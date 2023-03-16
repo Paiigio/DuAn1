@@ -32,6 +32,8 @@ public class KhachHangJpanel extends javax.swing.JPanel {
 
         dtm = (DefaultTableModel) tblBang.getModel();
         loadTable();
+              tblBang.getColumnModel().getColumn(1).setPreferredWidth(150);
+              tblBang.getColumnModel().getColumn(0).setPreferredWidth(30);
     }
 
     public void loadTable() {

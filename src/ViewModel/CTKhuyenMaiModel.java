@@ -2,29 +2,37 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DomainModels;
+package ViewModel;
 
 import java.util.Date;
 
 /**
  *
- * @author WellCome Win1021H2
+ * @author duong
  */
-public class CTKhuyenMai {
-    private String id;
+public class CTKhuyenMaiModel {
+        private String id;
     private String ma;
     private String ten;
     private Date thoiGianBatDau;
     private Date thoiGianKetThuc;
     private String hinhThuc;
-    private Date ngayTao;
+        private Date ngayTao;
     private Date ngaySua;
 
-    public CTKhuyenMai() {
+    public CTKhuyenMaiModel() {
     }
 
-  
-    public CTKhuyenMai(String id, String ma, String ten, Date thoiGianBatDau, Date thoiGianKetThuc, String hinhThuc, Date ngayTao, Date ngaySua) {
+    public CTKhuyenMaiModel(String id, String ma, String ten, Date thoiGianBatDau, Date thoiGianKetThuc, String hinhThuc) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
+        this.thoiGianBatDau = thoiGianBatDau;
+        this.thoiGianKetThuc = thoiGianKetThuc;
+        this.hinhThuc = hinhThuc;
+    }
+
+    public CTKhuyenMaiModel(String id, String ma, String ten, Date thoiGianBatDau, Date thoiGianKetThuc, String hinhThuc, Date ngayTao, Date ngaySua) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
