@@ -544,7 +544,7 @@
                 <Component class="javax.swing.JLabel" name="anhTrangchu">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/duan1_nhom8/DuAn1/src/icon/login.gif"/>
+                      <Image iconType="3" name="/icon/login.gif"/>
                     </Property>
                   </Properties>
                 </Component>
