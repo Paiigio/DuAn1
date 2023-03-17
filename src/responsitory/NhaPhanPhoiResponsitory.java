@@ -29,7 +29,7 @@ public class NhaPhanPhoiResponsitory {
         }
         return list;
     }
-       public NhaPhanPhoi getCVByID(String id){
+       public NhaPhanPhoi getNPPByID(String id){
         
         String sql="SELECT * FROM NHAPHANPHOI WHERE IDNPP=?";
         ResultSet rs=JDBC_Helper.excuteQuery(sql,id);
