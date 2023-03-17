@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DomainModels;
+package ViewModel;
 
 import java.util.Date;
 
@@ -10,17 +10,17 @@ import java.util.Date;
  *
  * @author WellCome Win1021H2
  */
-public class NSX {
+public class NSXModel {
     private String id;
     private String ma;
     private String ten;
     private Date ngayTao;
     private Date ngaySua;
 
-    public NSX() {
+    public NSXModel() {
     }
 
-    public NSX(String id, String ma, String ten, Date ngayTao, Date ngaySua) {
+    public NSXModel(String id, String ma, String ten, Date ngayTao, Date ngaySua) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;

@@ -3,7 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/DuAn1/src/view/Login.java</file>
+            <file>file:/D:/duan1_nhom8/src/responsitory/NhanVienResponsitory.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/QL_NSX.java</file>
+            <file>file:/D:/duan1_nhom8/src/DomainModels/CTSanPham.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/QL_ChucVu.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/Login.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/QL_DT.java</file>
+            <file>file:/D:/duan1_nhom8/src/DomainModels/NSX.java</file>
+            <file>file:/D:/duan1_nhom8/src/responsitory/SanPhamResponsitory.java</file>
+            <file>file:/D:/duan1_nhom8/src/responsitory/NSXResponsitory.java</file>
+            <file>file:/D:/duan1_nhom8/src/DomainModels/SanPham.java</file>
+            <file>file:/D:/duan1_nhom8/src/ViewModel/NhanVienModel.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/SanPhamJpanel.java</file>
+            <file>file:/D:/duan1_nhom8/src/Service/Interface/INSXService.java</file>
+            <file>file:/D:/duan1_nhom8/src/Service/NSXService.java</file>
+            <file>file:/D:/duan1_nhom8/src/ViewModel/NSXModel.java</file>
+            <file>file:/D:/duan1_nhom8/src/ViewModel/SanPhamModel.java</file>
         </group>
     </open-files>
 </project-private>

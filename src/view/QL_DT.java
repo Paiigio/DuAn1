@@ -408,7 +408,7 @@ public class QL_DT extends javax.swing.JFrame {
         TrangChu.setBackground(new java.awt.Color(241, 94, 103));
         TrangChu.setPreferredSize(new java.awt.Dimension(1265, 710));
 
-        anhTrangchu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1_nhom8/DuAn1/src/icon/login.gif"))); // NOI18N
+        anhTrangchu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/login.gif"))); // NOI18N
 
         javax.swing.GroupLayout TrangChuLayout = new javax.swing.GroupLayout(TrangChu);
         TrangChu.setLayout(TrangChuLayout);
