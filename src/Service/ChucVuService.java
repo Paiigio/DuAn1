@@ -36,13 +36,13 @@ private ChucVuResponsitory cvr = new ChucVuResponsitory();
             }
             
         }
-        var x= cvr.insertCV(new ChucVu(cv.getId(), cv.getMa(), cv.getTenCV(),cv.getNgayTao(),cv.getNgayTao()));
+        var x= cvr.insertCV(new ChucVu(cv.getId(), cv.getMa(), cv.getTenCV(),cv.getNgayTao(),cv.getNgaySua()));
         return  new ChucVuModel(x.getId(), x.getMa(),x.getTenCV(),x.getNgayTao(),x.getNgaySua());
     }
 
     @Override
     public ChucVuModel updateCV(ChucVuModel cv) {
-          var x= cvr.updateCV(new ChucVu(cv.getId(), cv.getMa(), cv.getTenCV(),cv.getNgayTao(),cv.getNgayTao()));
+          var x= cvr.updateCV(new ChucVu(cv.getId(), cv.getMa(), cv.getTenCV(),cv.getNgayTao(),cv.getNgaySua()));
         return  new ChucVuModel(x.getId(), x.getMa(),x.getTenCV(),x.getNgayTao(),x.getNgaySua());
     }
 

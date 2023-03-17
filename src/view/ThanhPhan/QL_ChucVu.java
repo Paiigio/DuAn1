@@ -52,7 +52,7 @@ public class QL_ChucVu extends javax.swing.JFrame {
         txtTenCV.setText("");
     }
 
-    public ChucVuModel getFromData() throws ParseException {
+    public ChucVuModel getFromData(){
         String maCV = txtMaCV.getText().trim();
         String tenCV = txtTenCV.getText().trim();
         if (maCV.length() == 0) {
