@@ -77,6 +77,6 @@ public class PhieuNhap {
     public void setNgayTao(Date ngayTao) {
         this.ngayTao = ngayTao;
     }
-    
+
     
 }

@@ -11,6 +11,7 @@ import java.util.Date;
  * @author WellCome Win1021H2
  */
 public class NhanVien {
+
     private String id;
     private ChucVu cv;
     private String ma;
@@ -29,7 +30,15 @@ public class NhanVien {
     public NhanVien() {
     }
 
-    public NhanVien(String ma, String hoTen) {
+    public NhanVien(String id, ChucVu cv, String ma, String hoTen) {
+        this.id = id;
+        this.cv = cv;
+        this.ma = ma;
+        this.hoTen = hoTen;
+    }
+
+    public NhanVien(String id, String ma, String hoTen) {
+        this.id = id;
         this.ma = ma;
         this.hoTen = hoTen;
     }
@@ -73,7 +82,6 @@ public class NhanVien {
         this.ngayTao = ngayTao;
         this.ngaySua = ngaySua;
     }
-
 
     public String getId() {
         return id;
@@ -183,5 +191,5 @@ public class NhanVien {
     public String toString() {
         return ma;
     }
-    
+
 }
