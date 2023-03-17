@@ -23,6 +23,7 @@ public class CTKhuyenMai {
     public CTKhuyenMai() {
     }
 
+  
     public CTKhuyenMai(String id, String ma, String ten, Date thoiGianBatDau, Date thoiGianKetThuc, String hinhThuc, Date ngayTao, Date ngaySua) {
         this.id = id;
         this.ma = ma;

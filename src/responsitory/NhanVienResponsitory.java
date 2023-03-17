@@ -112,7 +112,7 @@ public class NhanVienResponsitory {
     }
 
     public NhanVien getNVByID(String id) {
-        String sql = "SELECT Manv,hoTEN FROM NhanVien WHERE ma=?";
+        String sql = "SELECT Manv,hoTEN FROM NhanVien WHERE idnv=?";
         ResultSet rs = JDBC_Helper.excuteQuery(sql, id);
         try {
             while (rs.next()) {
