@@ -344,7 +344,7 @@ public class Login extends javax.swing.JFrame {
             }
         }
         if (check) {
-            new QL_DT().setVisible(true);
+            new Loading().setVisible(true);
             this.setVisible(false);
             
             JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
