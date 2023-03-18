@@ -20,6 +20,7 @@ public class Loading extends javax.swing.JFrame {
     public Loading() {
         initComponents();
         load();
+        setLocationRelativeTo(this);
         lbl.setIcon(new ImageIcon(new ImageIcon("src\\icon\\loadding.png").getImage().getScaledInstance(lbl.getWidth(), lbl.getHeight(), Image.SCALE_SMOOTH)));
     }
 
@@ -55,7 +56,7 @@ public class Loading extends javax.swing.JFrame {
         pgrload = new javax.swing.JProgressBar();
         lbl = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
