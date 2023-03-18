@@ -12,6 +12,7 @@ import java.util.Date;
  */
 public class IMEI {
     private String id;
+    private CTSanPham ctsp;
     private String ma;
     private Date ngayTao;
     private String ghiChu;
@@ -20,13 +21,16 @@ public class IMEI {
     public IMEI() {
     }
 
-    public IMEI(String id, String ma, Date ngayTao, String ghiChu, int trangThai) {
+    public IMEI(String id, CTSanPham ctsp, String ma, Date ngayTao, String ghiChu, int trangThai) {
         this.id = id;
+        this.ctsp = ctsp;
         this.ma = ma;
         this.ngayTao = ngayTao;
         this.ghiChu = ghiChu;
         this.trangThai = trangThai;
     }
+
+
 
     public String getId() {
         return id;
@@ -66,6 +70,14 @@ public class IMEI {
 
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
+    }
+
+    public CTSanPham getCtsp() {
+        return ctsp;
+    }
+
+    public void setCtsp(CTSanPham ctsp) {
+        this.ctsp = ctsp;
     }
     
 }
