@@ -29,6 +29,19 @@ public class NhanVienModel {
     public NhanVienModel() {
     }
 
+    public NhanVienModel(String id, String ma, String hoTen) {
+        this.id = id;
+        this.ma = ma;
+        this.hoTen = hoTen;
+    }
+
+    public NhanVienModel(String id, ChucVu cv, String ma, String hoTen) {
+        this.id = id;
+        this.cv = cv;
+        this.ma = ma;
+        this.hoTen = hoTen;
+    }
+
     public NhanVienModel(ChucVu cv, String ma, String hoTen, String gioiTinh, String sdt, Date ngaySinh, String diaChi, String email, String matKhau, int trangThai, String hinhAnh) {
         this.cv = cv;
         this.ma = ma;

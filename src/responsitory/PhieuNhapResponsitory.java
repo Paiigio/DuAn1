@@ -30,7 +30,7 @@ public class PhieuNhapResponsitory {
                 NhaPhanPhoi npp = nppr.getNPPByID(rs.getString(2));
                 NhanVien nv = nvr.getNVByID(rs.getString(3));
 
-                list.add(new PhieuNhap(rs.getString(1), npp, nv, rs.getString(4), rs.getInt(5), rs.getDate(6)));
+                list.add(new PhieuNhap(rs.getString(1), npp, nv, rs.getString(4), rs.getFloat(5), rs.getDate(6)));
             }
         } catch (SQLException ex) {
 
@@ -48,7 +48,7 @@ public class PhieuNhapResponsitory {
             while (rs.next()) {
                 NhaPhanPhoi npp = nppr.getNPPByID(rs.getString(2));
                 NhanVien nv = nvr.getNVByID(rs.getString(3));
-                return new PhieuNhap(rs.getString(1), npp, nv, rs.getString(4), rs.getInt(5), rs.getDate(6));
+                return new PhieuNhap(rs.getString(1), npp, nv, rs.getString(4), rs.getFloat(5), rs.getDate(6));
             }
         } catch (SQLException ex) {
 
@@ -57,7 +57,8 @@ public class PhieuNhapResponsitory {
     }
 
     public PhieuNhap insertPN(PhieuNhap cv) {
-        String sql = "INSERT INTO dbo.PHIEUNHAP(ID,IDNPP,IDNV,MAPN,TONGGIA,NGAYTAO) VALUES(NEWID(),?,?,?,?,GETDATE())";
+        String sql = "INSERT INTO dbo.PHIEUNHAP(ID,IDNPP,IDNV,MAPN,TONGGIA,NGAYTAO) VALUES(NEWID(),?,\n" +
+"?,?,?,GETDATE())";
         JDBC_Helper.excuteUpdate(sql, cv.getNhaPhanPhoi().getId(), cv.getNhanVien().getId(), cv.getMaPN(), cv.getTongGia());
         return cv;
     }

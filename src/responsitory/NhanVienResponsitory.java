@@ -40,14 +40,15 @@ public class NhanVienResponsitory {
         return list;
     }
 
-    public ArrayList<NhanVien> getTim(String ma) {
+    public ArrayList<NhanVien> getTim(String id) {
         ArrayList<NhanVien> list = new ArrayList<>();
-        String sql = "SELECT Manv,hoTen FROM dbo.NhanVien WHERE Ma=?";
+        String sql = "SELECT idnv,idcv, Manv,hoTen, FROM dbo.NhanVien WHERE idnv=?";
         ResultSet rs = JDBC_Helper.excuteQuery(sql);
 
         try {
             while (rs.next()) {
-                list.add(new NhanVien(rs.getString(1), rs.getString(2)));
+                ChucVu cv = cvr.getCVByID(rs.getString(2));
+                list.add(new NhanVien(rs.getString(1), cv, rs.getString(3), rs.getString(4)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(NhanVienResponsitory.class.getName()).log(Level.SEVERE, null, ex);
@@ -76,13 +77,13 @@ public class NhanVienResponsitory {
 
     public ArrayList<NhanVien> getVaiTro(String tencv) {
         ArrayList<NhanVien> list = new ArrayList<>();
-        String sql = "Select nhanvien.* from nhanvien join chucvu ON CHUCVU.IDCV = NHANVIEN.IDCV\n" +
-                            "WHERE TENCV =?";
+        String sql = "Select nhanvien.* from nhanvien join chucvu ON CHUCVU.IDCV = NHANVIEN.IDCV\n"
+                + "WHERE TENCV =?";
         ResultSet rs = JDBC_Helper.excuteQuery(sql, tencv);
         try {
             while (rs.next()) {
                 ChucVu cv = cvr.getCVByID(rs.getString(2));
-                list.add(new NhanVien(rs.getString(1), cv,rs.getString(3), rs.getString(4), rs.getString(5),
+                list.add(new NhanVien(rs.getString(1), cv, rs.getString(3), rs.getString(4), rs.getString(5),
                         rs.getString(6), rs.getDate(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getInt(11),
                         rs.getString(12), rs.getDate(13), rs.getDate(14)));
 
@@ -92,15 +93,16 @@ public class NhanVienResponsitory {
         }
         return list;
     }
-       public ArrayList<NhanVien> getTT(String tt) {
+
+    public ArrayList<NhanVien> getTT(String tt) {
         ArrayList<NhanVien> list = new ArrayList<>();
-        String sql = "Select nhanvien.* from nhanvien join chucvu ON CHUCVU.IDCV = NHANVIEN.IDCV\n" +
-"WHERE TRANGTHAI=?";
+        String sql = "Select nhanvien.* from nhanvien join chucvu ON CHUCVU.IDCV = NHANVIEN.IDCV\n"
+                + "WHERE TRANGTHAI=?";
         ResultSet rs = JDBC_Helper.excuteQuery(sql, tt);
         try {
             while (rs.next()) {
                 ChucVu cv = cvr.getCVByID(rs.getString(2));
-                list.add(new NhanVien(rs.getString(1), cv,rs.getString(3), rs.getString(4), rs.getString(5),
+                list.add(new NhanVien(rs.getString(1), cv, rs.getString(3), rs.getString(4), rs.getString(5),
                         rs.getString(6), rs.getDate(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getInt(11),
                         rs.getString(12), rs.getDate(13), rs.getDate(14)));
 
@@ -112,11 +114,15 @@ public class NhanVienResponsitory {
     }
 
     public NhanVien getNVByID(String id) {
-        String sql = "SELECT Manv,hoTEN FROM NhanVien WHERE idnv=?";
+        String sql = "SELECT * FROM NhanVien WHERE IDNV=?";
         ResultSet rs = JDBC_Helper.excuteQuery(sql, id);
         try {
             while (rs.next()) {
-                return new NhanVien(rs.getString(1), rs.getString(2));
+                ChucVu cv = cvr.getCVByID(rs.getString(2));
+                return new NhanVien(rs.getString(1), cv, rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getDate(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getInt(11),
+                        rs.getString(12), rs.getDate(13), rs.getDate(14));
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(NhanVienResponsitory.class.getName()).log(Level.SEVERE, null, ex);

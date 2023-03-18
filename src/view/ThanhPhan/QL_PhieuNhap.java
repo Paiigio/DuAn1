@@ -68,7 +68,7 @@ private void clearForm(){
         ArrayList<NhanVienModel> list = nvs.getAllNV();
         Collections.sort(list, Comparator.comparing(NhanVienModel -> NhanVienModel.getMa()));
         for (NhanVienModel x : list) {
-            dcmNV.addElement(new NhanVien(x.getMa(), x.getHoTen()));
+            dcmNV.addElement(new NhanVien(x.getId(),x.getMa(), x.getHoTen()));
         }
     }
 
@@ -77,11 +77,10 @@ private void clearForm(){
         dtm.setRowCount(0);
 
         for (PhieuNhapModel x : list) {
-            Object[] rowData = {
-                x.getNhaPhanPhoi(), x.getNhanVien(), x.getMaPN(), x.getTongGia(), x.getNgayTao()
-            };
+             Object[]rowData={
+               x.getNhaPhanPhoi(),x.getNhanVien(),x.getMaPN(),x.getTongGia(),x.getNgayTao()
+             };
             dtm.addRow(rowData);
-
         }
     }
 
@@ -110,7 +109,7 @@ private void clearForm(){
             } catch (NumberFormatException e) {
             }
         }
-        
+        System.out.println(nv);
         return new PhieuNhapModel(null, pn, nv, ma, gia, null);
     }
 
@@ -320,9 +319,9 @@ private void clearForm(){
             if (cv == null) {
                 return;
           }
-            String id = tblBang.getValueAt(row, 2).toString();
-            cv.setMaPN(id);
-            if (pns.insertPN(cv)!= null) {
+            String ma = tblBang.getValueAt(row, 2).toString();
+            cv.setMaPN(ma);
+            if (pns.updatePN(cv)!= null) {
                 JOptionPane.showMessageDialog(this, "Sửa thành công");
             } else {
                 JOptionPane.showMessageDialog(this, "Sửa thất bại");
