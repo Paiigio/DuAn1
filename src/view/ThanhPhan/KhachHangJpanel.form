@@ -16,10 +16,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="KhachHang" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="190" max="32767" attributes="0"/>
-          </Group>
+          <Component id="KhachHang" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -33,6 +30,11 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="KhachHang">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="aa" green="e8" red="ee" type="rgb"/>
+        </Property>
+      </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="cardKH"/>
       </AccessibilityProperties>
@@ -98,6 +100,7 @@
                 </TitledBorder>
               </Border>
             </Property>
+            <Property name="opaque" type="boolean" value="false"/>
           </Properties>
 
           <Layout>

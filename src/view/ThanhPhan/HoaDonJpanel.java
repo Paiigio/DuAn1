@@ -28,6 +28,8 @@ public class HoaDonJpanel extends javax.swing.JPanel {
 
         JHoaDon = new javax.swing.JPanel();
 
+        JHoaDon.setBackground(new java.awt.Color(238, 232, 170));
+
         javax.swing.GroupLayout JHoaDonLayout = new javax.swing.GroupLayout(JHoaDon);
         JHoaDon.setLayout(JHoaDonLayout);
         JHoaDonLayout.setHorizontalGroup(

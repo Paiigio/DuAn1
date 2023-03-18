@@ -31,27 +31,31 @@ public class ThongKeJpanel extends javax.swing.JPanel {
         jLabel68 = new javax.swing.JLabel();
         jLabel71 = new javax.swing.JLabel();
 
+        JThongKe.setBackground(new java.awt.Color(238, 232, 170));
+
         jLabel61.setText("jLabel61");
         jLabel61.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel61.setOpaque(true);
 
         jLabel68.setText("jLabel61");
         jLabel68.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel68.setOpaque(true);
 
-        jLabel71.setText("jLabel61");
         jLabel71.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel71.setOpaque(true);
 
         javax.swing.GroupLayout JThongKeLayout = new javax.swing.GroupLayout(JThongKe);
         JThongKe.setLayout(JThongKeLayout);
         JThongKeLayout.setHorizontalGroup(
             JThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JThongKeLayout.createSequentialGroup()
-                .addGap(132, 132, 132)
+                .addGap(82, 82, 82)
                 .addComponent(jLabel68, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
+                .addGap(93, 93, 93)
                 .addComponent(jLabel71, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74)
+                .addGap(65, 65, 65)
                 .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(878, Short.MAX_VALUE))
+                .addContainerGap(912, Short.MAX_VALUE))
         );
         JThongKeLayout.setVerticalGroup(
             JThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -68,15 +72,15 @@ public class ThongKeJpanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(JThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(JThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(JThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(JThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

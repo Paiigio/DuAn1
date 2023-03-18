@@ -42,7 +42,7 @@ public class PhieuNhapResponsitory {
 
     public PhieuNhap getPNByID(String id) {
 
-        String sql = "SELECT * FROM PHIEUNHAP WHERE IDNPN=?";
+        String sql = "SELECT * FROM PHIEUNHAP WHERE IDPN=?";
         ResultSet rs = JDBC_Helper.excuteQuery(sql, id);
         try {
             while (rs.next()) {
