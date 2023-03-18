@@ -20,4 +20,8 @@ public interface ICTSanPhamService {
     public CTSanPhamModel updateCTSanPham(CTSanPhamModel ctsp);
 
     public Integer deleteCTSanPham(String ma);
+
+    public CTSanPhamModel updateCTKMSanPham(CTSanPhamModel ctsp);
+
+    public CTSanPhamModel deleteCTKM(CTSanPhamModel ctsp);
 }

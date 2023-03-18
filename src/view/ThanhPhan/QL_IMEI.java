@@ -4,10 +4,15 @@
  */
 package view.ThanhPhan;
 
+import DomainModels.CTSanPham;
+import Service.CTSanPhamService;
 import Service.IMEIService;
+import Service.Interface.ICTSanPhamService;
 import Service.Interface.IIMEIService;
+import ViewModel.CTSanPhamModel;
 import ViewModel.IMEIModel;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,8 +21,12 @@ import javax.swing.table.DefaultTableModel;
  * @author WellCome Win1021H2
  */
 public class QL_IMEI extends javax.swing.JFrame {
+
     private IIMEIService iIMEIService = new IMEIService();
     private DefaultTableModel dtm = new DefaultTableModel();
+    private ICTSanPhamService iCTSanPhamService = new CTSanPhamService();
+    private DefaultComboBoxModel cbb = new DefaultComboBoxModel();
+
     /**
      * Creates new form QL_IMEI
      */
@@ -25,44 +34,57 @@ public class QL_IMEI extends javax.swing.JFrame {
         initComponents();
         dtm = (DefaultTableModel) tblHienThi.getModel();
         setLocationRelativeTo(null);
+        cbbSP.setModel(cbb);
         loadData();
+        loadCBB();
     }
-    private void loadData(){
+
+    private void loadCBB() {
+        ArrayList<CTSanPhamModel> list = iCTSanPhamService.getAllCTSanPham();
+        for (CTSanPhamModel x : list) {
+            cbb.addElement(new CTSanPham(x.getId(), x.getMs(), x.getCtkm(), x.getSp(), x.getDl(), x.getMa(), x.getMaQR(), x.getSoLuongTon(), x.getHinhAnh(), x.getNamBH(), x.getNgayTao(), x.getNgaySua(), x.getGiaNhap(), x.getGiaBan()));
+        }
+    }
+
+    private void loadData() {
         ArrayList<IMEIModel> list = iIMEIService.getAllIMEI();
         dtm.setRowCount(0);
-        for (int i = 0 ; i < list.size() ; ++i){
+        for (int i = 0; i < list.size(); ++i) {
+            System.out.println(list.get(i));
             dtm.addRow(new Object[]{
-                i+1,
+                i + 1,
                 list.get(i).getMa(),
-                list.get(i).getTrangThai()==0?"Còn hàng":"Đã bán",
+                list.get(i).getCtsp(),
+                list.get(i).getTrangThai() == 0 ? "Còn hàng" : "Đã bán",
                 list.get(i).getGhiChu()
             });
         }
     }
-    private IMEIModel getFromInput(){
+
+    private IMEIModel getFromInput() {
         ArrayList<IMEIModel> list = iIMEIService.getAllIMEI();
         IMEIModel i = new IMEIModel();
         String ma = txtMa.getText();
         String ghiChu = txtGhiChu.getText();
+        CTSanPham ctsp = (CTSanPham) cbbSP.getSelectedItem();
         int trangThai = 0;
-        if (rdConHang.isSelected()){
+        if (rdConHang.isSelected()) {
             trangThai = 0;
-        } else trangThai = 1;
-        if (ma.trim().isEmpty()){
+        } else {
+            trangThai = 1;
+        }
+        if (ma.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Mã không được để trống!");
             return null;
         }
-        for (IMEIModel x : list){
-            if (x.getMa()!=null && x.getMa().equals(ma)){
-                JOptionPane.showMessageDialog(this, "Mã đã tồn tại");
-                return null;
-            }
-        }
+
+        i.setCtsp(ctsp);
         i.setMa(ma);
         i.setGhiChu(ghiChu);
         i.setTrangThai(trangThai);
         return i;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,6 +105,8 @@ public class QL_IMEI extends javax.swing.JFrame {
         rdDaBan = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtGhiChu = new javax.swing.JTextArea();
+        jLabel5 = new javax.swing.JLabel();
+        cbbSP = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         txtTimKiem = new javax.swing.JTextField();
         btnThem = new javax.swing.JButton();
@@ -112,24 +136,34 @@ public class QL_IMEI extends javax.swing.JFrame {
         txtGhiChu.setRows(5);
         jScrollPane1.setViewportView(txtGhiChu);
 
+        jLabel5.setText("Sản phẩm:");
+
+        cbbSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtMa)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(rdConHang, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(rdDaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE))
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbbSP, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtMa)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(rdConHang, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(rdDaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -145,9 +179,13 @@ public class QL_IMEI extends javax.swing.JFrame {
                     .addComponent(rdConHang)
                     .addComponent(rdDaBan))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(cbbSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -202,13 +240,13 @@ public class QL_IMEI extends javax.swing.JFrame {
 
         tblHienThi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã IMEI", "Trạng thái", "Ghi chú"
+                "STT", "Mã IMEI", "Sản phẩm", "Trạng thái", "Ghi chú"
             }
         ));
         tblHienThi.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -245,7 +283,7 @@ public class QL_IMEI extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         pack();
@@ -253,31 +291,49 @@ public class QL_IMEI extends javax.swing.JFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         IMEIModel im = getFromInput();
-        if (im == null){
+        ArrayList<IMEIModel> list = iIMEIService.getAllIMEI();
+        if (im == null) {
             JOptionPane.showMessageDialog(this, "Thêm thất bại");
             return;
         }
-        if (iIMEIService.insertIMEI(im)!=null){
+        for (IMEIModel x : list) {
+            if (x.getMa() != null && x.getMa().equals(im.getMa())) {
+                JOptionPane.showMessageDialog(this, "Mã đã tồn tại");
+                return;
+            }
+        }
+        if (iIMEIService.insertIMEI(im) != null) {
             JOptionPane.showMessageDialog(this, "Thêm thành công");
             loadData();
-        } 
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         int index = tblHienThi.getSelectedRow();
-        if (index < 0){
+        ArrayList<IMEIModel> list = iIMEIService.getAllIMEI();
+        if (index < 0) {
             JOptionPane.showMessageDialog(this, "Mời bạn chọn dòng cần sửa");
             return;
         }
-        if (JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không?","Thông báo",JOptionPane.YES_NO_OPTION)!=JOptionPane.YES_OPTION){
+        if (JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không?", "Thông báo", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
             return;
         }
-        IMEIModel im = getFromInput();        
-        if (im == null){
+        IMEIModel im = getFromInput();
+        if (im == null) {
             JOptionPane.showMessageDialog(this, "Sửa thất bại");
             return;
         }
-        if (iIMEIService.updateIMEI(im)!=null){
+        for (IMEIModel x : list) {
+            if (x.getMa() != null && x.getMa().equals(tblHienThi.getValueAt(index, 1).toString())) {
+                im.setId(x.getId());
+                continue;
+            }
+            if (x.getMa()!=null && x.getMa().equals(im.getMa())){
+                JOptionPane.showMessageDialog(this, "Mã đã tồn tại");
+                return;
+            }
+        }
+        if (iIMEIService.updateIMEI(im) != null) {
             JOptionPane.showMessageDialog(this, "Sửa thành công");
             loadData();
         }
@@ -286,31 +342,33 @@ public class QL_IMEI extends javax.swing.JFrame {
     private void tblHienThiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHienThiMouseClicked
         int index = tblHienThi.getSelectedRow();
         String ma = tblHienThi.getValueAt(index, 1).toString();
-        String ghiChu = tblHienThi.getValueAt(index, 3).toString();
-        String trangThai = tblHienThi.getValueAt(index, 2).toString();
+        String ghiChu = tblHienThi.getValueAt(index, 4).toString();
+        String trangThai = tblHienThi.getValueAt(index, 3).toString();
+        cbb.setSelectedItem(tblHienThi.getValueAt(index, 2));
         txtMa.setText(ma);
         txtGhiChu.setText(ghiChu);
-        if (trangThai.trim().equals("Còn hàng")){
+        if (trangThai.trim().equals("Còn hàng")) {
             rdConHang.setSelected(true);
-        } else rdDaBan.setSelected(true);
+        } else
+            rdDaBan.setSelected(true);
     }//GEN-LAST:event_tblHienThiMouseClicked
 
     private void txtTimKiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimKiemCaretUpdate
         String timKiem = txtTimKiem.getText();
         ArrayList<IMEIModel> list = iIMEIService.getAllIMEI();
         ArrayList<IMEIModel> listNew = new ArrayList<>();
-        for (IMEIModel x : list){
-            if (x.getMa()!=null && x.getMa().equals(timKiem)){
+        for (IMEIModel x : list) {
+            if (x.getMa() != null && x.getMa().equals(timKiem)) {
                 listNew.add(x);
-                
+
             }
         }
         dtm.setRowCount(0);
-        for (int i = 0 ; i < listNew.size() ; ++i){
+        for (int i = 0; i < listNew.size(); ++i) {
             dtm.addRow(new Object[]{
-                i+1,
+                i + 1,
                 listNew.get(i).getMa(),
-                listNew.get(i).getTrangThai()==0?"Còn hàng":"Đã bán",
+                listNew.get(i).getTrangThai() == 0 ? "Còn hàng" : "Đã bán",
                 listNew.get(i).getGhiChu()
             });
         }
@@ -355,10 +413,12 @@ public class QL_IMEI extends javax.swing.JFrame {
     private javax.swing.ButtonGroup TrangThai;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
+    private javax.swing.JComboBox<String> cbbSP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

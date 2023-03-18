@@ -273,6 +273,11 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         cbbMS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         cbbSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbSPActionPerformed(evt);
+            }
+        });
 
         txtNamBH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -730,6 +735,10 @@ public class SanPhamJpanel extends javax.swing.JPanel {
             });
         }
     }//GEN-LAST:event_cbbTKDLActionPerformed
+
+    private void cbbSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbSPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbbSPActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

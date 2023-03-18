@@ -159,6 +159,11 @@ public class CTSanPham {
         this.ngaySua = ngaySua;
     }
 
+    @Override
+    public String toString() {
+        return sp.getTen()+" "+dl.getSoDungLuong()+" "+ms.getTen();
+    }
+
 
 
 }

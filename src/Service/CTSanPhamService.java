@@ -53,4 +53,16 @@ public class CTSanPhamService implements ICTSanPhamService {
         return ctsp.deleteCTSanPham(ma);
     }
 
+    @Override
+    public CTSanPhamModel updateCTKMSanPham(CTSanPhamModel sp) {
+        var x = ctsp.updateCTKMSanPham(new CTSanPham(sp.getId(), sp.getMs(), sp.getCtkm(), sp.getSp(), sp.getDl(), sp.getMa(), sp.getMaQR(), sp.getSoLuongTon(), sp.getHinhAnh(), sp.getNamBH(), sp.getNgayTao(), sp.getNgaySua(), sp.getGiaNhap(), sp.getGiaBan()));
+        return new CTSanPhamModel(x.getId(), x.getMs(), x.getCtkm(), x.getSp(), x.getDl(), x.getMa(), x.getMaQR(), x.getSoLuongTon(), x.getHinhAnh(), x.getNamBH(), x.getNgayTao(), x.getNgaySua(), x.getGiaNhap(), x.getGiaBan());
+    }
+
+    @Override
+    public CTSanPhamModel deleteCTKM(CTSanPhamModel sp) {
+        var x = ctsp.deleteCTKM(new CTSanPham(sp.getId(), sp.getMs(), sp.getCtkm(), sp.getSp(), sp.getDl(), sp.getMa(), sp.getMaQR(), sp.getSoLuongTon(), sp.getHinhAnh(), sp.getNamBH(), sp.getNgayTao(), sp.getNgaySua(), sp.getGiaNhap(), sp.getGiaBan()));
+        return new CTSanPhamModel(x.getId(), x.getMs(), x.getCtkm(), x.getSp(), x.getDl(), x.getMa(), x.getMaQR(), x.getSoLuongTon(), x.getHinhAnh(), x.getNamBH(), x.getNgayTao(), x.getNgaySua(), x.getGiaNhap(), x.getGiaBan());
+    }
+
 }

@@ -23,7 +23,7 @@ private IMEIResponsitory im = new IMEIResponsitory();
                 ArrayList<IMEIModel> list = new ArrayList<>();
         ArrayList<IMEI> i = im.getAllIMEI();
         for (IMEI x : i) {
-            list.add( new IMEIModel(x.getId(), x.getMa(), x.getNgayTao(), x.getGhiChu(), x.getTrangThai()));
+            list.add( new IMEIModel(x.getId(), x.getCtsp(), x.getMa(), x.getNgayTao(), x.getGhiChu(),x.getTrangThai()));
             
         }
         return list;
@@ -38,14 +38,14 @@ private IMEIResponsitory im = new IMEIResponsitory();
             }
             
         }
-        var x= im.insertIMEI(new IMEI(i.getId(), i.getMa(), i.getNgayTao(), i.getGhiChu(), i.getTrangThai()));
-        return  new IMEIModel(x.getId(), x.getMa(),x.getNgayTao(),x.getGhiChu(),x.getTrangThai());
+        var x= im.insertIMEI(new IMEI(i.getId(),i.getCtsp() ,i.getMa(), i.getNgayTao(), i.getGhiChu(), i.getTrangThai()));
+        return  new IMEIModel(x.getId(), x.getCtsp(), x.getMa(),x.getNgayTao(),x.getGhiChu(),x.getTrangThai());
     }
 
     @Override
     public IMEIModel updateIMEI(IMEIModel i) {
-        var x= im.updateIMEI(new IMEI(i.getId(), i.getMa(), i.getNgayTao(), i.getGhiChu(), i.getTrangThai()));
-        return  new IMEIModel(x.getId(), x.getMa(),x.getNgayTao(),x.getGhiChu(),x.getTrangThai());
+        var x= im.updateIMEI(new IMEI(i.getId(),i.getCtsp(), i.getMa(), i.getNgayTao(), i.getGhiChu(), i.getTrangThai()));
+        return  new IMEIModel(x.getId(), x.getCtsp(), x.getMa(),x.getNgayTao(),x.getGhiChu(),x.getTrangThai());
     }
 
     @Override
