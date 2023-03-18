@@ -72,5 +72,10 @@ public class MauSac {
     public void setNgaySua(Date ngaySua) {
         this.ngaySua = ngaySua;
     }
+
+    @Override
+    public String toString() {
+        return ten;
+    }
     
 }

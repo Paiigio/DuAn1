@@ -4,8 +4,11 @@
  */
 package responsitory;
 
+import DomainModels.CTKhuyenMai;
 import DomainModels.CTSanPham;
-import DomainModels.ChucVu;
+import DomainModels.DungLuong;
+import DomainModels.MauSac;
+import DomainModels.SanPham;
 import Utilites.JDBC_Helper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,14 +22,20 @@ import java.util.logging.Logger;
  */
 public class CTSanPhamResponsitory {
     MauSacResponsitory ms = new MauSacResponsitory();
-    
+    CTKhuyenMaiResponsitory ctkm = new CTKhuyenMaiResponsitory();
+    SanPhamResponsitory sp = new SanPhamResponsitory();
+    DungLuongResponsitory dl = new DungLuongResponsitory();
         public ArrayList<CTSanPham> getAllCTSanPham() {
         ArrayList<CTSanPham> list = new ArrayList<>();
-        String sql="SELECT* FROM dbo.CTSP";
+        String sql="SELECT* FROM dbo.CTSANPHAM";
         ResultSet rs = JDBC_Helper.excuteQuery(sql);
         try {
             while (rs.next()) {
-                list.add(new CTSanPham(sql, ms, ctkm, sp, dl, sql, sql, 0, sql, 0, 0, 0, ngayTao, ngayNhap));
+                MauSac mauSac = ms.getMSByID(rs.getString(2));
+            CTKhuyenMai ctKhuyenMai = ctkm.getCVCTKMID(rs.getString(3));
+                SanPham sanPham = sp.getSPByID(rs.getString(4));
+                DungLuong dungLuong = dl.getDLByID(rs.getString(5));
+                list.add(new CTSanPham(rs.getString(1), mauSac, ctKhuyenMai, sanPham, dungLuong, rs.getString(6), rs.getString(7), rs.getInt(8), rs.getString(9), rs.getInt(10), rs.getDate(11), rs.getDate(12), rs.getFloat(13), rs.getFloat(14)));
                 
             }
         } catch (SQLException ex) {
@@ -37,11 +46,15 @@ public class CTSanPhamResponsitory {
     }
        public CTSanPham getCTSanPhamByID(String id){
         
-        String sql="SELECT * FROM CHUCVU WHERE IDCV=?";
+        String sql="SELECT * FROM CTSANPHAM WHERE IDCTSP=?";
         ResultSet rs=JDBC_Helper.excuteQuery(sql,id);
         try {
             while(rs.next()){
-                return new ChucVu(rs.getString(1),rs.getString(2),rs.getString(3),rs.getDate(4),rs.getDate(5));
+                MauSac mauSac = ms.getMSByID(rs.getString(2));
+            CTKhuyenMai ctKhuyenMai = ctkm.getCVCTKMID(rs.getString(3));
+                SanPham sanPham = sp.getSPByID(rs.getString(4));
+                DungLuong dungLuong = dl.getDLByID(rs.getString(5));         
+                return new CTSanPham(rs.getString(1), mauSac, ctKhuyenMai, sanPham, dungLuong, rs.getString(6), rs.getString(7), rs.getInt(8), rs.getString(9), rs.getInt(10), rs.getDate(11), rs.getDate(12), rs.getFloat(13), rs.getFloat(14));
             }
         } catch (SQLException ex) {
             Logger.getLogger(CTSanPhamResponsitory.class.getName()).log(Level.SEVERE, null, ex);
@@ -49,17 +62,17 @@ public class CTSanPhamResponsitory {
        return null;
     }
     public CTSanPham insertCTSanPham(CTSanPham ctsp){
-        String sql= "INSERT INTO CHUCVU VALUES(NEWID(),?,?,GETDATE(),GETDATE())";
-       JDBC_Helper.excuteUpdate(sql, cv.getMa(),cv.getTenCV());
-        return cv;
+        String sql= "INSERT INTO CTSANPHAM(IDCTSP,IDMS,IDCTKM,IDSP,IDDL,MACTSP,MAQR,SOLUONGTON,HINHANH,NAMBH,NGAYTAO,NGAYSUA,GIANHAP,GIABAN) VALUES(NEWID(),?,null,?,?,?,?,?,?,?,GETDATE(),null,?,?)";
+       JDBC_Helper.excuteUpdate(sql, ctsp.getMs().getId(),ctsp.getSp().getId(),ctsp.getDl().getId(),ctsp.getMa(),ctsp.getMaQR(),ctsp.getSoLuongTon(),ctsp.getHinhAnh(),ctsp.getNamBH(),ctsp.getGiaNhap(),ctsp.getGiaBan());
+        return ctsp;
     }
     public CTSanPham updateCTSanPham(CTSanPham ctsp){
-        String sql= "UPDATE dbo.ChucVu SET Tencv=?,NGAYSUA=GETDATE() WHERE MACV=?";
-       JDBC_Helper.excuteUpdate(sql, cv.getTenCV(),cv.getMa());
-        return cv;
+        String sql= "UPDATE dbo.CTSANPHAM SET IDMS=?,IDSP=?,IDDL=?,MACTSP=?,MAQR=?,SOLUONGTON=?,HINHANH=?,NAMBH=?,NGAYSUA=GETDATE(),GIANHAP=?,GIABAN=? WHERE IDCTSP=?";
+       JDBC_Helper.excuteUpdate(sql, ctsp.getMs().getId(),ctsp.getSp().getId(),ctsp.getDl().getId(),ctsp.getMa(),ctsp.getMaQR(),ctsp.getSoLuongTon(),ctsp.getHinhAnh(),ctsp.getNamBH(),ctsp.getGiaNhap(),ctsp.getGiaBan(),ctsp.getId());
+        return ctsp;
     }
     public Integer deleteCTSanPham(String ma){
-        String sql="DELETE dbo.ChucVu WHERE maCV =?";
+        String sql="DELETE dbo.CTSANPHAM WHERE MACTSP =?";
         int row=JDBC_Helper.excuteUpdate(sql,ma);
         return row;
     }

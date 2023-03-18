@@ -12,6 +12,7 @@ import java.util.Date;
  * @author WellCome Win1021H2
  */
 public class CTSanPhamModel {
+
     private String id;
     private MauSac ms;
     private CTKhuyenMai ctkm;
@@ -22,15 +23,15 @@ public class CTSanPhamModel {
     private int soLuongTon;
     private String hinhAnh;
     private int namBH;
+    private Date ngayTao;
+    private Date ngaySua;
     private float giaNhap;
     private float giaBan;
-    private Date ngayTao;
-    private Date ngayNhap;
 
     public CTSanPhamModel() {
     }
 
-    public CTSanPhamModel(String id, MauSac ms, CTKhuyenMai ctkm, SanPham sp, DungLuong dl, String ma, String maQR, int soLuongTon, String hinhAnh, int namBH, float giaNhap, float giaBan, Date ngayTao, Date ngayNhap) {
+    public CTSanPhamModel(String id, MauSac ms, CTKhuyenMai ctkm, SanPham sp, DungLuong dl, String ma, String maQR, int soLuongTon, String hinhAnh, int namBH, Date ngayTao, Date ngaySua, float giaNhap, float giaBan) {
         this.id = id;
         this.ms = ms;
         this.ctkm = ctkm;
@@ -41,10 +42,10 @@ public class CTSanPhamModel {
         this.soLuongTon = soLuongTon;
         this.hinhAnh = hinhAnh;
         this.namBH = namBH;
+        this.ngayTao = ngayTao;
+        this.ngaySua = ngaySua;
         this.giaNhap = giaNhap;
         this.giaBan = giaBan;
-        this.ngayTao = ngayTao;
-        this.ngayNhap = ngayNhap;
     }
 
     public String getId() {
@@ -151,12 +152,14 @@ public class CTSanPhamModel {
         this.ngayTao = ngayTao;
     }
 
-    public Date getNgayNhap() {
-        return ngayNhap;
+    public Date getNgaySua() {
+        return ngaySua;
     }
 
-    public void setNgayNhap(Date ngayNhap) {
-        this.ngayNhap = ngayNhap;
+    public void setNgaySua(Date ngaySua) {
+        this.ngaySua = ngaySua;
     }
-    
+
+
+
 }

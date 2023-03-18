@@ -35,17 +35,27 @@ public class MauSacResponsitory {
     }
        public MauSac getMSByID(String id){
         
-        String sql="SELECT * FROM MauSac WHERE ID=?";
+        String sql="SELECT * FROM MauSac WHERE IDMS=?";
         ResultSet rs=JDBC_Helper.excuteQuery(sql,id);
         try {
             while(rs.next()){
-                return new MauSac(rs.getString(1),rs.getString(2),rs.getString(3),rs.getDate(4),rs.getDate(5));
+                return new MauSac(rs.getString(1), rs.getString(2), rs.getString(3));
             }
         } catch (SQLException ex) {
             Logger.getLogger(ChucVuResponsitory.class.getName()).log(Level.SEVERE, null, ex);
         }
        return null;
     }
+       public MauSac getMSByName(String ten){
+           String sql = "SELECT * FROM MAUSAC WHERE TENMAU=?";
+           ResultSet rs = JDBC_Helper.excuteQuery(sql, ten);
+           try {
+               return new MauSac(rs.getString(1), rs.getString(2), rs.getString(3));
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+           return null;
+       }
     public MauSac insertMS(MauSac cv){
         String sql= "INSERT INTO MauSac VALUES(NEWID(),?,?,GETDATE(),GETDATE())";
        JDBC_Helper.excuteUpdate(sql, cv.getMa(),cv.getTen());

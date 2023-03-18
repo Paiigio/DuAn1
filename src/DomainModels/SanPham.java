@@ -88,5 +88,10 @@ public class SanPham {
         this.ngaySua = ngaySua;
     }
 
+    @Override
+    public String toString() {
+        return ten;
+    }
+
 
 }

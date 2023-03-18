@@ -60,5 +60,10 @@ public class DungLuong {
     public void setNgayNhap(Date ngayNhap) {
         this.ngayNhap = ngayNhap;
     }
+
+    @Override
+    public String toString() {
+        return soDungLuong;
+    }
     
 }

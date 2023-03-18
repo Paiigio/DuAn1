@@ -43,5 +43,10 @@ public class DungLuongModel {
     public void setSoDungLuong(String soDungLuong) {
         this.soDungLuong = soDungLuong;
     }
+
+    @Override
+    public String toString() {
+        return soDungLuong;
+    }
     
 }

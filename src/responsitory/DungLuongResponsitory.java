@@ -30,7 +30,7 @@ public class DungLuongResponsitory {
 
     public DungLuong getDLByID(String id) {
 
-        String sql = "SELECT * FROM DungLuong WHERE ID=?";
+        String sql = "SELECT * FROM DungLuong WHERE IDDL=?";
         ResultSet rs = JDBC_Helper.excuteQuery(sql, id);
         try {
             while (rs.next()) {
