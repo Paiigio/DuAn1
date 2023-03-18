@@ -1,6 +1,5 @@
 package view;
 
-import DomainModels.NhanVien;
 import Service.Interface.INhanVienService;
 import Service.NhanVienService;
 import ViewModel.NhanVienModel;
