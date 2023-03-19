@@ -260,10 +260,10 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setText("QUẢN LÝ BÁN ĐIỆN THOẠI");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, -1, -1));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/iphone-x-mac.gif"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AnhNV/login.gif"))); // NOI18N
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 490, 490));
 
-        jLabel1.setBackground(new java.awt.Color(3, 2, 3));
+        jLabel1.setBackground(new java.awt.Color(21, 188, 194));
         jLabel1.setOpaque(true);
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 610));
 
