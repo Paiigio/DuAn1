@@ -85,5 +85,19 @@ public class KhachHangResponsitory {
                 nv.getEmail(), nv.getNgaySinh(), nv.getMaKH());
         return nv;
     }
+    public KhachHang getKHByID(String id) {
+        String sql = "SELECT IDKH,MAKH,HOTEN,SDT,DIACHI,GIOITINH,EMAIL,NGAYSINH,NGAYTAO,NGAYSUA FROM dbo.KHACHHANG WHERE IDKH=?";
+        ResultSet rs = JDBC_Helper.excuteQuery(sql, id);
+        try {
+            while (rs.next()) {
+           
+               return new KhachHang(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getDate(8),
+                        rs.getDate(9), rs.getDate(10));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NhanVienResponsitory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
 }
