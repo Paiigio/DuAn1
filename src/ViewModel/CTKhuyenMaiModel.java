@@ -43,6 +43,8 @@ public class CTKhuyenMaiModel {
         this.ngaySua = ngaySua;
     }
 
+
+
     public String getId() {
         return id;
     }

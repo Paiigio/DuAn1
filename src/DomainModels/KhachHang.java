@@ -40,6 +40,8 @@ public class KhachHang {
         this.ngaySua = ngaySua;
     }
 
+
+
     public String getMaKH() {
         return maKH;
     }

@@ -23,8 +23,7 @@ public class NhanVienService implements INhanVienService {
         ArrayList<NhanVienModel> list = new ArrayList<>();
         ArrayList<NhanVien> nv = nvr.getAllNhanVien();
         for (NhanVien x : nv) {
-            list.add(new NhanVienModel(x.getId(), x.getCv(), x.getMa(), x.getHoTen(), x.getGioiTinh(), x.getSdt(), x.getNgaySinh(),
-                    x.getDiaChi(), x.getEmail(), x.getMatKhau(), x.getTrangThai(), x.getHinhAnh()));
+            list.add(new NhanVienModel(x.getId(), x.getCv(), x.getMa(), x.getHoTen(), x.getGioiTinh(), x.getSdt(), x.getNgaySinh(), x.getDiaChi(), x.getEmail(), x.getMatKhau(), x.getTrangThai(), x.getHinhAnh()));
 
         }
         return list;
