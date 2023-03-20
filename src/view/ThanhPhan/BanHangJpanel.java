@@ -4,6 +4,13 @@
  */
 package view.ThanhPhan;
 
+import Service.CTSanPhamService;
+import Service.Interface.ICTSanPhamService;
+import ViewModel.CTSanPhamModel;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Locale;
+import javax.swing.table.DefaultTableModel;
 import view.QuetQR;
 
 /**
@@ -11,12 +18,30 @@ import view.QuetQR;
  * @author duong
  */
 public class BanHangJpanel extends javax.swing.JPanel {
-
+    private DefaultTableModel dtmSP = new DefaultTableModel();
+    private ICTSanPhamService iCTSanPhamService = new CTSanPhamService();
+    private ArrayList<String> listIMEI = new ArrayList<>();
     /**
      * Creates new form BanHangJpanel1
      */
     public BanHangJpanel() {
         initComponents();
+        dtmSP = (DefaultTableModel) tblSanPham.getModel();
+        loadSP();
+    }
+    private void loadSP(){
+        ArrayList<CTSanPhamModel> listSP = iCTSanPhamService.getAllCTSanPham();
+        dtmSP.setRowCount(0);
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat vn = NumberFormat.getInstance(localeVN);        
+        for (CTSanPhamModel x : listSP){
+            dtmSP.addRow(new Object[]{
+                x.getMa(),
+                x.getSp().getTen()+" "+x.getDl().getSoDungLuong()+"GB "+x.getMs().getTen(),
+                x.getSoLuongTon(),
+                vn.format(x.getGiaBan())
+            });
+        }
     }
 
     /**
@@ -31,12 +56,12 @@ public class BanHangJpanel extends javax.swing.JPanel {
         JBanHang = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        tblGioHang = new javax.swing.JTable();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        tblSanPham = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel30 = new javax.swing.JLabel();
@@ -76,24 +101,26 @@ public class BanHangJpanel extends javax.swing.JPanel {
         btnQR1 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable6 = new javax.swing.JTable();
+        tblHoaDon = new javax.swing.JTable();
+        btnTaoHoaDon = new javax.swing.JButton();
+        cbbTrangThaiHoaDon = new javax.swing.JComboBox<>();
 
         JBanHang.setBackground(new java.awt.Color(238, 232, 170));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Giỏ hàng"));
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        tblGioHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "STT", "Tên SP", "Đơn giá", "Số lượng", "Thành tiền"
             }
         ));
-        jScrollPane4.setViewportView(jTable4);
+        jScrollPane4.setViewportView(tblGioHang);
 
         jButton7.setText("jButton7");
 
@@ -128,7 +155,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh sách sản phẩm"));
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -136,10 +163,10 @@ public class BanHangJpanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Mã Sản Phẩm", "Tên Sản Phẩm", "Số lượng tồn", "Đơn giá"
             }
         ));
-        jScrollPane5.setViewportView(jTable5);
+        jScrollPane5.setViewportView(tblSanPham);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -435,20 +462,24 @@ public class BanHangJpanel extends javax.swing.JPanel {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Giỏ hàng"));
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Hóa đơn"));
 
-        jTable6.setModel(new javax.swing.table.DefaultTableModel(
+        tblHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Mã HĐ", "Tên NV", "Tên KH", "Ngày tạo", "Tình trạng"
             }
         ));
-        jScrollPane6.setViewportView(jTable6);
+        jScrollPane6.setViewportView(tblHoaDon);
+
+        btnTaoHoaDon.setText("Tạo hóa đơn");
+
+        cbbTrangThaiHoaDon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -456,14 +487,23 @@ public class BanHangJpanel extends javax.swing.JPanel {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnTaoHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbbTrangThaiHoaDon, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(btnTaoHoaDon)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbbTrangThaiHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -500,7 +540,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 57, Short.MAX_VALUE))
         );
@@ -509,7 +549,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2117, Short.MAX_VALUE)
+            .addGap(0, 2139, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -556,6 +596,8 @@ public class BanHangJpanel extends javax.swing.JPanel {
     private javax.swing.JButton btn2;
     private javax.swing.JButton btn5;
     private javax.swing.JButton btnQR1;
+    private javax.swing.JButton btnTaoHoaDon;
+    private javax.swing.JComboBox<String> cbbTrangThaiHoaDon;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
@@ -587,9 +629,6 @@ public class BanHangJpanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
-    private javax.swing.JTable jTable6;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
@@ -599,5 +638,8 @@ public class BanHangJpanel extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField20;
     private javax.swing.JTextField jTextField22;
+    private javax.swing.JTable tblGioHang;
+    private javax.swing.JTable tblHoaDon;
+    private javax.swing.JTable tblSanPham;
     // End of variables declaration//GEN-END:variables
 }
