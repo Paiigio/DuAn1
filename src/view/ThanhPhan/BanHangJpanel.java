@@ -5,8 +5,11 @@
 package view.ThanhPhan;
 
 import Service.CTSanPhamService;
+import Service.HoaDonService;
 import Service.Interface.ICTSanPhamService;
+import Service.Interface.IHoaDonService;
 import ViewModel.CTSanPhamModel;
+import ViewModel.HoaDonModel;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -20,6 +23,8 @@ import view.QuetQR;
 public class BanHangJpanel extends javax.swing.JPanel {
     private DefaultTableModel dtmSP = new DefaultTableModel();
     private ICTSanPhamService iCTSanPhamService = new CTSanPhamService();
+    private DefaultTableModel dtmHD = new DefaultTableModel();
+    private IHoaDonService iHoaDonService = new HoaDonService();
     private ArrayList<String> listIMEI = new ArrayList<>();
     /**
      * Creates new form BanHangJpanel1
@@ -27,7 +32,9 @@ public class BanHangJpanel extends javax.swing.JPanel {
     public BanHangJpanel() {
         initComponents();
         dtmSP = (DefaultTableModel) tblSanPham.getModel();
+        dtmHD = (DefaultTableModel) tblHoaDon.getModel();
         loadSP();
+        loadHD();
     }
     private void loadSP(){
         ArrayList<CTSanPhamModel> listSP = iCTSanPhamService.getAllCTSanPham();
@@ -40,6 +47,19 @@ public class BanHangJpanel extends javax.swing.JPanel {
                 x.getSp().getTen()+" "+x.getDl().getSoDungLuong()+"GB "+x.getMs().getTen(),
                 x.getSoLuongTon(),
                 vn.format(x.getGiaBan())
+            });
+        }
+    }
+    private void loadHD(){
+        ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDon();
+        dtmHD.setRowCount(0);
+        for (HoaDonModel x : listHD){
+            dtmHD.addRow(new Object[]{
+                x.getMa(),
+                x.getNv().getHoTen(),
+                x.getKh().getHoTen(),
+                x.getNgayTao(),
+                x.getTrangThai()
             });
         }
     }

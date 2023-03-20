@@ -91,7 +91,7 @@ public class CTSanPhamResponsitory {
         return ctsp;
      }   
       public CTSanPham deleteCTKM (CTSanPham ctsp) {
-        String sql = "UPDATE dbo.CTSANPHAM SET IDCTKM=null WHERE IDCTSP=?";
+        String sql = "UPDATE dbo.CTSANPHAM SET IDCTKM = null WHERE IDCTSP = ?";
         JDBC_Helper.excuteUpdate(sql,ctsp.getId());
         return ctsp;
     }

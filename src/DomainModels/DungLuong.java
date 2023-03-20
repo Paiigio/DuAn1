@@ -21,13 +21,14 @@ public class DungLuong {
         this.soDungLuong = soDungLuong;
     }
 
-    
     public DungLuong(String id, String ma, String soDungLuong, Date ngayNhap) {
         this.id = id;
         this.ma = ma;
         this.soDungLuong = soDungLuong;
         this.ngayNhap = ngayNhap;
     }
+
+    
 
     public String getId() {
         return id;

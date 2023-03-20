@@ -32,6 +32,8 @@ public class SanPham {
         this.ngaySua = ngaySua;
     }
 
+
+
     public String getId() {
         return id;
     }

@@ -32,6 +32,8 @@ public class HoaDonChiTiet {
         this.ngaySua = ngaySua;
     }
 
+
+
     public HoaDon getIdhd() {
         return idhd;
     }

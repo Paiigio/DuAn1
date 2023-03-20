@@ -47,6 +47,8 @@ public class CTSanPham {
         this.giaBan = giaBan;
     }
 
+
+
     public String getId() {
         return id;
     }

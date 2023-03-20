@@ -34,6 +34,8 @@ public class PhieuChi {
         this.NgayNhap = NgayNhap;
     }
 
+
+
     public String getIDPC() {
         return IDPC;
     }

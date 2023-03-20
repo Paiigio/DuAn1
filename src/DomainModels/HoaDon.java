@@ -40,6 +40,8 @@ public class HoaDon {
         this.ngaySua = ngaySua;
     }
 
+
+
     public String getId() {
         return id;
     }

@@ -13,8 +13,8 @@ import java.util.Date;
  */
 public class NhanVienModel {
 
-     private String id;
-   private ChucVu cv;
+    private String id;
+    private ChucVu cv;
     private String ma;
     private String hoTen;
     private String gioiTinh;
@@ -166,5 +166,5 @@ public class NhanVienModel {
     public void setHinhAnh(String hinhAnh) {
         this.hinhAnh = hinhAnh;
     }
-    
+
 }

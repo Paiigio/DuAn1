@@ -30,6 +30,8 @@ public class PhieuNhap {
         this.ngayTao = ngayTao;
     }
 
+
+
     public String getId() {
         return id;
     }

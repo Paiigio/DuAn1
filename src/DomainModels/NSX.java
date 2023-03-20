@@ -28,6 +28,8 @@ public class NSX {
         this.ngaySua = ngaySua;
     }
 
+
+
     public String getId() {
         return id;
     }
