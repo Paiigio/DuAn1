@@ -56,8 +56,6 @@ public class Loading extends javax.swing.JFrame {
         pgrload = new javax.swing.JProgressBar();
         lbl = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pgrload.setStringPainted(true);

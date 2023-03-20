@@ -4,7 +4,6 @@
  */
 package view.ThanhPhan;
 
-import DomainModels.CTSanPham;
 import DomainModels.DungLuong;
 import DomainModels.MauSac;
 import DomainModels.SanPham;
@@ -27,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -454,7 +452,15 @@ public class SanPhamJpanel extends javax.swing.JPanel {
             new String [] {
                 "STT", "Mã CTSP", "Tên SP", "Màu Sắc", "Dung Lượng", "Mã QR", "Số lượng tồn", "Hình ảnh", "Năm BH", "Giá Nhập", "Giá Bán"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblHienThi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblHienThiMouseClicked(evt);

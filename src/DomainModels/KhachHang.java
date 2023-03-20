@@ -120,4 +120,9 @@ public class KhachHang {
         this.ngaySua = ngaySua;
     }
 
+    @Override
+    public String toString() {
+        return maKH;
+    }
+
 }

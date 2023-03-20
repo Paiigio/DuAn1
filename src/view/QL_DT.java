@@ -614,7 +614,7 @@ public class QL_DT extends javax.swing.JFrame {
     private void btnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaDonActionPerformed
         HoaDonJpanel hdj = new HoaDonJpanel();
         hdj.setSize(panelCardGoc.getWidth(), panelCardGoc.getHeight());
-        JSanPham.add(hdj, BorderLayout.CENTER);
+        JHoaDon.add(hdj, BorderLayout.CENTER);
         cardLayout.show(panelCardGoc, "cardhoadon");
     }//GEN-LAST:event_btnHoaDonActionPerformed
 
