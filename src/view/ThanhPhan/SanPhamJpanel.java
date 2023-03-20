@@ -639,7 +639,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         txtMaQR.setText(tblHienThi.getValueAt(index, 5).toString());
         txtSL.setText(tblHienThi.getValueAt(index, 6).toString());
         String hinh = tblHienThi.getValueAt(index, 7).toString();
-        ImageIcon imgicon = new ImageIcon(getClass().getResource("/icon/" + hinh));
+        ImageIcon imgicon = new ImageIcon(getClass().getResource("/icon/anhSP/" + hinh));
         Image img = imgicon.getImage();
         imgicon.setImage(img.getScaledInstance(lblAnhSP.getWidth(), lblAnhSP.getHeight(), 0));
         lblAnhSP.setIcon(imgicon);
