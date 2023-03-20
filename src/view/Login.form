@@ -437,7 +437,7 @@
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/AnhNV/login.gif"/>
+              <Image iconType="3" name="/icon/iphone-x-mac.gif"/>
             </Property>
           </Properties>
           <Constraints>
@@ -449,7 +449,7 @@
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="c2" green="bc" red="15" type="rgb"/>
+              <Color blue="3" green="2" red="3" type="rgb"/>
             </Property>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
