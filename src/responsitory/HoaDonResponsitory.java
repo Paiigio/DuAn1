@@ -112,5 +112,5 @@ public class HoaDonResponsitory {
         JDBC_Helper.excuteUpdate(sql, nv.getTrangThai(), nv.getId());
         return nv;
     }
-
+//
 }

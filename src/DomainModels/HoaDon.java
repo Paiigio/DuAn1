@@ -22,7 +22,7 @@ public class HoaDon {
     private int trangThai;
     private Date ngayTao;
     private Date ngaySua;
-
+    
     public HoaDon() {
     }
 
