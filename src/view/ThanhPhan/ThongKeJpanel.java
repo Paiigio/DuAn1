@@ -6,7 +6,10 @@ package view.ThanhPhan;
 
 import DomainModels.HoaDon;
 import Service.HoaDonService;
+import Service.KhachHangService;
 import ViewModel.HoaDonModel;
+import ViewModel.KhachHangModel;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +21,8 @@ import java.util.logging.Logger;
 public class ThongKeJpanel extends javax.swing.JPanel {
 
     private HoaDonService hds = new HoaDonService();
-
+    private KhachHangService khs= new KhachHangService();
+   
     /**
      * Creates new form ThongKeJpanel
      */
@@ -37,6 +41,25 @@ public class ThongKeJpanel extends javax.swing.JPanel {
         }
         lblHoaDon.setText(String.valueOf(dem));
 
+    }
+    public void tongKhachHang(){
+        int dem=0;
+        ArrayList<KhachHangModel> list = khs.getAllKH();
+        for (int i = 0; i < list.size(); i++) {
+            if(list.get(i).getMaKH()!=null){
+               dem++;
+            }
+        }
+        lblKhachHang.setText(String.valueOf(dem));
+    }
+    public void TongTienHD(){
+        int tong =0;
+        ArrayList<HoaDonModel> list = hds.getAllHoaDonTT();
+        for (int i = 0; i < list.size(); i++) {
+            
+            tong+=list.get(i).getThanhTien();
+        }
+        lblDoanhThu.setText(String.valueOf(tong));
     }
 
     /**
@@ -66,21 +89,18 @@ public class ThongKeJpanel extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setText("Doanh thu");
 
-        lblDoanhThu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblDoanhThu.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(111, 111, 111)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(lblDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                    .addComponent(lblDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,16 +131,16 @@ public class ThongKeJpanel extends javax.swing.JPanel {
                         .addGap(83, 83, 83))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(lblHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(133, 133, 133))))
+                        .addGap(132, 132, 132))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(lblHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addGap(27, 27, 27))
         );
 
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -128,7 +148,7 @@ public class ThongKeJpanel extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel3.setText("Tổng khách hàng");
 
-        lblKhachHang.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblKhachHang.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -141,17 +161,17 @@ public class ThongKeJpanel extends javax.swing.JPanel {
                         .addComponent(jLabel3)
                         .addGap(68, 68, 68))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(lblKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(125, 125, 125))))
+                        .addComponent(lblKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(146, 146, 146))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
                 .addComponent(lblKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout JThongKeLayout = new javax.swing.GroupLayout(JThongKe);
@@ -220,6 +240,8 @@ public class ThongKeJpanel extends javax.swing.JPanel {
                 try {
                     Thread.sleep(100);
                     tongHoaDon();
+                    tongKhachHang();
+                    TongTienHD();
                 } catch (InterruptedException ex) {
                     Logger.getLogger(ThongKeJpanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
