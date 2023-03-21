@@ -549,7 +549,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
 
     private void btnUpAnhThemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpAnhThemSPActionPerformed
         try {
-            JFileChooser f = new JFileChooser("D:\\duan1_nhom8\\src\\icon");
+            JFileChooser f = new JFileChooser("D:\\duan1_nhom8\\src\\icon\\anhSP");
             f.showOpenDialog(null);
             File file = f.getSelectedFile();
             Image img = ImageIO.read(file);
