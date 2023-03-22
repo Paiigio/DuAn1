@@ -5,6 +5,7 @@
 package view.ThanhPhan;
 
 import DomainModels.CTSanPham;
+import DomainModels.HoaDon;
 import DomainModels.NhanVien;
 import Service.CTSanPhamService;
 import Service.HoaDonChiTietService;
@@ -692,6 +693,15 @@ public class BanHangJpanel extends javax.swing.JPanel {
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
        int index = tblSanPham.getSelectedRow();
+       int indexHD = tblHoaDon.getSelectedRow();
+       String maHD = tblHoaDon.getValueAt(index, 0).toString();
+       HoaDon hd = new HoaDon();
+       ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDon();
+       for (HoaDonModel h : listHD){
+           if (h.getMa()!=null && h.getMa().equals(maHD)){
+               hd.setId(h.getId());
+           }
+       }
        String soLuongTon = tblSanPham.getValueAt(index, 2).toString();
        if (Integer.valueOf(soLuongTon) <= 0){
            JOptionPane.showMessageDialog(this, "Số lượng tồn không đủ");
@@ -717,6 +727,14 @@ public class BanHangJpanel extends javax.swing.JPanel {
               return;
           }
       }
+      String donGia = tblSanPham.getValueAt(index, 3).toString();
+      HoaDonChiTietModel hdct = new HoaDonChiTietModel();
+      hdct.setSl(1);
+      hdct.setIdctsp(c);
+      hdct.setIdhd(hd);
+      hdct.setDongia(Float.valueOf(donGia.replace(".","")));
+      hdct.setThanhTien(Float.valueOf(donGia.replace(".","")));
+      
         System.out.println(themIMEI);
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
