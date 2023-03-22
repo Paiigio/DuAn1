@@ -6,11 +6,6 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
-<<<<<<< HEAD
-import javax.swing.JOptionPane;
-import org.apache.log4j.lf5.Log4JLogRecord;
-=======
->>>>>>> origin/master
 import view.ThanhPhan.BanHangJpanel;
 import view.ThanhPhan.HoaDonJpanel;
 import view.ThanhPhan.KhachHangJpanel;
@@ -22,7 +17,8 @@ import view.ThanhPhan.ThongKeJpanel;
 public class QL_DT extends javax.swing.JFrame {
 
     CardLayout cardLayout;
-
+        
+       
     public QL_DT() {
         initComponents();
         this.setLocationRelativeTo(this);
@@ -30,21 +26,17 @@ public class QL_DT extends javax.swing.JFrame {
         //show card 1 
         cardLayout.show(panelCardGoc, "trangchu");
         loaddulieuDangNhap();
-
+      
     }
-
-    public void loaddulieuDangNhap() {
-        NhanVien nv = new NhanVien();
-        lblTen.setText(Login.nv.getHoTen());
-        lblChucVU.setText(Login.nv.getCv().getTenCV());
-        ImageIcon imgicon = new ImageIcon(getClass().getResource("/AnhNV/" + Login.nv.getHinhAnh()));
-        Image img = imgicon.getImage();
-        img.getScaledInstance(lblAnhDangNhap.getWidth(), lblAnhDangNhap.getY(), 0);
-        lblAnhDangNhap.setIcon(imgicon);
-
-
+    public void loaddulieuDangNhap(){
+             NhanVien nv = new NhanVien();
+           lblTen.setText(Login.nv.getHoTen());
+           lblChucVU.setText(Login.nv.getCv().getTenCV());
+           ImageIcon imgicon = new ImageIcon(getClass().getResource("/AnhNV/" + Login.nv.getHinhAnh()));
+           Image img = imgicon.getImage();
+           img.getScaledInstance(lblAnhDangNhap.getWidth(), lblAnhDangNhap.getY(), 0);
+           lblAnhDangNhap.setIcon(imgicon);
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -245,6 +237,9 @@ public class QL_DT extends javax.swing.JFrame {
             .addGroup(TraiLayout.createSequentialGroup()
                 .addGroup(TraiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(TraiLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(lblAnhDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(TraiLayout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addGroup(TraiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -254,19 +249,8 @@ public class QL_DT extends javax.swing.JFrame {
                             .addComponent(btnSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-<<<<<<< HEAD
-                            .addComponent(btnTrangChu, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(TraiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(TraiLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(lblChucVU, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, TraiLayout.createSequentialGroup()
-                            .addGap(36, 36, 36)
-                            .addComponent(lblAnhDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
-=======
                             .addComponent(btnTrangChu, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblChucVU, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
->>>>>>> origin/master
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         TraiLayout.setVerticalGroup(
@@ -524,7 +508,7 @@ public class QL_DT extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTrangChuMouseEntered
 
     private void btnTrangChuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangChuMouseExited
-        btnTrangChu.setBackground(new Color(255, 215, 0));
+        btnTrangChu.setBackground(new Color(255,215,0));
     }//GEN-LAST:event_btnTrangChuMouseExited
 
     private void btnHoaDonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHoaDonMouseEntered
@@ -532,7 +516,7 @@ public class QL_DT extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHoaDonMouseEntered
 
     private void btnHoaDonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHoaDonMouseExited
-        btnHoaDon.setBackground(new Color(255, 215, 0));
+        btnHoaDon.setBackground(new Color(255,215,0));
     }//GEN-LAST:event_btnHoaDonMouseExited
 
     private void btnSanPhamMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSanPhamMouseEntered
@@ -540,7 +524,7 @@ public class QL_DT extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSanPhamMouseEntered
 
     private void btnSanPhamMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSanPhamMouseExited
-        btnSanPham.setBackground(new Color(255, 215, 0));
+        btnSanPham.setBackground(new Color(255,215,0));
     }//GEN-LAST:event_btnSanPhamMouseExited
 
     private void btnKhuyenMaiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhuyenMaiMouseEntered
@@ -548,7 +532,7 @@ public class QL_DT extends javax.swing.JFrame {
     }//GEN-LAST:event_btnKhuyenMaiMouseEntered
 
     private void btnKhuyenMaiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhuyenMaiMouseExited
-        btnKhuyenMai.setBackground(new Color(255, 215, 0));
+        btnKhuyenMai.setBackground(new Color(255,215,0));
     }//GEN-LAST:event_btnKhuyenMaiMouseExited
 
     private void btnNhanVienMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhanVienMouseEntered
@@ -556,7 +540,7 @@ public class QL_DT extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNhanVienMouseEntered
 
     private void btnNhanVienMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhanVienMouseExited
-        btnNhanVien.setBackground(new Color(255, 215, 0));
+        btnNhanVien.setBackground(new Color(255,215,0));
     }//GEN-LAST:event_btnNhanVienMouseExited
 
     private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
@@ -586,7 +570,7 @@ public class QL_DT extends javax.swing.JFrame {
     }//GEN-LAST:event_btnKhachHangMouseEntered
 
     private void btnThongkeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThongkeMouseExited
-        btnThongke.setBackground(new Color(255, 215, 0));
+        btnThongke.setBackground(new Color(255,215,0));
     }//GEN-LAST:event_btnThongkeMouseExited
 
     private void btnThongkeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThongkeMouseEntered
@@ -601,7 +585,7 @@ public class QL_DT extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBanHangActionPerformed
 
     private void btnBanHangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBanHangMouseExited
-        btnBanHang.setBackground(new Color(255, 215, 0));
+        btnBanHang.setBackground(new Color(255,215,0));
     }//GEN-LAST:event_btnBanHangMouseExited
 
     private void btnBanHangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBanHangMouseEntered
