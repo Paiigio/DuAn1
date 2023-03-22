@@ -37,20 +37,22 @@ public class QL_IMEI extends javax.swing.JFrame {
         cbbSP.setModel(cbb);
         loadData();
         loadCBB();
+        String id = "2C3365F3-FE58-48B6-B469-E6B305AB2394";
+        ArrayList<IMEIModel> listTest = iIMEIService.selectSL(id);
+        System.out.println(listTest.size());
     }
 
     private void loadCBB() {
         ArrayList<CTSanPhamModel> list = iCTSanPhamService.getAllCTSanPham();
         for (CTSanPhamModel x : list) {
-            cbb.addElement(new CTSanPham(x.getId(), x.getMs(), x.getCtkm(), x.getSp(), x.getDl(), x.getMa(), x.getMaQR(), x.getSoLuongTon(), x.getHinhAnh(), x.getNamBH(), x.getNgayTao(), x.getNgaySua(), x.getGiaNhap(), x.getGiaBan()));
+            cbb.addElement(new CTSanPham(x.getId(), x.getMs(), x.getCtkm(), x.getSp(), x.getDl(), x.getMa(), x.getMaQR(), x.getHinhAnh(), x.getNamBH(), x.getNgayTao(), x.getNgaySua(), x.getGiaNhap(), x.getGiaBan(),x.getTrangThai()));
         }
     }
 
     private void loadData() {
         ArrayList<IMEIModel> list = iIMEIService.getAllIMEI();
         dtm.setRowCount(0);
-        for (int i = 0; i < list.size(); ++i) {
-            System.out.println(list.get(i));
+        for (int i = 0; i < list.size(); ++i) {;
             dtm.addRow(new Object[]{
                 i + 1,
                 list.get(i).getMa(),

@@ -1,14 +1,11 @@
 package view;
 
-import DomainModels.KhachHang;
 import DomainModels.NhanVien;
-import ViewModel.NhanVienModel;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
-import org.apache.log4j.lf5.Log4JLogRecord;
 import view.ThanhPhan.BanHangJpanel;
 import view.ThanhPhan.HoaDonJpanel;
 import view.ThanhPhan.KhachHangJpanel;
@@ -252,10 +249,8 @@ public class QL_DT extends javax.swing.JFrame {
                             .addComponent(btnSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnTrangChu, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(TraiLayout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(lblChucVU, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnTrangChu, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblChucVU, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         TraiLayout.setVerticalGroup(

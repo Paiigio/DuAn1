@@ -105,11 +105,8 @@
                                   <Component id="btnHoaDon" alignment="0" min="-2" pref="191" max="-2" attributes="0"/>
                                   <Component id="btnBanHang" alignment="0" min="-2" pref="191" max="-2" attributes="0"/>
                                   <Component id="btnTrangChu" alignment="0" min="-2" pref="191" max="-2" attributes="0"/>
+                                  <Component id="lblChucVU" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                               </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                              <Component id="lblChucVU" min="-2" pref="89" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="15" max="32767" attributes="0"/>
