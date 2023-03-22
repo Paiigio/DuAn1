@@ -78,11 +78,12 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         ArrayList<CTSanPhamModel> listSP = ctsp.getAllCTSanPham();
         dtmSP.setRowCount(0);
         for (int i = 0; i < listSP.size(); ++i) {
+            
             dtmSP.addRow(new Object[]{
                 i + 1,
                 listSP.get(i).getMa(),
                 listSP.get(i).getSp().getTen() + " " + listSP.get(i).getDl().getSoDungLuong() + " " + listSP.get(i).getMs().getTen(),
-                listSP.get(i).getSoLuongTon(),
+//                listSP.get(i).getSoLuongTon(),
                 listSP.get(i).getCtkm()
             });
         }
@@ -626,7 +627,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
                 i + 1,
                 listNEW.get(i).getMa(),
                 listNEW.get(i).getSp().getTen() + " " + listNEW.get(i).getDl().getSoDungLuong() + " " + listNEW.get(i).getMs().getTen(),
-                listNEW.get(i).getSoLuongTon(),
+//                listNEW.get(i).getSoLuongTon(),
                 listNEW.get(i).getCtkm()
             });
         }
@@ -647,7 +648,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
                 i + 1,
                 listNEW.get(i).getMa(),
                 listNEW.get(i).getSp().getTen() + " " + listNEW.get(i).getDl().getSoDungLuong() + " " + listNEW.get(i).getMs().getTen(),
-                listNEW.get(i).getSoLuongTon(),
+//                listNEW.get(i).getSoLuongTon(),
                 listNEW.get(i).getCtkm()
             });
         }
@@ -741,7 +742,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         ArrayList<CTSanPhamModel> listSP = ctsp.getAllCTSanPham();
         for (CTSanPhamModel z : listSP) {
             if (z.getMa() != null && z.getMa().equals(ma)) {
-                return new CTSanPhamModel(z.getId(), z.getMs(), z.getCtkm(), z.getSp(), z.getDl(), z.getMa(), z.getMaQR(), z.getSoLuongTon(), z.getHinhAnh(), z.getNamBH(), z.getNgayTao(), z.getNgaySua(), z.getGiaNhap(), z.getGiaBan());
+                return new CTSanPhamModel(z.getId(), z.getMs(), z.getCtkm(), z.getSp(), z.getDl(), z.getMa(), z.getMaQR(), z.getHinhAnh(), z.getNamBH(), z.getNgayTao(), z.getNgaySua(), z.getGiaNhap(), z.getGiaBan(),z.getTrangThai());
             }
         }
         return null;

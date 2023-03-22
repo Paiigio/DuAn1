@@ -101,8 +101,10 @@
                                   <Component id="btnHoaDon" alignment="0" min="-2" pref="191" max="-2" attributes="0"/>
                                   <Component id="btnBanHang" alignment="0" min="-2" pref="191" max="-2" attributes="0"/>
                                   <Component id="btnTrangChu" alignment="0" min="-2" pref="191" max="-2" attributes="0"/>
+                                  <Component id="lblChucVU" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+<<<<<<< HEAD
                           <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
@@ -113,6 +115,8 @@
                                   <Component id="lblAnhDangNhap" min="-2" pref="129" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+=======
+>>>>>>> origin/master
                       </Group>
                       <EmptySpace pref="15" max="32767" attributes="0"/>
                   </Group>

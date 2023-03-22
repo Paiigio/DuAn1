@@ -19,18 +19,18 @@ public class CTSanPham {
     private DungLuong dl;
     private String ma;
     private String maQR;
-    private int soLuongTon;
     private String hinhAnh;
     private int namBH;
     private Date ngayTao;
     private Date ngaySua;
     private float giaNhap;
     private float giaBan;
+    private int trangThai;
 
     public CTSanPham() {
     }
 
-    public CTSanPham(String id, MauSac ms, CTKhuyenMai ctkm, SanPham sp, DungLuong dl, String ma, String maQR, int soLuongTon, String hinhAnh, int namBH, Date ngayTao, Date ngaySua, float giaNhap, float giaBan) {
+    public CTSanPham(String id, MauSac ms, CTKhuyenMai ctkm, SanPham sp, DungLuong dl, String ma, String maQR, String hinhAnh, int namBH, Date ngayTao, Date ngaySua, float giaNhap, float giaBan, int trangThai) {
         this.id = id;
         this.ms = ms;
         this.ctkm = ctkm;
@@ -38,14 +38,24 @@ public class CTSanPham {
         this.dl = dl;
         this.ma = ma;
         this.maQR = maQR;
-        this.soLuongTon = soLuongTon;
         this.hinhAnh = hinhAnh;
         this.namBH = namBH;
         this.ngayTao = ngayTao;
         this.ngaySua = ngaySua;
         this.giaNhap = giaNhap;
         this.giaBan = giaBan;
+        this.trangThai = trangThai;
     }
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
+
+
 
 
 
@@ -105,13 +115,6 @@ public class CTSanPham {
         this.maQR = maQR;
     }
 
-    public int getSoLuongTon() {
-        return soLuongTon;
-    }
-
-    public void setSoLuongTon(int soLuongTon) {
-        this.soLuongTon = soLuongTon;
-    }
 
     public String getHinhAnh() {
         return hinhAnh;

@@ -3,6 +3,30 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+            <file>file:/D:/duan1_nhom8/src/Service/Interface/IHoaDonChiTietService.java</file>
+            <file>file:/D:/duan1_nhom8/src/Service/CTSanPhamService.java</file>
+            <file>file:/D:/duan1_nhom8/src/responsitory/CTSanPhamResponsitory.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/NhanVienJpanel.java</file>
+            <file>file:/D:/duan1_nhom8/src/ViewModel/CTSanPhamModel.java</file>
+            <file>file:/D:/duan1_nhom8/src/DomainModels/CTSanPham.java</file>
+            <file>file:/D:/duan1_nhom8/src/responsitory/IMEIResponsitory.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/Login.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/QL_SanPham.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/QL_DT.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/QL_IMEI.java</file>
+            <file>file:/D:/duan1_nhom8/src/DomainModels/ChucVu.java</file>
+            <file>file:/D:/duan1_nhom8/src/Service/IMEIService.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/KhuyenMaiJpanel.java</file>
+            <file>file:/D:/duan1_nhom8/src/DomainModels/HoaDon.java</file>
+            <file>file:/D:/duan1_nhom8/src/Service/Interface/IIMEIService.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/SanPhamJpanel.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/Loading.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/ViewChonKhachHang.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/BanHangJpanel.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/ViewIMEI.java</file>
+            <file>file:/D:/duan1_nhom8/src/Service/HoaDonChiTietService.java</file>
+=======
             <file>file:/D:/duan1_nhom8/src/responsitory/CTSanPhamResponsitory.java</file>
             <file>file:/D:/duan1_nhom8/src/DomainModels/HoaDon.java</file>
             <file>file:/D:/duan1_nhom8/src/responsitory/HoaDonResponsitory.java</file>
@@ -11,6 +35,7 @@
             <file>file:/D:/duan1_nhom8/src/view/QL_DT.java</file>
             <file>file:/D:/duan1_nhom8/src/Service/HoaDonService.java</file>
             <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/ThongKeJpanel.java</file>
+>>>>>>> origin/master
         </group>
     </open-files>
 </project-private>
