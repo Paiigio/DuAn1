@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -49,6 +50,15 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         tblBang.getColumnModel().getColumn(4).setPreferredWidth(60);
         loadSP();
         loadTKHang();
+//              TableActionEvent event = new TableActionEvent() {
+//            @Override
+//            public void onDelete(int row) {
+//                DefaultTableModel dtm=(DefaultTableModel) tblSanPham.getModel();
+//                dtm.getRowCount();
+//            }
+//        };
+//           tblSanPham.getColumnModel().getColumn(5).setCellRenderer(new SpinneAction());
+//        tblSanPham.getColumnModel().getColumn(5).setCellEditor(new SipnerEditor(event));
     }
 
     public void loadTable() {
@@ -92,7 +102,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         Collections.sort(list, Comparator.comparing(CTKhuyenMai -> CTKhuyenMai.getMa()));
         for (CTKhuyenMaiModel x : list) {
             Object[] rowData = {
-                x.getMa(), x.getTen(), x.getThoiGianBatDau(), x.getThoiGianKetThuc(), x.getHinhThuc(), x.getNgayTao(), x.getNgaySua()
+                x.getMa(), x.getTen(), x.getThoiGianBatDau(), x.getThoiGianKetThuc(), x.getHinhThuc(), x.getNgayTao(), x.getNgaySua(),false
             };
             dtm.addRow(rowData);
 
@@ -376,15 +386,30 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
 
         tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã", "Tên SP", "Số lượng tồn", "CTKM"
+                "STT", "Mã", "Tên SP", "Số lượng tồn", "CTKM", "Check"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane6.setViewportView(tblSanPham);
 
         btnSuaCTKM.setText("Thêm/Sửa CTKM");
@@ -634,6 +659,32 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         String idCTKM = "";
         int indexSP = tblSanPham.getSelectedRow();
         String maSP = tblSanPham.getValueAt(indexSP, 1).toString();
+        Boolean check=(Boolean) tblSanPham.getValueAt(indexCTKM, 5);
+        if(check==true){
+            
+        ArrayList<CTKhuyenMaiModel> listCTKM = ctkm.getAllCTKM();
+        CTKhuyenMai ctkm = null;
+        for (CTKhuyenMaiModel x : listCTKM) {
+            if (x.getMa() != null && x.getMa().equals(maCTKM)) {
+                ctkm = new CTKhuyenMai(x.getId(), x.getMa(), x.getTen(), x.getThoiGianBatDau(), x.getThoiGianKetThuc(), x.getHinhThuc(), x.getNgayTao(), x.getNgaySua());
+            }
+        }
+        if (indexCTKM < 0) {
+            JOptionPane.showMessageDialog(this, "Mời chọn chương trình khuyến mãi");
+            return;
+        }
+        if (indexSP < 0) {
+            JOptionPane.showMessageDialog(this, "Mời chọn dòng sản phẩm");
+            return;
+        }
+        if (JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm / sửa chương trình khuyến mãi không?", "Thông báo", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+            return;
+        }
+                ArrayList<CTSanPhamModel> listSP = ctsp.getAllCTSanPham();
+        CTSanPhamModel c = getCTSPByMa(maSP);
+        c.setCtkm(ctkm);
+        System.out.println(c.getCtkm().getId());
+        }
 
         ArrayList<CTKhuyenMaiModel> listCTKM = ctkm.getAllCTKM();
         CTKhuyenMai ctkm = null;

@@ -337,14 +337,24 @@ public class Login extends javax.swing.JFrame {
             return;
         }
         boolean check = false;
+
         for (NhanVienModel x : list) {
-            if (x.getMa().equals(txtUser.getText()) && x.getMatKhau().equals(String.valueOf(txtPass.getPassword()))) {
+            if(x.getTrangThai()==0){
+                if (x.getMa().equals(txtUser.getText()) && x.getMatKhau().equals(String.valueOf(txtPass.getPassword()))) {
                 nv = x;
-                check = true;
-            }
+                
+            }      
         }
+            }
+        if(nv.getTrangThai()==1){
+            JOptionPane.showMessageDialog(this, "Tài khoản hết hạn");
+            check =false;
+           
+        }else check=true;
+        
         if (check) {
             new Loading().setVisible(true);
+           
             this.setVisible(false);
             
             JOptionPane.showMessageDialog(this, "Đăng nhập thành công");

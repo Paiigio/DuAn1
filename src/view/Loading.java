@@ -32,7 +32,7 @@ public class Loading extends javax.swing.JFrame {
                     pgrload.setValue(i);
 //                    lblLoad.setText("Loading "+i +"%");
                     try {
-                        Thread.sleep(60);
+                        Thread.sleep(20);
                     } catch (InterruptedException ex) {
 //                        Logger.getLogger(Loading.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -56,8 +56,11 @@ public class Loading extends javax.swing.JFrame {
         pgrload = new javax.swing.JProgressBar();
         lbl = new javax.swing.JLabel();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pgrload.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         pgrload.setStringPainted(true);
         jPanel1.add(pgrload, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 810, 50));
         jPanel1.add(lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 450));
