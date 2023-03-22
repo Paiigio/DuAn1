@@ -13,6 +13,7 @@ import Service.Interface.ICTKhuyenMaiService;
 import Service.Interface.ICTSanPhamService;
 import Service.Interface.INSXService;
 import Service.NSXService;
+import Utilites.DB_Context;
 import ViewModel.CTKhuyenMaiModel;
 import ViewModel.CTSanPhamModel;
 import ViewModel.NSXModel;
@@ -24,6 +25,7 @@ import java.util.Comparator;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class KhuyenMaiJpanel extends javax.swing.JPanel {
@@ -68,12 +70,12 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         ArrayList<CTSanPhamModel> listSP = ctsp.getAllCTSanPham();
         dtmSP.setRowCount(0);
         for (int i = 0; i < listSP.size(); ++i) {
-            
+
             dtmSP.addRow(new Object[]{
                 i + 1,
                 listSP.get(i).getMa(),
                 listSP.get(i).getSp().getTen() + " " + listSP.get(i).getDl().getSoDungLuong() + " " + listSP.get(i).getMs().getTen(),
-//                listSP.get(i).getSoLuongTon(),
+                //                listSP.get(i).getSoLuongTon(),
                 listSP.get(i).getCtkm()
             });
         }
@@ -383,9 +385,24 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã", "Tên SP", "Số lượng tồn", "CTKM"
+                "STT", "Mã", "Tên SP", "CTKM", "Check"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane6.setViewportView(tblSanPham);
 
         btnSuaCTKM.setText("Thêm/Sửa CTKM");
@@ -602,7 +619,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
                 i + 1,
                 listNEW.get(i).getMa(),
                 listNEW.get(i).getSp().getTen() + " " + listNEW.get(i).getDl().getSoDungLuong() + " " + listNEW.get(i).getMs().getTen(),
-//                listNEW.get(i).getSoLuongTon(),
+                //                listNEW.get(i).getSoLuongTon(),
                 listNEW.get(i).getCtkm()
             });
         }
@@ -623,7 +640,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
                 i + 1,
                 listNEW.get(i).getMa(),
                 listNEW.get(i).getSp().getTen() + " " + listNEW.get(i).getDl().getSoDungLuong() + " " + listNEW.get(i).getMs().getTen(),
-//                listNEW.get(i).getSoLuongTon(),
+                //                listNEW.get(i).getSoLuongTon(),
                 listNEW.get(i).getCtkm()
             });
         }
@@ -654,7 +671,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         if (JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm / sửa chương trình khuyến mãi không?", "Thông báo", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
             return;
         }
-                ArrayList<CTSanPhamModel> listSP = ctsp.getAllCTSanPham();
+        ArrayList<CTSanPhamModel> listSP = ctsp.getAllCTSanPham();
         CTSanPhamModel c = getCTSPByMa(maSP);
         c.setCtkm(ctkm);
         System.out.println(c.getCtkm().getId());
@@ -670,28 +687,54 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
 
     private void btnXoaCTKMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaCTKMActionPerformed
         int index = tblSanPham.getSelectedRow();
-        CTSanPhamModel c = getCTSPByMa(tblSanPham.getValueAt(index, 1).toString());
-        if (index < 0){
-            JOptionPane.showMessageDialog(this, "Mời bạn chọn dòng cần xóa");
-            return;
-        }
-        if (c== null){
-            JOptionPane.showMessageDialog(this, "Xóa thất bại");
-            return;
-        }
-        if (JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?","Thông báo",JOptionPane.YES_NO_OPTION)!=JOptionPane.YES_OPTION){
-            return;
-        }
-        if (ctsp.deleteCTKM(c)!=null){
-            JOptionPane.showMessageDialog(this, "Xóa thành công");
-            loadSP();
+
+        boolean tich = false;
+        Object[] options = {"Yes", "No"};
+        int n = JOptionPane.showOptionDialog(null, "Bạn có muốn xóa dữ liệu này không?", "Confirm to Delete?",
+                JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+        if (n == 0) // Confirm Delete = Yes
+        {
+            for (int i = 0; i < tblSanPham.getRowCount(); i++) {
+                Boolean chkDel = Boolean.valueOf(tblSanPham.getValueAt(i, 4).toString()); // Checked
+                if (chkDel) // Checked to Delete
+                {
+                    // Delete Data
+
+                    try {
+                        CTSanPhamModel c = getCTSPByMa(tblSanPham.getValueAt(index, 1).toString());
+                        if (index < 0) {
+                            JOptionPane.showMessageDialog(this, "Mời bạn chọn dòng cần xóa");
+                            return;
+                        }
+                        if (c == null) {
+                            JOptionPane.showMessageDialog(this, "Xóa thất bại");
+                            return;
+                        }
+                        if (JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?", "Thông báo", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+                            return;
+                        }
+                        if (ctsp.deleteCTKM(c) != null) {
+                            JOptionPane.showMessageDialog(this, "Xóa thành công");
+                            loadSP();
+                        }
+                        tich = true;
+                    } catch (Exception ed) {
+                        JOptionPane.showMessageDialog(null, "Không thể xóa id "
+                                + tblSanPham.getValueAt(i, 1).toString() + " vui lòng xem lại bảng điểm");
+                        tich = false;
+                    }
+                }
+            }
+            if (tich) {
+                JOptionPane.showMessageDialog(null, "Xóa dữ liệu thành công!");
+            }
         }
     }//GEN-LAST:event_btnXoaCTKMActionPerformed
     private CTSanPhamModel getCTSPByMa(String ma) {
         ArrayList<CTSanPhamModel> listSP = ctsp.getAllCTSanPham();
         for (CTSanPhamModel z : listSP) {
             if (z.getMa() != null && z.getMa().equals(ma)) {
-                return new CTSanPhamModel(z.getId(), z.getMs(), z.getCtkm(), z.getSp(), z.getDl(), z.getMa(), z.getMaQR(), z.getHinhAnh(), z.getNamBH(), z.getNgayTao(), z.getNgaySua(), z.getGiaNhap(), z.getGiaBan(),z.getTrangThai());
+                return new CTSanPhamModel(z.getId(), z.getMs(), z.getCtkm(), z.getSp(), z.getDl(), z.getMa(), z.getMaQR(), z.getHinhAnh(), z.getNamBH(), z.getNgayTao(), z.getNgaySua(), z.getGiaNhap(), z.getGiaBan(), z.getTrangThai());
             }
         }
         return null;
