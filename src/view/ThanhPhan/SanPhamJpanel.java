@@ -154,7 +154,6 @@ public class SanPhamJpanel extends javax.swing.JPanel {
 
     private CTSanPhamModel getCTSPFormInput() {
         String ma = txtMa.getText();
-        String maQR = txtMaQR.getText();
         String giaNhap = txtGiaNhap.getText();
         String giaBan = txtGiaBan.getText();
         String namBH = txtNamBH.getText();
@@ -162,6 +161,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         DungLuong dl = (DungLuong) cbbDL.getSelectedItem();
         MauSac ms = (MauSac) cbbMS.getSelectedItem();
         String anh = "";
+        String maQR = sp.getTen()+""+dl.getSoDungLuong()+""+ms.getTen();
         if (strHinhanh == null) {
             anh = "NoAvatar.jpg";
         } else {
@@ -289,6 +289,8 @@ public class SanPhamJpanel extends javax.swing.JPanel {
                 cbbSPActionPerformed(evt);
             }
         });
+
+        txtMaQR.setEnabled(false);
 
         txtNamBH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
