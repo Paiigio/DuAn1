@@ -34,5 +34,14 @@ public class HoaDonChiTietResponsitory {
         }
         return list;
  }
-     
+    public HoaDonChiTiet insertHDCT(HoaDonChiTiet hdct) {
+        String sql = "INSERT dbo.HOADONCHITIET(IDHD,IDCTSP,DONGIA,SOLUONG,NGAYTAO,NGAYSUA) VALUES(?,?,?,?,GETDATE(),null)";
+        JDBC_Helper.excuteUpdate(sql, hdct.getIdhd(),hdct.getIdctsp(),hdct.getDongia(),hdct.getSl());
+        return hdct;
+    }
+    public Integer deleteHDCT(String ma) {
+        String sql = "DELETE HOADONCHITIET WHERE IDCTSP =?";
+        int row = JDBC_Helper.excuteUpdate(sql, ma);
+        return row;
+    }
 }
