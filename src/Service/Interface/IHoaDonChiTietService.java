@@ -15,5 +15,6 @@ import java.util.ArrayList;
  */
 public interface IHoaDonChiTietService {
     public ArrayList<HoaDonChiTietModel> getAllHoaDonCT();
-//    public HoaDonChiTietModel insertHDCT(HoaDonChiTietModel nv);
+    public HoaDonChiTietModel insertHDCT(HoaDonChiTietModel hdct);
+    public Integer deleteHDCT (String ma);
 }
