@@ -6,7 +6,9 @@ package view.ThanhPhan;
 
 import DomainModels.ChucVu;
 import DomainModels.HoaDon;
+import Service.HoaDonChiTietService;
 import Service.HoaDonService;
+import ViewModel.HoaDonChiTietModel;
 import ViewModel.HoaDonModel;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
@@ -17,16 +19,21 @@ import javax.swing.table.DefaultTableModel;
  * @author duong
  */
 public class HoaDonJpanel extends javax.swing.JPanel {
-private DefaultTableModel dtm = new DefaultTableModel();
-private  HoaDonService hds= new HoaDonService();
+
+    private DefaultTableModel dtm = new DefaultTableModel();
+    private DefaultTableModel dt = new DefaultTableModel();
+    private HoaDonService hds = new HoaDonService();
+    private HoaDonChiTietService hdcts = new HoaDonChiTietService();
     DefaultComboBoxModel<HoaDon> dcmCV;
+
     public HoaDonJpanel() {
         initComponents();
-          dtm = (DefaultTableModel) tblHoaDon.getModel();
-          loadTable();
-          
-          
+        dtm = (DefaultTableModel) tblHoaDon.getModel();
+        dt = (DefaultTableModel) tblHDCT.getModel();
+        loadTable();
+
     }
+
     private void loadTable() {
         ArrayList<HoaDonModel> listSP = hds.getAllHoaDon();
         dtm.setRowCount(0);
@@ -35,13 +42,14 @@ private  HoaDonService hds= new HoaDonService();
                 s.getKh(),
                 s.getNv(),
                 s.getCp(),
-                s.getMa(),s.getThanhTien(),s.getHinhThucThanhToan()==1?"Tiền mặt":"Chuyển khoản",s.getNgayThanhToan(),
-                s.getTrangThai()==1?"Đã thanh toán":"Chưa thanh toán",s.getNgayTao(),s.getNgaySua()
+                s.getMa(), s.getThanhTien(), s.getHinhThucThanhToan() == 1 ? "Tiền mặt" : "Chuyển khoản", s.getNgayThanhToan(),
+                s.getTrangThai() == 1 ? "Đã thanh toán" : "Chưa thanh toán", s.getNgayTao(), s.getNgaySua()
             });
-        
+
         }
     }
-        private void loadTableCTT( ) {
+
+    private void loadTableCTT() {
         ArrayList<HoaDonModel> listSP = hds.getAllHoaDonCTT();
         dtm.setRowCount(0);
         for (HoaDonModel s : listSP) {
@@ -49,13 +57,14 @@ private  HoaDonService hds= new HoaDonService();
                 s.getKh(),
                 s.getNv(),
                 s.getCp(),
-                s.getMa(),s.getThanhTien(),s.getHinhThucThanhToan()==1?"Tiền mặt":"Chuyển khoản",s.getNgayThanhToan(),
-                s.getTrangThai()==1?"Đã thanh toán":"Chưa thanh toán",s.getNgayTao(),s.getNgaySua()
+                s.getMa(), s.getThanhTien(), s.getHinhThucThanhToan() == 1 ? "Tiền mặt" : "Chuyển khoản", s.getNgayThanhToan(),
+                s.getTrangThai() == 1 ? "Đã thanh toán" : "Chưa thanh toán", s.getNgayTao(), s.getNgaySua()
             });
-        
+
         }
     }
-        private void loadTableTT( ) {
+
+    private void loadTableTT() {
         ArrayList<HoaDonModel> listSP = hds.getAllHoaDonTT();
         dtm.setRowCount(0);
         for (HoaDonModel s : listSP) {
@@ -63,13 +72,22 @@ private  HoaDonService hds= new HoaDonService();
                 s.getKh(),
                 s.getNv(),
                 s.getCp(),
-                s.getMa(),s.getThanhTien(),s.getHinhThucThanhToan()==1?"Tiền mặt":"Chuyển khoản",s.getNgayThanhToan(),
-                s.getTrangThai()==1?"Đã thanh toán":"Chưa thanh toán",s.getNgayTao(),s.getNgaySua()
+                s.getMa(), s.getThanhTien(), s.getHinhThucThanhToan() == 1 ? "Tiền mặt" : "Chuyển khoản", s.getNgayThanhToan(),
+                s.getTrangThai() == 1 ? "Đã thanh toán" : "Chưa thanh toán", s.getNgayTao(), s.getNgaySua()
             });
-        
+
         }
     }
 
+       public String getIDHoaDon(String ma) {
+        ArrayList<HoaDonModel> hd = hds.getAllHoaDon();
+        for (HoaDonModel h : hd) {
+            if (h.getMa().equals(ma)) {
+                return h.getId();
+            }
+        }
+        return null;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,7 +100,7 @@ private  HoaDonService hds= new HoaDonService();
         JHoaDon = new javax.swing.JPanel();
         cbbTT = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblHDCT = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblHoaDon = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -99,18 +117,15 @@ private  HoaDonService hds= new HoaDonService();
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblHDCT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Mã HD", "Tên SP", "Số lượng", "Đơn giá", "Thành Tiền"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblHDCT);
 
         tblHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -129,6 +144,11 @@ private  HoaDonService hds= new HoaDonService();
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblHoaDonMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tblHoaDon);
@@ -191,16 +211,37 @@ private  HoaDonService hds= new HoaDonService();
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbbTTItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbTTItemStateChanged
-       String tt= cbbTT.getSelectedItem().toString();
-       if(tt.equalsIgnoreCase("Đã thanh toán")){
-           loadTableTT();
-       }else if(tt.equalsIgnoreCase("Chưa thanh toán")){
-           loadTableCTT();
-       }else if(tt.equalsIgnoreCase("ALL")){
-           loadTable();
-       }
-       
+        String tt = cbbTT.getSelectedItem().toString();
+        if (tt.equalsIgnoreCase("Đã thanh toán")) {
+            loadTableTT();
+        } else if (tt.equalsIgnoreCase("Chưa thanh toán")) {
+            loadTableCTT();
+        } else if (tt.equalsIgnoreCase("ALL")) {
+            loadTable();
+        }
+
     }//GEN-LAST:event_cbbTTItemStateChanged
+
+    private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
+        dt.setRowCount(0);
+        int row = tblHoaDon.getSelectedRow();
+        String ma = tblHoaDon.getValueAt(row, 3).toString();
+        String id = getIDHoaDon(ma);
+        ArrayList<HoaDonChiTietModel> listHD = hdcts.getAllHoaDonCT();
+        for (HoaDonChiTietModel h : listHD) {
+            
+            if (h.getIdhd() != null && h.getIdhd().getId().equals(id)) {
+                dt.addRow(new Object[]{
+                    h.getIdhd().getMa(),
+                    h.getIdctsp().getSp().getTen(),
+                    h.getIdctsp().getGiaBan(),
+                    h.getSl(),
+                    Double.valueOf(h.getIdctsp().getGiaBan() * h.getSl()).longValue()
+                });
+            }
+            
+        }
+    }//GEN-LAST:event_tblHoaDonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -209,7 +250,7 @@ private  HoaDonService hds= new HoaDonService();
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblHDCT;
     private javax.swing.JTable tblHoaDon;
     // End of variables declaration//GEN-END:variables
 }
