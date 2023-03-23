@@ -647,6 +647,11 @@ public class SanPhamJpanel extends javax.swing.JPanel {
             return;
         }
         CTSanPhamModel ctsp = getCTSPFormInput();
+        int tt = 0;
+        if (rdKhongBan.isSelected()){
+            tt=1;
+        }
+        ctsp.setTrangThai(tt);
         ArrayList<CTSanPhamModel> list = iCTSanPhamService.getAllCTSanPham();
         for (CTSanPhamModel x : list) {
             if (x.getMa() != null && x.getMa().equals(tblHienThi.getValueAt(index, 1).toString())) {

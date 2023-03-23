@@ -79,7 +79,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         }
     }
 
-       public String getIDHoaDon(String ma) {
+    public String getIDHoaDon(String ma) {
         ArrayList<HoaDonModel> hd = hds.getAllHoaDon();
         for (HoaDonModel h : hd) {
             if (h.getMa().equals(ma)) {
@@ -88,6 +88,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         }
         return null;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -229,17 +230,17 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         String id = getIDHoaDon(ma);
         ArrayList<HoaDonChiTietModel> listHD = hdcts.getAllHoaDonCT();
         for (HoaDonChiTietModel h : listHD) {
-            
+
             if (h.getIdhd() != null && h.getIdhd().getId().equals(id)) {
                 dt.addRow(new Object[]{
                     h.getIdhd().getMa(),
                     h.getIdctsp().getSp().getTen(),
-                    h.getIdctsp().getGiaBan(),
                     h.getSl(),
+                    h.getIdctsp().getGiaBan(),
                     Double.valueOf(h.getIdctsp().getGiaBan() * h.getSl()).longValue()
                 });
             }
-            
+
         }
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
