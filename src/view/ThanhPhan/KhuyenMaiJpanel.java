@@ -683,8 +683,9 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
             loadSP();
         }
     }//GEN-LAST:event_btnSuaCTKMActionPerformed
-public void deleteSinhVien(JTable table){
-     ArrayList<CTSanPhamModel> listSP = ctsp.getAllCTSanPham();
+
+    private void btnXoaCTKMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaCTKMActionPerformed
+          ArrayList<CTSanPhamModel> listSP = ctsp.getAllCTSanPham();
   int index = tblSanPham.getSelectedRow();
 if(index<0  ){
     return;
@@ -695,15 +696,16 @@ if(index<0  ){
                 JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
         if (n == 0) // Confirm Delete = Yes
         {
-            for (int i = 0; i < listSP.size(); i++) {
+            for (int i = 0; i < tblSanPham.getRowCount(); i++) {
                 boolean chkDel = Boolean.valueOf(tblSanPham.getValueAt(i, 4).toString()); // Checked
+                 CTSanPhamModel c = getCTSPByMa(tblSanPham.getValueAt(i, 1).toString());
                 System.out.println(chkDel);
                 if (chkDel) // Checked to Delete
                 {
                     // Delete Data
-
+ 
                   
-                        CTSanPhamModel c = getCTSPByMa(tblSanPham.getValueAt(i, 1).toString());
+                       
                      
                         if (c == null) {
                             JOptionPane.showMessageDialog(this, "Xóa thất bại");
@@ -722,9 +724,6 @@ if(index<0  ){
                 JOptionPane.showMessageDialog(null, "Xóa dữ liệu thành công!");
             }
         }
-}
-    private void btnXoaCTKMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaCTKMActionPerformed
-        deleteSinhVien(tblSanPham);
     }//GEN-LAST:event_btnXoaCTKMActionPerformed
     private CTSanPhamModel getCTSPByMa(String ma) {
         ArrayList<CTSanPhamModel> listSP = ctsp.getAllCTSanPham();
