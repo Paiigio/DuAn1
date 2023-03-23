@@ -339,13 +339,10 @@ public class Login extends javax.swing.JFrame {
         boolean check = false;
 
         for (NhanVienModel x : list) {
-            if(x.getTrangThai()==0){
                 if (x.getMa().equals(txtUser.getText()) && x.getMatKhau().equals(String.valueOf(txtPass.getPassword()))) {
-                nv = x;
-                
+                nv = x;            
             }      
-        }
-            }
+        }          
         if(nv.getTrangThai()==1){
             JOptionPane.showMessageDialog(this, "Tài khoản hết hạn");
             check =false;

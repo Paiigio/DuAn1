@@ -4,6 +4,8 @@
  */
 package view.ThanhPhan;
 
+import DomainModels.CTSanPham;
+import DomainModels.HoaDon;
 import DomainModels.NhanVien;
 import Service.CTSanPhamService;
 import Service.HoaDonChiTietService;
@@ -21,6 +23,7 @@ import ViewModel.NhanVienModel;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import view.QuetQR;
 
@@ -223,6 +226,11 @@ public class BanHangJpanel extends javax.swing.JPanel {
                 "Mã Sản Phẩm", "Tên Sản Phẩm", "Số lượng tồn", "Đơn giá"
             }
         ));
+        tblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSanPhamMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(tblSanPham);
 
         jLabel1.setText("Tìm kiếm");
@@ -682,6 +690,53 @@ public class BanHangJpanel extends javax.swing.JPanel {
     private void btnChonKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonKHActionPerformed
         
     }//GEN-LAST:event_btnChonKHActionPerformed
+
+    private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
+       int index = tblSanPham.getSelectedRow();
+       int indexHD = tblHoaDon.getSelectedRow();
+       String maHD = tblHoaDon.getValueAt(index, 0).toString();
+       HoaDon hd = new HoaDon();
+       ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDon();
+       for (HoaDonModel h : listHD){
+           if (h.getMa()!=null && h.getMa().equals(maHD)){
+               hd.setId(h.getId());
+           }
+       }
+       String soLuongTon = tblSanPham.getValueAt(index, 2).toString();
+       if (Integer.valueOf(soLuongTon) <= 0){
+           JOptionPane.showMessageDialog(this, "Số lượng tồn không đủ");
+           return;
+       }
+       String maSP = tblSanPham.getValueAt(index, 0).toString();
+        CTSanPham c = new CTSanPham();
+       ArrayList<CTSanPhamModel> listCTSP = iCTSanPhamService.getAllCTSanPham();
+       for (CTSanPhamModel x :listCTSP){
+           if (x.getMa()!=null && x.getMa().equals(maSP)){
+               c.setId(x.getId());
+               
+           }
+       }
+       ArrayList<IMEIModel> listIMEI = iIMEIService.selectSL(c.getId());
+       String themIMEI = "";
+      String maIMEI = (String) JOptionPane.showInputDialog(this, "Mời bạn chọn mã IMEI", "Lựa chọn",JOptionPane.INFORMATION_MESSAGE,null,null,"Mã IMEI");
+      for (IMEIModel i : listIMEI){
+          if (i.getMa()!=null && i.getTrangThai()==0 && i.getMa().equals(maIMEI)){
+              themIMEI = maIMEI;
+          } else {
+              JOptionPane.showMessageDialog(this, "Sai mã IMEI hoặc mã imei không tồn tại");
+              return;
+          }
+      }
+      String donGia = tblSanPham.getValueAt(index, 3).toString();
+      HoaDonChiTietModel hdct = new HoaDonChiTietModel();
+      hdct.setSl(1);
+      hdct.setIdctsp(c);
+      hdct.setIdhd(hd);
+      hdct.setDongia(Float.valueOf(donGia.replace(".","")));
+      hdct.setThanhTien(Float.valueOf(donGia.replace(".","")));
+      
+        System.out.println(themIMEI);
+    }//GEN-LAST:event_tblSanPhamMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
