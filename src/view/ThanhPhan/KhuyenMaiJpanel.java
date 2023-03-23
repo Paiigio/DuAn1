@@ -682,7 +682,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
                 System.out.println(c.getCtkm());
                 if (ctsp.updateCTKMSanPham(c) != null) {
                     dem++;
-                }
+                }   
             }
         }
         if (dem > 0) {

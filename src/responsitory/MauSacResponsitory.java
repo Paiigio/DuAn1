@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * @author duong
  */
 public class MauSacResponsitory {
-          public ArrayList<MauSac> getAllMauSac() {
+          public ArrayList<MauSac> getAllMauSac(int position, int pageSize) {
         ArrayList<MauSac> list = new ArrayList<>();
         String sql="SELECT* FROM dbo.MauSac";
         ResultSet rs = JDBC_Helper.excuteQuery(sql);
@@ -71,4 +71,10 @@ public class MauSacResponsitory {
         int row=JDBC_Helper.excuteUpdate(sql,ma);
         return row;
     }
+  public long totalCount() {
+    long total = 0;
+    ArrayList<MauSac> listMauSac = new ArrayList<>();
+    total = listMauSac.size();
+    return total;
+  }
 }

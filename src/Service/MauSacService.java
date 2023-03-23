@@ -17,9 +17,9 @@ import responsitory.MauSacResponsitory;
 public class MauSacService implements IMauSacService{
     private  MauSacResponsitory msr = new MauSacResponsitory();
     @Override
-    public ArrayList<MauSacModel> getAllMauSac() {
+    public ArrayList<MauSacModel> getAllMauSac(int position , int pageSize) {
                     ArrayList<MauSacModel> list = new ArrayList<>();
-        ArrayList<MauSac> cv = msr.getAllMauSac();
+        ArrayList<MauSac> cv = msr.getAllMauSac(position,pageSize);
         for (MauSac x : cv) {
             list.add( new MauSacModel(x.getId(), x.getMa(),x.getTen()));
             
@@ -29,13 +29,6 @@ public class MauSacService implements IMauSacService{
 
     @Override
     public MauSacModel insertMS(MauSacModel cv) {
-         ArrayList<MauSac> list= msr.getAllMauSac();
-          for (MauSac x : list) {
-            if(x.getMa().equalsIgnoreCase(cv.getMa())){
-                return null;
-            }
-            
-        }
         var x= msr.insertMS(new MauSac(cv.getId(), cv.getMa(), cv.getTen()));
         return  new MauSacModel(x.getId(), x.getMa(),x.getTen());
     }
@@ -50,5 +43,8 @@ public class MauSacService implements IMauSacService{
     public Integer deleteMS(String ma) {
                    return msr.deleteMS(ma);
     }
-    
+    @Override
+    public long countAll(){
+        return msr.totalCount();
+    }
 }

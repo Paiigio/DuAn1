@@ -16,7 +16,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="2237" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="2240" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
@@ -98,16 +98,20 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane4" max="32767" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jScrollPane4" min="-2" pref="591" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton7" linkSize="1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnXoaCTSP" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnChonIMEI" linkSize="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="btnXoaCTSP" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="12" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                              <Component id="btnQR1" pref="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -117,11 +121,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnXoaCTSP" linkSize="2" min="-2" pref="32" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jButton7" linkSize="2" min="-2" pref="32" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnChonIMEI" linkSize="2" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnXoaCTSP" min="-2" pref="32" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btnQR1" min="-2" pref="93" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane4" alignment="0" min="-2" pref="177" max="-2" attributes="0"/>
                       </Group>
@@ -191,20 +193,20 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="jButton7">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JButton" name="btnXoaCTSP">
               <Properties>
                 <Property name="text" type="java.lang.String" value="X&#xf3;a "/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnChonIMEI">
+            <Component class="javax.swing.JButton" name="btnQR1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n IMEI"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icon/qr-scan.png"/>
+                </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQR1ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -738,14 +740,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane6" pref="587" max="32767" attributes="0"/>
+                      <Component id="jScrollPane6" pref="590" max="32767" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnTaoHoaDon" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbbTrangThaiHoaDon" alignment="1" min="-2" pref="97" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="btnQR1" alignment="1" min="-2" pref="94" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="btnTaoHoaDon" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbbTrangThaiHoaDon" alignment="1" min="-2" pref="97" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -761,8 +760,7 @@
                               <Component id="btnTaoHoaDon" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="cbbTrangThaiHoaDon" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="9" max="32767" attributes="0"/>
-                              <Component id="btnQR1" min="-2" pref="80" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="89" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -850,16 +848,6 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnQR1">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icon/qr-scan.png"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQR1ActionPerformed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>

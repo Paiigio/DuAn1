@@ -41,5 +41,14 @@ public class HoaDonChiTietService implements  IHoaDonChiTietService{
     public Integer deleteHDCT(String ma){
         return hdct.deleteHDCT(ma);
     }
-    
+     @Override
+    public ArrayList<HoaDonChiTietModel> getAllHoaDonCTBYIDHD(String id) {
+              ArrayList<HoaDonChiTietModel> list = new ArrayList<>();
+        ArrayList<HoaDonChiTiet> hd = hdct.getAllHoaDonCTByIDHD(id);
+        for (HoaDonChiTiet x : hd) {
+            list.add(new HoaDonChiTietModel(x.getIdhd(),x.getIdctsp(), x.getDongia(), x.getSl(), x.getThanhTien(), x.getNgayTao(), x.getNgaySua()));
+
+        }
+        return list;
+    }   
 }

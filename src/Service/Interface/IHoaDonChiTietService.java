@@ -17,4 +17,5 @@ public interface IHoaDonChiTietService {
     public ArrayList<HoaDonChiTietModel> getAllHoaDonCT();
     public HoaDonChiTietModel insertHDCT(HoaDonChiTietModel hdct);
     public Integer deleteHDCT (String ma);
+    public ArrayList<HoaDonChiTietModel> getAllHoaDonCTBYIDHD(String id);
 }
