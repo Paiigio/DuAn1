@@ -18,6 +18,7 @@ public class SanPhamService implements ISanPhamService {
 
     private SanPhamResponsitory spr = new SanPhamResponsitory();
 
+
     @Override
     public ArrayList<SanPhamModel> getAllSanPham() {
         ArrayList<SanPhamModel> list = new ArrayList<>();
@@ -52,5 +53,6 @@ public class SanPhamService implements ISanPhamService {
     public Integer deleteSP(String ma) {
         return spr.deleteSP(ma);
     }
+
 
 }
