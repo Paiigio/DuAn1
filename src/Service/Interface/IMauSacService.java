@@ -12,9 +12,8 @@ import java.util.ArrayList;
  * @author duong
  */
 public interface IMauSacService {
-    public ArrayList<MauSacModel> getAllMauSac(int position , int pageSize);
+    public ArrayList<MauSacModel> getAllMauSac();
     public MauSacModel insertMS(MauSacModel cv);
     public MauSacModel updateMS(MauSacModel cv);
     public Integer deleteMS(String ma);
-    public long countAll();
 }

@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * @author duong
  */
 public class MauSacResponsitory {
-          public ArrayList<MauSac> getAllMauSac(int position, int pageSize) {
+          public ArrayList<MauSac> getAllMauSac() {
         ArrayList<MauSac> list = new ArrayList<>();
         String sql="SELECT* FROM dbo.MauSac";
         ResultSet rs = JDBC_Helper.excuteQuery(sql);
@@ -35,27 +35,17 @@ public class MauSacResponsitory {
     }
        public MauSac getMSByID(String id){
         
-        String sql="SELECT * FROM MauSac WHERE IDMS=?";
+        String sql="SELECT * FROM MauSac WHERE ID=?";
         ResultSet rs=JDBC_Helper.excuteQuery(sql,id);
         try {
             while(rs.next()){
-                return new MauSac(rs.getString(1), rs.getString(2), rs.getString(3));
+                return new MauSac(rs.getString(1),rs.getString(2),rs.getString(3),rs.getDate(4),rs.getDate(5));
             }
         } catch (SQLException ex) {
             Logger.getLogger(ChucVuResponsitory.class.getName()).log(Level.SEVERE, null, ex);
         }
        return null;
     }
-       public MauSac getMSByName(String ten){
-           String sql = "SELECT * FROM MAUSAC WHERE TENMAU=?";
-           ResultSet rs = JDBC_Helper.excuteQuery(sql, ten);
-           try {
-               return new MauSac(rs.getString(1), rs.getString(2), rs.getString(3));
-           } catch (Exception e) {
-               e.printStackTrace();
-           }
-           return null;
-       }
     public MauSac insertMS(MauSac cv){
         String sql= "INSERT INTO MauSac VALUES(NEWID(),?,?,GETDATE(),GETDATE())";
        JDBC_Helper.excuteUpdate(sql, cv.getMa(),cv.getTen());
@@ -71,10 +61,4 @@ public class MauSacResponsitory {
         int row=JDBC_Helper.excuteUpdate(sql,ma);
         return row;
     }
-  public long totalCount() {
-    long total = 0;
-    ArrayList<MauSac> listMauSac = new ArrayList<>();
-    total = listMauSac.size();
-    return total;
-  }
 }
