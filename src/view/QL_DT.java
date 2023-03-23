@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import view.ThanhPhan.BanHangJpanel;
+import view.ThanhPhan.DoiMatKhauJpanel;
 import view.ThanhPhan.HoaDonJpanel;
 import view.ThanhPhan.KhachHangJpanel;
 import view.ThanhPhan.KhuyenMaiJpanel;
@@ -285,6 +286,11 @@ public class QL_DT extends javax.swing.JFrame {
         Tren.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jButton1.setText("Đổi mật khẩu");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Đăng xuất");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -624,6 +630,10 @@ public class QL_DT extends javax.swing.JFrame {
         this.setVisible(false);
         new Login().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       new DoiMatKhauJpanel().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

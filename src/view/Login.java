@@ -10,6 +10,7 @@ public class Login extends javax.swing.JFrame {
 
     private INhanVienService nvs = new NhanVienService();
      public static NhanVienModel nv = null;
+      public String userLogin = "";
 
     /**
      * Creates new form Login
@@ -25,6 +26,15 @@ public class Login extends javax.swing.JFrame {
         email.setVisible(false);
         this.setLocationRelativeTo(this);
 
+    }
+        public String getUser() {
+        ArrayList<NhanVienModel> list = nvs.getAllNV();
+        for (NhanVienModel x : list) {
+            if (x.getMa().equals(txtUser.getText()) && x.getMatKhau().equals(String.valueOf(txtPass.getPassword()))) {
+                nv = x;
+            }
+        }
+        return nv.getMa();
     }
 
     private boolean check() {
