@@ -6,6 +6,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import view.ThanhPhan.BanHangJpanel;
 import view.ThanhPhan.DoiMatKhauJpanel;
 import view.ThanhPhan.HoaDonJpanel;
@@ -26,6 +27,7 @@ public class QL_DT extends javax.swing.JFrame {
         cardLayout = (CardLayout) panelCardGoc.getLayout();
         //show card 1 
         cardLayout.show(panelCardGoc, "trangchu");
+          JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
         loaddulieuDangNhap();
       
     }

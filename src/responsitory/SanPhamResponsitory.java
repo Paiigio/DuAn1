@@ -19,6 +19,7 @@ import java.util.logging.Logger;
  */
 public class SanPhamResponsitory {
         NSXResponsitory nsx = new NSXResponsitory();
+
         public ArrayList<SanPham> getAllSanPham() {
         ArrayList<SanPham> list = new ArrayList<>();
         String sql="SELECT* FROM dbo.SanPham";

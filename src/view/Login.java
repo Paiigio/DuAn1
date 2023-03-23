@@ -364,7 +364,7 @@ public class Login extends javax.swing.JFrame {
            
             this.setVisible(false);
             
-            JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
+          
 
         } else {
             JOptionPane.showMessageDialog(this, "Sai tên đăng nhập hoặc mật khẩu");
