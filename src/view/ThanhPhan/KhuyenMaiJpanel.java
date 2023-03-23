@@ -697,29 +697,12 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         if (index < 0) {
             return;
         }
-<<<<<<< HEAD
         int dem = 0;
-=======
-        if (ctsp.updateCTKMSanPham(c) != null) {
-            JOptionPane.showMessageDialog(this, "Thêm chương trình thành công");
-            loadSP();
-        }
-    }//GEN-LAST:event_btnSuaCTKMActionPerformed
-
-    private void btnXoaCTKMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaCTKMActionPerformed
-          ArrayList<CTSanPhamModel> listSP = ctsp.getAllCTSanPham();
-  int index = tblSanPham.getSelectedRow();
-if(index<0  ){
-    return;
-}
-        boolean tich = false;
->>>>>>> origin/master
         Object[] options = {"Yes", "No"};
         int n = JOptionPane.showOptionDialog(null, "Bạn có muốn xóa dữ liệu này không?", "Confirm to Delete?",
                 JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
         if (n == 0) // Confirm Delete = Yes
         {
-<<<<<<< HEAD
             for (int i = 0; i < listSP.size(); i++) {
                 boolean check = (boolean) tblSanPham.getValueAt(i, 4);
                 if (check) // Checked to Delete
@@ -729,31 +712,6 @@ if(index<0  ){
                         dem++;
                     }
                 }
-=======
-            for (int i = 0; i < tblSanPham.getRowCount(); i++) {
-                boolean chkDel = Boolean.valueOf(tblSanPham.getValueAt(i, 4).toString()); // Checked
-                 CTSanPhamModel c = getCTSPByMa(tblSanPham.getValueAt(i, 1).toString());
-                System.out.println(chkDel);
-                if (chkDel) // Checked to Delete
-                {
-                    // Delete Data
- 
-                  
-                       
-                     
-                        if (c == null) {
-                            JOptionPane.showMessageDialog(this, "Xóa thất bại");
-                            return;
-                        }
-                        
-                        if (ctsp.deleteCTKM(c) != null) {
-                            JOptionPane.showMessageDialog(this, "Xóa thành công");
-                            loadSP();
-                        }
-                        
-                
-                }tich = true;
->>>>>>> origin/master
             }
             if (dem > 0) {
                 loadSP();
@@ -762,14 +720,11 @@ if(index<0  ){
                 JOptionPane.showMessageDialog(null, "Xóa dữ liệu thất bại!");
             }
         }
-<<<<<<< HEAD
     }
 
 
     private void btnXoaCTKMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaCTKMActionPerformed
         deleteSinhVien(tblSanPham);
-=======
->>>>>>> origin/master
     }//GEN-LAST:event_btnXoaCTKMActionPerformed
     private CTSanPhamModel getCTSPByMa(String ma) {
         ArrayList<CTSanPhamModel> listSP = ctsp.getAllCTSanPham();
