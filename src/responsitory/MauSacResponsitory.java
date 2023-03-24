@@ -35,7 +35,7 @@ public class MauSacResponsitory {
     }
        public MauSac getMSByID(String id){
         
-        String sql="SELECT * FROM MauSac WHERE ID=?";
+        String sql="SELECT * FROM MauSac WHERE IDMS=?";
         ResultSet rs=JDBC_Helper.excuteQuery(sql,id);
         try {
             while(rs.next()){
