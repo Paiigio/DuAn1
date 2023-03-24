@@ -26,6 +26,7 @@ public class QL_MauSac extends javax.swing.JFrame {
      DefaultTableModel dtm = new DefaultTableModel();
     public QL_MauSac() {
         initComponents();
+        setLocationRelativeTo(this);
           dtm=(DefaultTableModel) tblBang.getModel();
         this.loadTable();
     }
@@ -87,7 +88,7 @@ public class QL_MauSac extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtMa = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel4.setText("Tên màu");
 

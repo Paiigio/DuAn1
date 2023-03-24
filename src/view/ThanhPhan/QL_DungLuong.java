@@ -24,6 +24,7 @@ public class QL_DungLuong extends javax.swing.JFrame {
 
     public QL_DungLuong() {
         initComponents();
+        setLocationRelativeTo(this);
         dtm = (DefaultTableModel) tblDL.getModel();
         this.setTitle("Dung Lượng");
         this.loadTable();
@@ -100,7 +101,7 @@ public class QL_DungLuong extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDL = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 0, 255));

@@ -483,6 +483,9 @@
                   <Image iconType="3" name="/icon/plus-2-math.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDungLuongActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnSP">
               <Properties>
@@ -500,6 +503,9 @@
                   <Image iconType="3" name="/icon/plus-2-math.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMauSacActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
