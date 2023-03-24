@@ -66,10 +66,10 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         cbbTKMS.setModel(dcbmTKMS);
         loadData();
         loadCBBSP();
-        loadCBBMS();
+//        loadCBBMS();
         loadCBBDL();
         loadCBBTKDL();
-        loadCBBTKMS();
+//        loadCBBTKMS();
     }
 
     private void loadCBBSP() {
@@ -79,12 +79,12 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         }
     }
 
-    private void loadCBBMS() {
-        ArrayList<MauSacModel> listMS = iMauSacService.getAllMauSac();
-        for (MauSacModel x : listMS) {
-            dcbmMS.addElement(new MauSac(x.getId(), x.getMa(), x.getTen()));
-        }
-    }
+//    private void loadCBBMS() {
+//        ArrayList<MauSacModel> listMS = iMauSacService.getAllMauSac();
+//        for (MauSacModel x : listMS) {
+//            dcbmMS.addElement(new MauSac(x.getId(), x.getMa(), x.getTen()));
+//        }
+//    }
 
     private void loadCBBDL() {
         ArrayList<DungLuongModel> listDL = iDungLuongService.getAllDungLuong();
@@ -93,12 +93,12 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         }
     }
 
-    private void loadCBBTKMS() {
-        ArrayList<MauSacModel> listMS = iMauSacService.getAllMauSac();
-        for (MauSacModel x : listMS) {
-            dcbmTKMS.addElement(new MauSac(x.getId(), x.getMa(), x.getTen()));
-        }
-    }
+//    private void loadCBBTKMS() {
+//        ArrayList<MauSacModel> listMS = iMauSacService.getAllMauSac();
+//        for (MauSacModel x : listMS) {
+//            dcbmTKMS.addElement(new MauSac(x.getId(), x.getMa(), x.getTen()));
+//        }
+//    }
 
     private void loadCBBTKDL() {
         ArrayList<DungLuongModel> listDL = iDungLuongService.getAllDungLuong();
