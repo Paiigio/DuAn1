@@ -27,6 +27,8 @@ import java.io.File;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -64,12 +66,33 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         cbbDL.setModel(dcbmDL);
         cbbTKDL.setModel(dcbmTKDL);
         cbbTKMS.setModel(dcbmTKMS);
-        loadData();
+//        loadData();
         loadCBBSP();
         loadCBBMS();
         loadCBBDL();
         loadCBBTKDL();
         loadCBBTKMS();
+        load();
+    }
+
+    private void load() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(100);
+                    loadData();
+//                    loadCBBSP();
+//                    loadCBBMS();
+//                    loadCBBDL();
+//                    loadCBBTKDL();
+//                    loadCBBTKMS();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ThongKeJpanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        }).start();
     }
 
     private void loadCBBSP() {
@@ -161,7 +184,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         DungLuong dl = (DungLuong) cbbDL.getSelectedItem();
         MauSac ms = (MauSac) cbbMS.getSelectedItem();
         String anh = "";
-        String maQR = sp.getTen()+""+dl.getSoDungLuong()+""+ms.getTen();
+        String maQR = sp.getTen() + "" + dl.getSoDungLuong() + "" + ms.getTen();
         if (strHinhanh == null) {
             anh = "NoAvatar.jpg";
         } else {
@@ -685,8 +708,8 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         }
         CTSanPhamModel ctsp = getCTSPFormInput();
         int tt = 0;
-        if (rdKhongBan.isSelected()){
-            tt=1;
+        if (rdKhongBan.isSelected()) {
+            tt = 1;
         }
         ctsp.setTrangThai(tt);
         ArrayList<CTSanPhamModel> list = iCTSanPhamService.getAllCTSanPham();
@@ -850,7 +873,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSPActionPerformed
 
     private void btnDungLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDungLuongActionPerformed
-       new QL_DungLuong().setVisible(true);
+        new QL_DungLuong().setVisible(true);
     }//GEN-LAST:event_btnDungLuongActionPerformed
 
     private void btnMauSacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMauSacActionPerformed
