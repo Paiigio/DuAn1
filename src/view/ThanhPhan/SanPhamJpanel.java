@@ -66,10 +66,10 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         cbbTKMS.setModel(dcbmTKMS);
         loadData();
         loadCBBSP();
-//        loadCBBMS();
+        loadCBBMS();
         loadCBBDL();
         loadCBBTKDL();
-//        loadCBBTKMS();
+        loadCBBTKMS();
     }
 
     private void loadCBBSP() {
@@ -79,12 +79,12 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         }
     }
 
-//    private void loadCBBMS() {
-//        ArrayList<MauSacModel> listMS = iMauSacService.getAllMauSac();
-//        for (MauSacModel x : listMS) {
-//            dcbmMS.addElement(new MauSac(x.getId(), x.getMa(), x.getTen()));
-//        }
-//    }
+    private void loadCBBMS() {
+        ArrayList<MauSacModel> listMS = iMauSacService.getAllMauSac();
+        for (MauSacModel x : listMS) {
+            dcbmMS.addElement(new MauSac(x.getId(), x.getMa(), x.getTen()));
+        }
+    }
 
     private void loadCBBDL() {
         ArrayList<DungLuongModel> listDL = iDungLuongService.getAllDungLuong();
@@ -93,12 +93,12 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         }
     }
 
-//    private void loadCBBTKMS() {
-//        ArrayList<MauSacModel> listMS = iMauSacService.getAllMauSac();
-//        for (MauSacModel x : listMS) {
-//            dcbmTKMS.addElement(new MauSac(x.getId(), x.getMa(), x.getTen()));
-//        }
-//    }
+    private void loadCBBTKMS() {
+        ArrayList<MauSacModel> listMS = iMauSacService.getAllMauSac();
+        for (MauSacModel x : listMS) {
+            dcbmTKMS.addElement(new MauSac(x.getId(), x.getMa(), x.getTen()));
+        }
+    }
 
     private void loadCBBTKDL() {
         ArrayList<DungLuongModel> listDL = iDungLuongService.getAllDungLuong();
@@ -323,6 +323,11 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         });
 
         btnDungLuong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plus-2-math.png"))); // NOI18N
+        btnDungLuong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDungLuongActionPerformed(evt);
+            }
+        });
 
         btnSP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plus-2-math.png"))); // NOI18N
         btnSP.addActionListener(new java.awt.event.ActionListener() {
@@ -332,6 +337,11 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         });
 
         btnMauSac.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plus-2-math.png"))); // NOI18N
+        btnMauSac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMauSacActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Mô tả:");
 
@@ -836,8 +846,16 @@ public class SanPhamJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cbbSPActionPerformed
 
     private void btnSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSPActionPerformed
-        // TODO add your handling code here:
+        new QL_SanPham().setVisible(true);
     }//GEN-LAST:event_btnSPActionPerformed
+
+    private void btnDungLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDungLuongActionPerformed
+       new QL_DungLuong().setVisible(true);
+    }//GEN-LAST:event_btnDungLuongActionPerformed
+
+    private void btnMauSacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMauSacActionPerformed
+        new QL_MauSac().setVisible(true);
+    }//GEN-LAST:event_btnMauSacActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
