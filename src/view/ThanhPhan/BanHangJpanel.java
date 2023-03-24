@@ -83,7 +83,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
         dtmGH.setRowCount(0);
         ArrayList<HoaDonChiTietModel> listHDCT = iHoaDonChiTietService.getAllHoaDonCT();      
         for (int i = 0 ;i < listHDCT.size() ; ++i){
-            ArrayList<IMEIModel> list = iIMEIService.selectSL(listHDCT.get(i).getIdhd());
+//            ArrayList<IMEIModel> list = iIMEIService.selectSL(listHDCT.get(i).getIdhd());
             dtmGH.addRow(new Object[]{
                 i+1,
                 listHDCT.get(i).getIdctsp().getSp().getTen()+" "+listHDCT.get(i).getIdctsp().getDl().getSoDungLuong()+" "+listHDCT.get(i).getIdctsp().getMs().getTen(),

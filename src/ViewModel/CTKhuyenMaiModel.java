@@ -11,13 +11,14 @@ import java.util.Date;
  * @author duong
  */
 public class CTKhuyenMaiModel {
-        private String id;
+
+    private String id;
     private String ma;
     private String ten;
     private Date thoiGianBatDau;
     private Date thoiGianKetThuc;
     private String hinhThuc;
-        private Date ngayTao;
+    private Date ngayTao;
     private Date ngaySua;
 
     public CTKhuyenMaiModel() {
@@ -42,8 +43,6 @@ public class CTKhuyenMaiModel {
         this.ngayTao = ngayTao;
         this.ngaySua = ngaySua;
     }
-
-
 
     public String getId() {
         return id;
@@ -108,5 +107,5 @@ public class CTKhuyenMaiModel {
     public void setNgaySua(Date ngaySua) {
         this.ngaySua = ngaySua;
     }
-    
+
 }
