@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/NhanVienJpanel.java</file>
+            <file>file:/D:/duan1_nhom8/src/responsitory/CTSanPhamResponsitory.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/QuetQR.java</file>
             <file>file:/D:/duan1_nhom8/src/view/Login.java</file>
-            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/DoiMatKhauJpanel.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/KhachHangJpanel.java</file>
         </group>
     </open-files>
 </project-private>
