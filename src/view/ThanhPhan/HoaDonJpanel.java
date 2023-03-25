@@ -5,14 +5,23 @@
 package view.ThanhPhan;
 
 import DomainModels.ChucVu;
+import DomainModels.Coupon;
 import DomainModels.HoaDon;
+import DomainModels.KhachHang;
+import DomainModels.NhanVien;
 import Service.HoaDonChiTietService;
 import Service.HoaDonService;
+import Utilites.JDBC_Helper;
 import ViewModel.HoaDonChiTietModel;
 import ViewModel.HoaDonModel;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
+import responsitory.CouponReponsitory;
+import responsitory.KhachHangResponsitory;
+import responsitory.NhanVienResponsitory;
 
 /**
  *
@@ -25,54 +34,161 @@ public class HoaDonJpanel extends javax.swing.JPanel {
     private HoaDonService hds = new HoaDonService();
     private HoaDonChiTietService hdcts = new HoaDonChiTietService();
     DefaultComboBoxModel<HoaDon> dcmCV;
+    private KhachHangResponsitory khr = new KhachHangResponsitory();
+    private NhanVienResponsitory nvr = new NhanVienResponsitory();
+    private CouponReponsitory cr = new CouponReponsitory();
+    long count, soTrang, Trang = 1;
 
     public HoaDonJpanel() {
         initComponents();
         dtm = (DefaultTableModel) tblHoaDon.getModel();
         dt = (DefaultTableModel) tblHDCT.getModel();
-        loadTable();
-
+        countHD();
+        if (count % 3 == 0) {
+            soTrang = count / 3;
+        } else {
+            soTrang = count / 3 + 1;
+        }
+        loadTable(1);
+        lblTrang.setText("1/" + soTrang);
     }
 
-    private void loadTable() {
-        ArrayList<HoaDonModel> listSP = hds.getAllHoaDon();
+    
+    public void countHD() {
+        try {
+            String sql = "SELECT count(*) From HOADON";
+            ResultSet rs = JDBC_Helper.excuteQuery(sql);
+            while (rs.next()) {
+                count = rs.getLong(1);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+        public void countHDTT() {
+        try {
+            String sql = "SELECT count(*) From HOADON WHERE TRANGTHAI=1";
+            ResultSet rs = JDBC_Helper.excuteQuery(sql);
+            while (rs.next()) {
+                count = rs.getLong(1);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+        
+            public void countHDCTT() {
+        try {
+            String sql = "SELECT count(*) From HOADON WHERE TRANGTHAI=0";
+            ResultSet rs = JDBC_Helper.excuteQuery(sql);
+            while (rs.next()) {
+                count = rs.getLong(1);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public ArrayList<HoaDonModel> getAllHoaDon() {
+        ArrayList<HoaDonModel> list = new ArrayList<>();
+        String sql = "SELECT TOP 3 * FROM HOADON where MAHD not in (SELECT TOP " + (Trang * 3 - 3) + " MAHD FROM HOADON)";
+        ResultSet rs = JDBC_Helper.excuteQuery(sql);
+        try {
+            while (rs.next()) {
+                KhachHang kh = khr.getKHByID(rs.getString(2));
+                NhanVien nv = nvr.getNVByID(rs.getString(3));
+                Coupon cp = cr.getCPByID(rs.getString(4));
+                list.add(new HoaDonModel(rs.getString(1), kh, nv, cp, rs.getString(5), rs.getFloat(6), rs.getInt(7), rs.getDate(8), rs.getInt(9),
+                        rs.getDate(10), rs.getDate(11)));
+            }
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
+    public ArrayList<HoaDonModel> getAllHoaDonTT() {
+        ArrayList<HoaDonModel> list = new ArrayList<>();
+        String sql = "SELECT TOP 3 * FROM HOADON where MAHD not in (SELECT TOP " + (Trang * 3 - 3) + " MAHD FROM HOADON) AND TRANGTHAI=1";
+        ResultSet rs = JDBC_Helper.excuteQuery(sql);
+        try {
+            while (rs.next()) {
+                KhachHang kh = khr.getKHByID(rs.getString(2));
+                NhanVien nv = nvr.getNVByID(rs.getString(3));
+                Coupon cp = cr.getCPByID(rs.getString(4));
+                list.add(new HoaDonModel(rs.getString(1), kh, nv, cp, rs.getString(5), rs.getFloat(6), rs.getInt(7), rs.getDate(8), rs.getInt(9),
+                        rs.getDate(10), rs.getDate(11)));
+            }
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
+        public ArrayList<HoaDonModel> getAllHoaDonCTT() {
+        ArrayList<HoaDonModel> list = new ArrayList<>();
+        String sql = "SELECT TOP 3 * FROM HOADON where MAHD not in (SELECT TOP " + (Trang * 3 - 3) + " MAHD FROM HOADON) AND TRANGTHAI=0";
+        ResultSet rs = JDBC_Helper.excuteQuery(sql);
+        try {
+            while (rs.next()) {
+                KhachHang kh = khr.getKHByID(rs.getString(2));
+                NhanVien nv = nvr.getNVByID(rs.getString(3));
+                Coupon cp = cr.getCPByID(rs.getString(4));
+                list.add(new HoaDonModel(rs.getString(1), kh, nv, cp, rs.getString(5), rs.getFloat(6), rs.getInt(7), rs.getDate(8), rs.getInt(9),
+                        rs.getDate(10), rs.getDate(11)));
+            }
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+        }
+        return list;
+    }
+    private void loadTable(long Trang) {
+        ArrayList<HoaDonModel> listSP = getAllHoaDon();
         dtm.setRowCount(0);
         for (HoaDonModel s : listSP) {
             dtm.addRow(new Object[]{
                 s.getKh(),
                 s.getNv(),
                 s.getCp(),
-                s.getMa(), s.getThanhTien(), s.getHinhThucThanhToan() == 1 ? "Tiền mặt" : "Chuyển khoản", s.getNgayThanhToan(),
+                s.getMa(), 
+                Double.valueOf(s.getThanhTien()).longValue(), 
+                s.getHinhThucThanhToan() == 1 ? "Tiền mặt" : "Chuyển khoản", s.getNgayThanhToan(),
                 s.getTrangThai() == 1 ? "Đã thanh toán" : "Chưa thanh toán", s.getNgayTao(), s.getNgaySua()
             });
 
         }
     }
 
-    private void loadTableCTT() {
-        ArrayList<HoaDonModel> listSP = hds.getAllHoaDonCTT();
+    private void loadTableCTT(long Trang) {
+        ArrayList<HoaDonModel> listSP = getAllHoaDonCTT();
         dtm.setRowCount(0);
         for (HoaDonModel s : listSP) {
             dtm.addRow(new Object[]{
                 s.getKh(),
                 s.getNv(),
                 s.getCp(),
-                s.getMa(), s.getThanhTien(), s.getHinhThucThanhToan() == 1 ? "Tiền mặt" : "Chuyển khoản", s.getNgayThanhToan(),
+                s.getMa(), Double.valueOf(s.getThanhTien()).longValue(),  s.getHinhThucThanhToan() == 1 ? "Tiền mặt" : "Chuyển khoản", s.getNgayThanhToan(),
                 s.getTrangThai() == 1 ? "Đã thanh toán" : "Chưa thanh toán", s.getNgayTao(), s.getNgaySua()
             });
 
         }
     }
 
-    private void loadTableTT() {
-        ArrayList<HoaDonModel> listSP = hds.getAllHoaDonTT();
+    private void loadTableTT(long Trang) {
+        ArrayList<HoaDonModel> listSP = getAllHoaDonTT();
         dtm.setRowCount(0);
         for (HoaDonModel s : listSP) {
             dtm.addRow(new Object[]{
                 s.getKh(),
                 s.getNv(),
                 s.getCp(),
-                s.getMa(), s.getThanhTien(), s.getHinhThucThanhToan() == 1 ? "Tiền mặt" : "Chuyển khoản", s.getNgayThanhToan(),
+                s.getMa(),Double.valueOf(s.getThanhTien()).longValue(),  s.getHinhThucThanhToan() == 1 ? "Tiền mặt" : "Chuyển khoản", s.getNgayThanhToan(),
                 s.getTrangThai() == 1 ? "Đã thanh toán" : "Chưa thanh toán", s.getNgayTao(), s.getNgaySua()
             });
 
@@ -105,6 +221,13 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblHoaDon = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        lblTrang = new javax.swing.JLabel();
+        btnTrangTruoc = new javax.swing.JButton();
+        btnTiep = new javax.swing.JButton();
+        txtDenTrang = new javax.swing.JTextField();
+        btnDen = new javax.swing.JButton();
+        btnTrangCuoi = new javax.swing.JButton();
+        btnTrangDau = new javax.swing.JButton();
 
         setName(""); // NOI18N
 
@@ -160,6 +283,28 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Hóa Đơn");
 
+        lblTrang.setText("jLabel2");
+
+        btnTrangTruoc.setText("<");
+        btnTrangTruoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTrangTruocActionPerformed(evt);
+            }
+        });
+
+        btnTiep.setText(">");
+        btnTiep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTiepActionPerformed(evt);
+            }
+        });
+
+        btnDen.setText("Đến");
+
+        btnTrangCuoi.setText(">>");
+
+        btnTrangDau.setText("<<");
+
         javax.swing.GroupLayout JHoaDonLayout = new javax.swing.GroupLayout(JHoaDon);
         JHoaDon.setLayout(JHoaDonLayout);
         JHoaDonLayout.setHorizontalGroup(
@@ -173,10 +318,25 @@ public class HoaDonJpanel extends javax.swing.JPanel {
                         .addComponent(cbbTT, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(JHoaDonLayout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addGroup(JHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(JHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(463, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(JHoaDonLayout.createSequentialGroup()
+                                .addGap(273, 273, 273)
+                                .addComponent(btnTrangDau)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnTrangTruoc)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblTrang)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnTiep)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnTrangCuoi, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtDenTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnDen)))))
+                .addContainerGap(554, Short.MAX_VALUE))
         );
         JHoaDonLayout.setVerticalGroup(
             JHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,9 +350,21 @@ public class HoaDonJpanel extends javax.swing.JPanel {
                         .addComponent(jLabel1)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
+                .addGroup(JHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(JHoaDonLayout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(JHoaDonLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(JHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnTrangTruoc)
+                            .addComponent(lblTrang)
+                            .addComponent(btnTiep)
+                            .addComponent(btnTrangCuoi)
+                            .addComponent(btnTrangDau)
+                            .addComponent(txtDenTrang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDen))))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -200,25 +372,48 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(146, 146, 146)
                 .addComponent(JHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 670, Short.MAX_VALUE))
+                .addContainerGap(433, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(66, 66, 66)
                 .addComponent(JHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 218, Short.MAX_VALUE))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbbTTItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbTTItemStateChanged
         String tt = cbbTT.getSelectedItem().toString();
         if (tt.equalsIgnoreCase("Đã thanh toán")) {
-            loadTableTT();
+            countHDTT();
+            if (count % 3 == 0) {
+                soTrang = count / 3;
+            } else {
+                soTrang = count / 3 + 1;
+            }
+            loadTableTT(1);
+            lblTrang.setText("1/" + soTrang);
         } else if (tt.equalsIgnoreCase("Chưa thanh toán")) {
-            loadTableCTT();
+            countHDCTT();
+            if (count % 3 == 0) {
+                soTrang = count / 3;
+            } else {
+                soTrang = count / 3 + 1;
+            }
+            loadTableCTT(1);
+            lblTrang.setText("1/" + soTrang);
         } else if (tt.equalsIgnoreCase("ALL")) {
-            loadTable();
+            countHD();
+            if (count % 3 == 0) {
+                soTrang = count / 3;
+            } else {
+                soTrang = count / 3 + 1;
+            }
+            loadTable(1);
+            lblTrang.setText("1/" + soTrang);
         }
 
     }//GEN-LAST:event_cbbTTItemStateChanged
@@ -236,7 +431,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
                     h.getIdhd().getMa(),
                     h.getIdctsp().getSp().getTen(),
                     h.getSl(),
-                    h.getIdctsp().getGiaBan(),
+                    Double.valueOf(h.getIdctsp().getGiaBan()).longValue(),
                     Double.valueOf(h.getIdctsp().getGiaBan() * h.getSl()).longValue()
                 });
             }
@@ -244,14 +439,34 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
+    private void btnTrangTruocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrangTruocActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTrangTruocActionPerformed
+
+    private void btnTiepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTiepActionPerformed
+          if (Trang < soTrang) {
+            Trang++;
+            loadTable(Trang);
+            lblTrang.setText("" + Trang);
+            lblTrang.setText(Trang + "/" + soTrang);
+        }
+    }//GEN-LAST:event_btnTiepActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JHoaDon;
+    private javax.swing.JButton btnDen;
+    private javax.swing.JButton btnTiep;
+    private javax.swing.JButton btnTrangCuoi;
+    private javax.swing.JButton btnTrangDau;
+    private javax.swing.JButton btnTrangTruoc;
     private javax.swing.JComboBox<String> cbbTT;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblTrang;
     private javax.swing.JTable tblHDCT;
     private javax.swing.JTable tblHoaDon;
+    private javax.swing.JTextField txtDenTrang;
     // End of variables declaration//GEN-END:variables
 }
