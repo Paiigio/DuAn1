@@ -4,6 +4,7 @@
  */
 package view;
 
+import DomainModels.CTSanPham;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamResolution;
@@ -19,6 +20,8 @@ import java.awt.image.BufferedImage;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
+import javax.swing.JOptionPane;
+import responsitory.CTSanPhamResponsitory;
 
 /**
  *
@@ -29,6 +32,8 @@ public class QuetQR extends javax.swing.JFrame implements Runnable, ThreadFactor
     private Webcam webcam = null;
         private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
+    public static CTSanPham ctsp;
+    CTSanPhamResponsitory ctspr=new CTSanPhamResponsitory();
     /**
      * Creates new form NewJFrame
      */
@@ -51,7 +56,7 @@ public class QuetQR extends javax.swing.JFrame implements Runnable, ThreadFactor
         txt = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -147,6 +152,11 @@ public class QuetQR extends javax.swing.JFrame implements Runnable, ThreadFactor
 
             if (result != null) {
                 txt.setText(result.getText());
+                ctsp=ctspr.quetQR(result.getText());
+                if(ctsp!=null & ctsp.getMaQR()!=null){
+                    JOptionPane.showConfirmDialog(this, "Đã tìm thấy sản phẩm "+ ctsp.getSp().getTen()+ ", size "+ctsp.getDl().getSoDungLuong()+", màu "+ctsp.getMs().getTen()+", cao "+"\n Bạn có muốn thêm sản phẩm này vào giỏ hàng không?");
+                }
+
             }
         } while (true);
     }

@@ -6,7 +6,10 @@ package view.ThanhPhan;
 
 import Service.Interface.IKhachHangService;
 import Service.KhachHangService;
+import Utilites.JDBC_Helper;
 import ViewModel.KhachHangModel;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,6 +30,7 @@ public class KhachHangJpanel extends javax.swing.JPanel {
 
     private IKhachHangService khs = new KhachHangService();
     DefaultTableModel dtm = new DefaultTableModel();
+       long count, soTrang, Trang = 1;
 
     public KhachHangJpanel() {
         initComponents();
@@ -35,6 +39,20 @@ public class KhachHangJpanel extends javax.swing.JPanel {
         loadTable();
               tblBang.getColumnModel().getColumn(1).setPreferredWidth(150);
               tblBang.getColumnModel().getColumn(0).setPreferredWidth(30);
+    
+    }
+
+        public void countKH() {
+        try {
+            String sql = "SELECT count(*) From KHACHHANG";
+            ResultSet rs = JDBC_Helper.excuteQuery(sql);
+            while (rs.next()) {
+                count = rs.getLong(1);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void loadTable() {
@@ -352,6 +370,9 @@ public class KhachHangJpanel extends javax.swing.JPanel {
         KhachHang.setLayout(KhachHangLayout);
         KhachHangLayout.setHorizontalGroup(
             KhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, KhachHangLayout.createSequentialGroup()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 1197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
             .addGroup(KhachHangLayout.createSequentialGroup()
                 .addGroup(KhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(KhachHangLayout.createSequentialGroup()
@@ -366,9 +387,6 @@ public class KhachHangJpanel extends javax.swing.JPanel {
                         .addGap(17, 17, 17)
                         .addComponent(TTNhanVien1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, KhachHangLayout.createSequentialGroup()
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 1197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
         );
         KhachHangLayout.setVerticalGroup(
             KhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

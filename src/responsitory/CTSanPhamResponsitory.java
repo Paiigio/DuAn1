@@ -96,4 +96,22 @@ public class CTSanPhamResponsitory {
         return ctsp;
     }
 
+      public CTSanPham quetQR(String maqr){
+          
+        String sql = "SELECT * FROM dbo.CTSANPHAM WHERE maqr=?";
+        ResultSet rs = JDBC_Helper.excuteQuery(sql, maqr);
+        try {
+            while (rs.next()) {
+                MauSac mauSac = ms.getMSByID(rs.getString(2));
+                CTKhuyenMai ctKhuyenMai = ctkm.getCVCTKMID(rs.getString(3));
+                SanPham sanPham = sp.getSPByID(rs.getString(4));
+                DungLuong dungLuong = dl.getDLByID(rs.getString(5));
+                return new CTSanPham(rs.getString(1), mauSac, ctKhuyenMai, sanPham, dungLuong, rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getDate(11), rs.getFloat(12), rs.getFloat(13),rs.getInt(14));
+//                return new ChucVu(rs.getString(1),rs.getString(2),rs.getString(3),rs.getDate(4),rs.getDate(5));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+      }
 }

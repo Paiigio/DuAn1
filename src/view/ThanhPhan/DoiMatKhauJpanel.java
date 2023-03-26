@@ -112,7 +112,7 @@ public class DoiMatKhauJpanel extends javax.swing.JFrame {
         for(NhanVienModel x : list) {
             if(x.getMa().equalsIgnoreCase(user)) {
                 nvs.updateNV(new NhanVienModel(x.getId(), x.getCv(), x.getMa(), x.getHoTen(), x.getGioiTinh(),
-                                                x.getSdt(), x.getNgaySinh(), x.getDiaChi(), x.getEmail(), String.valueOf(this.txtPasss.getText()),
+                                                x.getSdt(), x.getNgaySinh(), x.getDiaChi(), x.getEmail(), String.valueOf(this.txtPasss.getPassword()),
                                                 x.getTrangThai(), x.getHinhAnh()));
                                 JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công!");
                                 this.dispose();
