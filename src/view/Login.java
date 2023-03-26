@@ -9,8 +9,8 @@ import javax.swing.JOptionPane;
 public class Login extends javax.swing.JFrame {
 
     private INhanVienService nvs = new NhanVienService();
-     public static NhanVienModel nv = null;
-      public String userLogin = "";
+    public static NhanVienModel nv = null;
+    public String userLogin = "";
 
     /**
      * Creates new form Login
@@ -27,7 +27,8 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
 
     }
-        public String getUser() {
+
+    public String getUser() {
         ArrayList<NhanVienModel> list = nvs.getAllNV();
         for (NhanVienModel x : list) {
             if (x.getMa().equals(txtUser.getText()) && x.getMatKhau().equals(String.valueOf(txtPass.getPassword()))) {
@@ -55,9 +56,11 @@ public class Login extends javax.swing.JFrame {
         }
         return true;
     }
-    private void clearMauButoon(){
-        
+
+    private void clearMauButoon() {
+
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -337,11 +340,11 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_chkCheckActionPerformed
 
     private void btnSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupActionPerformed
-  
+
     }//GEN-LAST:event_btnSignupActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-          ArrayList<NhanVienModel> list = nvs.getAllNV();
+        ArrayList<NhanVienModel> list = nvs.getAllNV();
         if (txtUser.getText().trim().isEmpty() | String.valueOf(txtPass.getPassword()).trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Tài khoản và mật khẩu không được để trống!");
             return;
@@ -349,22 +352,22 @@ public class Login extends javax.swing.JFrame {
         boolean check = false;
 
         for (NhanVienModel x : list) {
-                if (x.getMa().equals(txtUser.getText()) && x.getMatKhau().equals(String.valueOf(txtPass.getPassword()))) {
-                nv = x;            
-            }      
-        }          
-        if(nv.getTrangThai()==1){
+            if (x.getMa().equals(txtUser.getText()) && x.getMatKhau().equals(String.valueOf(txtPass.getPassword()))) {
+                nv = x;
+            }
+        }
+        if (nv.getTrangThai() == 1) {
             JOptionPane.showMessageDialog(this, "Tài khoản hết hạn");
-            check =false;
-           
-        }else check=true;
-        
+            check = false;
+
+        } else {
+            check = true;
+        }
+
         if (check) {
             new Loading().setVisible(true);
-           
+
             this.setVisible(false);
-            
-          
 
         } else {
             JOptionPane.showMessageDialog(this, "Sai tên đăng nhập hoặc mật khẩu");

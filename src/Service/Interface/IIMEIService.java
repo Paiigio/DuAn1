@@ -17,4 +17,5 @@ public interface IIMEIService {
     public IMEIModel updateIMEI(IMEIModel i);
     public Integer deleteIMEI(String ma);
     public ArrayList<IMEIModel> selectSL(String id);
+    public ArrayList<IMEIModel> getIMEIByNote(String note);
 }

@@ -67,7 +67,7 @@ public class QL_IMEI extends javax.swing.JFrame {
         ArrayList<IMEIModel> list = iIMEIService.getAllIMEI();
         IMEIModel i = new IMEIModel();
         String ma = txtMa.getText();
-        String ghiChu = txtGhiChu.getText();
+        String ghiChu ="";
         CTSanPham ctsp = (CTSanPham) cbbSP.getSelectedItem();
         int trangThai = 0;
         if (rdConHang.isSelected()) {
@@ -136,6 +136,7 @@ public class QL_IMEI extends javax.swing.JFrame {
 
         txtGhiChu.setColumns(20);
         txtGhiChu.setRows(5);
+        txtGhiChu.setEnabled(false);
         jScrollPane1.setViewportView(txtGhiChu);
 
         jLabel5.setText("Sản phẩm:");

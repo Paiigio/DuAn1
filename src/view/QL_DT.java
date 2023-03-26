@@ -1,6 +1,7 @@
 package view;
 
 import DomainModels.NhanVien;
+import ViewModel.KhachHangModel;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -19,7 +20,7 @@ import view.ThanhPhan.ThongKeJpanel;
 public class QL_DT extends javax.swing.JFrame {
 
     CardLayout cardLayout;
-        
+
        
     public QL_DT() {
         initComponents();
