@@ -17,6 +17,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import view.QL_DT;
 
 /**
  *
@@ -29,7 +30,7 @@ public class KhachHangJpanel extends javax.swing.JPanel {
 
     public KhachHangJpanel() {
         initComponents();
-
+        
         dtm = (DefaultTableModel) tblBang.getModel();
         loadTable();
               tblBang.getColumnModel().getColumn(1).setPreferredWidth(150);

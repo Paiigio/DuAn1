@@ -36,7 +36,7 @@ public class HoaDonChiTietResponsitory {
  }
     public HoaDonChiTiet insertHDCT(HoaDonChiTiet hdct) {
         String sql = "INSERT dbo.HOADONCHITIET(IDHD,IDCTSP,DONGIA,SOLUONG,NGAYTAO,NGAYSUA) VALUES(?,?,?,?,GETDATE(),null)";
-        JDBC_Helper.excuteUpdate(sql, hdct.getIdhd(),hdct.getIdctsp(),hdct.getDongia(),hdct.getSl());
+        JDBC_Helper.excuteUpdate(sql, hdct.getIdhd().getId(),hdct.getIdctsp().getId(),hdct.getDongia(),hdct.getSl());
         return hdct;
     }
     public Integer deleteHDCT(String ma) {

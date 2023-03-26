@@ -41,7 +41,15 @@ public class IMEIService implements IIMEIService {
         var x = im.insertIMEI(new IMEI(i.getId(), i.getCtsp(), i.getMa(), i.getNgayTao(), i.getGhiChu(), i.getTrangThai()));
         return new IMEIModel(x.getId(), x.getCtsp(), x.getMa(), x.getNgayTao(), x.getGhiChu(), x.getTrangThai());
     }
-
+    @Override 
+    public ArrayList<IMEIModel> getIMEIByNote(String note){
+        ArrayList<IMEIModel> list = new ArrayList<>();
+        ArrayList<IMEI> i = im.getIMEIByNote(note);
+        for (IMEI x : i) {
+            list.add(new IMEIModel(x.getId(), x.getCtsp(), x.getMa(), x.getNgayTao(), x.getGhiChu(), x.getTrangThai()));
+        }
+        return list;       
+    }
     @Override
     public IMEIModel updateIMEI(IMEIModel i) {
         var x = im.updateIMEI(new IMEI(i.getId(), i.getCtsp(), i.getMa(), i.getNgayTao(), i.getGhiChu(), i.getTrangThai()));

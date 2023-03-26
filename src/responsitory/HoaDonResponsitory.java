@@ -101,8 +101,8 @@ public class HoaDonResponsitory {
 
     public HoaDon insertHD(HoaDon nv) {
         String sql = "INSERT dbo.HOADON(IDHD,IDKH,IDNV,IDCP,MAHD,THANHTIEN,HINHTHUCTT,NGAYTT,TRANGTHAI,NGAYTAO,NGAYSUA)"
-                + "VALUES(NEWID(),?,?,?,?,?,?,?,? GETDATE(),NULL)";
-        JDBC_Helper.excuteUpdate(sql, nv.getKh().getId(), nv.getNv().getId(), nv.getCp().getId(), nv.getMa(), nv.getThanhTien(),
+                + "VALUES(NEWID(),?,?,?,?,?,?,?,?, GETDATE(),NULL)";
+        JDBC_Helper.excuteUpdate(sql, nv.getKh().getId(), nv.getNv().getId(), nv.getCp(), nv.getMa(), nv.getThanhTien(),
                 nv.getHinhThucThanhToan(), nv.getNgayThanhToan(), nv.getTrangThai());
         return nv;
     }

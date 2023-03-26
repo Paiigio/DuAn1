@@ -4,20 +4,26 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/duan1_nhom8/src/Service/Interface/IMauSacService.java</file>
-            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/SanPhamJpanel.java</file>
-<<<<<<< HEAD
+            <file>file:/D:/duan1_nhom8/src/responsitory/HoaDonResponsitory.java</file>
             <file>file:/D:/duan1_nhom8/src/Service/MauSacService.java</file>
             <file>file:/D:/duan1_nhom8/src/DomainModels/CTSanPham.java</file>
+            <file>file:/D:/duan1_nhom8/src/responsitory/HoaDonChiTietResponsitory.java</file>
+            <file>file:/D:/duan1_nhom8/src/responsitory/IMEIResponsitory.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/Login.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/KhachHangJpanel.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/QL_DT.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/QL_MauSac.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/QL_IMEI.java</file>
+            <file>file:/D:/duan1_nhom8/src/Service/IMEIService.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/KhuyenMaiJpanel.java</file>
+            <file>file:/D:/duan1_nhom8/src/responsitory/CTKhuyenMaiResponsitory.java</file>
+            <file>file:/D:/duan1_nhom8/src/Service/Interface/IIMEIService.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/SanPhamJpanel.java</file>
+            <file>file:/D:/duan1_nhom8/src/Service/CTKhuyenMaiService.java</file>
             <file>file:/D:/duan1_nhom8/src/responsitory/MauSacResponsitory.java</file>
             <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/BanHangJpanel.java</file>
-            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/QL_MauSac.java</file>
-=======
-            <file>file:/D:/duan1_nhom8/src/Utilites/DB_Context.java</file>
-            <file>file:/D:/duan1_nhom8/src/Utilites/JDBC_Helper.java</file>
-            <file>file:/D:/duan1_nhom8/src/view/Login.java</file>
-            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/BanHangJpanel.java</file>
-            <file>file:/D:/duan1_nhom8/src/view/QL_DT.java</file>
->>>>>>> origin/master
+            <file>file:/D:/duan1_nhom8/src/Service/HoaDonService.java</file>
+            <file>file:/D:/duan1_nhom8/src/Service/HoaDonChiTietService.java</file>
         </group>
     </open-files>
 </project-private>
