@@ -155,6 +155,7 @@ public class QuetQR extends javax.swing.JFrame implements Runnable, ThreadFactor
                 ctsp=ctspr.quetQR(result.getText());
                 if(ctsp!=null & ctsp.getMaQR()!=null){
                     JOptionPane.showConfirmDialog(this, "Đã tìm thấy sản phẩm "+ ctsp.getSp().getTen()+ ", size "+ctsp.getDl().getSoDungLuong()+", màu "+ctsp.getMs().getTen()+", cao "+"\n Bạn có muốn thêm sản phẩm này vào giỏ hàng không?");
+                    
                 }
 
             }
