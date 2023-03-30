@@ -40,8 +40,8 @@ public class KhachHangResponsitory {
 
     public ArrayList<KhachHang> getTim(String ma) {
         ArrayList<KhachHang> list = new ArrayList<>();
-        String sql = "SELECT IDKH,MAKH,HOTEN,SDT,DIACHI,GIOITINH,EMAIL,NGAYSINH,NGAYTAO,NGAYSUA FROM dbo.KHACHHANG  WHERE Makh like ?";
-        ResultSet rs = JDBC_Helper.excuteQuery(sql);
+        String sql = "SELECT IDKH,MAKH,HOTEN,SDT,DIACHI,GIOITINH,EMAIL,NGAYSINH,NGAYTAO,NGAYSUA FROM dbo.KHACHHANG  WHERE Makh = ?";
+        ResultSet rs = JDBC_Helper.excuteQuery(sql, ma);
 
         try {
             while (rs.next()) {

@@ -37,6 +37,12 @@ public class KhachHangService implements IKhachHangService{
         }
         return list;
     }
+    
+    @Override
+    public KhachHangModel getKHByMa(String ma) {
+        var x = khs.getTim(ma).get(0);
+        return new KhachHangModel(x.getMaKH(), x.getSdt(), x.getHoTen(), x.getDiaChi(), x.getGioiTinh(), x.getEmail(), x.getNgaySinh());
+    }
 
     @Override
     public KhachHangModel insertKH(KhachHangModel nv) {
