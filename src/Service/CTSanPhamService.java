@@ -28,6 +28,8 @@ public class CTSanPhamService implements ICTSanPhamService {
         }
         return list;
     }
+    
+    
 
     @Override
     public CTSanPhamModel insertCTSanPham(CTSanPhamModel sp) {
@@ -62,6 +64,12 @@ public class CTSanPhamService implements ICTSanPhamService {
     @Override
     public CTSanPhamModel deleteCTKM(CTSanPhamModel sp) {
         var x = ctsp.deleteCTKM(new CTSanPham(sp.getId(), sp.getMs(), sp.getCtkm(), sp.getSp(), sp.getDl(), sp.getMa(), sp.getMaQR(), sp.getHinhAnh(), sp.getNamBH(), sp.getNgayTao(), sp.getNgaySua(), sp.getGiaNhap(), sp.getGiaBan(),sp.getTrangThai()));
+        return new CTSanPhamModel(x.getId(), x.getMs(), x.getCtkm(), x.getSp(), x.getDl(), x.getMa(), x.getMaQR(), x.getHinhAnh(), x.getNamBH(), x.getNgayTao(), x.getNgaySua(), x.getGiaNhap(), x.getGiaBan(),x.getTrangThai());
+    }
+
+    @Override
+    public CTSanPhamModel getCTSPById(String ma) {
+        var x = ctsp.getCTSanPhamByID(ma);
         return new CTSanPhamModel(x.getId(), x.getMs(), x.getCtkm(), x.getSp(), x.getDl(), x.getMa(), x.getMaQR(), x.getHinhAnh(), x.getNamBH(), x.getNgayTao(), x.getNgaySua(), x.getGiaNhap(), x.getGiaBan(),x.getTrangThai());
     }
 

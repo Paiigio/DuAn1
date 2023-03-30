@@ -145,6 +145,12 @@ public class NhanVienResponsitory {
                 nv.getDiaChi(), nv.getEmail(), nv.getMatKhau(), nv.getTrangThai(), nv.getHinhAnh(), nv.getMa());
         return nv;
     }
+    
+    public String updatePass(String pass, String ma) {
+        String sql = "UPDATE NHANVIEN SET MATKHAU = ? WHERE MANV = ?";
+        JDBC_Helper.excuteUpdate(sql, pass, ma);
+        return pass;
+    }
 
     public Integer deleteNV(String id) {
         String sql = "DELETE FROM NHANVIEN WHERE ID=?";

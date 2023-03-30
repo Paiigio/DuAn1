@@ -8,6 +8,7 @@ import DomainModels.CTSanPham;
 import DomainModels.HoaDon;
 import DomainModels.KhachHang;
 import DomainModels.NhanVien;
+import DomainModels.SanPham;
 import Service.CTSanPhamService;
 import Service.HoaDonChiTietService;
 import Service.HoaDonService;
@@ -24,6 +25,7 @@ import ViewModel.HoaDonModel;
 import ViewModel.IMEIModel;
 import ViewModel.KhachHangModel;
 import ViewModel.NhanVienModel;
+import java.io.ObjectOutput;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -139,9 +141,9 @@ public class BanHangJpanel extends javax.swing.JPanel {
             for (IMEIModel x : listI) {
                 if (x.getGhiChu() != null) {
                     List<String> listString = tachChuoi(x.getGhiChu());
-                    System.out.println(listString);
+//                    System.out.println(listString);
                     for (String s : listString) {
-                        System.out.println(s);
+//                        System.out.println(s);
                         if (maHD.equals(s)) {
                             maIMEI = x.getMa();
 
@@ -251,6 +253,11 @@ public class BanHangJpanel extends javax.swing.JPanel {
         jScrollPane4.setViewportView(tblGioHang);
 
         btnXoaCTSP.setText("Xóa ");
+        btnXoaCTSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaCTSPActionPerformed(evt);
+            }
+        });
 
         btnQR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/qr-scan.png"))); // NOI18N
         btnQR.addActionListener(new java.awt.event.ActionListener() {
@@ -712,6 +719,59 @@ public class BanHangJpanel extends javax.swing.JPanel {
     private void btnQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQRActionPerformed
         QuetQR qr = new QuetQR();
         qr.setVisible(true);
+        CTSanPhamModel loadCTSP = (CTSanPhamModel) iCTSanPhamService.getCTSPById(qr.idctsp);
+        System.out.println(qr.idctsp);
+        String tensp = loadCTSP.getSp().getTen();
+        float dongia = loadCTSP.getGiaBan();
+        float thanhtien = loadCTSP.getGiaBan();
+           ArrayList<IMEIModel> listIMEI = iIMEIService.selectSL(qr.idctsp);
+        IMEIModel imei = new IMEIModel();
+        // nhập vào imei
+        String maIMEI = (String) JOptionPane.showInputDialog(this, "Mời bạn chọn mã IMEI", "Lựa chọn", JOptionPane.INFORMATION_MESSAGE, null, null, "Mã IMEI");
+        System.out.println("Mã vừa nhập :"+maIMEI);
+        String ghiChu = "";
+        String maIM = maIMEI;
+        int dem = 0;
+        // kiểm tra imei uvằ nhập vào
+          int indexHD = tblHoaDon.getSelectedRow();
+          String maHD = tblHoaDon.getValueAt(indexHD, 0).toString();
+        for (IMEIModel i : listIMEI) {
+            System.out.println("Mã imei trong list"+i.getMa());
+            if (i.getMa()!= null && i.getMa().equals(maIMEI)) {
+                ghiChu = i.getGhiChu();
+                List<String> listS = tachChuoi(i.getGhiChu());
+                if (listS != null) {
+                    for (String st : listS) {
+                        if (maHD.equals(st)) {
+                            JOptionPane.showMessageDialog(this, "IMEI đã tồn tại trong đơn hàng");
+                            return;
+                        } else {
+                            dem++;
+                            imei.setGhiChu(i.getGhiChu() + " " + maHD);
+                        }
+                    }
+                } else {
+                    dem++;
+                    imei.setGhiChu(maHD);
+                }
+                imei.setMa(i.getMa());
+                imei.setId(i.getId());
+            }
+        }
+        if (dem == 0) {
+            JOptionPane.showMessageDialog(this, "Sai mã IMEI hoặc mã imei không tồn tại");
+            return;
+        }
+        
+        Object[]rowDataa = {
+            dem,
+            tensp,
+            dongia,
+            1,
+            dongia,
+            imei.getMa()
+        };
+        dtmGH.addRow(rowDataa);
     }//GEN-LAST:event_btnQRActionPerformed
 
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
@@ -929,6 +989,10 @@ public class BanHangJpanel extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_cbbTrangThaiHoaDonActionPerformed
+
+    private void btnXoaCTSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaCTSPActionPerformed
+        
+    }//GEN-LAST:event_btnXoaCTSPActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
