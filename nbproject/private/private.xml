@@ -7,6 +7,15 @@
             <file>file:/D:/duan1_nhom8/src/responsitory/HoaDonChiTietResponsitory.java</file>
             <file>file:/D:/duan1_nhom8/src/responsitory/IMEIResponsitory.java</file>
             <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/BanHangJpanel.java</file>
+<<<<<<< HEAD
+=======
+            <file>file:/D:/duan1_nhom8/src/Service/HoaDonService.java</file>
+            <file>file:/D:/duan1_nhom8/src/Service/HoaDonChiTietService.java</file>
+=======
+            <file>file:/D:/duan1_nhom8/src/responsitory/CTSanPhamResponsitory.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/QuetQR.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/SanPhamJpanel.java</file>
+>>>>>>> origin/master
             <file>file:/D:/duan1_nhom8/src/view/Login.java</file>
         </group>
     </open-files>

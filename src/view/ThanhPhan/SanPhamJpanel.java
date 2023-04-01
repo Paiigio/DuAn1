@@ -149,7 +149,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
                 list.get(i).getSp(),
                 list.get(i).getMs(),
                 list.get(i).getDl(),
-                list.get(i).getMaQR(),
+                list.get(i).getId(),
                 listIMEI.size(),
                 list.get(i).getHinhAnh(),
                 list.get(i).getNamBH(),
@@ -205,6 +205,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         MauSac ms = (MauSac) cbbMS.getSelectedItem();
         String anh = "";
         String maQR = sp.getTen() + "" + dl.getSoDungLuong() + "" + ms.getTen();
+       
         if (strHinhanh == null) {
             anh = "NoAvatar.jpg";
         } else {

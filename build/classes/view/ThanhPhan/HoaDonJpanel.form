@@ -314,16 +314,25 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x110;&#x1ebf;n"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDenActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnTrangCuoi">
           <Properties>
             <Property name="text" type="java.lang.String" value="&gt;&gt;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTrangCuoiActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnTrangDau">
           <Properties>
             <Property name="text" type="java.lang.String" value="&lt;&lt;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTrangDauActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
