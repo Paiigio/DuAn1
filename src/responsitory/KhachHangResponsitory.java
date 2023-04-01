@@ -40,8 +40,8 @@ public class KhachHangResponsitory {
 
     public ArrayList<KhachHang> getTim(String ma) {
         ArrayList<KhachHang> list = new ArrayList<>();
-        String sql = "SELECT IDKH,MAKH,HOTEN,SDT,DIACHI,GIOITINH,EMAIL,NGAYSINH,NGAYTAO,NGAYSUA FROM dbo.KHACHHANG  WHERE Makh like ?";
-        ResultSet rs = JDBC_Helper.excuteQuery(sql);
+        String sql = "SELECT IDKH,MAKH,HOTEN,SDT,DIACHI,GIOITINH,EMAIL,NGAYSINH,NGAYTAO,NGAYSUA FROM dbo.KHACHHANG  WHERE Makh = ?";
+        ResultSet rs = JDBC_Helper.excuteQuery(sql, ma);
 
         try {
             while (rs.next()) {
@@ -55,20 +55,20 @@ public class KhachHangResponsitory {
         return list;
     }
 
-    public ArrayList<KhachHang> getTimKH(String sdt) {
-        ArrayList<KhachHang> list = new ArrayList<>();
+    public KhachHang getTimKH(String sdt) {
+
         String sql = "SELECT IDKH,MAKH,HOTEN,SDT,DIACHI,GIOITINH,EMAIL,NGAYSINH,NGAYTAO,NGAYSUA FROM dbo.KHACHHANG  WHERE SDT like ? ";
         ResultSet rs = JDBC_Helper.excuteQuery(sql, "%" + sdt + "%");
         try {
             while (rs.next()) {
-                list.add(new KhachHang(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getDate(8),
-                        rs.getDate(9), rs.getDate(10)));
+                return new KhachHang(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getDate(8),
+                        rs.getDate(9), rs.getDate(10));
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(NhanVienResponsitory.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
-        return list;
+        return null;
     }
 
     public KhachHang insertKH(KhachHang nv) {

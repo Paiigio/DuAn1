@@ -192,6 +192,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         btnDen = new javax.swing.JButton();
         btnTrangCuoi = new javax.swing.JButton();
         btnTrangDau = new javax.swing.JButton();
+        txtMaHD = new javax.swing.JTextField();
 
         setName(""); // NOI18N
 
@@ -284,6 +285,13 @@ public class HoaDonJpanel extends javax.swing.JPanel {
             }
         });
 
+        txtMaHD.setText("jTextField1");
+        txtMaHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaHDActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout JHoaDonLayout = new javax.swing.GroupLayout(JHoaDon);
         JHoaDon.setLayout(JHoaDonLayout);
         JHoaDonLayout.setHorizontalGroup(
@@ -293,7 +301,9 @@ public class HoaDonJpanel extends javax.swing.JPanel {
                     .addGroup(JHoaDonLayout.createSequentialGroup()
                         .addGap(381, 381, 381)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(263, 263, 263)
+                        .addGap(120, 120, 120)
+                        .addComponent(txtMaHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72)
                         .addComponent(cbbTT, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(JHoaDonLayout.createSequentialGroup()
                         .addGap(33, 33, 33)
@@ -323,7 +333,9 @@ public class HoaDonJpanel extends javax.swing.JPanel {
                 .addGroup(JHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(JHoaDonLayout.createSequentialGroup()
                         .addGap(41, 41, 41)
-                        .addComponent(cbbTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(JHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbbTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMaHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(JHoaDonLayout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jLabel1)))
@@ -502,6 +514,10 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         lblTrang.setText(Trang + "/" + soTrang);
     }//GEN-LAST:event_btnDenActionPerformed
 
+    private void txtMaHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaHDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaHDActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JHoaDon;
@@ -518,5 +534,6 @@ public class HoaDonJpanel extends javax.swing.JPanel {
     private javax.swing.JTable tblHDCT;
     private javax.swing.JTable tblHoaDon;
     private javax.swing.JTextField txtDenTrang;
+    private javax.swing.JTextField txtMaHD;
     // End of variables declaration//GEN-END:variables
 }

@@ -13,9 +13,15 @@ import java.util.ArrayList;
  * @author duong
  */
 public interface IKhachHangService {
+
     public ArrayList<KhachHangModel> getAllKH();
-    public ArrayList<KhachHangModel> getTimKH(String sdt) ;
-     public KhachHangModel insertKH(KhachHangModel nv);
-      public KhachHangModel updateKH(KhachHangModel nv);
-       
+
+    public KhachHangModel getTimKH(String sdt);
+
+    public KhachHangModel insertKH(KhachHangModel nv);
+
+    public KhachHangModel updateKH(KhachHangModel nv);
+
+    public KhachHangModel getKHByMa(String ma);
+
 }

@@ -51,6 +51,11 @@ public class NhanVienService implements INhanVienService {
         return new NhanVienModel(x.getId(), x.getCv(), x.getMa(), x.getHoTen(), x.getGioiTinh(), x.getSdt(), x.getNgaySinh(),
                 x.getDiaChi(), x.getEmail(), x.getMatKhau(), x.getTrangThai(), x.getHinhAnh());
     }
+    
+    @Override
+    public String updatePass(String pass, String ma) {
+        return nvr.updatePass(pass, ma);
+    }
 
     @Override
     public Integer deleteNV(String ma) {

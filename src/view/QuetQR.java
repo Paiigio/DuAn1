@@ -28,12 +28,13 @@ import responsitory.CTSanPhamResponsitory;
  * @author duong
  */
 public class QuetQR extends javax.swing.JFrame implements Runnable, ThreadFactory{
-    private WebcamPanel panel = null;
+        private WebcamPanel panel = null;
     private Webcam webcam = null;
         private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
     public static CTSanPham ctsp;
     CTSanPhamResponsitory ctspr=new CTSanPhamResponsitory();
+    public String idctsp = "";
     /**
      * Creates new form NewJFrame
      */
@@ -154,13 +155,16 @@ public class QuetQR extends javax.swing.JFrame implements Runnable, ThreadFactor
                 txt.setText(result.getText());
                 ctsp=ctspr.quetQR(result.getText());
                 if(ctsp!=null & ctsp.getMaQR()!=null){
-                    JOptionPane.showConfirmDialog(this, "Đã tìm thấy sản phẩm "+ ctsp.getSp().getTen()+ ", size "+ctsp.getDl().getSoDungLuong()+", màu "+ctsp.getMs().getTen()+", cao "+"\n Bạn có muốn thêm sản phẩm này vào giỏ hàng không?");
+//                    JOptionPane.showConfirmDialog(this, "Đã tìm thấy sản phẩm "+ ctsp.getSp().getTen()+ ", size "+ctsp.getDl().getSoDungLuong()+", màu "+ctsp.getMs().getTen()+", cao "+"\n Bạn có muốn thêm sản phẩm này vào giỏ hàng không?");
+                    idctsp = result.getText();
+                  System.out.println(idctsp); 
                 }
 
             }
+               
         } while (true);
     }
-
+//bye
     @Override
     public Thread newThread(Runnable r) {
          Thread t = new Thread(r, "My Thread");

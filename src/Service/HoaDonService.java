@@ -31,13 +31,6 @@ public class HoaDonService implements  IHoaDonService{
 
     @Override
     public HoaDonModel insertHD(HoaDonModel nv) {
-            ArrayList<HoaDon> ds = hdr.getAllHoaDon();
-        for (HoaDon x : ds) {
-            if (x.getMa().equalsIgnoreCase(nv.getMa())) {
-                return null;
-            }
-        }
-
         var x = hdr.insertHD(new HoaDon(nv.getId(), nv.getKh(), nv.getNv(), nv.getCp(), nv.getMa(), nv.getThanhTien(), 
                     nv.getHinhThucThanhToan(), nv.getNgayThanhToan(), nv.getTrangThai(), nv.getNgayTao(), nv.getNgaySua()));
         return new HoaDonModel(x.getId(), x.getKh(), x.getNv(), x.getCp(), x.getMa(), x.getThanhTien(), 
@@ -74,6 +67,14 @@ public class HoaDonService implements  IHoaDonService{
 
         }
         return list;
+    }
+
+    @Override
+    public HoaDonModel upadteHD(HoaDonModel nv) {
+        var x = hdr.upadteHD(new HoaDon(nv.getId(), nv.getKh(), nv.getNv(), nv.getCp(), nv.getMa(), nv.getThanhTien(), 
+                    nv.getHinhThucThanhToan(), nv.getNgayThanhToan(), nv.getTrangThai(), nv.getNgayTao(), nv.getNgaySua()));
+        return new HoaDonModel(x.getId(), x.getKh(), x.getNv(), x.getCp(), x.getMa(), x.getThanhTien(), 
+                    x.getHinhThucThanhToan(), x.getNgayThanhToan(), x.getTrangThai(), x.getNgayTao(), x.getNgaySua());
     }
     
     

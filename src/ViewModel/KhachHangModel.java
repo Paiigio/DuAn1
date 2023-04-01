@@ -38,6 +38,17 @@ public class KhachHangModel {
         this.ngaySua = ngaySua;
     }
 
+    public KhachHangModel(String maKH, String sdt, String hoTen, String diaChi, String gioiTinh, String email, Date ngaySinh) {
+        this.maKH = maKH;
+        this.sdt = sdt;
+        this.hoTen = hoTen;
+        this.diaChi = diaChi;
+        this.gioiTinh = gioiTinh;
+        this.email = email;
+        this.ngaySinh = ngaySinh;
+    }
+    
+
     public String getId() {
         return id;
     }
@@ -116,6 +127,11 @@ public class KhachHangModel {
 
     public void setNgaySua(Date ngaySua) {
         this.ngaySua = ngaySua;
+    }
+
+    @Override
+    public String toString() {
+        return sdt;
     }
 
 
