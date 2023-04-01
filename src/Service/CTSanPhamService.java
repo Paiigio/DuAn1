@@ -72,5 +72,10 @@ public class CTSanPhamService implements ICTSanPhamService {
         var x = ctsp.getCTSanPhamByID(ma);
         return new CTSanPhamModel(x.getId(), x.getMs(), x.getCtkm(), x.getSp(), x.getDl(), x.getMa(), x.getMaQR(), x.getHinhAnh(), x.getNamBH(), x.getNgayTao(), x.getNgaySua(), x.getGiaNhap(), x.getGiaBan(),x.getTrangThai());
     }
+    @Override
+    public CTSanPhamModel getCTSPByMa(String ma) {
+        var x = ctsp.quetQR(ma);
+        return new CTSanPhamModel(x.getId(), x.getMs(), x.getCtkm(), x.getSp(), x.getDl(), x.getMa(), x.getMaQR(), x.getHinhAnh(), x.getNamBH(), x.getNgayTao(), x.getNgaySua(), x.getGiaNhap(), x.getGiaBan(),x.getTrangThai());
+    }
 
 }

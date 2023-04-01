@@ -16,6 +16,7 @@ public interface ICTSanPhamService {
     public ArrayList<CTSanPhamModel> getAllCTSanPham();
     
    public Object getCTSPById(String ma);
+    public CTSanPhamModel getCTSPByMa(String ma);
 
     public CTSanPhamModel insertCTSanPham(CTSanPhamModel ctsp);
 

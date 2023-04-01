@@ -98,7 +98,7 @@ public class CTSanPhamResponsitory {
 
       public CTSanPham quetQR(String maqr){
           
-        String sql = "SELECT * FROM dbo.CTSANPHAM WHERE idctsp=?";
+        String sql = "SELECT * FROM dbo.CTSANPHAM WHERE mactsp=?";
         ResultSet rs = JDBC_Helper.excuteQuery(sql, maqr);
         try {
             while (rs.next()) {

@@ -13,9 +13,15 @@ import java.util.ArrayList;
  * @author duong
  */
 public interface IHoaDonService {
+
     public ArrayList<HoaDonModel> getAllHoaDon();
+
     public HoaDonModel insertHD(HoaDonModel nv);
+        public HoaDonModel upadteHD(HoaDonModel nv);
+
     public HoaDonModel updateTinhTrangHD(HoaDonModel nv);
-       public ArrayList<HoaDonModel> getAllHoaDonTT();
-          public ArrayList<HoaDonModel> getAllHoaDonCTT() ;
+
+    public ArrayList<HoaDonModel> getAllHoaDonTT();
+
+    public ArrayList<HoaDonModel> getAllHoaDonCTT();
 }

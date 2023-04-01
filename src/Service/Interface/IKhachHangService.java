@@ -16,7 +16,7 @@ public interface IKhachHangService {
 
     public ArrayList<KhachHangModel> getAllKH();
 
-    public ArrayList<KhachHangModel> getTimKH(String sdt);
+    public KhachHangModel getTimKH(String sdt);
 
     public KhachHangModel insertKH(KhachHangModel nv);
 

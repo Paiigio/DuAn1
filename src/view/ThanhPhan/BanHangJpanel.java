@@ -110,7 +110,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
             dtmHD.addRow(new Object[]{
                 x.getMa(),
                 x.getNv().getHoTen(),
-                x.getKh().getHoTen(),
+                x.getKh()==null?"Khach le":x.getKh().getHoTen(),
                 x.getNgayTao(),
                 x.getTrangThai() == 0 ? "Chưa thanh toán" : "Đã thanh toán"
             });
@@ -745,7 +745,8 @@ public class BanHangJpanel extends javax.swing.JPanel {
     private void btnQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQRActionPerformed
         QuetQR qr = new QuetQR();
         qr.setVisible(true);
-        CTSanPhamModel loadCTSP = (CTSanPhamModel) iCTSanPhamService.getCTSPById(qr.idctsp);
+        System.out.println(QuetQR.ctsp);
+        CTSanPhamModel loadCTSP = (CTSanPhamModel) iCTSanPhamService.getCTSPByMa(qr.idctsp);
         System.out.println(qr.idctsp);
         String tensp = loadCTSP.getSp().getTen();
         float dongia = loadCTSP.getGiaBan();
@@ -840,32 +841,48 @@ public class BanHangJpanel extends javax.swing.JPanel {
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
         ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDon();
 
-        ArrayList<KhachHangModel> listKH = iKhachHangService.getAllKH();
-        KhachHang kh = new KhachHang();
-        for (KhachHangModel x : listKH) {
-            if (x.getSdt() != null && x.getSdt().equals(txtSDT.getText())) {
-                kh.setId(x.getId());
-                kh.setMaKH(x.getMaKH());
-                kh.setHoTen(x.getHoTen());
-                kh.setSdt(x.getSdt());
-            }
-        }
-        if (txtSDT.getText().trim().isEmpty()) {
-            kh.setId(iKhachHangService.getTimKH("0000000000").get(0).getId());
-            kh.setHoTen("Khách lẻ");
-            kh.setMaKH("KH9999");
+//        ArrayList<KhachHangModel> listKH = iKhachHangService.getAllKH();
+//        KhachHang kh = new KhachHang();
+//        for (KhachHangModel x : listKH) {
+//            if (x.getSdt() != null && x.getSdt().equals(txtSDT.getText())) {
+//                kh.setId(x.getId());
+//                kh.setMaKH(x.getMaKH());
+//                kh.setHoTen(x.getHoTen());
+//                kh.setSdt(x.getSdt());
+//            }
+//        }
+//        if (txtSDT.getText().trim().isEmpty()) {
+//            kh.setId(iKhachHangService.getTimKH("0000000000").get(0).getId());
+//            kh.setHoTen("Khách lẻ");
+//            kh.setMaKH("KH9999");
+//
+//        }
+//        KhachHangModel khMD = iKhachHangService.getTimKH(txtSDT.getText()).get(0);
+//        KhachHang kh = new KhachHang();
+//        kh.setId(khMD.getId());
+//        kh.setMaKH(khMD.getMaKH());
+//        kh.setHoTen(khMD.getHoTen());
+//        kh.setSdt(khMD.getSdt());
 
-        }
         int soHD = listHD.size() + 1;
         String maHD = "HD" + soHD;
         NhanVienModel nv = view.Login.nv;
-        NhanVien nvNew = new NhanVien();
-        nvNew.setId(nv.getId());
-        nvNew.setHoTen(nv.getHoTen());
-        nvNew.setMa(nv.getMa());
+        NhanVien nvNew = new NhanVien(nv.getId(), nv.getMa(), nv.getHoTen());
+//        nvNew.setId(nv.getId());
+//        nvNew.setHoTen(nv.getHoTen());
+//        nvNew.setMa(nv.getMa());
+//        HoaDonModel hd = new HoaDonModel();
+//        hd.setNv(nvNew);
+//        hd.setKh(kh);
+//        hd.setMa(maHD);
+//        hd.setTrangThai(0);
+//        hd.setCp(null);
+//        hd.setThanhTien(0);
+//        hd.setHinhThucThanhToan(0);
+//        System.out.println(kh);
         HoaDonModel hd = new HoaDonModel();
         hd.setNv(nvNew);
-        hd.setKh(kh);
+        hd.setKh(null);
         hd.setMa(maHD);
         hd.setTrangThai(0);
         hd.setCp(null);
@@ -968,7 +985,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
     private void txtSDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSDTActionPerformed
-    
+
     }//GEN-LAST:event_txtSDTActionPerformed
 
     private void cbbTrangThaiHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTrangThaiHoaDonActionPerformed
@@ -1010,17 +1027,34 @@ public class BanHangJpanel extends javax.swing.JPanel {
     private void btnKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKHActionPerformed
         KhachHang_BanHang k1 = new KhachHang_BanHang();
         k1.setVisible(true);
-  
+
 
     }//GEN-LAST:event_btnKHActionPerformed
 
     private void btnThayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThayActionPerformed
         KhachHang_BanHang b2 = new KhachHang_BanHang();
- 
-     
-                 txtTenKH.setText(KhachHang_BanHang.k111.getHoTen()); 
-      txtSDT.setText(KhachHang_BanHang.k111.getSdt());
-   
+        txtTenKH.setText(KhachHang_BanHang.k111.getHoTen());
+        txtSDT.setText(KhachHang_BanHang.k111.getSdt());
+        int row= tblHoaDon.getSelectedRow();
+        String maHD = tblHoaDon.getValueAt(row, 0).toString();
+        if(row<0){
+            JOptionPane.showMessageDialog(this ,"chon hoa don ");
+            return;
+        }
+        KhachHangModel KH = iKhachHangService.getTimKH(KhachHang_BanHang.k111.getSdt());
+        System.out.println(KhachHang_BanHang.k111.getSdt());
+        KhachHang khNew = new KhachHang();
+        khNew.setHoTen(KH.getHoTen());
+        HoaDonModel hdNew = new HoaDonModel();
+        hdNew.setKh(khNew);
+        hdNew.setMa(maHD);
+        if(iHoaDonService.upadteHD(hdNew)!=null){
+            JOptionPane.showMessageDialog(this, "Them thanh cong");
+            loadHD();
+        } else {
+            JOptionPane.showMessageDialog(this, "Them that bai");
+        }
+
     }//GEN-LAST:event_btnThayActionPerformed
 
 
