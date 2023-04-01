@@ -5,6 +5,17 @@
 package view;
 
 import DomainModels.CTSanPham;
+import DomainModels.HoaDon;
+import Service.CTSanPhamService;
+import Service.HoaDonChiTietService;
+import Service.HoaDonService;
+import Service.IMEIService;
+import Service.Interface.IHoaDonChiTietService;
+import Service.Interface.IIMEIService;
+import ViewModel.CTSanPhamModel;
+import ViewModel.HoaDonChiTietModel;
+import ViewModel.HoaDonModel;
+import ViewModel.IMEIModel;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamResolution;
@@ -17,11 +28,15 @@ import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import responsitory.CTSanPhamResponsitory;
+import view.ThanhPhan.BanHangJpanel;
 
 /**
  *
@@ -33,15 +48,34 @@ public class QuetQR extends javax.swing.JFrame implements Runnable, ThreadFactor
         private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
     public static CTSanPham ctsp;
-    CTSanPhamResponsitory ctspr=new CTSanPhamResponsitory();
-    public String idctsp = "";
+      public String idctsp = "";
+       HoaDonChiTietService hoaDonChiTieservice = new HoaDonChiTietService();
+    CTSanPhamResponsitory ctspr = new CTSanPhamResponsitory();
+        private IIMEIService iIMEIService = new IMEIService();
+            private IHoaDonChiTietService iHoaDonChiTietService = new HoaDonChiTietService();
+
+    JTable tblGioHang;
+    JTable tblHoaDon;
+    BanHangJpanel banHangjp;
+    private final HoaDonService hoaDonService;
+    private final CTSanPhamService chiTietSanPhamService;
     /**
      * Creates new form NewJFrame
      */
-    public QuetQR() {
+    public QuetQR(JTable tblGioHang, JTable tblHoaDon, BanHangJpanel banhangjp) {
         initComponents();
         initWebcam();
         setLocationRelativeTo(this);
+            ctsp = new CTSanPham();
+        this.tblGioHang = tblGioHang;
+        this.tblHoaDon = tblHoaDon;
+        this.banHangjp = banhangjp;
+        chiTietSanPhamService = new CTSanPhamService();
+        hoaDonService = new HoaDonService();
+    }
+
+    private QuetQR() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**
@@ -90,6 +124,10 @@ public class QuetQR extends javax.swing.JFrame implements Runnable, ThreadFactor
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(QuetQR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -155,9 +193,92 @@ public class QuetQR extends javax.swing.JFrame implements Runnable, ThreadFactor
                 txt.setText(result.getText());
                 ctsp=ctspr.quetQR(result.getText());
                 if(ctsp!=null & ctsp.getMaQR()!=null){
-//                    JOptionPane.showConfirmDialog(this, "Đã tìm thấy sản phẩm "+ ctsp.getSp().getTen()+ ", size "+ctsp.getDl().getSoDungLuong()+", màu "+ctsp.getMs().getTen()+", cao "+"\n Bạn có muốn thêm sản phẩm này vào giỏ hàng không?");
+                   JOptionPane.showConfirmDialog(this, "Đã tìm thấy sản phẩm "+ ctsp.getSp().getTen()+ ", size "+ctsp.getDl().getSoDungLuong()+", màu "+ctsp.getMs().getTen()+", cao "+"\n Bạn có muốn thêm sản phẩm này vào giỏ hàng không?");
                     idctsp = result.getText();
-                  System.out.println(idctsp); 
+                    
+                    
+                     
+        ArrayList<HoaDonChiTietModel> listHDCT = hoaDonChiTieservice.getAllHoaDonCT();
+        int indexHD = tblHoaDon.getSelectedRow();
+        if (indexHD < 0) {
+            JOptionPane.showMessageDialog(this, "Moi ban chon don hang");
+            return;
+        }
+        String maHD = tblHoaDon.getValueAt(indexHD, 0).toString();
+        // Lấy ID Hóa Đơn
+        HoaDon hd = new HoaDon();
+        ArrayList<HoaDonModel> listHD = hoaDonService.getAllHoaDon();
+        for (HoaDonModel h : listHD) {
+            if (h.getMa() != null && h.getMa().equals(maHD)) {
+                hd.setId(h.getId());
+                
+            }
+        }
+        System.out.println("ID Hóa đơn: " + hd.getId());
+        // Check số lượng tồn
+ 
+        // Lấy Id CTSP
+    
+        CTSanPham c = new CTSanPham();
+        ArrayList<CTSanPhamModel> listCTSP = chiTietSanPhamService.getAllCTSanPham();
+        for (CTSanPhamModel x : listCTSP) {
+            if (x.getMa() != null && x.getMa().equals(ctsp.getMa())) {
+                c.setId(x.getId());
+            }
+        }
+        System.out.println("ID Chi tiết sản phẩm: " + c.getId());
+        // list imei được chọn từ ctsp còn tồn
+        ArrayList<IMEIModel> listIMEI = iIMEIService.selectSL(c.getId());
+        IMEIModel imei = new IMEIModel();
+        // nhập vào imei
+        String maIMEI = (String) JOptionPane.showInputDialog(this, "Mời bạn chọn mã IMEI", "Lựa chọn", JOptionPane.INFORMATION_MESSAGE, null, null, "Mã IMEI");
+        System.out.println("Mã vừa nhập :" + maIMEI);
+        String ghiChu = "";
+        String maIM = maIMEI;
+        int dem = 0;
+        // kiểm tra imei uvằ nhập vào
+        for (IMEIModel i : listIMEI) {
+            System.out.println("Mã imei trong list" + i.getMa());
+            if (i.getMa() != null && i.getMa().equals(maIMEI)) {
+                ghiChu = i.getGhiChu();
+                List<String> listS = tachChuoi(i.getGhiChu());
+                if (listS != null) {
+                    for (String st : listS) {
+                        if (maHD.equals(st)) {
+                            JOptionPane.showMessageDialog(this, "IMEI đã tồn tại trong đơn hàng");
+                            return;
+                        } else {
+                            dem++;
+                            imei.setGhiChu(i.getGhiChu() + " " + maHD);
+                        }
+                    }
+                } else {
+                    dem++;
+                    imei.setGhiChu(maHD);
+                }
+                imei.setMa(i.getMa());
+                imei.setId(i.getId());
+            }
+        }
+        if (dem == 0) {
+            JOptionPane.showMessageDialog(this, "Sai mã IMEI hoặc mã imei không tồn tại");
+            return;
+        }
+
+        HoaDonChiTietModel hdct = new HoaDonChiTietModel();
+        CTSanPham cTSanPham=new CTSanPham();
+        hdct.setSl(1);
+        hdct.setIdctsp(c);
+        hdct.setIdhd(hd);
+        hdct.setDongia(ctsp.getGiaBan());
+        hdct.setThanhTien(Float.valueOf(1*ctsp.getGiaBan()));
+        if (hdct == null) {
+            return;
+        }
+
+        iHoaDonChiTietService.insertHDCT(hdct);
+        iIMEIService.updateIMEI(imei);
+        banHangjp.loadGioHang1(hd.getId());
                 }
 
             }
@@ -165,6 +286,17 @@ public class QuetQR extends javax.swing.JFrame implements Runnable, ThreadFactor
         } while (true);
     }
 //bye
+    private List tachChuoi(String s) {
+        List<String> list = new ArrayList<>();
+        String[] mang = s.split(" ");
+        if (mang == null) {
+            return null;
+        }
+        for (String x : mang) {
+            list.add(x);
+        }
+        return list;
+    }
     @Override
     public Thread newThread(Runnable r) {
          Thread t = new Thread(r, "My Thread");
