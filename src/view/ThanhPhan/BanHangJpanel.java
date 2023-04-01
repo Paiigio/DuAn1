@@ -90,11 +90,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
                     Thread.sleep(100);
                     loadSP();
                     loadHD();
-//                    loadCBBSP();
-//                    loadCBBMS();
-//                    loadCBBDL();
-//                    loadCBBTKDL();
-//                    loadCBBTKMS();
+
                 } catch (InterruptedException ex) {
                     Logger.getLogger(ThongKeJpanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -103,19 +99,20 @@ public class BanHangJpanel extends javax.swing.JPanel {
         }).start();
     }
 
-private void loadHD() {
+    private void loadHD() {
         ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDon();
         dtmHD.setRowCount(0);
         for (HoaDonModel x : listHD) {
             dtmHD.addRow(new Object[]{
                 x.getMa(),
                 x.getNv().getHoTen(),
-                x.getKh()==null?"Khach le":x.getKh().getHoTen(),
+                x.getKh() == null ? "Khach le" : x.getKh().getHoTen(),
                 x.getNgayTao(),
                 x.getTrangThai() == 0 ? "Chưa thanh toán" : "Đã thanh toán"
             });
         }
     }
+
     private void loadGioHang() {
         int index = tblHoaDon.getSelectedRow();
         dtmGH.setRowCount(0);
@@ -174,7 +171,8 @@ private void loadHD() {
 //
 //                }
     }
-      public void loadGioHang1(String id) {
+
+    public void loadGioHang1(String id) {
         int index = tblHoaDon.getSelectedRow();
         dtmGH.setRowCount(0);
         String maHD = tblHoaDon.getValueAt(index, 0).toString();
@@ -805,8 +803,8 @@ private void loadHD() {
     }//GEN-LAST:event_btnActionPerformed
 
     private void btnQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQRActionPerformed
-       new QuetQR(tblGioHang, tblHoaDon, this).setVisible(true);
-    
+        new QuetQR(tblGioHang, tblHoaDon, this).setVisible(true);
+
     }//GEN-LAST:event_btnQRActionPerformed
 
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
@@ -847,7 +845,7 @@ private void loadHD() {
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
-     ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDon();
+        ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDon();
 
 //        ArrayList<KhachHangModel> listKH = iKhachHangService.getAllKH();
 //        KhachHang kh = new KhachHang();
@@ -871,7 +869,6 @@ private void loadHD() {
 //        kh.setMaKH(khMD.getMaKH());
 //        kh.setHoTen(khMD.getHoTen());
 //        kh.setSdt(khMD.getSdt());
-
         int soHD = listHD.size() + 1;
         String maHD = "HD" + soHD;
         NhanVienModel nv = view.Login.nv;
@@ -993,7 +990,7 @@ private void loadHD() {
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
     private void txtSDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSDTActionPerformed
-    
+
     }//GEN-LAST:event_txtSDTActionPerformed
 
     private void cbbTrangThaiHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTrangThaiHoaDonActionPerformed
@@ -1033,29 +1030,24 @@ private void loadHD() {
     }//GEN-LAST:event_btnXoaCTSPActionPerformed
 
     private void btnKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKHActionPerformed
-//        KhachHang_BanHang k1 = new KhachHang_BanHang();
-//        k1.setVisible(true);
-  
+        KhachHang_BanHang k1 = new KhachHang_BanHang();
+        k1.setVisible(true);
+
 
     }//GEN-LAST:event_btnKHActionPerformed
 
     private void btnThayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThayActionPerformed
         KhachHang_BanHang b2 = new KhachHang_BanHang();
- 
-     
-                 txtTenKH.setText(KhachHang_BanHang.k111.getHoTen()); 
-      txtSDT.setText(KhachHang_BanHang.k111.getSdt());
-   
+
+        txtTenKH.setText(KhachHang_BanHang.k111.getHoTen());
+        txtSDT.setText(KhachHang_BanHang.k111.getSdt());
+
     }//GEN-LAST:event_btnThayActionPerformed
 
     private void btnKHMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKHMousePressed
-        
-           KhachHang_BanHang k1 = new KhachHang_BanHang();
-        k1.setVisible(true);
-                        txtTenKH.setText(KhachHang_BanHang.k111.getHoTen()); 
-      txtSDT.setText(KhachHang_BanHang.k111.getSdt());
-   
-  
+
+
+
     }//GEN-LAST:event_btnKHMousePressed
 
 
