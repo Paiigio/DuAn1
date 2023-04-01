@@ -197,6 +197,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="X&#xf3;a "/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaCTSPActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnQR1">
               <Properties>

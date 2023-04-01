@@ -41,7 +41,6 @@ public class HoaDon {
     }
 
 
-
     public String getId() {
         return id;
     }
