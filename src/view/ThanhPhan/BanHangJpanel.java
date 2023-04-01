@@ -6,7 +6,6 @@ package view.ThanhPhan;
 
 import DomainModels.CTSanPham;
 import DomainModels.HoaDon;
-import DomainModels.IMEI;
 import DomainModels.KhachHang;
 import DomainModels.NhanVien;
 import DomainModels.SanPham;
@@ -256,16 +255,6 @@ public class BanHangJpanel extends javax.swing.JPanel {
 
         btnXoaCTSP.setText("Xóa ");
         btnXoaCTSP.addActionListener(new java.awt.event.ActionListener() {
-<<<<<<< HEAD
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaCTSPActionPerformed(evt);
-            }
-        });
-
-        btnQR1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/qr-scan.png"))); // NOI18N
-        btnQR1.addActionListener(new java.awt.event.ActionListener() {
-=======
->>>>>>> origin/master
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoaCTSPActionPerformed(evt);
             }
@@ -1032,18 +1021,6 @@ public class BanHangJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cbbTrangThaiHoaDonActionPerformed
 
     private void btnXoaCTSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaCTSPActionPerformed
-<<<<<<< HEAD
-     int indexCTSP = tblGioHang.getSelectedRow();
-     int indexHD = tblHoaDon.getSelectedRow();
-     String maHD = tblHoaDon.getValueAt(indexHD, 0).toString();
-     String imei = tblGioHang.getValueAt(indexCTSP, 5).toString();
-     IMEIModel i = new IMEIModel();
-
-     
-     
-    }//GEN-LAST:event_btnXoaCTSPActionPerformed
-
-=======
 
     }//GEN-LAST:event_btnXoaCTSPActionPerformed
 
@@ -1080,7 +1057,6 @@ public class BanHangJpanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnThayActionPerformed
 
->>>>>>> origin/master
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JBanHang;
