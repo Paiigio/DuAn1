@@ -1,6 +1,5 @@
 package view;
 
-import Mail.ResetPass;
 import Service.Interface.INhanVienService;
 import Service.NhanVienService;
 import ViewModel.NhanVienModel;
@@ -10,7 +9,6 @@ import javax.swing.JOptionPane;
 public class Login extends javax.swing.JFrame {
 
     private INhanVienService nvs = new NhanVienService();
-    private ResetPass reset = new ResetPass();
     public static NhanVienModel nv = null;
     public String userLogin = "";
 
@@ -22,8 +20,10 @@ public class Login extends javax.swing.JFrame {
         setTitle("Đăng nhập");
         lab3.setVisible(false);
         lab4.setVisible(false);
-        btnReset.setVisible(false);
-
+        btnSignup.setVisible(false);
+        txtEmail.setVisible(false);
+        speEmail.setVisible(false);
+        email.setVisible(false);
         this.setLocationRelativeTo(this);
 
     }
@@ -68,9 +68,12 @@ public class Login extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         lab3 = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JPasswordField();
+        speEmail = new javax.swing.JSeparator();
+        email = new javax.swing.JLabel();
         lab4 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        btnReset = new javax.swing.JButton();
+        btnSignup = new javax.swing.JButton();
         Panel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         txtUser = new javax.swing.JTextField();
@@ -106,19 +109,28 @@ public class Login extends javax.swing.JFrame {
 
         lab3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         lab3.setForeground(new java.awt.Color(255, 255, 255));
-        lab3.setText("Forgot Pass");
-        jPanel1.add(lab3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, 220, 50));
+        lab3.setText("Sign up");
+        jPanel1.add(lab3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, 150, 50));
+
+        txtEmail.setBackground(new java.awt.Color(51, 51, 51));
+        txtEmail.setForeground(new java.awt.Color(255, 255, 255));
+        txtEmail.setBorder(null);
+        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 340, 230, 30));
+        jPanel1.add(speEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 370, 230, 10));
+
+        email.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Lock.png"))); // NOI18N
+        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 350, 30, 20));
 
         lab4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Edit.png"))); // NOI18N
         jPanel1.add(lab4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 30, 20));
 
         jPanel6.setOpaque(false);
 
-        btnReset.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnReset.setText("Reset password");
-        btnReset.addActionListener(new java.awt.event.ActionListener() {
+        btnSignup.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnSignup.setText("Sign up");
+        btnSignup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnResetActionPerformed(evt);
+                btnSignupActionPerformed(evt);
             }
         });
 
@@ -127,12 +139,12 @@ public class Login extends javax.swing.JFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSignup, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnReset, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnSignup, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 420, 270, 50));
@@ -215,7 +227,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(Panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 420, 440));
 
         lab2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lab2.setText("Forgot Pass");
+        lab2.setText("          Sign up");
         lab2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lab2MousePressed(evt);
@@ -290,18 +302,15 @@ public class Login extends javax.swing.JFrame {
 
         lab3.setVisible(false);
         lab4.setVisible(false);
-        btnReset.setVisible(false);
+        btnSignup.setVisible(false);
         btnLogin.setVisible(true);
         lab7.setVisible(true);
         lab8.setVisible(true);
-        txtPass.setVisible(true);
-        jSeparator2.setVisible(true);
-        chkCheck.setVisible(true);
-        jLabel4.setVisible(true);
+        txtEmail.setVisible(false);
+        speEmail.setVisible(false);
+        email.setVisible(false);
         Lab1.setEnabled(false);
         lab2.setEnabled(true);
-        txtUser.setText("");
-        txtPass.setText("");
 
     }//GEN-LAST:event_Lab1MousePressed
 
@@ -312,14 +321,12 @@ public class Login extends javax.swing.JFrame {
         lab8.setVisible(false);
         lab3.setVisible(true);
         lab4.setVisible(true);
-        btnReset.setVisible(true);
-        txtPass.setVisible(false);
-        jSeparator2.setVisible(false);
-        chkCheck.setVisible(false);
-        jLabel4.setVisible(false);
+        btnSignup.setVisible(true);
+        txtEmail.setVisible(true);
+        speEmail.setVisible(true);
+        email.setVisible(true);
         lab2.setEnabled(false);
         Lab1.setEnabled(true);
-        txtUser.setText("");
 
     }//GEN-LAST:event_lab2MousePressed
 
@@ -332,25 +339,9 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_chkCheckActionPerformed
 
-    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-        String user = txtUser.getText();
-        if (user.trim().length() == 0) {
-            JOptionPane.showMessageDialog(this, "Không được để trống USER");
-            return;
-        }
-        ArrayList<NhanVienModel> list = nvs.getAllNV();
-        for (NhanVienModel x : list) {
-            if (x.getMa().equalsIgnoreCase(user)) {
-                reset.sendEmail(x.getEmail());
-                nvs.updatePass("IT18105", x.getMa());
-                JOptionPane.showMessageDialog(this, "Dùng mật khẩu vừa được gửi đến email " + x.getEmail() + " của bạn để đăng nhập.");
-                return;
-            } else {
-                JOptionPane.showMessageDialog(this, "User (mã nhân viên) không tồn tại hoặc đã hết hạn.");
-                
-            }
-        }
-    }//GEN-LAST:event_btnResetActionPerformed
+    private void btnSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupActionPerformed
+
+    }//GEN-LAST:event_btnSignupActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         ArrayList<NhanVienModel> list = nvs.getAllNV();
@@ -363,21 +354,21 @@ public class Login extends javax.swing.JFrame {
         for (NhanVienModel x : list) {
             if (x.getMa().equals(txtUser.getText()) && x.getMatKhau().equals(String.valueOf(txtPass.getPassword()))) {
                 nv = x;
-            }
-        }
-        if (nv.getTrangThai() == 1) {
-            JOptionPane.showMessageDialog(this, "Tài khoản hết hạn");
-            check = false;
-
-        } else {
-            check = true;
+                check = true;
+            } 
         }
 
         if (check) {
-            new Loading().setVisible(true);
+            if (nv.getTrangThai() == 1) {
+                JOptionPane.showMessageDialog(this, "Tài khoản hết hạn");
+                return;
 
-            this.setVisible(false);
+            } else {
 
+                new Loading().setVisible(true);
+
+                this.setVisible(false);
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Sai tên đăng nhập hoặc mật khẩu");
             return;
@@ -424,8 +415,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel Lab1;
     private javax.swing.JPanel Panel1;
     private javax.swing.JButton btnLogin;
-    private javax.swing.JButton btnReset;
+    private javax.swing.JButton btnSignup;
     private javax.swing.JCheckBox chkCheck;
+    private javax.swing.JLabel email;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -444,6 +436,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel lab4;
     private javax.swing.JLabel lab7;
     private javax.swing.JLabel lab8;
+    private javax.swing.JSeparator speEmail;
+    private javax.swing.JPasswordField txtEmail;
     private javax.swing.JPasswordField txtPass;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
