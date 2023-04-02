@@ -149,7 +149,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
                 list.get(i).getSp(),
                 list.get(i).getMs(),
                 list.get(i).getDl(),
-                list.get(i).getId(),
+                list.get(i).getMa(),
                 listIMEI.size(),
                 list.get(i).getHinhAnh(),
                 list.get(i).getNamBH(),
