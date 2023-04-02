@@ -8,7 +8,6 @@ import DomainModels.CTSanPham;
 import DomainModels.HoaDon;
 import DomainModels.KhachHang;
 import DomainModels.NhanVien;
-import DomainModels.SanPham;
 import Service.CTSanPhamService;
 import Service.HoaDonChiTietService;
 import Service.HoaDonService;
@@ -25,10 +24,8 @@ import ViewModel.HoaDonModel;
 import ViewModel.IMEIModel;
 import ViewModel.KhachHangModel;
 import ViewModel.NhanVienModel;
-import java.io.ObjectOutput;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,7 +48,6 @@ public class BanHangJpanel extends javax.swing.JPanel {
     private IHoaDonChiTietService iHoaDonChiTietService = new HoaDonChiTietService();
     private IIMEIService iIMEIService = new IMEIService();
     private IKhachHangService iKhachHangService = new KhachHangService();
-//    public KhachHangModel kh = new KhachHangModel();
 
     /**
      * Creates new form BanHangJpanel1
@@ -92,11 +88,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
                     Thread.sleep(100);
                     loadSP();
                     loadHD();
-//                    loadCBBSP();
-//                    loadCBBMS();
-//                    loadCBBDL();
-//                    loadCBBTKDL();
-//                    loadCBBTKMS();
+
                 } catch (InterruptedException ex) {
                     Logger.getLogger(ThongKeJpanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -141,16 +133,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
 
 
             // lấy ra những mã imei có mã sản phẩm đang có trong hóa đơn chi tiết
-//            ArrayList<IMEIModel> listI = iIMEIService.selectSL(hdct.getIdctsp().getId());
-//            for (IMEIModel x : listI) {
-//                if (x.getGhiChu() != null) {
-//                    List<String> listString = tachChuoi(x.getGhiChu());
-////                    System.out.println(listString);
-//                    for (String s : listString) {
-////                        System.out.println(s);
-//                        if (maHD.equals(s)) {
-//                            maIMEI = x.getMa();
-//
+
             dem++;
             dtmGH.addRow(new Object[]{
                 dem,
@@ -160,26 +143,10 @@ public class BanHangJpanel extends javax.swing.JPanel {
                 vn.format(hdct.getSl() * hdct.getDongia()),
                 hdct.getGhiChu()
             });
-//                        }
-//                    }
-//                }
-//            }
+
 
         }
 
-//                if (maHD.trim().equals(tblHoaDon.getValueAt(index, 0).toString())) {
-//                    dem++;
-//                    for (HoaDonChiTietModel hdct : listNEW) {
-//                        dtmGH.addRow(new Object[]{
-//                            dem,
-//                            hdct.getIdctsp().getSp().getTen() + " " + hdct.getIdctsp().getDl().getSoDungLuong() + " " + hdct.getIdctsp().getMs().getTen(),
-//                            vn.format(hdct.getDongia()),
-//                            hdct.getSl(),
-//                            vn.format(hdct.getSl() * hdct.getDongia()),
-//                            maIMEI
-//                        });
-//
-//                }
     }
 
     public void loadGioHang1(String id) {
@@ -200,17 +167,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
         NumberFormat vn = NumberFormat.getInstance(localeVN);
         // lấy ra hóa đơn chi tiết có trong hóa đơn và mã imei
         for (HoaDonChiTietModel hdct : listNEW) {
-            // lấy ra những mã imei có mã sản phẩm đang có trong hóa đơn chi tiết
-//            ArrayList<IMEIModel> listI = iIMEIService.selectSL(hdct.getIdctsp().getId());
-//            for (IMEIModel x : listI) {
-//                if (x.getGhiChu() != null) {
-//                    List<String> listString = tachChuoi(x.getGhiChu());
-////                    System.out.println(listString);
-//                    for (String s : listString) {
-////                        System.out.println(s);
-//                        if (maHD.equals(s)) {
-//                            maIMEI = x.getMa();
-//
+
             dem++;
             dtmGH.addRow(new Object[]{
                 dem,
@@ -220,25 +177,10 @@ public class BanHangJpanel extends javax.swing.JPanel {
                 vn.format(hdct.getSl() * hdct.getDongia()),
                 hdct.getGhiChu()
             });
-//                        }
-//                    }
-//                }
-//            }
+
         }
 
-//                if (maHD.trim().equals(tblHoaDon.getValueAt(index, 0).toString())) {
-//                    dem++;
-//                    for (HoaDonChiTietModel hdct : listNEW) {
-//                        dtmGH.addRow(new Object[]{
-//                            dem,
-//                            hdct.getIdctsp().getSp().getTen() + " " + hdct.getIdctsp().getDl().getSoDungLuong() + " " + hdct.getIdctsp().getMs().getTen(),
-//                            vn.format(hdct.getDongia()),
-//                            hdct.getSl(),
-//                            vn.format(hdct.getSl() * hdct.getDongia()),
-//                            maIMEI
-//                        });
-//
-//                }
+
     }
 
     /**
@@ -820,35 +762,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
         txtMaHD.setText(tblHoaDon.getValueAt(index, 0).toString());
         txtTenKH.setText(tblHoaDon.getValueAt(index, 2).toString());
         txtTenNV.setText(tblHoaDon.getValueAt(index, 1).toString());
-//        String maIMEI = "";
-//        String maHD = "";
-//        ArrayList<HoaDonChiTietModel> listHDCT = iHoaDonChiTietService.getAllHoaDonCT();
-//        Locale localeVN = new Locale("vi", "VN");
-//        NumberFormat vn = NumberFormat.getInstance(localeVN);
-//        for (int i = 0; i < listHDCT.size(); ++i) {
-//            ArrayList<IMEIModel> listI = iIMEIService.getAllIMEI();
-//            for (IMEIModel x : listI) {
-//                List<String> listString = tachChuoi(x.getGhiChu());
-//                for (String s : listString) {
-//                    System.out.println(s);
-//                    if (listHDCT.get(i).getIdhd().getMa() != null && listHDCT.get(i).getIdhd().getMa().equals(s)) {
-//                        maIMEI = x.getMa();
-//                        maHD = listHDCT.get(i).getIdhd().getMa();
-//                    }
-//                }
-//            }
-//            dtmGH.setRowCount(0);
-//            if (maHD.trim().equals(tblHoaDon.getValueAt(index, 0).toString())) {
-//                dtmGH.addRow(new Object[]{
-//                    i + 1,
-//                    listHDCT.get(i).getIdctsp().getSp().getTen() + " " + listHDCT.get(i).getIdctsp().getDl().getSoDungLuong() + " " + listHDCT.get(i).getIdctsp().getMs().getTen(),
-//                    vn.format(listHDCT.get(i).getDongia()),
-//                    listHDCT.get(i).getSl(),
-//                    vn.format(listHDCT.get(i).getDongia() * listHDCT.get(i).getSl()),
-//                    maIMEI
-//                });
-//            }
-//        }
+
         loadGioHang();
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
