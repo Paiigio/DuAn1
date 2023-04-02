@@ -185,6 +185,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this,"Ngày bắt đầu phải trước ngày kết thúc" );
             return null;
         }
+     
         return new CTKhuyenMaiModel(null, ma, ten, ngayBD, ngayKT, hinhthuc, null, null, trangThai);
     }
 
@@ -616,6 +617,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         if (nv == null) {
             return;
         }
+             
         String ma = tblBang.getValueAt(row, 0).toString();
 
         nv.setId(ma);
