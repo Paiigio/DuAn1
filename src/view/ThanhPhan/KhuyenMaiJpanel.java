@@ -449,6 +449,9 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
             }
         });
         jScrollPane3.setViewportView(tblBang);
+        if (tblBang.getColumnModel().getColumnCount() > 0) {
+            tblBang.getColumnModel().getColumn(0).setMaxWidth(75);
+        }
 
         jLabel58.setText("Tìm sản phẩm");
 

@@ -340,7 +340,7 @@ public class QL_DT extends javax.swing.JFrame {
         JKhachHang.setLayout(JKhachHangLayout);
         JKhachHangLayout.setHorizontalGroup(
             JKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2064, Short.MAX_VALUE)
+            .addGap(0, 1808, Short.MAX_VALUE)
         );
         JKhachHangLayout.setVerticalGroup(
             JKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -355,7 +355,7 @@ public class QL_DT extends javax.swing.JFrame {
         JNhanVien.setLayout(JNhanVienLayout);
         JNhanVienLayout.setHorizontalGroup(
             JNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2064, Short.MAX_VALUE)
+            .addGap(0, 1914, Short.MAX_VALUE)
         );
         JNhanVienLayout.setVerticalGroup(
             JNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -371,7 +371,7 @@ public class QL_DT extends javax.swing.JFrame {
         JThongKe.setLayout(JThongKeLayout);
         JThongKeLayout.setHorizontalGroup(
             JThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2064, Short.MAX_VALUE)
+            .addGap(0, 1914, Short.MAX_VALUE)
         );
         JThongKeLayout.setVerticalGroup(
             JThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -388,11 +388,11 @@ public class QL_DT extends javax.swing.JFrame {
         JBanHang.setLayout(JBanHangLayout);
         JBanHangLayout.setHorizontalGroup(
             JBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2064, Short.MAX_VALUE)
+            .addGap(0, 1914, Short.MAX_VALUE)
         );
         JBanHangLayout.setVerticalGroup(
             JBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 783, Short.MAX_VALUE)
+            .addGap(0, 694, Short.MAX_VALUE)
         );
 
         panelCardGoc.add(JBanHang, "cardBH");
@@ -404,7 +404,7 @@ public class QL_DT extends javax.swing.JFrame {
         JKhuyenMai.setLayout(JKhuyenMaiLayout);
         JKhuyenMaiLayout.setHorizontalGroup(
             JKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2064, Short.MAX_VALUE)
+            .addGap(0, 1914, Short.MAX_VALUE)
         );
         JKhuyenMaiLayout.setVerticalGroup(
             JKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -420,7 +420,7 @@ public class QL_DT extends javax.swing.JFrame {
         JHoaDon.setLayout(JHoaDonLayout);
         JHoaDonLayout.setHorizontalGroup(
             JHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2064, Short.MAX_VALUE)
+            .addGap(0, 1914, Short.MAX_VALUE)
         );
         JHoaDonLayout.setVerticalGroup(
             JHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -436,7 +436,7 @@ public class QL_DT extends javax.swing.JFrame {
         JSanPham.setLayout(JSanPhamLayout);
         JSanPhamLayout.setHorizontalGroup(
             JSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2064, Short.MAX_VALUE)
+            .addGap(0, 1914, Short.MAX_VALUE)
         );
         JSanPhamLayout.setVerticalGroup(
             JSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -458,7 +458,7 @@ public class QL_DT extends javax.swing.JFrame {
             .addGroup(TrangChuLayout.createSequentialGroup()
                 .addGap(274, 274, 274)
                 .addComponent(anhTrangchu)
-                .addContainerGap(990, Short.MAX_VALUE))
+                .addContainerGap(840, Short.MAX_VALUE))
         );
         TrangChuLayout.setVerticalGroup(
             TrangChuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -498,9 +498,7 @@ public class QL_DT extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(Tong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(Tong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
