@@ -102,19 +102,26 @@ public class HoaDonResponsitory {
     public HoaDon insertHD(HoaDon nv) {
         String sql = "INSERT dbo.HOADON(IDHD,IDKH,IDNV,MAHD,THANHTIEN,HINHTHUCTT,NGAYTT,TRANGTHAI,NGAYTAO,NGAYSUA)"
                 + "VALUES(NEWID(),?,?,?,?,?,?,?, GETDATE(),NULL)";
-        JDBC_Helper.excuteUpdate(sql,nv.getKh().getId(), nv.getNv().getId(), nv.getMa(), nv.getThanhTien(),
+        JDBC_Helper.excuteUpdate(sql, nv.getKh().getId(), nv.getNv().getId(), nv.getMa(), nv.getThanhTien(),
                 nv.getHinhThucThanhToan(), nv.getNgayThanhToan(), nv.getTrangThai());
         return nv;
     }
+
     public HoaDon upadteHD(HoaDon nv) {
         String sql = "UPDATE dbo.HOADON SET IDKH =?, NGAYSUA=GETDATE() WHERE MAHD=?";
-        JDBC_Helper.excuteUpdate(sql,nv.getKh().getId(),nv.getMa() );
+        JDBC_Helper.excuteUpdate(sql, nv.getKh().getId(), nv.getMa());
         return nv;
     }
-   
+
     public HoaDon updateTinhTrangHD(HoaDon nv) {
         String sql = "UPDATE HOADON SET TINHTRANG = ? WHERE ID = ?";
         JDBC_Helper.excuteUpdate(sql, nv.getTrangThai(), nv.getId());
+        return nv;
+    }
+
+    public HoaDon upadteHD_ThanhToan(HoaDon nv) {
+        String sql = "UPDATE HOADON SET IDCP = ? ,THANHTIEN=?,HINHTHUCTT=? , TRANGTHAI = ?, NGAYTT=GETDATE() WHERE MAHD=?";
+        JDBC_Helper.excuteUpdate(sql, nv.getCp().getId(), nv.getThanhTien(), nv.getHinhThucThanhToan(),nv.getTrangThai(), nv.getMa());
         return nv;
     }
 //

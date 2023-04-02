@@ -52,6 +52,7 @@ public class IMEIResponsitory {
         }
         return null;
     }
+
     public ArrayList<IMEI> getIMEIByNote(String note) {
         ArrayList<IMEI> list = new ArrayList<>();
         String sql = "SELECT * FROM IMEI WHERE ghiChu=?";
@@ -67,9 +68,10 @@ public class IMEIResponsitory {
         }
         return list;
     }
+
     public IMEI insertIMEI(IMEI i) {
         String sql = "INSERT INTO IMEI VALUES(NEWID(),?,GETDATE(),?,?,?)";
-        JDBC_Helper.excuteUpdate(sql, i.getMa(), i.getGhiChu(), i.getTrangThai(),i.getCtsp().getId());
+        JDBC_Helper.excuteUpdate(sql, i.getMa(), i.getGhiChu(), i.getTrangThai(), i.getCtsp().getId());
         return i;
     }
 
@@ -79,15 +81,22 @@ public class IMEIResponsitory {
         return i;
     }
 
+    public Integer updateIMEI_ThanhToan(String ma) {
+        String sql = "UPDATE dbo.IMEI SET TRANGTHAI=1 WHERE MAIMEI=?";
+        int row = JDBC_Helper.excuteUpdate(sql, ma);
+        return row;
+    }
+
     public Integer deleteIMEI(String ma) {
         String sql = "DELETE dbo.IMEI WHERE MAIMEI =?";
         int row = JDBC_Helper.excuteUpdate(sql, ma);
         return row;
     }
+
     public ArrayList<IMEI> selectSL(String id) {
         ArrayList<IMEI> list = new ArrayList<>();
         String sql = "SELECT * FROM dbo.IMEI WHERE IDCTSP=? And TrangThai = 0";
-        ResultSet rs = JDBC_Helper.excuteQuery(sql,id);
+        ResultSet rs = JDBC_Helper.excuteQuery(sql, id);
         try {
             while (rs.next()) {
                 CTSanPham ctsp = c.getCTSanPhamByID(rs.getString(6));
@@ -99,5 +108,20 @@ public class IMEIResponsitory {
             ex.printStackTrace();
         }
         return list;
+    }
+
+    public IMEI getTrangThaiByIMEI(String imei) {
+
+        String sql = "SELECT * FROM IMEI WHERE MAIMEI=?";
+        ResultSet rs = JDBC_Helper.excuteQuery(sql, imei);
+        try {
+            while (rs.next()) {
+                CTSanPham ctsp = c.getCTSanPhamByID(rs.getString(6));
+                return new IMEI(rs.getString(1), ctsp, rs.getString(3), rs.getDate(3), rs.getString(4), rs.getInt(5));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(IMEIResponsitory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }
