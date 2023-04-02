@@ -39,8 +39,8 @@ public class HoaDonChiTietResponsitory {
     }
 
     public HoaDonChiTiet insertHDCT(HoaDonChiTiet hdct) {
-        String sql = "INSERT dbo.HOADONCHITIET(IDHD,IDCTSP,DONGIA,SOLUONG,NGAYTAO,NGAYSUA,GHICHU) VALUES(?,?,?,?,GETDATE(),null,?)";
-        JDBC_Helper.excuteUpdate(sql, hdct.getIdhd().getId(), hdct.getIdctsp().getId(), hdct.getDongia(), hdct.getSl(),hdct.getGhiChu());
+        String sql = "INSERT dbo.HOADONCHITIET(IDHD,IDCTSP,DONGIA,SOLUONG,NGAYTAO,NGAYSUA,GHICHU,THANHTIEN) VALUES(?,?,?,?,GETDATE(),null,?,?)";
+        JDBC_Helper.excuteUpdate(sql, hdct.getIdhd().getId(), hdct.getIdctsp().getId(), hdct.getDongia(), hdct.getSl(),hdct.getGhiChu(),hdct.getThanhTien());
         return hdct;
     }
 
@@ -72,4 +72,10 @@ public class HoaDonChiTietResponsitory {
         }
         return list;
     }
+    public Integer delete(String ghiChu , String idHD) {
+        String sql = "DELETE HOADONCHITIET WHERE GHICHU =? AND IDHD = ?";
+        int row = JDBC_Helper.excuteUpdate(sql, ghiChu , idHD);
+        return row;
+    }
+    
 }

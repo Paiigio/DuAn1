@@ -17,7 +17,10 @@ public interface IHoaDonService {
     public ArrayList<HoaDonModel> getAllHoaDon();
 
     public HoaDonModel insertHD(HoaDonModel nv);
-        public HoaDonModel upadteHD(HoaDonModel nv);
+
+    public HoaDonModel upadteHD(HoaDonModel nv);
+
+    public HoaDonModel upadteHD_ThanhToan(HoaDonModel nv);
 
     public HoaDonModel updateTinhTrangHD(HoaDonModel nv);
 

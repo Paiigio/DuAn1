@@ -78,7 +78,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(100);
                     loadSP();
                     loadTable();
 
@@ -650,6 +650,9 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         String ma = tblBang.getValueAt(row, 0).toString();
 
         nv.setId(ma);
+        if (JOptionPane.showConfirmDialog(null, "Bạn có muốn sửa không?","Thông báo",JOptionPane.YES_NO_OPTION)!=JOptionPane.YES_OPTION){
+            return;
+        }
         if (ctkm.updateCTKM(nv) != null) {
             JOptionPane.showMessageDialog(null, "Sửa thành công");
         } else {
