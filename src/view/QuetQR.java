@@ -234,6 +234,8 @@ public class QuetQR extends javax.swing.JFrame implements Runnable, ThreadFactor
 //            JOptionPane.showMessageDialog(this, "Số lượng tồn không đủ");
 //            return;
 //        }
+        
+    
         // Lấy Id CTSP
       
         CTSanPham c = new CTSanPham();
@@ -246,6 +248,12 @@ public class QuetQR extends javax.swing.JFrame implements Runnable, ThreadFactor
         int dem = 0;
         String ghiChu = "";
         ArrayList<IMEIModel> listIMEINEW = iIMEIService.selectSL(c.getId());
+          for (IMEIModel ss : listIMEINEW){
+              if(Integer.valueOf(listIMEINEW.size())<0){
+                   JOptionPane.showMessageDialog(this, "Số lượng tồn không đủ");
+         return;
+              }
+          }
         // list imei được chọn từ ctsp còn tồn
         ArrayList<HoaDonChiTietModel> listHDCTNEW = iHoaDonChiTietService.getAllHoaDonCTBYIDHD(hd.getId());
         // nhập vào imei
