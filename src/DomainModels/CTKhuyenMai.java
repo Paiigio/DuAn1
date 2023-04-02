@@ -19,11 +19,12 @@ public class CTKhuyenMai {
     private String hinhThuc;
     private Date ngayTao;
     private Date ngaySua;
+    private int trangThai;
 
     public CTKhuyenMai() {
     }
 
-    public CTKhuyenMai(String id, String ma, String ten, Date thoiGianBatDau, Date thoiGianKetThuc, String hinhThuc, Date ngayTao, Date ngaySua) {
+    public CTKhuyenMai(String id, String ma, String ten, Date thoiGianBatDau, Date thoiGianKetThuc, String hinhThuc, Date ngayTao, Date ngaySua, int trangThai) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
@@ -32,6 +33,7 @@ public class CTKhuyenMai {
         this.hinhThuc = hinhThuc;
         this.ngayTao = ngayTao;
         this.ngaySua = ngaySua;
+        this.trangThai = trangThai;
     }
 
   
@@ -99,6 +101,14 @@ public class CTKhuyenMai {
 
     public void setNgaySua(Date ngaySua) {
         this.ngaySua = ngaySua;
+    }
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
     }
 
     @Override

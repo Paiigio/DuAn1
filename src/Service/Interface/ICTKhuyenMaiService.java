@@ -13,8 +13,14 @@ import java.util.ArrayList;
  * @author duong
  */
 public interface ICTKhuyenMaiService {
-     public ArrayList<CTKhuyenMaiModel> getAllCTKM();
-     public CTKhuyenMaiModel insertCTKM(CTKhuyenMaiModel cv);
-     public CTKhuyenMaiModel updateCTKM(CTKhuyenMaiModel cv);
-      public ArrayList<CTKhuyenMaiModel> getTimTen(String ten);
+
+    public ArrayList<CTKhuyenMaiModel> getAllCTKM();
+
+    public CTKhuyenMaiModel insertCTKM(CTKhuyenMaiModel cv);
+
+    public CTKhuyenMaiModel updateCTKM(CTKhuyenMaiModel cv);
+    
+    public CTKhuyenMaiModel updateTrangThai(CTKhuyenMaiModel cv);
+
+    public ArrayList<CTKhuyenMaiModel> getTimTen(String ten);
 }

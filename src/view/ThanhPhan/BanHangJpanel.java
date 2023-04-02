@@ -62,8 +62,6 @@ public class BanHangJpanel extends javax.swing.JPanel {
         dtmSP = (DefaultTableModel) tblSanPham.getModel();
         dtmHD = (DefaultTableModel) tblHoaDon.getModel();
         dtmGH = (DefaultTableModel) tblGioHang.getModel();
-        btnThay.setEnabled(false);
-        btnKH.setEnabled(false);
         load();
 
     }
@@ -92,11 +90,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
                     Thread.sleep(100);
                     loadSP();
                     loadHD();
-//                    loadCBBSP();
-//                    loadCBBMS();
-//                    loadCBBDL();
-//                    loadCBBTKDL();
-//                    loadCBBTKMS();
+
                 } catch (InterruptedException ex) {
                     Logger.getLogger(ThongKeJpanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -112,7 +106,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
             dtmHD.addRow(new Object[]{
                 x.getMa(),
                 x.getNv().getHoTen(),
-                x.getKh().getHoTen(),
+                x.getKh() == null ? "Khach le" : x.getKh().getHoTen(),
                 x.getNgayTao(),
                 x.getTrangThai() == 0 ? "Chưa thanh toán" : "Đã thanh toán"
             });
@@ -813,10 +807,13 @@ public class BanHangJpanel extends javax.swing.JPanel {
 
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
         int index = tblHoaDon.getSelectedRow();
+<<<<<<< HEAD
         if (index >= 0) {
             btnKH.setEnabled(true);
             btnThay.setEnabled(true);
         }
+=======
+>>>>>>> origin/master
         txtMaHD.setText(tblHoaDon.getValueAt(index, 0).toString());
         txtTenKH.setText(tblHoaDon.getValueAt(index, 2).toString());
         txtTenNV.setText(tblHoaDon.getValueAt(index, 1).toString());
@@ -871,12 +868,12 @@ public class BanHangJpanel extends javax.swing.JPanel {
 //            kh.setMaKH("KH9999");
 //
 //        }
-        KhachHangModel khMD = iKhachHangService.getTimKH("0000000000");
-        KhachHang kh = new KhachHang();
-        kh.setId(khMD.getId());
-        kh.setMaKH(khMD.getMaKH());
-        kh.setHoTen(khMD.getHoTen());
-        kh.setSdt(khMD.getSdt());
+//        KhachHangModel khMD = iKhachHangService.getTimKH(txtSDT.getText()).get(0);
+//        KhachHang kh = new KhachHang();
+//        kh.setId(khMD.getId());
+//        kh.setMaKH(khMD.getMaKH());
+//        kh.setHoTen(khMD.getHoTen());
+//        kh.setSdt(khMD.getSdt());
         int soHD = listHD.size() + 1;
         String maHD = "HD" + soHD;
         NhanVienModel nv = view.Login.nv;
@@ -895,7 +892,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
 //        System.out.println(kh);
         HoaDonModel hd = new HoaDonModel();
         hd.setNv(nvNew);
-        hd.setKh(kh);
+        hd.setKh(null);
         hd.setMa(maHD);
         hd.setTrangThai(0);
         hd.setCp(null);
@@ -1071,8 +1068,10 @@ public class BanHangJpanel extends javax.swing.JPanel {
 
     private void btnThayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThayActionPerformed
         KhachHang_BanHang b2 = new KhachHang_BanHang();
+
         txtTenKH.setText(KhachHang_BanHang.k111.getHoTen());
         txtSDT.setText(KhachHang_BanHang.k111.getSdt());
+<<<<<<< HEAD
         int indexHD = tblHoaDon.getSelectedRow();
         String maHD = tblHoaDon.getValueAt(indexHD, 0).toString();
         KhachHangModel kh = iKhachHangService.getTimKH(KhachHang_BanHang.k111.getSdt());
@@ -1085,6 +1084,8 @@ public class BanHangJpanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Cập nhật thành công");
             loadHD();
         }
+=======
+>>>>>>> origin/master
 
     }//GEN-LAST:event_btnThayActionPerformed
 

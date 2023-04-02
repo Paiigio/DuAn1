@@ -23,7 +23,7 @@ public class CTKhuyenMaiService implements ICTKhuyenMaiService {
         ArrayList<CTKhuyenMaiModel> list = new ArrayList<>();
         ArrayList<CTKhuyenMai> cv = ct.getAllCTKM();
         for (CTKhuyenMai x : cv) {
-            list.add(new CTKhuyenMaiModel(x.getId(), x.getMa(), x.getTen(), x.getThoiGianBatDau(), x.getThoiGianKetThuc(), x.getHinhThuc(),x.getNgayTao(),x.getNgaySua()));
+            list.add(new CTKhuyenMaiModel(x.getId(), x.getMa(), x.getTen(), x.getThoiGianBatDau(), x.getThoiGianKetThuc(), x.getHinhThuc(), x.getNgayTao(), x.getNgaySua(), x.getTrangThai()));
 
         }
         return list;
@@ -31,31 +31,37 @@ public class CTKhuyenMaiService implements ICTKhuyenMaiService {
 
     @Override
     public CTKhuyenMaiModel insertCTKM(CTKhuyenMaiModel cv) {
-        ArrayList<CTKhuyenMai> list =ct.getAllCTKM();
+        ArrayList<CTKhuyenMai> list = ct.getAllCTKM();
         for (CTKhuyenMai x : list) {
             if (x.getMa().equalsIgnoreCase(cv.getMa())) {
                 return null;
             }
 
         }
-        var x = ct.insertCTKM(new CTKhuyenMai(cv.getId(), cv.getMa(), cv.getTen(), cv.getThoiGianBatDau(), cv.getThoiGianKetThuc(), cv.getHinhThuc(),cv.getNgayTao(),cv.getNgaySua()));
-        return new CTKhuyenMaiModel(x.getId(), x.getMa(), x.getTen(), x.getThoiGianBatDau(), x.getThoiGianKetThuc(), x.getHinhThuc(),x.getNgayTao(),x.getNgaySua());
-  
+        var x = ct.insertCTKM(new CTKhuyenMai(cv.getId(), cv.getMa(), cv.getTen(), cv.getThoiGianBatDau(), cv.getThoiGianKetThuc(), cv.getHinhThuc(), cv.getNgayTao(), cv.getNgaySua(), cv.getTrangThai()));
+        return new CTKhuyenMaiModel(x.getId(), x.getMa(), x.getTen(), x.getThoiGianBatDau(), x.getThoiGianKetThuc(), x.getHinhThuc(), x.getNgayTao(), x.getNgaySua(), x.getTrangThai());
+
     }
 
     @Override
     public CTKhuyenMaiModel updateCTKM(CTKhuyenMaiModel cv) {
-         var x = ct.updateCTKM(new CTKhuyenMai(cv.getId(), cv.getMa(), cv.getTen(), cv.getThoiGianBatDau(), cv.getThoiGianKetThuc(), cv.getHinhThuc(),cv.getNgayTao(),cv.getNgaySua()));
-        return new CTKhuyenMaiModel(x.getId(), x.getMa(), x.getTen(), x.getThoiGianBatDau(), x.getThoiGianKetThuc(), x.getHinhThuc(),x.getNgayTao(),x.getNgaySua());
-   
+        var x = ct.updateCTKM(new CTKhuyenMai(cv.getId(), cv.getMa(), cv.getTen(), cv.getThoiGianBatDau(), cv.getThoiGianKetThuc(), cv.getHinhThuc(), cv.getNgayTao(), cv.getNgaySua(), cv.getTrangThai()));
+        return new CTKhuyenMaiModel(x.getId(), x.getMa(), x.getTen(), x.getThoiGianBatDau(), x.getThoiGianKetThuc(), x.getHinhThuc(), x.getNgayTao(), x.getNgaySua(), x.getTrangThai());
+
+    }
+    
+    @Override
+    public CTKhuyenMaiModel updateTrangThai(CTKhuyenMaiModel cv) {
+        var x = ct.updateCTKM(new CTKhuyenMai(cv.getId(), cv.getMa(), cv.getTen(), cv.getThoiGianBatDau(), cv.getThoiGianKetThuc(), cv.getHinhThuc(), cv.getNgayTao(), cv.getNgaySua(), cv.getTrangThai()));
+        return new CTKhuyenMaiModel(x.getId(), x.getMa(), x.getTen(), x.getThoiGianBatDau(), x.getThoiGianKetThuc(), x.getHinhThuc(), x.getNgayTao(), x.getNgaySua(), x.getTrangThai());
     }
 
     @Override
     public ArrayList<CTKhuyenMaiModel> getTimTen(String ten) {
-          ArrayList<CTKhuyenMaiModel> list = new ArrayList<>();
+        ArrayList<CTKhuyenMaiModel> list = new ArrayList<>();
         ArrayList<CTKhuyenMai> cv = ct.getTimTen(ten);
         for (CTKhuyenMai x : cv) {
-            list.add(new CTKhuyenMaiModel(x.getId(), x.getMa(), x.getTen(), x.getThoiGianBatDau(), x.getThoiGianKetThuc(), x.getHinhThuc(),x.getNgayTao(),x.getNgaySua()));
+            list.add(new CTKhuyenMaiModel(x.getId(), x.getMa(), x.getTen(), x.getThoiGianBatDau(), x.getThoiGianKetThuc(), x.getHinhThuc(), x.getNgayTao(), x.getNgaySua(), x.getTrangThai()));
 
         }
         return list;
