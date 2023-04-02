@@ -807,13 +807,10 @@ public class BanHangJpanel extends javax.swing.JPanel {
 
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
         int index = tblHoaDon.getSelectedRow();
-<<<<<<< HEAD
         if (index >= 0) {
             btnKH.setEnabled(true);
             btnThay.setEnabled(true);
         }
-=======
->>>>>>> origin/master
         txtMaHD.setText(tblHoaDon.getValueAt(index, 0).toString());
         txtTenKH.setText(tblHoaDon.getValueAt(index, 2).toString());
         txtTenNV.setText(tblHoaDon.getValueAt(index, 1).toString());
@@ -1071,7 +1068,6 @@ public class BanHangJpanel extends javax.swing.JPanel {
 
         txtTenKH.setText(KhachHang_BanHang.k111.getHoTen());
         txtSDT.setText(KhachHang_BanHang.k111.getSdt());
-<<<<<<< HEAD
         int indexHD = tblHoaDon.getSelectedRow();
         String maHD = tblHoaDon.getValueAt(indexHD, 0).toString();
         KhachHangModel kh = iKhachHangService.getTimKH(KhachHang_BanHang.k111.getSdt());
@@ -1084,8 +1080,6 @@ public class BanHangJpanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Cập nhật thành công");
             loadHD();
         }
-=======
->>>>>>> origin/master
 
     }//GEN-LAST:event_btnThayActionPerformed
 
