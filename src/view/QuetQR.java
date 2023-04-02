@@ -11,6 +11,7 @@ import Service.HoaDonChiTietService;
 import Service.HoaDonService;
 import Service.IMEIService;
 import Service.Interface.IHoaDonChiTietService;
+import Service.Interface.IHoaDonService;
 import Service.Interface.IIMEIService;
 import ViewModel.CTSanPhamModel;
 import ViewModel.HoaDonChiTietModel;
@@ -49,13 +50,15 @@ public class QuetQR extends javax.swing.JFrame implements Runnable, ThreadFactor
     private Executor executor = Executors.newSingleThreadExecutor(this);
     public static CTSanPham ctsp;
       public String idctsp = "";
-       HoaDonChiTietService hoaDonChiTieservice = new HoaDonChiTietService();
+      
     CTSanPhamResponsitory ctspr = new CTSanPhamResponsitory();
         private IIMEIService iIMEIService = new IMEIService();
             private IHoaDonChiTietService iHoaDonChiTietService = new HoaDonChiTietService();
+            private IHoaDonService iHoaDonService= new HoaDonService();
 
     JTable tblGioHang;
     JTable tblHoaDon;
+    JTable tblSanPham;
     BanHangJpanel banHangjp;
     private final HoaDonService hoaDonService;
     private final CTSanPhamService chiTietSanPhamService;
@@ -69,6 +72,7 @@ public class QuetQR extends javax.swing.JFrame implements Runnable, ThreadFactor
             ctsp = new CTSanPham();
         this.tblGioHang = tblGioHang;
         this.tblHoaDon = tblHoaDon;
+        this.tblSanPham = tblSanPham;
         this.banHangjp = banhangjp;
         chiTietSanPhamService = new CTSanPhamService();
         hoaDonService = new HoaDonService();
@@ -207,27 +211,33 @@ public class QuetQR extends javax.swing.JFrame implements Runnable, ThreadFactor
                     
                     
                      
-        ArrayList<HoaDonChiTietModel> listHDCT = hoaDonChiTieservice.getAllHoaDonCT();
+//          int indexSP = tblSanPham.getSelectedRow();
+        ArrayList<HoaDonChiTietModel> listHDCT = iHoaDonChiTietService.getAllHoaDonCT();
         int indexHD = tblHoaDon.getSelectedRow();
         if (indexHD < 0) {
-            JOptionPane.showMessageDialog(this, "Moi ban chon don hang");
+            JOptionPane.showMessageDialog(this, "Mời bạn chọn hóa đơn!");
             return;
         }
         String maHD = tblHoaDon.getValueAt(indexHD, 0).toString();
         // Lấy ID Hóa Đơn
         HoaDon hd = new HoaDon();
-        ArrayList<HoaDonModel> listHD = hoaDonService.getAllHoaDon();
+        ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDon();
         for (HoaDonModel h : listHD) {
             if (h.getMa() != null && h.getMa().equals(maHD)) {
                 hd.setId(h.getId());
-                
             }
         }
         System.out.println("ID Hóa đơn: " + hd.getId());
         // Check số lượng tồn
- 
-        // Lấy Id CTSP
+//        String soLuongTon = tblSanPham.getValueAt(indexSP, 2).toString();
+//        if (Integer.valueOf(soLuongTon) <= 0) {
+//            JOptionPane.showMessageDialog(this, "Số lượng tồn không đủ");
+//            return;
+//        }
+        
     
+        // Lấy Id CTSP
+      
         CTSanPham c = new CTSanPham();
         ArrayList<CTSanPhamModel> listCTSP = chiTietSanPhamService.getAllCTSanPham();
         for (CTSanPhamModel x : listCTSP) {
@@ -235,58 +245,55 @@ public class QuetQR extends javax.swing.JFrame implements Runnable, ThreadFactor
                 c.setId(x.getId());
             }
         }
-        System.out.println("ID Chi tiết sản phẩm: " + c.getId());
+        int dem = 0;
+        String ghiChu = "";
+        ArrayList<IMEIModel> listIMEINEW = iIMEIService.selectSL(c.getId());
+          for (IMEIModel ss : listIMEINEW){
+              if(Integer.valueOf(listIMEINEW.size())<0){
+                   JOptionPane.showMessageDialog(this, "Số lượng tồn không đủ");
+         return;
+              }
+          }
         // list imei được chọn từ ctsp còn tồn
-        ArrayList<IMEIModel> listIMEI = iIMEIService.selectSL(c.getId());
-        IMEIModel imei = new IMEIModel();
+        ArrayList<HoaDonChiTietModel> listHDCTNEW = iHoaDonChiTietService.getAllHoaDonCTBYIDHD(hd.getId());
         // nhập vào imei
         String maIMEI = (String) JOptionPane.showInputDialog(this, "Mời bạn chọn mã IMEI", "Lựa chọn", JOptionPane.INFORMATION_MESSAGE, null, null, "Mã IMEI");
-        System.out.println("Mã vừa nhập :" + maIMEI);
-        String ghiChu = "";
-        String maIM = maIMEI;
-        int dem = 0;
-        // kiểm tra imei uvằ nhập vào
-        for (IMEIModel i : listIMEI) {
-            System.out.println("Mã imei trong list" + i.getMa());
-            if (i.getMa() != null && i.getMa().equals(maIMEI)) {
-                ghiChu = i.getGhiChu();
-                List<String> listS = tachChuoi(i.getGhiChu());
-                if (listS != null) {
-                    for (String st : listS) {
-                        if (maHD.equals(st)) {
-                            JOptionPane.showMessageDialog(this, "IMEI đã tồn tại trong đơn hàng");
-                            return;
-                        } else {
-                            dem++;
-                            imei.setGhiChu(i.getGhiChu() + " " + maHD);
-                        }
-                    }
-                } else {
-                    dem++;
-                    imei.setGhiChu(maHD);
+        for (IMEIModel ss : listIMEINEW) {
+            System.out.println("IMEI " + ss.getMa());
+            if (ss.getMa() != null) {
+                if (ss.getMa().equals(maIMEI)){
+                    ghiChu = ss.getMa();
+                     dem++;               
                 }
-                imei.setMa(i.getMa());
-                imei.setId(i.getId());
             }
         }
-        if (dem == 0) {
-            JOptionPane.showMessageDialog(this, "Sai mã IMEI hoặc mã imei không tồn tại");
-            return;
+        if (dem == 0){
+                JOptionPane.showMessageDialog(this, "Sai mã IMEI hoặc mã imei không tồn tại");
+                return;            
         }
+        // kiểm tra imei uvằ nhập vào
+        for (HoaDonChiTietModel i : listHDCTNEW) {
+            if (i.getGhiChu() != null && i.getGhiChu().equals(maIMEI)) {
+                JOptionPane.showMessageDialog(this, "IMEI đã tồn tại trong đơn hàng");
+                return;
 
+            }
+        }
+        System.out.println("Mã IMEI SAU"+maIMEI);
+//        String donGia = tblSanPham.getValueAt(indexSP, 3).toString();
         HoaDonChiTietModel hdct = new HoaDonChiTietModel();
-        CTSanPham cTSanPham=new CTSanPham();
         hdct.setSl(1);
         hdct.setIdctsp(c);
         hdct.setIdhd(hd);
+        hdct.setGhiChu(maIMEI);
         hdct.setDongia(ctsp.getGiaBan());
-        hdct.setThanhTien(Float.valueOf(1*ctsp.getGiaBan()));
+        hdct.setThanhTien(ctsp.getGiaBan()*1);
         if (hdct == null) {
             return;
         }
 
         iHoaDonChiTietService.insertHDCT(hdct);
-        iIMEIService.updateIMEI(imei);
+       
         banHangjp.loadGioHang1(hd.getId());
                 }
 
