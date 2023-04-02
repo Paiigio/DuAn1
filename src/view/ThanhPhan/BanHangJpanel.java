@@ -768,23 +768,6 @@ public class BanHangJpanel extends javax.swing.JPanel {
 
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
         ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDon();
-
-//        ArrayList<KhachHangModel> listKH = iKhachHangService.getAllKH();
-//        KhachHang kh = new KhachHang();
-//        for (KhachHangModel x : listKH) {
-//            if (x.getSdt() != null && x.getSdt().equals(txtSDT.getText())) {
-//                kh.setId(x.getId());
-//                kh.setMaKH(x.getMaKH());
-//                kh.setHoTen(x.getHoTen());
-//                kh.setSdt(x.getSdt());
-//            }
-//        }
-//        if (txtSDT.getText().trim().isEmpty()) {
-//            kh.setId(iKhachHangService.getTimKH("0000000000").get(0).getId());
-//            kh.setHoTen("Khách lẻ");
-//            kh.setMaKH("KH9999");
-//
-//        }
         KhachHangModel khMD = iKhachHangService.getTimKH("0000000000");
         KhachHang kh = new KhachHang();
         kh.setId(khMD.getId());
@@ -795,18 +778,6 @@ public class BanHangJpanel extends javax.swing.JPanel {
         String maHD = "HD" + soHD;
         NhanVienModel nv = view.Login.nv;
         NhanVien nvNew = new NhanVien(nv.getId(), nv.getMa(), nv.getHoTen());
-//        nvNew.setId(nv.getId());
-//        nvNew.setHoTen(nv.getHoTen());
-//        nvNew.setMa(nv.getMa());
-//        HoaDonModel hd = new HoaDonModel();
-//        hd.setNv(nvNew);
-//        hd.setKh(kh);
-//        hd.setMa(maHD);
-//        hd.setTrangThai(0);
-//        hd.setCp(null);
-//        hd.setThanhTien(0);
-//        hd.setHinhThucThanhToan(0);
-//        System.out.println(kh);
         HoaDonModel hd = new HoaDonModel();
         hd.setNv(nvNew);
         hd.setKh(kh);
@@ -816,10 +787,10 @@ public class BanHangJpanel extends javax.swing.JPanel {
         hd.setThanhTien(0);
         hd.setHinhThucThanhToan(0);
         if (iHoaDonService.insertHD(hd) != null) {
-            JOptionPane.showMessageDialog(this, "Thêm hóa đơn thành công!");
+            JOptionPane.showMessageDialog(null, "Thêm hóa đơn thành công!");
             loadHD();
         } else {
-            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+            JOptionPane.showMessageDialog(null, "Thêm thất bại");
             return;
         }
     }//GEN-LAST:event_btnTaoHoaDonActionPerformed
@@ -829,7 +800,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
         ArrayList<HoaDonChiTietModel> listHDCT = iHoaDonChiTietService.getAllHoaDonCT();
         int indexHD = tblHoaDon.getSelectedRow();
         if (indexHD < 0) {
-            JOptionPane.showMessageDialog(this, "Mời bạn chọn hóa đơn!");
+            JOptionPane.showMessageDialog(null, "Mời bạn chọn hóa đơn!");
             return;
         }
         String maHD = tblHoaDon.getValueAt(indexHD, 0).toString();
@@ -845,7 +816,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
         // Check số lượng tồn
         String soLuongTon = tblSanPham.getValueAt(indexSP, 2).toString();
         if (Integer.valueOf(soLuongTon) <= 0) {
-            JOptionPane.showMessageDialog(this, "Số lượng tồn không đủ");
+            JOptionPane.showMessageDialog(null, "Số lượng tồn không đủ");
             return;
         }
         // Lấy Id CTSP
@@ -863,7 +834,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
         // list imei được chọn từ ctsp còn tồn
         ArrayList<HoaDonChiTietModel> listHDCTNEW = iHoaDonChiTietService.getAllHoaDonCTBYIDHD(hd.getId());
         // nhập vào imei
-        String maIMEI = (String) JOptionPane.showInputDialog(this, "Mời bạn chọn mã IMEI", "Lựa chọn", JOptionPane.INFORMATION_MESSAGE, null, null, "Mã IMEI");
+        String maIMEI = (String) JOptionPane.showInputDialog(null, "Mời bạn chọn mã IMEI", "Lựa chọn", JOptionPane.INFORMATION_MESSAGE, null, null, "Mã IMEI");
         for (IMEIModel ss : listIMEINEW) {
             System.out.println("IMEI " + ss.getMa());
             if (ss.getMa() != null) {
@@ -874,38 +845,14 @@ public class BanHangJpanel extends javax.swing.JPanel {
             }
         }
         if (dem == 0){
-                JOptionPane.showMessageDialog(this, "Sai mã IMEI hoặc mã imei không tồn tại");
+                JOptionPane.showMessageDialog(null, "Sai mã IMEI hoặc mã imei không tồn tại");
                 return;            
         }
         // kiểm tra imei uvằ nhập vào
         for (HoaDonChiTietModel i : listHDCTNEW) {
             if (i.getGhiChu() != null && i.getGhiChu().equals(maIMEI)) {
-                JOptionPane.showMessageDialog(this, "IMEI đã tồn tại trong đơn hàng");
+                JOptionPane.showMessageDialog(null, "IMEI đã tồn tại trong đơn hàng");
                 return;
-//                ghiChu = i.getGhiChu();
-//                List<String> listS = tachChuoi(i.getGhiChu());
-//                if (listS != null) {
-//                    for (String st : listS) {
-//                        if (maHD.equals(st)) {
-//                            JOptionPane.showMessageDialog(this, "IMEI đã tồn tại trong đơn hàng");
-//                            return;
-//                        } else {
-//                            dem++;
-//                            imei.setGhiChu(i.getGhiChu() + " " + maHD);
-//                        }
-//                    }
-//                } else {
-//                    dem++;
-//                    imei.setGhiChu(maHD);
-//                }
-//                imei.setMa(i.getMa());
-//                imei.setId(i.getId());
-//            } else {
-//                dem++;
-//            }
-//        }
-//        if (dem == 0) {
-//
             }
         }
         System.out.println("Mã IMEI SAU"+maIMEI);
@@ -967,11 +914,11 @@ public class BanHangJpanel extends javax.swing.JPanel {
                 idHDCT = g.getId();
             }
         }
-        if (JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?","Thông báo",JOptionPane.YES_NO_OPTION)!=JOptionPane.YES_OPTION){
+        if (JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa không?","Thông báo",JOptionPane.YES_NO_OPTION)!=JOptionPane.YES_OPTION){
             return;
         }
         if (iHoaDonChiTietService.deleteHDCT(idHDCT)!=null){
-            JOptionPane.showMessageDialog(this, "Xóa thành công");
+            JOptionPane.showMessageDialog(null, "Xóa thành công");
             loadGioHang();
         }
     }//GEN-LAST:event_btnXoaCTSPActionPerformed
@@ -996,7 +943,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
         hd.setKh(khNew);
         hd.setMa(maHD);
         if (iHoaDonService.upadteHD(hd) != null) {
-            JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+            JOptionPane.showMessageDialog(null, "Cập nhật thành công");
             loadHD();
         }
 

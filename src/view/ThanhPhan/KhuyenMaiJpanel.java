@@ -28,6 +28,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import view.QL_DT;
 
 public class KhuyenMaiJpanel extends javax.swing.JPanel {
 
@@ -746,7 +747,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
             return;
         }
         if (tblBang.getValueAt(indexCTKM, 7).toString().equalsIgnoreCase("Hết hạn")){
-            JOptionPane.showMessageDialog(KhuyenMaiJpanel.this, "Chương trình đã hết hạn , mời bạn chọn chương trình khác");
+            JOptionPane.showMessageDialog(null, "Chương trình đã hết hạn , mời bạn chọn chương trình khác");
             return;
         }
         for (int i = 0; i < listSP.size(); i++) {
