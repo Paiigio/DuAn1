@@ -172,9 +172,9 @@ FROM     dbo.CTSANPHAM INNER JOIN
 				<reportElement x="0" y="45" width="555" height="1"/>
 			</line>
 			<textField>
-				<reportElement x="18" y="62" width="220" height="20"/>
+				<reportElement x="18" y="62" width="248" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{HINHANH}+""+$F{TENSP}+" "+$F{TENMau}+" "+$F{SOLUONG}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{TENSP}+" "+$F{TENMau}+" "+$F{SOLUONG}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="266" y="62" width="100" height="20"/>
