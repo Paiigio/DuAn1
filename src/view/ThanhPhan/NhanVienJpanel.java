@@ -13,6 +13,9 @@ import ViewModel.ChucVuModel;
 import ViewModel.NhanVienModel;
 import java.awt.Image;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,27 +30,34 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
  * @author duong
  */
 public class NhanVienJpanel extends javax.swing.JPanel {
-   IChucVuService cvs = new ChucVuService();
+
+    IChucVuService cvs = new ChucVuService();
     INhanVienService nvs = new NhanVienService();
-       DefaultComboBoxModel<ChucVu> dcmCV;
-      DefaultComboBoxModel<ChucVu> dcmCV1;
+    DefaultComboBoxModel<ChucVu> dcmCV;
+    DefaultComboBoxModel<ChucVu> dcmCV1;
     DefaultTableModel dtmNV = new DefaultTableModel();
-      String strHinhanh = null;
+    String strHinhanh = null;
+
     public NhanVienJpanel() {
         initComponents();
         dcmCV = new DefaultComboBoxModel<>();
-        dcmCV1 = new DefaultComboBoxModel<>();   
+        dcmCV1 = new DefaultComboBoxModel<>();
         loadComboCV();
         loadComboVaiTro();
         cbbCV.setModel((DefaultComboBoxModel) dcmCV);
         cbbVaiTroNV.setModel((DefaultComboBoxModel) dcmCV1);
-   
+
         dtmNV = (DefaultTableModel) tblBangTTNV.getModel();
         loadTableNV();
         tblBangTTNV.getColumnModel().getColumn(0).setPreferredWidth(30);
@@ -55,42 +65,44 @@ public class NhanVienJpanel extends javax.swing.JPanel {
         tblBangTTNV.getColumnModel().getColumn(2).setPreferredWidth(100);
         tblBangTTNV.getColumnModel().getColumn(3).setPreferredWidth(10);
         tblBangTTNV.getColumnModel().getColumn(7).setPreferredWidth(200);
-        
+
     }
- private void loadComboCV() {
+
+    private void loadComboCV() {
         ArrayList<ChucVuModel> list = cvs.getAllChucVu();
         for (ChucVuModel x : list) {
             dcmCV.addElement(new ChucVu(x.getMa(), x.getTenCV()));
         }
     }
-  private void loadComboVaiTro() {
+
+    private void loadComboVaiTro() {
         ArrayList<ChucVuModel> list = cvs.getAllChucVu();
         for (ChucVuModel x : list) {
             dcmCV1.addElement(new ChucVu(x.getMa(), x.getTenCV()));
         }
     }
 
-    private  NhanVienModel getFormData(){
-          ChucVu cv = (ChucVu) cbbCV.getSelectedItem();  
-        String ma=txtMaNV.getText().trim();
-        String ten=txtHoTen.getText().trim();
-        String sdt=txtSDT.getText().trim();
+    private NhanVienModel getFormData() {
+        ChucVu cv = (ChucVu) cbbCV.getSelectedItem();
+        String ma = txtMaNV.getText().trim();
+        String ten = txtHoTen.getText().trim();
+        String sdt = txtSDT.getText().trim();
         Date ngay = txtNgaySinhNV.getDate();
-             
-         String gt = rdoNam.isSelected() == true ? "Nam" : "Nữ";
-        String diachi=txtDCNV.getText().trim();
-        String email=txtEmail.getText().trim();
-        String mk=txtMK.getText().trim();
+
+        String gt = rdoNam.isSelected() == true ? "Nam" : "Nữ";
+        String diachi = txtDCNV.getText().trim();
+        String email = txtEmail.getText().trim();
+        String mk = txtMK.getText().trim();
         int tt = rdoDiLam.isSelected() == true ? 0 : 1;
 
         ArrayList<ChucVuModel> list = cvs.getAllChucVu();
-        for (ChucVuModel c : list){
-            if (c.getMa()!=null && c.getMa().equalsIgnoreCase(cv.getMa())){
+        for (ChucVuModel c : list) {
+            if (c.getMa() != null && c.getMa().equalsIgnoreCase(cv.getMa())) {
                 cv.setId(c.getId());
             }
         }
- 
-            if (ma.length() == 0) {
+
+        if (ma.length() == 0) {
             JOptionPane.showMessageDialog(this, "Không được để trống mã");
             txtMaNV.requestFocus();
             return null;
@@ -100,15 +112,15 @@ public class NhanVienJpanel extends javax.swing.JPanel {
             txtHoTen.requestFocus();
             return null;
         }
-            if (ngay == null) {
+        if (ngay == null) {
             JOptionPane.showMessageDialog(this, "Không được để trống ngày sinh");
             txtNgaySinhNV.requestFocus();
             return null;
         } else {
             SimpleDateFormat sdf = new SimpleDateFormat("YYYY-dd-MM");
-            String  date = sdf.format(txtNgaySinhNV.getDate());
+            String date = sdf.format(txtNgaySinhNV.getDate());
         }
-            
+
         if (sdt.length() == 0) {
             JOptionPane.showMessageDialog(this, "Không được để trống số điện thoại");
             txtSDT.requestFocus();
@@ -129,19 +141,19 @@ public class NhanVienJpanel extends javax.swing.JPanel {
                 txtSDT.requestFocus();
                 return null;
             }
-        }      
+        }
         if (email.length() == 0) {
             JOptionPane.showMessageDialog(this, "Không được để trống email");
             txtMK.requestFocus();
             return null;
-        }else{
-                 String mail = "\\w+@(\\w+\\.\\w+){1,2}";
+        } else {
+            String mail = "\\w+@(\\w+\\.\\w+){1,2}";
             Matcher matcher = Pattern.compile(mail).matcher(txtEmail.getText());
             if (!matcher.matches()) {
                 JOptionPane.showMessageDialog(this, "Sai định dạng email");
                 return null;
-        }
             }
+        }
         if (mk.length() == 0) {
             JOptionPane.showMessageDialog(this, "Không được để trống mật khẩu");
             txtMK.requestFocus();
@@ -154,20 +166,17 @@ public class NhanVienJpanel extends javax.swing.JPanel {
             return null;
         }
         String anh = "";
-           if (strHinhanh == null) {
+        if (strHinhanh == null) {
             anh = "NoAvatar.jpg";
         } else {
             anh = strHinhanh;
         }
 
-        
-        
-        return  new NhanVienModel(null, cv, ma, ten, gt, sdt, ngay, diachi, email, mk, tt, anh);
-       
-            
-}
-    
-    public void clearFormTTNV(){
+        return new NhanVienModel(null, cv, ma, ten, gt, sdt, ngay, diachi, email, mk, tt, anh);
+
+    }
+
+    public void clearFormTTNV() {
         txtMaNV.setText("");
         txtHoTen.setText("");
         rdoNam.setSelected(true);
@@ -180,66 +189,70 @@ public class NhanVienJpanel extends javax.swing.JPanel {
         lblAnhNV.setIcon(null);
         txtNgaySinhNV.setDate(null);
     }
+
     public void loadTableNV() {
         ArrayList<NhanVienModel> list = nvs.getAllNV();
-            dtmNV.setRowCount(0);
-            for (NhanVienModel x : list) {
-                dtmNV.addRow(new Object[]{
-                    x.getCv(),
-                    x.getMa(),
-                    x.getHoTen(),
-                    x.getGioiTinh(),
-                    x.getSdt(),
-                    x.getNgaySinh(),
-                    x.getDiaChi(),
-                    x.getEmail(),
-                    x.getMatKhau(),
-                    x.getTrangThai() == 0 ? "Đi làm": "Nghỉ làm",
-                    x.getHinhAnh()
-                });
+        dtmNV.setRowCount(0);
+        for (NhanVienModel x : list) {
+            dtmNV.addRow(new Object[]{
+                x.getCv(),
+                x.getMa(),
+                x.getHoTen(),
+                x.getGioiTinh(),
+                x.getSdt(),
+                x.getNgaySinh(),
+                x.getDiaChi(),
+                x.getEmail(),
+                x.getMatKhau(),
+                x.getTrangThai() == 0 ? "Đi làm" : "Nghỉ làm",
+                x.getHinhAnh()
+            });
 
-            }
+        }
     }
-        public void loadTableNV1(String ten) {
+
+    public void loadTableNV1(String ten) {
         ArrayList<NhanVienModel> list = nvs.getTimTen(ten);
-            dtmNV.setRowCount(0);
-            for (NhanVienModel x : list) {
-                dtmNV.addRow(new Object[]{
-                    x.getCv(),
-                    x.getMa(),
-                    x.getHoTen(),
-                    x.getGioiTinh(),
-                    x.getSdt(),
-                    x.getNgaySinh(),
-                    x.getDiaChi(),
-                    x.getEmail(),
-                    x.getMatKhau(),
-                    x.getTrangThai() == 0 ? "Đi làm": "Nghỉ làm",
-                    x.getHinhAnh()
-                });
+        dtmNV.setRowCount(0);
+        for (NhanVienModel x : list) {
+            dtmNV.addRow(new Object[]{
+                x.getCv(),
+                x.getMa(),
+                x.getHoTen(),
+                x.getGioiTinh(),
+                x.getSdt(),
+                x.getNgaySinh(),
+                x.getDiaChi(),
+                x.getEmail(),
+                x.getMatKhau(),
+                x.getTrangThai() == 0 ? "Đi làm" : "Nghỉ làm",
+                x.getHinhAnh()
+            });
 
-            }
+        }
     }
-            public void loadTableVaiTro(String ten) {
+
+    public void loadTableVaiTro(String ten) {
         ArrayList<NhanVienModel> list = nvs.getVaiTro(ten);
-            dtmNV.setRowCount(0);
-            for (NhanVienModel x : list) {
-                dtmNV.addRow(new Object[]{
-                    x.getCv(),
-                    x.getMa(),
-                    x.getHoTen(),
-                    x.getGioiTinh(),
-                    x.getSdt(),
-                    x.getNgaySinh(),
-                    x.getDiaChi(),
-                    x.getEmail(),
-                    x.getMatKhau(),
-                    x.getTrangThai() == 0 ? "Đi làm": "Nghỉ làm",
-                    x.getHinhAnh()
-                });
+        dtmNV.setRowCount(0);
+        for (NhanVienModel x : list) {
+            dtmNV.addRow(new Object[]{
+                x.getCv(),
+                x.getMa(),
+                x.getHoTen(),
+                x.getGioiTinh(),
+                x.getSdt(),
+                x.getNgaySinh(),
+                x.getDiaChi(),
+                x.getEmail(),
+                x.getMatKhau(),
+                x.getTrangThai() == 0 ? "Đi làm" : "Nghỉ làm",
+                x.getHinhAnh()
+            });
 
-            }
+        }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -289,6 +302,8 @@ public class NhanVienJpanel extends javax.swing.JPanel {
         cbbVaiTroNV = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
         cbbTT = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        XuatExcel = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(238, 232, 170));
 
@@ -566,6 +581,15 @@ public class NhanVienJpanel extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setText("Import Excel");
+
+        XuatExcel.setText("Export Excel");
+        XuatExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                XuatExcelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout JNhanVienLayout = new javax.swing.GroupLayout(JNhanVien);
         JNhanVien.setLayout(JNhanVienLayout);
         JNhanVienLayout.setHorizontalGroup(
@@ -589,7 +613,12 @@ public class NhanVienJpanel extends javax.swing.JPanel {
                             .addGap(99, 99, 99)
                             .addGroup(JNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel18)
-                                .addComponent(cbbTT, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(JNhanVienLayout.createSequentialGroup()
+                                    .addComponent(cbbTT, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(54, 54, 54)
+                                    .addComponent(jButton1)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(XuatExcel))))
                         .addGroup(JNhanVienLayout.createSequentialGroup()
                             .addGap(17, 17, 17)
                             .addComponent(TTNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -610,7 +639,9 @@ public class NhanVienJpanel extends javax.swing.JPanel {
                     .addComponent(txtTimNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTIm)
                     .addComponent(cbbVaiTroNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbbTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbbTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1)
+                    .addComponent(XuatExcel))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(176, Short.MAX_VALUE))
@@ -676,7 +707,7 @@ public class NhanVienJpanel extends javax.swing.JPanel {
         }
         String id = tblBangTTNV.getValueAt(row, 1).toString();
         String anh = tblBangTTNV.getValueAt(row, 10).toString();
-        if (anh != null){
+        if (anh != null) {
             nv.setHinhAnh(anh);
         }
         nv.setId(id);
@@ -695,55 +726,55 @@ public class NhanVienJpanel extends javax.swing.JPanel {
 
     private void tblBangTTNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBangTTNVMouseClicked
 
-       try {
-           int row = this.tblBangTTNV.getSelectedRow();
-           if (row == -1) {
-               return;
-           }
-           txtMaNV.setText(tblBangTTNV.getValueAt(row, 1).toString());
-           dcmCV.setSelectedItem(tblBangTTNV.getValueAt(row, 0));
-           txtHoTen.setText(tblBangTTNV.getValueAt(row, 2).toString());
-           String gt = tblBangTTNV.getValueAt(row, 3).toString();
-           if (gt.equalsIgnoreCase("Nam")) {
-               this.rdoNam.setSelected(true);
-           } else {
-               this.rdoNu.setSelected(true);
-           }
-           txtSDT.setText(tblBangTTNV.getValueAt(row, 4).toString());
-           
-           txtDCNV.setText(tblBangTTNV.getValueAt(row, 6).toString());
-           txtEmail.setText(tblBangTTNV.getValueAt(row, 7).toString());
-           txtMK.setText(tblBangTTNV.getValueAt(row, 8).toString());
-           String tt = tblBangTTNV.getValueAt(row, 9).toString();
-           String hinh =tblBangTTNV.getValueAt(row, 10).toString();
-           String ngay = tblBangTTNV.getValueAt(row, 5).toString();
-           if (tt.equalsIgnoreCase("Đi làm")) {
-               rdoDiLam.setSelected(true);
-           } else {
-               rdoNghiLam.setSelected(true);
-           }
+        try {
+            int row = this.tblBangTTNV.getSelectedRow();
+            if (row == -1) {
+                return;
+            }
+            txtMaNV.setText(tblBangTTNV.getValueAt(row, 1).toString());
+            dcmCV.setSelectedItem(tblBangTTNV.getValueAt(row, 0));
+            txtHoTen.setText(tblBangTTNV.getValueAt(row, 2).toString());
+            String gt = tblBangTTNV.getValueAt(row, 3).toString();
+            if (gt.equalsIgnoreCase("Nam")) {
+                this.rdoNam.setSelected(true);
+            } else {
+                this.rdoNu.setSelected(true);
+            }
+            txtSDT.setText(tblBangTTNV.getValueAt(row, 4).toString());
 
-           Date date = new SimpleDateFormat("yyyy-MM-dd").parse(ngay);
-           txtNgaySinhNV.setDate(date);
-   
-           ImageIcon imgicon = new ImageIcon(getClass().getResource("/AnhNV/" + hinh));
-           Image img = imgicon.getImage();
-           img.getScaledInstance(lblAnhNV.getWidth(), lblAnhNV.getY(), 0);
-           lblAnhNV.setIcon(imgicon);
-       } catch (ParseException ex) {
-           Logger.getLogger(NhanVienJpanel.class.getName()).log(Level.SEVERE, null, ex);
-       }
+            txtDCNV.setText(tblBangTTNV.getValueAt(row, 6).toString());
+            txtEmail.setText(tblBangTTNV.getValueAt(row, 7).toString());
+            txtMK.setText(tblBangTTNV.getValueAt(row, 8).toString());
+            String tt = tblBangTTNV.getValueAt(row, 9).toString();
+            String hinh = tblBangTTNV.getValueAt(row, 10).toString();
+            String ngay = tblBangTTNV.getValueAt(row, 5).toString();
+            if (tt.equalsIgnoreCase("Đi làm")) {
+                rdoDiLam.setSelected(true);
+            } else {
+                rdoNghiLam.setSelected(true);
+            }
+
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(ngay);
+            txtNgaySinhNV.setDate(date);
+
+            ImageIcon imgicon = new ImageIcon(getClass().getResource("/AnhNV/" + hinh));
+            Image img = imgicon.getImage();
+            img.getScaledInstance(lblAnhNV.getWidth(), lblAnhNV.getY(), 0);
+            lblAnhNV.setIcon(imgicon);
+        } catch (ParseException ex) {
+            Logger.getLogger(NhanVienJpanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_tblBangTTNVMouseClicked
 
     private void btnTImActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTImActionPerformed
         String tim = txtTimNV.getText().trim();
-        if(tim.length()==0){
+        if (tim.length() == 0) {
             JOptionPane.showMessageDialog(this, "không đc để trống tìm");
         }
-        if(nvs.getTimTen(tim).size()>0){
-               JOptionPane.showMessageDialog(this, "Tìm thành công");
-        }else{
+        if (nvs.getTimTen(tim).size() > 0) {
+            JOptionPane.showMessageDialog(this, "Tìm thành công");
+        } else {
             JOptionPane.showMessageDialog(this, "Tìm thành thất bại");
         }
         loadTableNV1(tim);
@@ -757,80 +788,80 @@ public class NhanVienJpanel extends javax.swing.JPanel {
 //            JOptionPane.showMessageDialog(this, "Tìm thành thất bại");
 //        }
 //        loadTableVaiTro(vaitro);
-           ArrayList<NhanVienModel> list = nvs.getAllNV();
-    ArrayList<NhanVienModel> listNew = new ArrayList<>();
+        ArrayList<NhanVienModel> list = nvs.getAllNV();
+        ArrayList<NhanVienModel> listNew = new ArrayList<>();
         ChucVu cv = (ChucVu) cbbVaiTroNV.getSelectedItem();
         System.out.println(cv.getMa());
-    for (NhanVienModel x : list){
-        if (x.getCv()!=null && x.getCv().getMa().equals(cv.getMa())){
-            listNew.add(x);
+        for (NhanVienModel x : list) {
+            if (x.getCv() != null && x.getCv().getMa().equals(cv.getMa())) {
+                listNew.add(x);
+            }
         }
-    }
-    dtmNV.setRowCount(0);
-            for (NhanVienModel z : listNew) {
-                dtmNV.addRow(new Object[]{
-                    z.getCv(),
-                    z.getMa(),
-                    z.getHoTen(),
-                    z.getGioiTinh(),
-                    z.getSdt(),
-                    z.getNgaySinh(),
-                    z.getDiaChi(),
-                    z.getEmail(),
-                    z.getMatKhau(),
-                    z.getTrangThai() == 0 ? "Đi làm": "Nghỉ làm",
-                    z.getHinhAnh()
-                });
+        dtmNV.setRowCount(0);
+        for (NhanVienModel z : listNew) {
+            dtmNV.addRow(new Object[]{
+                z.getCv(),
+                z.getMa(),
+                z.getHoTen(),
+                z.getGioiTinh(),
+                z.getSdt(),
+                z.getNgaySinh(),
+                z.getDiaChi(),
+                z.getEmail(),
+                z.getMatKhau(),
+                z.getTrangThai() == 0 ? "Đi làm" : "Nghỉ làm",
+                z.getHinhAnh()
+            });
 
-            }
+        }
     }//GEN-LAST:event_cbbVaiTroNVActionPerformed
-        public void loadTableTT(String ten) {
+    public void loadTableTT(String ten) {
         ArrayList<NhanVienModel> list = nvs.getVaiTro(ten);
-            dtmNV.setRowCount(0);
-            for (NhanVienModel x : list) {
-                dtmNV.addRow(new Object[]{
-                    x.getCv(),
-                    x.getMa(),
-                    x.getHoTen(),
-                    x.getGioiTinh(),
-                    x.getSdt(),
-                    x.getNgaySinh(),
-                    x.getDiaChi(),
-                    x.getEmail(),
-                    x.getMatKhau(),
-                    x.getTrangThai() == 0 ? "Đi làm": "Nghỉ làm",
-                    x.getHinhAnh()
-                });
+        dtmNV.setRowCount(0);
+        for (NhanVienModel x : list) {
+            dtmNV.addRow(new Object[]{
+                x.getCv(),
+                x.getMa(),
+                x.getHoTen(),
+                x.getGioiTinh(),
+                x.getSdt(),
+                x.getNgaySinh(),
+                x.getDiaChi(),
+                x.getEmail(),
+                x.getMatKhau(),
+                x.getTrangThai() == 0 ? "Đi làm" : "Nghỉ làm",
+                x.getHinhAnh()
+            });
 
-            }
+        }
     }
     private void cbbTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTTActionPerformed
 
         int index = cbbTT.getSelectedIndex();
         ArrayList<NhanVienModel> list = nvs.getAllNV();
         ArrayList<NhanVienModel> listNew = new ArrayList<>();
-        for (NhanVienModel x : list){
-            if (x.getTrangThai()== index){
+        for (NhanVienModel x : list) {
+            if (x.getTrangThai() == index) {
                 listNew.add(x);
             }
         }
         dtmNV.setRowCount(0);
-            for (NhanVienModel z : listNew) {
-                dtmNV.addRow(new Object[]{
-                    z.getCv(),
-                    z.getMa(),
-                    z.getHoTen(),
-                    z.getGioiTinh(),
-                    z.getSdt(),
-                    z.getNgaySinh(),
-                    z.getDiaChi(),
-                    z.getEmail(),
-                    z.getMatKhau(),
-                    z.getTrangThai() == 0 ? "Đi làm": "Nghỉ làm",
-                    z.getHinhAnh()
-                });
+        for (NhanVienModel z : listNew) {
+            dtmNV.addRow(new Object[]{
+                z.getCv(),
+                z.getMa(),
+                z.getHoTen(),
+                z.getGioiTinh(),
+                z.getSdt(),
+                z.getNgaySinh(),
+                z.getDiaChi(),
+                z.getEmail(),
+                z.getMatKhau(),
+                z.getTrangThai() == 0 ? "Đi làm" : "Nghỉ làm",
+                z.getHinhAnh()
+            });
 
-            }
+        }
     }//GEN-LAST:event_cbbTTActionPerformed
 
     private void cbbVaiTroNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbbVaiTroNVMouseClicked
@@ -894,10 +925,92 @@ public class NhanVienJpanel extends javax.swing.JPanel {
 //            }
     }//GEN-LAST:event_cbbVaiTroNVItemStateChanged
 
+    private void XuatExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XuatExcelActionPerformed
+        ArrayList<NhanVienModel> list = nvs.getAllNV();
+        try {
+            XSSFWorkbook wb = new XSSFWorkbook();
+            XSSFSheet sheet = wb.createSheet("Nhân Viên");
+            XSSFRow row = null;
+            Cell cell = null;
+            row = sheet.createRow(2);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("Danh Sách Nhân Viên");
+
+            row = sheet.createRow(2);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("Chức Vụ");
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue("Mã NV");
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellValue("Tên NV");
+            cell = row.createCell(3, CellType.STRING);
+            cell.setCellValue("Giới Tính");
+            cell = row.createCell(4, CellType.STRING);
+            cell.setCellValue("SDT");
+            cell = row.createCell(5, CellType.STRING);
+            cell.setCellValue("Ngày Sinh");
+            cell = row.createCell(6, CellType.STRING);
+            cell.setCellValue("Địa Chỉ");
+            cell = row.createCell(7, CellType.STRING);
+            cell.setCellValue("Email");
+            cell = row.createCell(8, CellType.STRING);
+            cell.setCellValue("Mật Khẩu");
+            cell = row.createCell(9, CellType.NUMERIC);
+            cell.setCellValue("Tình Trạng");
+            cell = row.createCell(10, CellType.STRING);
+            cell.setCellValue("Hình Ảnh");
+
+            for (int i = 0; i < list.size(); i++) {
+                row = sheet.createRow(3 + i);
+                cell = row.createCell(0, CellType.STRING);
+                cell.setCellValue(list.get(i).getCv().getTenCV());
+                cell = row.createCell(1, CellType.STRING);
+                cell.setCellValue(list.get(i).getMa());
+                cell = row.createCell(2, CellType.STRING);
+                cell.setCellValue(list.get(i).getHoTen());
+                cell = row.createCell(3, CellType.STRING);
+                cell.setCellValue(list.get(i).getGioiTinh());
+                cell = row.createCell(4, CellType.STRING);
+                cell.setCellValue(list.get(i).getSdt());
+                cell = row.createCell(5, CellType.STRING);
+                cell.setCellValue(list.get(i).getNgaySinh());
+                cell = row.createCell(6, CellType.STRING);
+                cell.setCellValue(list.get(i).getDiaChi());
+                cell = row.createCell(7, CellType.STRING);
+                cell.setCellValue(list.get(i).getEmail());
+                cell = row.createCell(8, CellType.STRING);
+                cell.setCellValue(list.get(i).getMatKhau());
+                cell = row.createCell(9, CellType.NUMERIC);
+                cell.setCellValue(list.get(i).getTrangThai());
+                cell = row.createCell(10, CellType.STRING);
+                cell.setCellValue(list.get(i).getHinhAnh());
+            }
+
+            File f = new File("D:\\duan1_nhom8\\excel\\NhanVienExcel.xlsx");
+
+            try {
+                FileOutputStream fis = new FileOutputStream(f);
+                wb.write(fis);
+                fis.close();
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+
+            JOptionPane.showMessageDialog(this, "Done !!!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error !!!");
+        }
+    }//GEN-LAST:event_XuatExcelActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JNhanVien;
     private javax.swing.JPanel TTNhanVien;
+    private javax.swing.JButton XuatExcel;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnTIm;
@@ -908,6 +1021,7 @@ public class NhanVienJpanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbbCV;
     private javax.swing.JComboBox<String> cbbTT;
     private javax.swing.JComboBox<String> cbbVaiTroNV;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
