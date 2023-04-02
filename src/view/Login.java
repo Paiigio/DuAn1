@@ -345,7 +345,7 @@ public class Login extends javax.swing.JFrame {
     public String randomPassword() {
         int leftLimit = 97; // letter 'a'
         int rightLimit = 122; // letter 'z'
-        int len = 10;
+        int len = 6;
         Random random = new Random();
         StringBuilder buffer = new StringBuilder(len);
         for (int i = 0; i < len; i++) {
