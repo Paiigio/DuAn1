@@ -29,7 +29,7 @@ public class HoaDonChiTietResponsitory {
             while (rs.next()) {
                 HoaDon hd = hds.getHDByID(rs.getString(1));
                 CTSanPham ctsp = ctspr.getCTSanPhamByID(rs.getString(2));
-                list.add(new HoaDonChiTiet(hd, ctsp, rs.getFloat(3), rs.getInt(4), rs.getFloat(5), rs.getDate(6), rs.getDate(7)));
+                list.add(new HoaDonChiTiet(rs.getString(9),hd, ctsp, rs.getFloat(3), rs.getInt(4), rs.getFloat(5), rs.getDate(6), rs.getDate(7),rs.getString(8)));
             }
         } catch (Exception ex) {
 
@@ -39,8 +39,8 @@ public class HoaDonChiTietResponsitory {
     }
 
     public HoaDonChiTiet insertHDCT(HoaDonChiTiet hdct) {
-        String sql = "INSERT dbo.HOADONCHITIET(IDHD,IDCTSP,DONGIA,SOLUONG,NGAYTAO,NGAYSUA) VALUES(?,?,?,?,GETDATE(),null)";
-        JDBC_Helper.excuteUpdate(sql, hdct.getIdhd().getId(), hdct.getIdctsp().getId(), hdct.getDongia(), hdct.getSl());
+        String sql = "INSERT dbo.HOADONCHITIET(IDHD,IDCTSP,DONGIA,SOLUONG,NGAYTAO,NGAYSUA,GHICHU) VALUES(?,?,?,?,GETDATE(),null,?)";
+        JDBC_Helper.excuteUpdate(sql, hdct.getIdhd().getId(), hdct.getIdctsp().getId(), hdct.getDongia(), hdct.getSl(),hdct.getGhiChu());
         return hdct;
     }
 
@@ -50,9 +50,9 @@ public class HoaDonChiTietResponsitory {
         return hdct;
     }
 
-    public Integer deleteHDCT(String ma) {
-        String sql = "DELETE HOADONCHITIET WHERE IDCTSP =?";
-        int row = JDBC_Helper.excuteUpdate(sql, ma);
+    public Integer deleteHDCT(String id) {
+        String sql = "DELETE HOADONCHITIET WHERE IDHDCT =?";
+        int row = JDBC_Helper.excuteUpdate(sql, id);
         return row;
     }
 
@@ -64,7 +64,7 @@ public class HoaDonChiTietResponsitory {
             while (rs.next()) {
                 HoaDon hd = hds.getHDByID(rs.getString(1));
                 CTSanPham ctsp = ctspr.getCTSanPhamByID(rs.getString(2));
-                list.add(new HoaDonChiTiet(hd, ctsp, rs.getFloat(3), rs.getInt(4), rs.getFloat(5), rs.getDate(6), rs.getDate(7)));
+                list.add(new HoaDonChiTiet(rs.getString(9),hd, ctsp, rs.getFloat(3), rs.getInt(4), rs.getFloat(5), rs.getDate(6), rs.getDate(7),rs.getString(8)));
             }
         } catch (Exception ex) {
 

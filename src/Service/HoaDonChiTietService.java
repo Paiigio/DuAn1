@@ -26,7 +26,7 @@ public class HoaDonChiTietService implements  IHoaDonChiTietService{
               ArrayList<HoaDonChiTietModel> list = new ArrayList<>();
         ArrayList<HoaDonChiTiet> hd = hdct.getAllHoaDonCT();
         for (HoaDonChiTiet x : hd) {
-            list.add(new HoaDonChiTietModel(x.getIdhd(),x.getIdctsp(), x.getDongia(), x.getSl(), x.getThanhTien(), x.getNgayTao(), x.getNgaySua()));
+            list.add(new HoaDonChiTietModel(x.getId(),x.getIdhd(),x.getIdctsp(), x.getDongia(), x.getSl(), x.getThanhTien(), x.getNgayTao(), x.getNgaySua(),x.getGhiChu()));
 
         }
         return list;
@@ -34,19 +34,19 @@ public class HoaDonChiTietService implements  IHoaDonChiTietService{
     @Override
     public HoaDonChiTietModel insertHDCT(HoaDonChiTietModel h) {
             ArrayList<HoaDonChiTiet> ds = hdct.getAllHoaDonCT();
-        var x = hdct.insertHDCT(new HoaDonChiTiet(h.getIdhd(), h.getIdctsp(), h.getDongia(), h.getSl(), h.getThanhTien(), h.getNgayTao(), h.getNgaySua()));
-        return new HoaDonChiTietModel(x.getIdhd(),x.getIdctsp(), x.getDongia(), x.getSl(), x.getThanhTien(), x.getNgayTao(), x.getNgaySua());
+        var x = hdct.insertHDCT(new HoaDonChiTiet(h.getId(),h.getIdhd(), h.getIdctsp(), h.getDongia(), h.getSl(), h.getThanhTien(), h.getNgayTao(), h.getNgaySua(),h.getGhiChu()));
+        return new HoaDonChiTietModel(x.getId(),x.getIdhd(),x.getIdctsp(), x.getDongia(), x.getSl(), x.getThanhTien(), x.getNgayTao(), x.getNgaySua(),x.getGhiChu());
     }
     @Override
-    public Integer deleteHDCT(String ma){
-        return hdct.deleteHDCT(ma);
+    public Integer deleteHDCT(String id){
+        return hdct.deleteHDCT(id);
     }
      @Override
     public ArrayList<HoaDonChiTietModel> getAllHoaDonCTBYIDHD(String id) {
               ArrayList<HoaDonChiTietModel> list = new ArrayList<>();
         ArrayList<HoaDonChiTiet> hd = hdct.getAllHoaDonCTByIDHD(id);
         for (HoaDonChiTiet x : hd) {
-            list.add(new HoaDonChiTietModel(x.getIdhd(),x.getIdctsp(), x.getDongia(), x.getSl(), x.getThanhTien(), x.getNgayTao(), x.getNgaySua()));
+            list.add(new HoaDonChiTietModel(x.getId(),x.getIdhd(),x.getIdctsp(), x.getDongia(), x.getSl(), x.getThanhTien(), x.getNgayTao(), x.getNgaySua(),x.getGhiChu()));
 
         }
         return list;

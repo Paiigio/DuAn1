@@ -11,6 +11,7 @@ import java.util.Date;
  * @author duong
  */
 public class HoaDonChiTiet {
+    private String id;
     private HoaDon idhd;
     private CTSanPham idctsp;
     private float dongia;
@@ -18,11 +19,13 @@ public class HoaDonChiTiet {
     private float thanhTien;
     private Date ngayTao;
     private Date ngaySua;
+    private String ghiChu;
 
     public HoaDonChiTiet() {
     }
 
-    public HoaDonChiTiet(HoaDon idhd, CTSanPham idctsp, float dongia, int sl, float thanhTien, Date ngayTao, Date ngaySua) {
+    public HoaDonChiTiet(String id,HoaDon idhd, CTSanPham idctsp, float dongia, int sl, float thanhTien, Date ngayTao, Date ngaySua,String ghiChu) {
+        this.id = id;
         this.idhd = idhd;
         this.idctsp = idctsp;
         this.dongia = dongia;
@@ -30,6 +33,23 @@ public class HoaDonChiTiet {
         this.thanhTien = thanhTien;
         this.ngayTao = ngayTao;
         this.ngaySua = ngaySua;
+        this.ghiChu = ghiChu;
+    }
+
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
 

@@ -136,31 +136,35 @@ public class BanHangJpanel extends javax.swing.JPanel {
         Locale localeVN = new Locale("vi", "VN");
         NumberFormat vn = NumberFormat.getInstance(localeVN);
         // lấy ra hóa đơn chi tiết có trong hóa đơn và mã imei
+                    dtmGH.setRowCount(0);
         for (HoaDonChiTietModel hdct : listNEW) {
-            // lấy ra những mã imei có mã sản phẩm đang có trong hóa đơn chi tiết
-            ArrayList<IMEIModel> listI = iIMEIService.selectSL(hdct.getIdctsp().getId());
-            for (IMEIModel x : listI) {
-                if (x.getGhiChu() != null) {
-                    List<String> listString = tachChuoi(x.getGhiChu());
-//                    System.out.println(listString);
-                    for (String s : listString) {
-//                        System.out.println(s);
-                        if (maHD.equals(s)) {
-                            maIMEI = x.getMa();
 
-                            dem++;
-                            dtmGH.addRow(new Object[]{
-                                dem,
-                                hdct.getIdctsp().getSp().getTen() + " " + hdct.getIdctsp().getDl().getSoDungLuong() + " " + hdct.getIdctsp().getMs().getTen(),
-                                vn.format(hdct.getDongia()),
-                                hdct.getSl(),
-                                vn.format(hdct.getSl() * hdct.getDongia()),
-                                maIMEI
-                            });
-                        }
-                    }
-                }
-            }
+
+            // lấy ra những mã imei có mã sản phẩm đang có trong hóa đơn chi tiết
+//            ArrayList<IMEIModel> listI = iIMEIService.selectSL(hdct.getIdctsp().getId());
+//            for (IMEIModel x : listI) {
+//                if (x.getGhiChu() != null) {
+//                    List<String> listString = tachChuoi(x.getGhiChu());
+////                    System.out.println(listString);
+//                    for (String s : listString) {
+////                        System.out.println(s);
+//                        if (maHD.equals(s)) {
+//                            maIMEI = x.getMa();
+//
+            dem++;
+            dtmGH.addRow(new Object[]{
+                dem,
+                hdct.getIdctsp().getSp().getTen() + " " + hdct.getIdctsp().getDl().getSoDungLuong() + " " + hdct.getIdctsp().getMs().getTen(),
+                vn.format(hdct.getDongia()),
+                hdct.getSl(),
+                vn.format(hdct.getSl() * hdct.getDongia()),
+                hdct.getGhiChu()
+            });
+//                        }
+//                    }
+//                }
+//            }
+
         }
 
 //                if (maHD.trim().equals(tblHoaDon.getValueAt(index, 0).toString())) {
@@ -197,29 +201,29 @@ public class BanHangJpanel extends javax.swing.JPanel {
         // lấy ra hóa đơn chi tiết có trong hóa đơn và mã imei
         for (HoaDonChiTietModel hdct : listNEW) {
             // lấy ra những mã imei có mã sản phẩm đang có trong hóa đơn chi tiết
-            ArrayList<IMEIModel> listI = iIMEIService.selectSL(hdct.getIdctsp().getId());
-            for (IMEIModel x : listI) {
-                if (x.getGhiChu() != null) {
-                    List<String> listString = tachChuoi(x.getGhiChu());
-//                    System.out.println(listString);
-                    for (String s : listString) {
-//                        System.out.println(s);
-                        if (maHD.equals(s)) {
-                            maIMEI = x.getMa();
-
-                            dem++;
-                            dtmGH.addRow(new Object[]{
-                                dem,
-                                hdct.getIdctsp().getSp().getTen() + " " + hdct.getIdctsp().getDl().getSoDungLuong() + " " + hdct.getIdctsp().getMs().getTen(),
-                                vn.format(hdct.getDongia()),
-                                hdct.getSl(),
-                                vn.format(hdct.getSl() * hdct.getDongia()),
-                                maIMEI
-                            });
-                        }
-                    }
-                }
-            }
+//            ArrayList<IMEIModel> listI = iIMEIService.selectSL(hdct.getIdctsp().getId());
+//            for (IMEIModel x : listI) {
+//                if (x.getGhiChu() != null) {
+//                    List<String> listString = tachChuoi(x.getGhiChu());
+////                    System.out.println(listString);
+//                    for (String s : listString) {
+////                        System.out.println(s);
+//                        if (maHD.equals(s)) {
+//                            maIMEI = x.getMa();
+//
+            dem++;
+            dtmGH.addRow(new Object[]{
+                dem,
+                hdct.getIdctsp().getSp().getTen() + " " + hdct.getIdctsp().getDl().getSoDungLuong() + " " + hdct.getIdctsp().getMs().getTen(),
+                vn.format(hdct.getDongia()),
+                hdct.getSl(),
+                vn.format(hdct.getSl() * hdct.getDongia()),
+                hdct.getGhiChu()
+            });
+//                        }
+//                    }
+//                }
+//            }
         }
 
 //                if (maHD.trim().equals(tblHoaDon.getValueAt(index, 0).toString())) {
@@ -407,12 +411,6 @@ public class BanHangJpanel extends javax.swing.JPanel {
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel30.setText("Số điện thoại KH");
-
-        txtSDT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSDTActionPerformed(evt);
-            }
-        });
 
         jLabel31.setText("Tên KH");
 
@@ -815,7 +813,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
 
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
         int index = tblHoaDon.getSelectedRow();
-        if (index >= 0){
+        if (index >= 0) {
             btnKH.setEnabled(true);
             btnThay.setEnabled(true);
         }
@@ -917,7 +915,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
         ArrayList<HoaDonChiTietModel> listHDCT = iHoaDonChiTietService.getAllHoaDonCT();
         int indexHD = tblHoaDon.getSelectedRow();
         if (indexHD < 0) {
-            JOptionPane.showMessageDialog(this, "Moi ban chon don hang");
+            JOptionPane.showMessageDialog(this, "Mời bạn chọn hóa đơn!");
             return;
         }
         String maHD = tblHoaDon.getValueAt(indexHD, 0).toString();
@@ -945,49 +943,64 @@ public class BanHangJpanel extends javax.swing.JPanel {
                 c.setId(x.getId());
             }
         }
-        System.out.println("ID Chi tiết sản phẩm: " + c.getId());
+        int dem = 0;
+        String ghiChu = "";
+        ArrayList<IMEIModel> listIMEINEW = iIMEIService.selectSL(c.getId());
         // list imei được chọn từ ctsp còn tồn
-        ArrayList<IMEIModel> listIMEI = iIMEIService.selectSL(c.getId());
-        IMEIModel imei = new IMEIModel();
+        ArrayList<HoaDonChiTietModel> listHDCTNEW = iHoaDonChiTietService.getAllHoaDonCTBYIDHD(hd.getId());
         // nhập vào imei
         String maIMEI = (String) JOptionPane.showInputDialog(this, "Mời bạn chọn mã IMEI", "Lựa chọn", JOptionPane.INFORMATION_MESSAGE, null, null, "Mã IMEI");
-        System.out.println("Mã vừa nhập :" + maIMEI);
-        String ghiChu = "";
-        String maIM = maIMEI;
-        int dem = 0;
-        // kiểm tra imei uvằ nhập vào
-        for (IMEIModel i : listIMEI) {
-            System.out.println("Mã imei trong list" + i.getMa());
-            if (i.getMa() != null && i.getMa().equals(maIMEI)) {
-                ghiChu = i.getGhiChu();
-                List<String> listS = tachChuoi(i.getGhiChu());
-                if (listS != null) {
-                    for (String st : listS) {
-                        if (maHD.equals(st)) {
-                            JOptionPane.showMessageDialog(this, "IMEI đã tồn tại trong đơn hàng");
-                            return;
-                        } else {
-                            dem++;
-                            imei.setGhiChu(i.getGhiChu() + " " + maHD);
-                        }
-                    }
-                } else {
-                    dem++;
-                    imei.setGhiChu(maHD);
+        for (IMEIModel ss : listIMEINEW) {
+            System.out.println("IMEI " + ss.getMa());
+            if (ss.getMa() != null) {
+                if (ss.getMa().equals(maIMEI)){
+                    ghiChu = ss.getMa();
+                     dem++;               
                 }
-                imei.setMa(i.getMa());
-                imei.setId(i.getId());
             }
         }
-        if (dem == 0) {
-            JOptionPane.showMessageDialog(this, "Sai mã IMEI hoặc mã imei không tồn tại");
-            return;
+        if (dem == 0){
+                JOptionPane.showMessageDialog(this, "Sai mã IMEI hoặc mã imei không tồn tại");
+                return;            
         }
+        // kiểm tra imei uvằ nhập vào
+        for (HoaDonChiTietModel i : listHDCTNEW) {
+            if (i.getGhiChu() != null && i.getGhiChu().equals(maIMEI)) {
+                JOptionPane.showMessageDialog(this, "IMEI đã tồn tại trong đơn hàng");
+                return;
+//                ghiChu = i.getGhiChu();
+//                List<String> listS = tachChuoi(i.getGhiChu());
+//                if (listS != null) {
+//                    for (String st : listS) {
+//                        if (maHD.equals(st)) {
+//                            JOptionPane.showMessageDialog(this, "IMEI đã tồn tại trong đơn hàng");
+//                            return;
+//                        } else {
+//                            dem++;
+//                            imei.setGhiChu(i.getGhiChu() + " " + maHD);
+//                        }
+//                    }
+//                } else {
+//                    dem++;
+//                    imei.setGhiChu(maHD);
+//                }
+//                imei.setMa(i.getMa());
+//                imei.setId(i.getId());
+//            } else {
+//                dem++;
+//            }
+//        }
+//        if (dem == 0) {
+//
+            }
+        }
+        System.out.println("Mã IMEI SAU"+maIMEI);
         String donGia = tblSanPham.getValueAt(indexSP, 3).toString();
         HoaDonChiTietModel hdct = new HoaDonChiTietModel();
         hdct.setSl(1);
         hdct.setIdctsp(c);
         hdct.setIdhd(hd);
+        hdct.setGhiChu(maIMEI);
         hdct.setDongia(Float.valueOf(donGia.replace(".", "")));
         hdct.setThanhTien(Float.valueOf(donGia.replace(".", "")));
         if (hdct == null) {
@@ -995,13 +1008,8 @@ public class BanHangJpanel extends javax.swing.JPanel {
         }
 
         iHoaDonChiTietService.insertHDCT(hdct);
-        iIMEIService.updateIMEI(imei);
         loadGioHang();
     }//GEN-LAST:event_tblSanPhamMouseClicked
-
-    private void txtSDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSDTActionPerformed
-
-    }//GEN-LAST:event_txtSDTActionPerformed
 
     private void cbbTrangThaiHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTrangThaiHoaDonActionPerformed
         if (cbbTrangThaiHoaDon.getSelectedIndex() == 0) {
@@ -1036,7 +1044,22 @@ public class BanHangJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cbbTrangThaiHoaDonActionPerformed
 
     private void btnXoaCTSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaCTSPActionPerformed
-
+        int indexGH = tblGioHang.getSelectedRow();
+        String ghiChu = tblGioHang.getValueAt(indexGH, 5).toString();
+        String idHDCT = "";
+        ArrayList<HoaDonChiTietModel> listHDCTModel = iHoaDonChiTietService.getAllHoaDonCT();
+        for (HoaDonChiTietModel g : listHDCTModel){
+            if (g.getGhiChu()!=null && g.getGhiChu().equals(ghiChu)){
+                idHDCT = g.getId();
+            }
+        }
+        if (JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?","Thông báo",JOptionPane.YES_NO_OPTION)!=JOptionPane.YES_OPTION){
+            return;
+        }
+        if (iHoaDonChiTietService.deleteHDCT(idHDCT)!=null){
+            JOptionPane.showMessageDialog(this, "Xóa thành công");
+            loadGioHang();
+        }
     }//GEN-LAST:event_btnXoaCTSPActionPerformed
 
     private void btnKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKHActionPerformed
@@ -1055,18 +1078,17 @@ public class BanHangJpanel extends javax.swing.JPanel {
         KhachHangModel kh = iKhachHangService.getTimKH(KhachHang_BanHang.k111.getSdt());
         KhachHang khNew = new KhachHang();
         khNew.setId(kh.getId());
-        HoaDonModel hd  = new HoaDonModel();
+        HoaDonModel hd = new HoaDonModel();
         hd.setKh(khNew);
         hd.setMa(maHD);
-        if (iHoaDonService.upadteHD(hd)!=null){
+        if (iHoaDonService.upadteHD(hd) != null) {
             JOptionPane.showMessageDialog(this, "Cập nhật thành công");
             loadHD();
-        } 
+        }
 
     }//GEN-LAST:event_btnThayActionPerformed
 
     private void btnKHMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKHMousePressed
-
 
 
     }//GEN-LAST:event_btnKHMousePressed
@@ -1124,15 +1146,15 @@ public class BanHangJpanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtTimKiemSP;
     private javax.swing.JTextField txtTongTien;
     // End of variables declaration//GEN-END:variables
-private List tachChuoi(String s) {
-        List<String> list = new ArrayList<>();
-        String[] mang = s.split(" ");
-        if (mang == null) {
-            return null;
-        }
-        for (String x : mang) {
-            list.add(x);
-        }
-        return list;
-    }
+//private List tachChuoi(String s) {
+//        List<String> list = new ArrayList<>();
+//        String[] mang = s.split(" ");
+//        if (mang == null) {
+//            return null;
+//        }
+//        for (String x : mang) {
+//            list.add(x);
+//        }
+//        return list;
+//    }
 }
