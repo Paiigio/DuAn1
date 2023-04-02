@@ -65,6 +65,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
                     list2.add(ctkm.updateTrangThai(x));
                 } else {
                     list2.add(x);
+
                 }
             }
             return list2;
@@ -72,12 +73,20 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
 
     public void loadTable() {
         ArrayList<CTKhuyenMaiModel> list = checkExpiryDate();
+
         dtm.setRowCount(0);
         Collections.sort(list, Comparator.comparing(CTKhuyenMai -> CTKhuyenMai.getMa()));
         for (CTKhuyenMaiModel x : list) {
+                    System.out.println(x.getTrangThai());
             Object[] rowData = {
-                x.getMa(), x.getTen(), x.getThoiGianBatDau(), x.getThoiGianKetThuc(), 
-                x.getHinhThuc(), x.getNgayTao(), x.getNgaySua(), x.getTrangThai() == 0 ? "Hoạt Động" : "Hết Hạn"
+                x.getMa(),
+                x.getTen(),
+                x.getThoiGianBatDau(), 
+                x.getThoiGianKetThuc(), 
+                x.getHinhThuc(),
+                x.getNgayTao(),
+                x.getNgaySua(),
+                x.getTrangThai() == 0 ? "Hoạt Động" : "Hết Hạn"
             };
             dtm.addRow(rowData);
 
@@ -135,7 +144,10 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         Date ngayBD = txtBD.getDate();
         Date ngayKT = txtKetThuc.getDate();
         int trangThai = rdoHetHan.isSelected() ? 1 : 0;
-
+        if (trangThai == 1){
+            JOptionPane.showMessageDialog(this, "Chương trình đã hết hạn , không thể thêm");
+            return null;
+        }
         if (ma.length() == 0) {
             JOptionPane.showMessageDialog(this, "Không được để trống mã");
             txtMa.requestFocus();
@@ -166,6 +178,10 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         if (hinhthuc.length() == 0) {
             JOptionPane.showMessageDialog(this, "Không được để trống hình thức");
             txtHinhThuc.requestFocus();
+            return null;
+        }
+        if (!ngayBD.before(ngayKT)){
+            JOptionPane.showMessageDialog(this,"Ngày bắt đầu phải trước ngày kết thúc" );
             return null;
         }
         return new CTKhuyenMaiModel(null, ma, ten, ngayBD, ngayKT, hinhthuc, null, null, trangThai);
@@ -727,6 +743,10 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
             return;
         }
         if (JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm / sửa chương trình khuyến mãi không?", "Thông báo", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+            return;
+        }
+        if (tblBang.getValueAt(indexCTKM, 7).toString().equalsIgnoreCase("Hết hạn")){
+            JOptionPane.showMessageDialog(KhuyenMaiJpanel.this, "Chương trình đã hết hạn , mời bạn chọn chương trình khác");
             return;
         }
         for (int i = 0; i < listSP.size(); i++) {

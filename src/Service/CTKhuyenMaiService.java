@@ -52,7 +52,7 @@ public class CTKhuyenMaiService implements ICTKhuyenMaiService {
     
     @Override
     public CTKhuyenMaiModel updateTrangThai(CTKhuyenMaiModel cv) {
-        var x = ct.updateCTKM(new CTKhuyenMai(cv.getId(), cv.getMa(), cv.getTen(), cv.getThoiGianBatDau(), cv.getThoiGianKetThuc(), cv.getHinhThuc(), cv.getNgayTao(), cv.getNgaySua(), cv.getTrangThai()));
+        var x = ct.updateTrangThai(new CTKhuyenMai(cv.getId(), cv.getMa(), cv.getTen(), cv.getThoiGianBatDau(), cv.getThoiGianKetThuc(), cv.getHinhThuc(), cv.getNgayTao(), cv.getNgaySua(), cv.getTrangThai()));
         return new CTKhuyenMaiModel(x.getId(), x.getMa(), x.getTen(), x.getThoiGianBatDau(), x.getThoiGianKetThuc(), x.getHinhThuc(), x.getNgayTao(), x.getNgaySua(), x.getTrangThai());
     }
 
