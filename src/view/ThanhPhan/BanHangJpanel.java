@@ -1007,15 +1007,5 @@ public class BanHangJpanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtTimKiemSP;
     private javax.swing.JTextField txtTongTien;
     // End of variables declaration//GEN-END:variables
-//private List tachChuoi(String s) {
-//        List<String> list = new ArrayList<>();
-//        String[] mang = s.split(" ");
-//        if (mang == null) {
-//            return null;
-//        }
-//        for (String x : mang) {
-//            list.add(x);
-//        }
-//        return list;
-//    }
+
 }

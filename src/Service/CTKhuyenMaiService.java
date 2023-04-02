@@ -55,7 +55,11 @@ public class CTKhuyenMaiService implements ICTKhuyenMaiService {
         var x = ct.updateTrangThai(new CTKhuyenMai(cv.getId(), cv.getMa(), cv.getTen(), cv.getThoiGianBatDau(), cv.getThoiGianKetThuc(), cv.getHinhThuc(), cv.getNgayTao(), cv.getNgaySua(), cv.getTrangThai()));
         return new CTKhuyenMaiModel(x.getId(), x.getMa(), x.getTen(), x.getThoiGianBatDau(), x.getThoiGianKetThuc(), x.getHinhThuc(), x.getNgayTao(), x.getNgaySua(), x.getTrangThai());
     }
-
+    @Override
+    public CTKhuyenMaiModel updateTrangThaiHoatDong (CTKhuyenMaiModel cv) {
+        var x = ct.updateTrangThaiHoatDong(new CTKhuyenMai(cv.getId(), cv.getMa(), cv.getTen(), cv.getThoiGianBatDau(), cv.getThoiGianKetThuc(), cv.getHinhThuc(), cv.getNgayTao(), cv.getNgaySua(), cv.getTrangThai()));
+        return new CTKhuyenMaiModel(x.getId(), x.getMa(), x.getTen(), x.getThoiGianBatDau(), x.getThoiGianKetThuc(), x.getHinhThuc(), x.getNgayTao(), x.getNgaySua(), x.getTrangThai());
+    }
     @Override
     public ArrayList<CTKhuyenMaiModel> getTimTen(String ten) {
         ArrayList<CTKhuyenMaiModel> list = new ArrayList<>();

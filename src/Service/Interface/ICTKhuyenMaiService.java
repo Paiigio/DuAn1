@@ -19,8 +19,10 @@ public interface ICTKhuyenMaiService {
     public CTKhuyenMaiModel insertCTKM(CTKhuyenMaiModel cv);
 
     public CTKhuyenMaiModel updateCTKM(CTKhuyenMaiModel cv);
-    
+
     public CTKhuyenMaiModel updateTrangThai(CTKhuyenMaiModel cv);
+
+    public CTKhuyenMaiModel updateTrangThaiHoatDong(CTKhuyenMaiModel cv);
 
     public ArrayList<CTKhuyenMaiModel> getTimTen(String ten);
 }

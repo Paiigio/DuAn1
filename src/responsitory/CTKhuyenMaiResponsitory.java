@@ -48,9 +48,9 @@ public class CTKhuyenMaiResponsitory {
     }
 
     public CTKhuyenMai insertCTKM(CTKhuyenMai cv) {
-        String sql = "	INSERT INTO dbo.CTKHUYENMAI(IDCTKM,  MAKM, TENKM,  TGBATDAU,TGKETTHUC,HINHTHUC,"
-                + "NGAYTAO,NGAYSUA)VALUES(NEWID(),?,?,?,?,?,GETDATE(),NULL)";
-        JDBC_Helper.excuteUpdate(sql, cv.getMa(), cv.getTen(), cv.getThoiGianBatDau(), cv.getThoiGianKetThuc(), cv.getHinhThuc());
+        String sql = "	INSERT INTO dbo.CTKHUYENMAI(IDCTKM,MAKM,TENKM,TGBATDAU,TGKETTHUC,HINHTHUC,"
+                + "NGAYTAO,NGAYSUA,TRANGTHAI)VALUES(NEWID(),?,?,?,?,?,GETDATE(),NULL,?)";
+        JDBC_Helper.excuteUpdate(sql, cv.getMa(), cv.getTen(), cv.getThoiGianBatDau(), cv.getThoiGianKetThuc(), cv.getHinhThuc(),cv.getTrangThai());
         return cv;
     }
 
@@ -62,6 +62,11 @@ public class CTKhuyenMaiResponsitory {
     
     public CTKhuyenMai updateTrangThai(CTKhuyenMai cv) {
         String sql = "UPDATE CTKHUYENMAI SET TRANGTHAI = 1 WHERE TGKETTHUC = ?";
+        JDBC_Helper.excuteUpdate(sql, cv.getThoiGianKetThuc());
+        return cv;
+    }
+        public CTKhuyenMai updateTrangThaiHoatDong(CTKhuyenMai cv) {
+        String sql = "UPDATE CTKHUYENMAI SET TRANGTHAI = 0 WHERE TGKETTHUC = ?";
         JDBC_Helper.excuteUpdate(sql, cv.getThoiGianKetThuc());
         return cv;
     }
