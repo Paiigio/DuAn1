@@ -70,13 +70,14 @@ public class BanHangJpanel extends javax.swing.JPanel {
         btnThay.setEnabled(false);
         btnKH.setEnabled(false);
         load();
-
+        System.out.println(giamGia("5%", 130000));
     }
 
     private float giamGia(String hinhThuc, float giaTien) {
         float gia = 0;
         if (hinhThuc.contains("%")) {
-            gia = (Integer.valueOf(hinhThuc.substring(0, hinhThuc.length() - 1)) / 100 * giaTien);
+            gia = giaTien - (Float.valueOf(hinhThuc.trim().substring(0, hinhThuc.length() - 1))/100 * giaTien);
+            System.out.println(Float.valueOf(hinhThuc.trim().substring(0, hinhThuc.length() - 1))/100);
         } else {
             gia = giaTien - Integer.valueOf(hinhThuc);
         }
@@ -106,7 +107,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(1000);
                     loadSP();
                     loadHD();
                 } catch (InterruptedException ex) {
