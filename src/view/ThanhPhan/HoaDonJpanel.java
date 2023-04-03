@@ -136,7 +136,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
                     s.getMa(),
                     Double.valueOf(s.getThanhTien()).longValue(),
                     s.getHinhThucThanhToan() == 1 ? "Tiền mặt" : "Chuyển khoản", s.getNgayThanhToan(),
-                    s.getTrangThai() == 1 ? "Chưa thanh toán" : "Đã thanh toán",
+                    s.getTrangThai() == 0 ? "Chưa thanh toán" : "Đã thanh toán",
                     s.getNgayTao(), s.getNgaySua()
                 });
 
@@ -153,7 +153,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
                 s.getNv(),
                 s.getCp(),
                 s.getMa(), Double.valueOf(s.getThanhTien()).longValue(), s.getHinhThucThanhToan() == 1 ? "Tiền mặt" : "Chuyển khoản", s.getNgayThanhToan(),
-                s.getTrangThai() == 1 ? "Chưa thanh toán" : "Đã thanh toán", s.getNgayTao(), s.getNgaySua()
+                s.getTrangThai() == 0 ? "Chưa thanh toán" : "Đã thanh toán", s.getNgayTao(), s.getNgaySua()
             });
 
         }

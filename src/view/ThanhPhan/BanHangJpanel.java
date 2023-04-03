@@ -112,7 +112,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
                 try {
                     Thread.sleep(1000);
                     loadSP();
-                    loadHD();
+                    loadHDCho();
                 } catch (InterruptedException ex) {
                     Logger.getLogger(ThongKeJpanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -133,6 +133,19 @@ public class BanHangJpanel extends javax.swing.JPanel {
                 x.getTrangThai() == 0 ? "Chưa thanh toán" : "Đã thanh toán"
             });
         }
+    }
+    private void loadHDCho(){
+          ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDonCTT();
+            dtmHD.setRowCount(0);
+            for (HoaDonModel x : listHD) {
+                dtmHD.addRow(new Object[]{
+                    x.getMa(),
+                    x.getNv().getHoTen(),
+                    x.getKh().getHoTen(),
+                    x.getNgayTao(),
+                    x.getTrangThai() == 0 ? "Chưa thanh toán" : "Đã thanh toán"
+                });
+            }
     }
 
     private void loadGioHang() {
@@ -344,6 +357,12 @@ public class BanHangJpanel extends javax.swing.JPanel {
 
         jLabel1.setText("Tìm kiếm");
 
+        txtTimKiemSP.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtTimKiemSPCaretUpdate(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -378,11 +397,6 @@ public class BanHangJpanel extends javax.swing.JPanel {
         txtTenKH.setEnabled(false);
 
         btnKH.setText("Chọn");
-        btnKH.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnKHMousePressed(evt);
-            }
-        });
         btnKH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKHActionPerformed(evt);
@@ -936,17 +950,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
             loadHD();
         }
         if (cbbTrangThaiHoaDon.getSelectedIndex() == 1) {
-            ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDonCTT();
-            dtmHD.setRowCount(0);
-            for (HoaDonModel x : listHD) {
-                dtmHD.addRow(new Object[]{
-                    x.getMa(),
-                    x.getNv().getHoTen(),
-                    x.getKh().getHoTen(),
-                    x.getNgayTao(),
-                    x.getTrangThai() == 0 ? "Chưa thanh toán" : "Đã thanh toán"
-                });
-            }
+          loadHDCho();
         }
         if (cbbTrangThaiHoaDon.getSelectedIndex() == 2) {
             ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDonTT();
@@ -1008,11 +1012,6 @@ public class BanHangJpanel extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_btnThayActionPerformed
-
-    private void btnKHMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKHMousePressed
-
-
-    }//GEN-LAST:event_btnKHMousePressed
 
     private void txtTongTienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTongTienActionPerformed
 
@@ -1106,6 +1105,10 @@ public class BanHangJpanel extends javax.swing.JPanel {
             Logger.getLogger(BanHangJpanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnThanhToan1ActionPerformed
+
+    private void txtTimKiemSPCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimKiemSPCaretUpdate
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimKiemSPCaretUpdate
     private void TongTien() {
         int indexHD = tblHoaDon.getSelectedRow();
         String maHD = tblHoaDon.getValueAt(indexHD, 0).toString();

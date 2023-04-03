@@ -76,8 +76,10 @@ public class KhachHangJpanel extends javax.swing.JPanel {
     }
 
     public void loadTableTim(String sdt) {
-        KhachHangModel x = khs.getTimKH(sdt);
+        ArrayList<KhachHangModel> list = khs.getTimSDT(sdt);
         dtm.setRowCount(0);
+        Collections.sort(list, Comparator.comparing(KhachHang -> KhachHang.getMaKH()));
+        for (KhachHangModel x : list) {
             dtm.addRow(new Object[]{
                 x.getMaKH(),
                 x.getHoTen(),
@@ -90,7 +92,7 @@ public class KhachHangJpanel extends javax.swing.JPanel {
                 x.getNgaySua()
             });
 
-        
+        }
     }
 
     private KhachHangModel getFormData() {
@@ -501,7 +503,7 @@ public class KhachHangJpanel extends javax.swing.JPanel {
         if (sdt.length() == 0) {
             JOptionPane.showMessageDialog(this, "nhập ô tìm theo sdt");
         }
-        if (khs.getTimKH(sdt)!=null) {
+        if (khs.getTimSDT(sdt).size()>0) {
             JOptionPane.showMessageDialog(this, "tìm thành công");
         } else {
             JOptionPane.showMessageDialog(this, "tìm thất bại");
