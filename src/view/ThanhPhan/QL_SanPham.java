@@ -9,10 +9,17 @@ import Service.Interface.INSXService;
 import Service.Interface.ISanPhamService;
 import Service.NSXService;
 import Service.SanPhamService;
+import Utilites.DB_Context;
 import ViewModel.NSXModel;
 import ViewModel.SanPhamModel;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -110,6 +117,7 @@ public class QL_SanPham extends javax.swing.JFrame {
         btnClear = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txtTimKiem = new javax.swing.JTextField();
+        btnImportEX = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblHienThi = new javax.swing.JTable();
 
@@ -158,6 +166,13 @@ public class QL_SanPham extends javax.swing.JFrame {
 
         jLabel6.setText("Tìm kiếm:");
 
+        btnImportEX.setText("Import");
+        btnImportEX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImportEXActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -176,13 +191,6 @@ public class QL_SanPham extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnThem)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tbnSua)
-                        .addGap(12, 12, 12)
-                        .addComponent(btnClear)
-                        .addGap(14, 14, 14))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,10 +198,21 @@ public class QL_SanPham extends javax.swing.JFrame {
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbbNSX, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(40, 40, 40))))
+                        .addGap(40, 40, 40))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnImportEX)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnClear))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnThem)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tbnSua)))
+                        .addGap(89, 89, 89))))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnClear, btnThem, tbnSua});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnClear, btnImportEX, btnThem, tbnSua});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,9 +234,12 @@ public class QL_SanPham extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnClear)
+                            .addComponent(btnImportEX)
+                            .addComponent(btnClear))
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tbnSua)
                             .addComponent(btnThem))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -336,6 +358,61 @@ public class QL_SanPham extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tbnSuaActionPerformed
 
+    private void btnImportEXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportEXActionPerformed
+        JFileChooser jfile = new JFileChooser();
+        int batchSize = 20;
+        Connection con = null;
+        int x1 = tblHienThi.getRowCount();
+        try {
+            int f = jfile.showOpenDialog(this);
+            File file = jfile.getSelectedFile();
+            System.out.println(file);
+            con = DB_Context.getConnection();
+            con.setAutoCommit(false);
+            String sql = "INSERT INTO SANPHAM VALUES(NEWID(),?,?,?,?,GETDATE(),null)";
+
+            PreparedStatement state = con.prepareStatement(sql);
+
+            BufferedReader lineReader = new BufferedReader(new FileReader(file));
+
+            String lineText = null;
+            int count = 0;
+
+            lineReader.readLine();
+            while ((lineText = lineReader.readLine()) != null) {
+                String[] data = lineText.split(",");
+
+                String NSX = data[1];
+                String Ma = data[2];
+                String Ten = data[3];
+                String MT = data[4];
+
+                state.setString(1, NSX);
+                state.setString(2, Ma);
+                state.setString(3, Ten);
+                state.setString(4, MT);
+                state.addBatch();
+                if (count % batchSize == 0) {
+                    state.executeBatch();
+                }
+            }
+
+            lineReader.close();
+            state.executeBatch();
+            con.commit();
+            con.close();
+            JOptionPane.showMessageDialog(this, "Thêm từ danh sách thành công !!");
+            loadData();
+
+        } catch (Exception e) {
+        }
+        int x2 = tblHienThi.getRowCount();
+        if (x1 == x2) {
+            JOptionPane.showMessageDialog(this, "Thêm không thành công !!");
+            return;
+        }
+    }//GEN-LAST:event_btnImportEXActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -373,6 +450,7 @@ public class QL_SanPham extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnImportEX;
     private javax.swing.JButton btnThem;
     private javax.swing.JComboBox<String> cbbNSX;
     private javax.swing.JLabel jLabel1;
