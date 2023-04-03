@@ -782,6 +782,15 @@ public class BanHangJpanel extends javax.swing.JPanel {
             btnKH.setEnabled(true);
             btnThay.setEnabled(true);
         }
+        int hinhThuc = 0;
+        String maHD = tblHoaDon.getValueAt(index, 0).toString();
+        ArrayList<HoaDonModel> list = iHoaDonService.getAllHoaDon();
+        for (HoaDonModel x : list){
+            if(x.getMa()!=null && x.getMa().equals(maHD)){
+                hinhThuc = x.getHinhThucThanhToan();
+            }
+        }
+        cbbPhuongThucThanhToan.setSelectedIndex(hinhThuc);
         txtMaHD.setText(tblHoaDon.getValueAt(index, 0).toString());
         txtTenKH.setText(tblHoaDon.getValueAt(index, 2).toString());
         txtTenNV.setText(tblHoaDon.getValueAt(index, 1).toString());
