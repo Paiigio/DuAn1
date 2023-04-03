@@ -278,6 +278,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
         JBanHang.setBackground(new java.awt.Color(238, 232, 170));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Giỏ hàng"));
+        jPanel3.setOpaque(false);
 
         tblGioHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -312,15 +313,15 @@ public class BanHangJpanel extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnQR, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(btnXoaCTSP)
-                        .addContainerGap(26, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(btnQR, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                        .addGap(32, 32, 32))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,6 +337,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh sách sản phẩm"));
+        jPanel4.setOpaque(false);
 
         tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -387,8 +389,11 @@ public class BanHangJpanel extends javax.swing.JPanel {
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Đơn hàng"));
+        jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel5.setOpaque(false);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel7.setOpaque(false);
 
         jLabel30.setText("Số điện thoại KH");
 
@@ -656,11 +661,11 @@ public class BanHangJpanel extends javax.swing.JPanel {
         });
         jScrollPane6.setViewportView(tblHoaDon);
         if (tblHoaDon.getColumnModel().getColumnCount() > 0) {
-            tblHoaDon.getColumnModel().getColumn(0).setMaxWidth(60);
+            tblHoaDon.getColumnModel().getColumn(0).setMaxWidth(65);
             tblHoaDon.getColumnModel().getColumn(1).setMaxWidth(180);
             tblHoaDon.getColumnModel().getColumn(2).setMaxWidth(180);
-            tblHoaDon.getColumnModel().getColumn(3).setMaxWidth(90);
-            tblHoaDon.getColumnModel().getColumn(4).setMaxWidth(80);
+            tblHoaDon.getColumnModel().getColumn(3).setMaxWidth(100);
+            tblHoaDon.getColumnModel().getColumn(4).setMaxWidth(100);
         }
 
         btnTaoHoaDon.setText("Tạo hóa đơn");
@@ -711,26 +716,27 @@ public class BanHangJpanel extends javax.swing.JPanel {
             .addGroup(JBanHangLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(JBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addGap(66, 66, 66))
         );
         JBanHangLayout.setVerticalGroup(
             JBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JBanHangLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(JBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(JBanHangLayout.createSequentialGroup()
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JBanHangLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -746,7 +752,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(JBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

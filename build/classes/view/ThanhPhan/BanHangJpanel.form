@@ -27,7 +27,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="JBanHang" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -46,13 +46,13 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jPanel8" max="32767" attributes="0"/>
-                      <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jPanel4" max="32767" attributes="0"/>
                       <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jPanel8" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace pref="61" max="32767" attributes="0"/>
                   <Component id="jPanel5" min="-2" pref="421" max="-2" attributes="0"/>
-                  <EmptySpace pref="151" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -60,17 +60,17 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jPanel5" max="32767" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace pref="15" max="32767" attributes="0"/>
+                  <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                  <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                  <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -83,6 +83,7 @@
                 <TitledBorder title="Gi&#x1ecf; h&#xe0;ng"/>
               </Border>
             </Property>
+            <Property name="opaque" type="boolean" value="false"/>
           </Properties>
 
           <Layout>
@@ -90,16 +91,16 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane4" min="-2" pref="591" max="-2" attributes="0"/>
+                      <Component id="jScrollPane4" min="-2" pref="613" max="-2" attributes="0"/>
+                      <EmptySpace pref="23" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="btnXoaCTSP" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="26" max="32767" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="btnQR" min="-2" pref="100" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                              <Component id="btnQR" pref="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="btnXoaCTSP" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -216,6 +217,7 @@
                 <TitledBorder title="Danh s&#xe1;ch s&#x1ea3;n ph&#x1ea9;m"/>
               </Border>
             </Property>
+            <Property name="opaque" type="boolean" value="false"/>
           </Properties>
 
           <Layout>
@@ -328,6 +330,10 @@
                 <TitledBorder title="&#x110;&#x1a1;n h&#xe0;ng"/>
               </Border>
             </Property>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
+            <Property name="opaque" type="boolean" value="false"/>
           </Properties>
 
           <Layout>
@@ -472,6 +478,7 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
+                <Property name="opaque" type="boolean" value="false"/>
               </Properties>
 
               <Layout>
@@ -758,7 +765,7 @@
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
-                        <Column maxWidth="60" minWidth="-1" prefWidth="-1" resizable="true">
+                        <Column maxWidth="65" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>
@@ -773,12 +780,12 @@
                           <Editor/>
                           <Renderer/>
                         </Column>
-                        <Column maxWidth="90" minWidth="-1" prefWidth="-1" resizable="true">
+                        <Column maxWidth="100" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>
                         </Column>
-                        <Column maxWidth="80" minWidth="-1" prefWidth="-1" resizable="true">
+                        <Column maxWidth="100" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>
