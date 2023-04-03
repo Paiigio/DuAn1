@@ -55,26 +55,23 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Component id="jLabel28" min="-2" pref="43" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane2" alignment="0" min="-2" pref="1076" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel27" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
-                                      <Component id="txtTimKiem" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="397" pref="397" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="cbbTKMS" min="-2" pref="175" max="-2" attributes="0"/>
-                                      <Component id="jLabel29" min="-2" pref="64" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="cbbTKDL" min="-2" pref="175" max="-2" attributes="0"/>
-                                      <Component id="jLabel30" min="-2" pref="89" max="-2" attributes="0"/>
-                                  </Group>
+                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane2" alignment="0" min="-2" pref="1125" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel28" min="-2" pref="43" max="-2" attributes="0"/>
+                                  <Component id="txtTimKiem" min="-2" pref="249" max="-2" attributes="0"/>
+                                  <Component id="jLabel27" min="-2" pref="60" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="397" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="cbbTKMS" min="-2" pref="175" max="-2" attributes="0"/>
+                                  <Component id="jLabel29" min="-2" pref="64" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="cbbTKDL" min="-2" pref="175" max="-2" attributes="0"/>
+                                  <Component id="jLabel30" min="-2" pref="89" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -106,10 +103,10 @@
                               <Component id="cbbTKMS" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cbbTKDL" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" min="-2" pref="246" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" pref="246" max="-2" attributes="0"/>
                   <EmptySpace pref="690" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -226,10 +223,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="txtGiaNhap" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel20" min="-2" pref="43" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="jLabel20" alignment="0" min="-2" pref="43" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel15" min="-2" pref="63" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>

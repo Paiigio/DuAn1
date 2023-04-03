@@ -118,11 +118,17 @@ public class HoaDonResponsitory {
         JDBC_Helper.excuteUpdate(sql, nv.getTrangThai(), nv.getId());
         return nv;
     }
+    public HoaDon updateHuyHD(HoaDon nv) {
+        String sql = "UPDATE HOADON SET Trangthai =2 WHERE MAHD=?";
+        JDBC_Helper.excuteUpdate(sql, nv.getMa());
+        return nv;
+    }
 
     public HoaDon upadteHD_ThanhToan(HoaDon nv) {
         String sql = "UPDATE HOADON SET IDCP = ? ,THANHTIEN=?,HINHTHUCTT=? , TRANGTHAI = ?, NGAYTT=GETDATE() WHERE MAHD=?";
         JDBC_Helper.excuteUpdate(sql, nv.getCp().getId(), nv.getThanhTien(), nv.getHinhThucThanhToan(),nv.getTrangThai(), nv.getMa());
         return nv;
     }
+    
 //
 }

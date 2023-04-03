@@ -24,6 +24,8 @@ public interface IHoaDonService {
 
     public HoaDonModel updateTinhTrangHD(HoaDonModel nv);
 
+    public HoaDonModel updateHuyHD(HoaDonModel nv);
+
     public ArrayList<HoaDonModel> getAllHoaDonTT();
 
     public ArrayList<HoaDonModel> getAllHoaDonCTT();
