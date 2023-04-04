@@ -58,22 +58,24 @@ public class KhachHang_BanHang extends javax.swing.JFrame {
         }
     }
 
-    public void loadTableTim(String sdt) {
-        KhachHangModel x = khs.getTimKH(sdt);
+public void loadTableTim(String sdt) {
+        ArrayList<KhachHangModel> list = khs.getTimSDT(sdt);
         dtm.setRowCount(0);
+            Collections.sort(list, Comparator.comparing(KhachHang -> KhachHang.getMaKH()));
+        for (KhachHangModel x : list) {
+            dtm.addRow(new Object[]{
+                x.getMaKH(),
+                x.getHoTen(),
+                x.getGioiTinh(),
+                x.getSdt(),
+                x.getNgaySinh(),
+                x.getDiaChi(),
+                x.getEmail(),
+                x.getNgayTao(),
+                x.getNgaySua()
+            });
 
-        dtm.addRow(new Object[]{
-            x.getMaKH(),
-            x.getHoTen(),
-            x.getGioiTinh(),
-            x.getSdt(),
-            x.getNgaySinh(),
-            x.getDiaChi(),
-            x.getEmail(),
-            x.getNgayTao(),
-            x.getNgaySua()
-        });
-
+        }
     }
 
     public void clearForm() {
@@ -205,13 +207,6 @@ public class KhachHang_BanHang extends javax.swing.JFrame {
         txtTimSDT.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 txtTimSDTCaretUpdate(evt);
-            }
-        });
-        txtTimSDT.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                txtTimSDTInputMethodTextChanged(evt);
             }
         });
 
@@ -455,7 +450,7 @@ public class KhachHang_BanHang extends javax.swing.JFrame {
     private void txtTimSDTCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimSDTCaretUpdate
         String sdt = txtTimSDT.getText().trim();
 
-        if (khs.getTimKH(sdt) != null) {
+        if (khs.getTimSDT(sdt).size()>0) {
 
         } else {
             JOptionPane.showMessageDialog(this, "tìm thất bại");
@@ -464,10 +459,6 @@ public class KhachHang_BanHang extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_txtTimSDTCaretUpdate
-
-    private void txtTimSDTInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtTimSDTInputMethodTextChanged
-
-    }//GEN-LAST:event_txtTimSDTInputMethodTextChanged
 
     private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
         int row = tblBang.getSelectedRow();

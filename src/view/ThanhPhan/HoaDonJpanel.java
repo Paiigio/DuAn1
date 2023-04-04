@@ -45,10 +45,10 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         dtm = (DefaultTableModel) tblHoaDon.getModel();
         dt = (DefaultTableModel) tblHDCT.getModel();
         countHD();
-        if (count % 3 == 0) {
-            soTrang = count / 3;
+        if (count % 5 == 0) {
+            soTrang = count / 5;
         } else {
-            soTrang = count / 3 + 1;
+            soTrang = count / 5 + 1;
         }
         loadTable(1);
         lblTrang.setText("1/" + soTrang);
@@ -104,7 +104,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         }
 
         ArrayList<HoaDonModel> list = new ArrayList<>();
-        String sql = "SELECT TOP 3 * FROM HOADON WHERE MAHD not in (SELECT TOP " + (Trang * 3 - 3) + " MAHD FROM HOADON WHERE TRANGTHAI=" + x + " OR TRANGTHAI=" + y + " ORDER BY MAHD)ORDER BY MAHD";
+        String sql = "SELECT TOP 5 * FROM HOADON WHERE MAHD not in (SELECT TOP " + (Trang * 5 - 5) + " MAHD FROM HOADON WHERE TRANGTHAI=" + x + " OR TRANGTHAI=" + y + " ORDER BY MAHD)ORDER BY MAHD";
         ResultSet rs = JDBC_Helper.excuteQuery(sql);
         try {
             while (rs.next()) {
@@ -136,7 +136,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
                     s.getMa(),
                     Double.valueOf(s.getThanhTien()).longValue(),
                     s.getHinhThucThanhToan() == 1 ? "Tiền mặt" : "Chuyển khoản", s.getNgayThanhToan(),
-                    s.getTrangThai() == 1 ? "Chưa thanh toán" : "Đã thanh toán",
+                    s.getTrangThai() == 0 ? "Chưa thanh toán" : "Đã thanh toán",
                     s.getNgayTao(), s.getNgaySua()
                 });
 
@@ -153,7 +153,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
                 s.getNv(),
                 s.getCp(),
                 s.getMa(), Double.valueOf(s.getThanhTien()).longValue(), s.getHinhThucThanhToan() == 1 ? "Tiền mặt" : "Chuyển khoản", s.getNgayThanhToan(),
-                s.getTrangThai() == 1 ? "Chưa thanh toán" : "Đã thanh toán", s.getNgayTao(), s.getNgaySua()
+                s.getTrangThai() == 0 ? "Chưa thanh toán" : "Đã thanh toán", s.getNgayTao(), s.getNgaySua()
             });
 
         }
@@ -291,18 +291,17 @@ public class HoaDonJpanel extends javax.swing.JPanel {
             .addGroup(JHoaDonLayout.createSequentialGroup()
                 .addGroup(JHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1030, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(JHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(JHoaDonLayout.createSequentialGroup()
-                            .addGap(381, 381, 381)
+                    .addGroup(JHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JHoaDonLayout.createSequentialGroup()
+                            .addContainerGap()
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGap(306, 306, 306)
                             .addComponent(cbbTT, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(JHoaDonLayout.createSequentialGroup()
                             .addGap(33, 33, 33)
-                            .addGroup(JHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(JHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1030, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(JHoaDonLayout.createSequentialGroup()
-                                    .addGap(273, 273, 273)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JHoaDonLayout.createSequentialGroup()
                                     .addComponent(btnTrangDau)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(btnTrangTruoc)
@@ -312,12 +311,12 @@ public class HoaDonJpanel extends javax.swing.JPanel {
                                     .addComponent(btnTiep)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(btnTrangCuoi)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGap(246, 246, 246)
                                     .addComponent(txtDenTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(btnDen)
                                     .addGap(50, 50, 50))))))
-                .addContainerGap(297, Short.MAX_VALUE))
+                .addContainerGap(245, Short.MAX_VALUE))
         );
         JHoaDonLayout.setVerticalGroup(
             JHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,11 +324,12 @@ public class HoaDonJpanel extends javax.swing.JPanel {
                 .addGroup(JHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(JHoaDonLayout.createSequentialGroup()
                         .addGap(41, 41, 41)
-                        .addComponent(cbbTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(JHoaDonLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel1)))
-                .addGap(18, 18, 18)
+                        .addComponent(cbbTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JHoaDonLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addGap(27, 27, 27)))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(JHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(JHoaDonLayout.createSequentialGroup()
@@ -352,13 +352,11 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(JHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(JHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(JHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -370,29 +368,29 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         if (tt.equalsIgnoreCase("Đã thanh toán")) {
             countHDTT();
             if (count % 3 == 0) {
-                soTrang = count / 3;
+                soTrang = count / 5;
             } else {
-                soTrang = count / 3 + 1;
+                soTrang = count / 5 + 1;
             }
             loadTable(1);
             Trang = 1;
             lblTrang.setText("1/" + soTrang);
         } else if (tt.equalsIgnoreCase("Chưa thanh toán")) {
             countHDCTT();
-            if (count % 3 == 0) {
-                soTrang = count / 3;
+            if (count % 5 == 0) {
+                soTrang = count / 5;
             } else {
-                soTrang = count / 3 + 1;
+                soTrang = count / 5 + 1;
             }
             loadTable(1);
             Trang = 1;
             lblTrang.setText("1/" + soTrang);
         } else if (tt.equalsIgnoreCase("ALL")) {
             countHD();
-            if (count % 3 == 0) {
-                soTrang = count / 3;
+            if (count % 5 == 0) {
+                soTrang = count / 5;
             } else {
-                soTrang = count / 3 + 1;
+                soTrang = count / 5 + 1;
             }
             loadTable(1);
             lblTrang.setText("1/" + soTrang);

@@ -97,6 +97,7 @@ public class QL_IMEI extends javax.swing.JFrame {
     private void initComponents() {
 
         TrangThai = new javax.swing.ButtonGroup();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -130,8 +131,10 @@ public class QL_IMEI extends javax.swing.JFrame {
 
         jLabel4.setText("Ghi chú:");
 
+        TrangThai.add(rdConHang);
         rdConHang.setText("Còn hàng");
 
+        TrangThai.add(rdDaBan);
         rdDaBan.setText("Đã bán");
 
         txtGhiChu.setColumns(20);
@@ -416,6 +419,7 @@ public class QL_IMEI extends javax.swing.JFrame {
     private javax.swing.ButtonGroup TrangThai;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbbSP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
