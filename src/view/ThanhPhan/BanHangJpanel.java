@@ -134,31 +134,33 @@ public class BanHangJpanel extends javax.swing.JPanel {
             });
         }
     }
-    private void loadHDCho(){
-          ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDonCTT();
-            dtmHD.setRowCount(0);
-            for (HoaDonModel x : listHD) {
-                dtmHD.addRow(new Object[]{
-                    x.getMa(),
-                    x.getNv().getHoTen(),
-                    x.getKh().getHoTen(),
-                    x.getNgayTao(),
-                    x.getTrangThai() == 0 ? "Chưa thanh toán" : "Đã thanh toán"
-                });
-            }
+
+    private void loadHDCho() {
+        ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDonCTT();
+        dtmHD.setRowCount(0);
+        for (HoaDonModel x : listHD) {
+            dtmHD.addRow(new Object[]{
+                x.getMa(),
+                x.getNv().getHoTen(),
+                x.getKh().getHoTen(),
+                x.getNgayTao(),
+                x.getTrangThai() == 0 ? "Chưa thanh toán" : "Đã thanh toán"
+            });
+        }
     }
-    private void loadHDTT(){
-              ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDonTT();
-            dtmHD.setRowCount(0);
-            for (HoaDonModel x : listHD) {
-                dtmHD.addRow(new Object[]{
-                    x.getMa(),
-                    x.getNv().getHoTen(),
-                    x.getKh().getHoTen(),
-                    x.getNgayTao(),
-                    x.getTrangThai() == 0 ? "Chưa thanh toán" : "Đã thanh toán"
-                });
-            }
+
+    private void loadHDTT() {
+        ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDonTT();
+        dtmHD.setRowCount(0);
+        for (HoaDonModel x : listHD) {
+            dtmHD.addRow(new Object[]{
+                x.getMa(),
+                x.getNv().getHoTen(),
+                x.getKh().getHoTen(),
+                x.getNgayTao(),
+                x.getTrangThai() == 0 ? "Chưa thanh toán" : "Đã thanh toán"
+            });
+        }
     }
 
     private void loadGioHang() {
@@ -847,8 +849,8 @@ public class BanHangJpanel extends javax.swing.JPanel {
         int hinhThuc = 0;
         String maHD = tblHoaDon.getValueAt(index, 0).toString();
         ArrayList<HoaDonModel> list = iHoaDonService.getAllHoaDon();
-        for (HoaDonModel x : list){
-            if(x.getMa()!=null && x.getMa().equals(maHD)){
+        for (HoaDonModel x : list) {
+            if (x.getMa() != null && x.getMa().equals(maHD)) {
                 hinhThuc = x.getHinhThucThanhToan();
             }
         }
@@ -978,13 +980,13 @@ public class BanHangJpanel extends javax.swing.JPanel {
 
     private void cbbTrangThaiHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTrangThaiHoaDonActionPerformed
         if (cbbTrangThaiHoaDon.getSelectedIndex() == 0) {
-             loadHDCho();
+            loadHDCho();
         }
         if (cbbTrangThaiHoaDon.getSelectedIndex() == 1) {
-         loadHDTT();
+            loadHDTT();
         }
         if (cbbTrangThaiHoaDon.getSelectedIndex() == 2) {
-           
+
         }
     }//GEN-LAST:event_cbbTrangThaiHoaDonActionPerformed
 
@@ -1128,21 +1130,48 @@ public class BanHangJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThanhToan1ActionPerformed
 
     private void txtTimKiemSPCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimKiemSPCaretUpdate
-        // TODO add your handling code here:
+        String timKiem = txtTimKiemSP.getText();
+        ArrayList<CTSanPhamModel> list = iCTSanPhamService.getAllCTSanPham();
+        ArrayList<CTSanPhamModel> listNEW = new ArrayList<>();
+        String tenSP = "";
+        for (CTSanPhamModel x : list) {
+            tenSP = x.getSp().getTen()+" "+x.getMs().getTen()+" "+x.getDl().getSoDungLuong();
+            if (x.getSp().getTen() != null && tenSP.toLowerCase().contains(timKiem.toLowerCase())) {
+                listNEW.add(x);
+            }
+        }
+        if (listNEW.size() < 0) {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy dữ liệu");
+            return;
+        }
+        dtmSP.setRowCount(0);
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat vn = NumberFormat.getInstance(localeVN);
+        for (CTSanPhamModel c : listNEW) {
+            ArrayList<IMEIModel> listIMEI = iIMEIService.selectSL(c.getId());
+            dtmSP.addRow(new Object[]{
+                c.getMa(),
+                c.getSp().getTen() + " " + c.getDl().getSoDungLuong() + "GB " + c.getMs().getTen(),
+                c.getCtkm(),
+                listIMEI.size(),
+                vn.format(c.getGiaBan()),
+                c.getCtkm() == null ? vn.format(c.getGiaBan()) : vn.format(giamGia(c.getCtkm().getHinhThuc(), c.getGiaBan()))
+            });
+        }
     }//GEN-LAST:event_txtTimKiemSPCaretUpdate
 
     private void btnHuyHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyHDActionPerformed
-      int row = tblHoaDon.getSelectedRow();
-      if(row<0){
-          JOptionPane.showMessageDialog(this, "mời bạn chọn HĐ");
-          return;
-      }
-      HoaDonModel hds = new HoaDonModel();
-      String mahd=tblHoaDon.getValueAt(row, 0).toString();
-      hds.setMa(mahd);
-      if(iHoaDonService.updateHuyHD(hds)!=null){
-          JOptionPane.showMessageDialog(this, "xóa hóa đơn thành công");
-      }
+        int row = tblHoaDon.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "mời bạn chọn HĐ");
+            return;
+        }
+        HoaDonModel hds = new HoaDonModel();
+        String mahd = tblHoaDon.getValueAt(row, 0).toString();
+        hds.setMa(mahd);
+        if (iHoaDonService.updateHuyHD(hds) != null) {
+            JOptionPane.showMessageDialog(this, "xóa hóa đơn thành công");
+        }
     }//GEN-LAST:event_btnHuyHDActionPerformed
     private void TongTien() {
         int indexHD = tblHoaDon.getSelectedRow();
