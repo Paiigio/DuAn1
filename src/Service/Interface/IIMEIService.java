@@ -28,4 +28,5 @@ public interface IIMEIService {
     public IMEIModel getTrangThaiByIMEI(String imei);
 
     public int updateIMEI_ThanhToan(String ma);
+    public Integer updateIMEI_HuyHang(String ma);
 }

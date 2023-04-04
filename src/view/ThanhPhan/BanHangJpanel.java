@@ -134,11 +134,19 @@ public class BanHangJpanel extends javax.swing.JPanel {
                 x.getNv().getHoTen(),
                 x.getKh().getHoTen(),
                 x.getNgayTao(),
-                x.getTrangThai() == 0 ? "Chưa thanh toán" : "Đã thanh toán"
+                getTTHD(x.getTrangThai())
             });
         }
     }
-
+    public String getTTHD(int tt){
+    if(tt==0){
+        return "Chưa thanh toán";
+    }else if(tt==1){
+        return "Đã thanh toán";
+    }else{
+        return "Đã hủy";
+    }
+}
     private void loadHDCho() {
         ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDonCTT();
         dtmHD.setRowCount(0);
@@ -150,7 +158,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
                 x.getNv().getHoTen(),
                 x.getKh().getHoTen(),
                 x.getNgayTao(),
-                x.getTrangThai() == 0 ? "Chưa thanh toán" : "Đã thanh toán"
+                getTTHD(x.getTrangThai())
             });
         }
     }
@@ -1175,10 +1183,17 @@ public class BanHangJpanel extends javax.swing.JPanel {
             return;
         }
         HoaDonModel hds = new HoaDonModel();
+      String lydo=  JOptionPane.showInputDialog(this, "Nhập lí do hủy hóa đơn");
         String mahd = tblHoaDon.getValueAt(row, 0).toString();
         hds.setMa(mahd);
+        hds.setGhiChu(lydo);
         if (iHoaDonService.updateHuyHD(hds) != null) {
             JOptionPane.showMessageDialog(this, "xóa hóa đơn thành công");
+            loadHDCho();loadHDTT();
+        }
+        
+        if (true) {
+            
         }
     }//GEN-LAST:event_btnHuyHDActionPerformed
     private void TongTien() {

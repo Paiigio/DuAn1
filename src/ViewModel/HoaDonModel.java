@@ -25,6 +25,7 @@ public class HoaDonModel {
     private int trangThai;
     private Date ngayTao;
     private Date ngaySua;
+    private String ghiChu;
 
     public HoaDonModel() {
     }
@@ -41,6 +42,21 @@ public class HoaDonModel {
         this.trangThai = trangThai;
         this.ngayTao = ngayTao;
         this.ngaySua = ngaySua;
+    }
+
+    public HoaDonModel(String id, KhachHang kh, NhanVien nv, Coupon cp, String ma, float thanhTien, int hinhThucThanhToan, Date ngayThanhToan, int trangThai, Date ngayTao, Date ngaySua, String ghiChu) {
+        this.id = id;
+        this.kh = kh;
+        this.nv = nv;
+        this.cp = cp;
+        this.ma = ma;
+        this.thanhTien = thanhTien;
+        this.hinhThucThanhToan = hinhThucThanhToan;
+        this.ngayThanhToan = ngayThanhToan;
+        this.trangThai = trangThai;
+        this.ngayTao = ngayTao;
+        this.ngaySua = ngaySua;
+        this.ghiChu = ghiChu;
     }
 
     public String getId() {
@@ -129,6 +145,14 @@ public class HoaDonModel {
 
     public void setNgaySua(Date ngaySua) {
         this.ngaySua = ngaySua;
+    }
+
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
     }
     
 }
