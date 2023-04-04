@@ -69,7 +69,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
 
     public void countHDTT() {
         try {
-            String sql = "SELECT count(*) From HOADON WHERE TRANGTHAI=1";
+            String sql = "SELECT count(*) From HOADON WHERE TRANGTHAI=0";
             ResultSet rs = JDBC_Helper.excuteQuery(sql);
             while (rs.next()) {
                 count = rs.getLong(1);
@@ -82,7 +82,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
 
     public void countHDCTT() {
         try {
-            String sql = "SELECT count(*) From HOADON WHERE TRANGTHAI=2";
+            String sql = "SELECT count(*) From HOADON WHERE TRANGTHAI=1";
             ResultSet rs = JDBC_Helper.excuteQuery(sql);
             while (rs.next()) {
                 count = rs.getLong(1);
@@ -202,6 +202,11 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         cbbTT.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbbTTItemStateChanged(evt);
+            }
+        });
+        cbbTT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbTTActionPerformed(evt);
             }
         });
 
@@ -367,7 +372,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         int x = cbbTT.getSelectedIndex();
         if (tt.equalsIgnoreCase("Đã thanh toán")) {
             countHDTT();
-            if (count % 3 == 0) {
+            if (count % 5 == 0) {
                 soTrang = count / 5;
             } else {
                 soTrang = count / 5 + 1;
@@ -499,6 +504,10 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         lblTrang.setText("" + Trang);
         lblTrang.setText(Trang + "/" + soTrang);
     }//GEN-LAST:event_btnDenActionPerformed
+
+    private void cbbTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbbTTActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

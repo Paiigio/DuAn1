@@ -29,6 +29,8 @@ import ViewModel.NhanVienModel;
 import java.awt.Color;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Hashtable;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -124,6 +126,8 @@ public class BanHangJpanel extends javax.swing.JPanel {
     private void loadHD() {
         ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDon();
         dtmHD.setRowCount(0);
+        Collections.sort(listHD, Comparator.comparing(HoaDon -> HoaDon.getMa()));
+
         for (HoaDonModel x : listHD) {
             dtmHD.addRow(new Object[]{
                 x.getMa(),
@@ -138,6 +142,8 @@ public class BanHangJpanel extends javax.swing.JPanel {
     private void loadHDCho() {
         ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDonCTT();
         dtmHD.setRowCount(0);
+        Collections.sort(listHD, Comparator.comparing(HoaDon -> HoaDon.getMa()));
+
         for (HoaDonModel x : listHD) {
             dtmHD.addRow(new Object[]{
                 x.getMa(),
@@ -152,6 +158,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
     private void loadHDTT() {
         ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDonTT();
         dtmHD.setRowCount(0);
+        Collections.sort(listHD, Comparator.comparing(HoaDon -> HoaDon.getMa()));
         for (HoaDonModel x : listHD) {
             dtmHD.addRow(new Object[]{
                 x.getMa(),
@@ -224,7 +231,8 @@ public class BanHangJpanel extends javax.swing.JPanel {
                 hdct.getIdctsp().getSp().getTen() + " " + hdct.getIdctsp().getDl().getSoDungLuong() + " " + hdct.getIdctsp().getMs().getTen(),
                 vn.format(hdct.getDongia()),
                 hdct.getSl(),
-                vn.format(hdct.getSl() * hdct.getDongia()),
+                hdct.getIdctsp().getCtkm(),
+                hdct.getIdctsp().getCtkm() == null ? vn.format(hdct.getDongia()) : vn.format(giamGia(hdct.getIdctsp().getCtkm().getHinhThuc(), hdct.getDongia())),
                 hdct.getGhiChu()
             });
 
@@ -829,7 +837,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
             }
             JOptionPane.showMessageDialog(this, "Thanh toán thành công");
 
-            loadHD();
+            loadHDTT();
             btnThanhToan.setEnabled(false);
 
         }
@@ -1062,58 +1070,58 @@ public class BanHangJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cbbPhuongThucThanhToanActionPerformed
 
     private void btnThanhToan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToan1ActionPerformed
-
-        String tienThua = txtTienThua.getText();
-        String tongTien = txtTongTien.getText();
-        float thanhTien = Float.valueOf(tongTien);
-        float tienKH = Float.valueOf(txtTienKH.getText());
-        int tienThua_number = 0;
-        if (tienThua != null) {
-            tienThua_number = Integer.valueOf(tienThua);
-        }
-        if (tienKH < thanhTien) {
-            JOptionPane.showMessageDialog(null, "Chưa đủ điều kiện thanh toán");
-        }
-
-        HoaDonModel newHD = new HoaDonModel();
-        newHD.setMa(txtMaHD.getText());
-        newHD.setThanhTien(thanhTien);
-        newHD.setHinhThucThanhToan(cbbPhuongThucThanhToan.getSelectedIndex());
-        newHD.setTrangThai(1);
-        Coupon cp = new Coupon();
-        cp.setMa(txtMaCoupon.getText());
-        newHD.setCp(cp);
-        String idHD = "";
-        ArrayList<HoaDonModel> listHDM = iHoaDonService.getAllHoaDon();
-        for (HoaDonModel x : listHDM) {
-            if (x.getMa() != null && x.getMa().equals(txtMaHD.getText())) {
-                idHD = x.getId();
-            }
-        }
-        if (idHD == null) {
-            return;
-        }
-        ArrayList<HoaDonChiTietModel> listHDCTByIDHD = iHoaDonChiTietService.getAllHoaDonCTBYIDHD(idHD);
-        if (iHoaDonService.upadteHD_ThanhToan(newHD) != null) {
-            System.out.println(newHD.getTrangThai());
-            System.out.println(newHD.getNgayThanhToan());
-            for (HoaDonChiTietModel u : listHDCTByIDHD) {
-                if (u.getGhiChu() != null && iIMEIService.getTrangThaiByIMEI(u.getGhiChu()).getTrangThai() == 1) {
-                    JOptionPane.showMessageDialog(null, "Sản phẩm có mã IMEI:" + u.getGhiChu() + " đã bán");
-                    iHoaDonChiTietService.delete(u.getGhiChu(), idHD);
-                    loadGioHang();
-                    return;
-                }
-                iIMEIService.updateIMEI_ThanhToan(u.getGhiChu());
-            }
-            JOptionPane.showMessageDialog(this, "Thanh toán thành công");
-
-            loadHD();
-            btnThanhToan.setEnabled(false);
-        }
-        if (txtMaHD.getText().length() < 0) {
-            return;
-        }
+//
+//        String tienThua = txtTienThua.getText();
+//        String tongTien = txtTongTien.getText();
+//        float thanhTien = Float.valueOf(tongTien);
+//        float tienKH = Float.valueOf(txtTienKH.getText());
+//        int tienThua_number = 0;
+//        if (tienThua != null) {
+//            tienThua_number = Integer.valueOf(tienThua);
+//        }
+//        if (tienKH < thanhTien) {
+//            JOptionPane.showMessageDialog(null, "Chưa đủ điều kiện thanh toán");
+//        }
+//
+//        HoaDonModel newHD = new HoaDonModel();
+//        newHD.setMa(txtMaHD.getText());
+//        newHD.setThanhTien(thanhTien);
+//        newHD.setHinhThucThanhToan(cbbPhuongThucThanhToan.getSelectedIndex());
+//        newHD.setTrangThai(1);
+//        Coupon cp = new Coupon();
+//        cp.setMa(txtMaCoupon.getText());
+//        newHD.setCp(cp);
+//        String idHD = "";
+//        ArrayList<HoaDonModel> listHDM = iHoaDonService.getAllHoaDon();
+//        for (HoaDonModel x : listHDM) {
+//            if (x.getMa() != null && x.getMa().equals(txtMaHD.getText())) {
+//                idHD = x.getId();
+//            }
+//        }
+//        if (idHD == null) {
+//            return;
+//        }
+//        ArrayList<HoaDonChiTietModel> listHDCTByIDHD = iHoaDonChiTietService.getAllHoaDonCTBYIDHD(idHD);
+//        if (iHoaDonService.upadteHD_ThanhToan(newHD) != null) {
+//            System.out.println(newHD.getTrangThai());
+//            System.out.println(newHD.getNgayThanhToan());
+//            for (HoaDonChiTietModel u : listHDCTByIDHD) {
+//                if (u.getGhiChu() != null && iIMEIService.getTrangThaiByIMEI(u.getGhiChu()).getTrangThai() == 1) {
+//                    JOptionPane.showMessageDialog(null, "Sản phẩm có mã IMEI:" + u.getGhiChu() + " đã bán");
+//                    iHoaDonChiTietService.delete(u.getGhiChu(), idHD);
+//                    loadGioHang();
+//                    return;
+//                }
+//                iIMEIService.updateIMEI_ThanhToan(u.getGhiChu());
+//            }
+//            JOptionPane.showMessageDialog(this, "Thanh toán thành công");
+//
+//            loadHD();
+//            btnThanhToan.setEnabled(false);
+//        }
+//        if (txtMaHD.getText().length() < 0) {
+//            return;
+//        }
         String h1 = txtMaHD.getText();
         try {
             Hashtable map = new Hashtable();
@@ -1135,7 +1143,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
         ArrayList<CTSanPhamModel> listNEW = new ArrayList<>();
         String tenSP = "";
         for (CTSanPhamModel x : list) {
-            tenSP = x.getSp().getTen()+" "+x.getMs().getTen()+" "+x.getDl().getSoDungLuong();
+            tenSP = x.getSp().getTen() + " " + x.getMs().getTen() + " " + x.getDl().getSoDungLuong();
             if (x.getSp().getTen() != null && tenSP.toLowerCase().contains(timKiem.toLowerCase())) {
                 listNEW.add(x);
             }
