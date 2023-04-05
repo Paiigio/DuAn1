@@ -6,6 +6,8 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Locale;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -42,6 +44,37 @@ public class QL_DT extends javax.swing.JFrame {
            Image img = imgicon.getImage();
            img.getScaledInstance(lblAnhDangNhap.getWidth(), lblAnhDangNhap.getY(), 0);
            lblAnhDangNhap.setIcon(imgicon);
+           if(Login.nv.getCv().getTenCV().equalsIgnoreCase("Nhân Viên")){
+               btnNhanVien.setEnabled(false);
+               btnNhanVien.addMouseListener(new MouseListener() {
+                   
+                   @Override
+                   public void mouseClicked(MouseEvent e) {
+                       e.consume();
+                   }
+
+                   @Override
+                   public void mousePressed(MouseEvent e) {
+                       throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                   }
+
+                   @Override
+                   public void mouseReleased(MouseEvent e) {
+                       throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                   }
+
+                   @Override
+                   public void mouseEntered(MouseEvent e) {
+                       throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                   }
+
+                   @Override
+                   public void mouseExited(MouseEvent e) {
+                       throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                   }
+               });
+               
+           }
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

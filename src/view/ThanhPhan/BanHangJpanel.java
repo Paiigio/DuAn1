@@ -1080,58 +1080,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cbbPhuongThucThanhToanActionPerformed
 
     private void btnInHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInHDActionPerformed
-//
-//        String tienThua = txtTienThua.getText();
-//        String tongTien = txtTongTien.getText();
-//        float thanhTien = Float.valueOf(tongTien);
-//        float tienKH = Float.valueOf(txtTienKH.getText());
-//        int tienThua_number = 0;
-//        if (tienThua != null) {
-//            tienThua_number = Integer.valueOf(tienThua);
-//        }
-//        if (tienKH < thanhTien) {
-//            JOptionPane.showMessageDialog(null, "Chưa đủ điều kiện thanh toán");
-//        }
-//
-//        HoaDonModel newHD = new HoaDonModel();
-//        newHD.setMa(txtMaHD.getText());
-//        newHD.setThanhTien(thanhTien);
-//        newHD.setHinhThucThanhToan(cbbPhuongThucThanhToan.getSelectedIndex());
-//        newHD.setTrangThai(1);
-//        Coupon cp = new Coupon();
-//        cp.setMa(txtMaCoupon.getText());
-//        newHD.setCp(cp);
-//        String idHD = "";
-//        ArrayList<HoaDonModel> listHDM = iHoaDonService.getAllHoaDon();
-//        for (HoaDonModel x : listHDM) {
-//            if (x.getMa() != null && x.getMa().equals(txtMaHD.getText())) {
-//                idHD = x.getId();
-//            }
-//        }
-//        if (idHD == null) {
-//            return;
-//        }
-//        ArrayList<HoaDonChiTietModel> listHDCTByIDHD = iHoaDonChiTietService.getAllHoaDonCTBYIDHD(idHD);
-//        if (iHoaDonService.upadteHD_ThanhToan(newHD) != null) {
-//            System.out.println(newHD.getTrangThai());
-//            System.out.println(newHD.getNgayThanhToan());
-//            for (HoaDonChiTietModel u : listHDCTByIDHD) {
-//                if (u.getGhiChu() != null && iIMEIService.getTrangThaiByIMEI(u.getGhiChu()).getTrangThai() == 1) {
-//                    JOptionPane.showMessageDialog(null, "Sản phẩm có mã IMEI:" + u.getGhiChu() + " đã bán");
-//                    iHoaDonChiTietService.delete(u.getGhiChu(), idHD);
-//                    loadGioHang();
-//                    return;
-//                }
-//                iIMEIService.updateIMEI_ThanhToan(u.getGhiChu());
-//            }
-//            JOptionPane.showMessageDialog(this, "Thanh toán thành công");
-//
-//            loadHD();
-//            btnThanhToan.setEnabled(false);
-//        }
-//        if (txtMaHD.getText().length() < 0) {
-//            return;
-//        }
+
         String h1 = txtMaHD.getText();
         try {
             Hashtable map = new Hashtable();
