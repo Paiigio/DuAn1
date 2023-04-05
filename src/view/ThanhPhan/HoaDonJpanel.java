@@ -30,6 +30,7 @@ import responsitory.NhanVienResponsitory;
  */
 public class HoaDonJpanel extends javax.swing.JPanel {
 
+   
     private DefaultTableModel dtm = new DefaultTableModel();
     private DefaultTableModel dt = new DefaultTableModel();
     private HoaDonService hds = new HoaDonService();
@@ -44,7 +45,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         initComponents();
         dtm = (DefaultTableModel) tblHoaDon.getModel();
         dt = (DefaultTableModel) tblHDCT.getModel();
-        countHD();
+        countHDCTT();
         if (count % 5 == 0) {
             soTrang = count / 5;
         } else {
@@ -80,7 +81,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         }
     }
 
-    public void countHDCTT() {
+    public void countHDH() {
         try {
             String sql = "SELECT count(*) From HOADON WHERE TRANGTHAI=2";
             ResultSet rs = JDBC_Helper.excuteQuery(sql);
@@ -93,18 +94,46 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         }
     }
 
+    public void countHDCTT() {
+        try {
+            String sql = "SELECT count(*) From HOADON WHERE TRANGTHAI=0";
+            ResultSet rs = JDBC_Helper.excuteQuery(sql);
+            while (rs.next()) {
+                count = rs.getLong(1);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public ArrayList<HoaDonModel> getAllHoaDon() {
         int x = cbbTT.getSelectedIndex();
-        int y = 0;
-        if (x == 0) {
-            x = 1;
-            y = 2;
+        int a = 1;
+        int b = 0;
+        int c = 0;
+        if (x == 3) {
+            a = 1;
+            b = 2;
+            c = 0;
+        } else if (x == 1) {
+            a = 0;
+            b = 2;
+            c = 0;
+            Trang = 2;
+        } else if (x == 2) {
+            a = 0;
+            b = 1;
+            c = 1;
+            Trang = 2;
         } else {
+            a = 1;
+            b = 2;
+            c = 1;
             Trang = 2;
         }
-
         ArrayList<HoaDonModel> list = new ArrayList<>();
-        String sql = "SELECT TOP 5 * FROM HOADON WHERE MAHD not in (SELECT TOP " + (Trang * 5 - 5) + " MAHD FROM HOADON WHERE TRANGTHAI=" + x + " OR TRANGTHAI=" + y + " ORDER BY MAHD)ORDER BY MAHD";
+        String sql = "SELECT TOP 5 * FROM HOADON WHERE MAHD not in (SELECT TOP " + (Trang * 5 - 5) + " MAHD FROM HOADON WHERE TRANGTHAI=" + a + " OR TRANGTHAI=" + b + " OR TRANGTHAI=" + c + " ORDER BY MAHD)ORDER BY MAHD";
         ResultSet rs = JDBC_Helper.excuteQuery(sql);
         try {
             while (rs.next()) {
@@ -136,7 +165,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
                     s.getMa(),
                     Double.valueOf(s.getThanhTien()).longValue(),
                     s.getHinhThucThanhToan() == 1 ? "Tiền mặt" : "Chuyển khoản", s.getNgayThanhToan(),
-                    s.getTrangThai() == 0 ? "Chưa thanh toán" : "Đã thanh toán",
+                    s.getTrangThai() == 0 ? "Chưa thanh toán" : s.getTrangThai() == 1 ? "Đã thanh toán" : "Đơn đã hủy",
                     s.getNgayTao(), s.getNgaySua()
                 });
 
@@ -153,7 +182,9 @@ public class HoaDonJpanel extends javax.swing.JPanel {
                 s.getNv(),
                 s.getCp(),
                 s.getMa(), Double.valueOf(s.getThanhTien()).longValue(), s.getHinhThucThanhToan() == 1 ? "Tiền mặt" : "Chuyển khoản", s.getNgayThanhToan(),
-                s.getTrangThai() == 0 ? "Chưa thanh toán" : "Đã thanh toán", s.getNgayTao(), s.getNgaySua()
+                s.getTrangThai() == 0 ? "Chưa thanh toán" : s.getTrangThai() == 1 ? "Đã thanh toán" : s.getTrangThai() == 2 ? "Đơn đã hủy" : "NULL",
+                s.getNgayTao(),
+                s.getNgaySua()
             });
 
         }
@@ -197,11 +228,16 @@ public class HoaDonJpanel extends javax.swing.JPanel {
 
         JHoaDon.setBackground(new java.awt.Color(238, 232, 170));
 
-        cbbTT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ALL", "Đã thanh toán", "Chưa thanh toán" }));
+        cbbTT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chưa thanh toán", "Đã thanh toán", "Đã hủy", "ALL" }));
         cbbTT.setToolTipText("");
         cbbTT.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbbTTItemStateChanged(evt);
+            }
+        });
+        cbbTT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbTTActionPerformed(evt);
             }
         });
 
@@ -363,11 +399,11 @@ public class HoaDonJpanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbbTTItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbTTItemStateChanged
-        String tt = cbbTT.getSelectedItem().toString();
+         String tt = cbbTT.getSelectedItem().toString();
         int x = cbbTT.getSelectedIndex();
         if (tt.equalsIgnoreCase("Đã thanh toán")) {
             countHDTT();
-            if (count % 3 == 0) {
+            if (count % 5 == 0) {
                 soTrang = count / 5;
             } else {
                 soTrang = count / 5 + 1;
@@ -377,6 +413,16 @@ public class HoaDonJpanel extends javax.swing.JPanel {
             lblTrang.setText("1/" + soTrang);
         } else if (tt.equalsIgnoreCase("Chưa thanh toán")) {
             countHDCTT();
+            if (count % 5 == 0) {
+                soTrang = count / 5;
+            } else {
+                soTrang = count / 5 + 1;
+            }
+            loadTable(1);
+            Trang = 1;
+            lblTrang.setText("1/" + soTrang);
+        } else if (tt.equalsIgnoreCase("Đã hủy")) {
+            countHDH();
             if (count % 5 == 0) {
                 soTrang = count / 5;
             } else {
@@ -395,6 +441,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
             loadTable(1);
             lblTrang.setText("1/" + soTrang);
         }
+        System.out.println(cbbTT.getSelectedIndex());
     }//GEN-LAST:event_cbbTTItemStateChanged
 
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
@@ -499,6 +546,10 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         lblTrang.setText("" + Trang);
         lblTrang.setText(Trang + "/" + soTrang);
     }//GEN-LAST:event_btnDenActionPerformed
+
+    private void cbbTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbbTTActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

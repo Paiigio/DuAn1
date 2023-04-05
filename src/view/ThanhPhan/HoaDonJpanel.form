@@ -123,16 +123,18 @@
         <Component class="javax.swing.JComboBox" name="cbbTT">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="ALL"/>
+              <StringArray count="4">
+                <StringItem index="0" value="Ch&#x1b0;a thanh to&#xe1;n"/>
                 <StringItem index="1" value="&#x110;&#xe3; thanh to&#xe1;n"/>
-                <StringItem index="2" value="Ch&#x1b0;a thanh to&#xe1;n"/>
+                <StringItem index="2" value="&#x110;&#xe3; h&#x1ee7;y"/>
+                <StringItem index="3" value="ALL"/>
               </StringArray>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <Events>
             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbbTTItemStateChanged"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbbTTActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

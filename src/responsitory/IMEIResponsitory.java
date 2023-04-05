@@ -124,4 +124,10 @@ public class IMEIResponsitory {
         }
         return null;
     }
+        public Integer updateIMEI_HuyHang(String ma) {
+        String sql = "UPDATE dbo.IMEI SET TRANGTHAI=0 WHERE MAIMEI=?";
+        int row = JDBC_Helper.excuteUpdate(sql, ma);
+        return row;
+    }
+    
 }

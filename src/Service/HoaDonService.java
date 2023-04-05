@@ -87,9 +87,9 @@ public class HoaDonService implements  IHoaDonService{
     @Override
     public HoaDonModel updateHuyHD(HoaDonModel nv) {
            var x = hdr.updateHuyHD(new HoaDon(nv.getId(), nv.getKh(), nv.getNv(), nv.getCp(), nv.getMa(), nv.getThanhTien(), 
-                    nv.getHinhThucThanhToan(), nv.getNgayThanhToan(), nv.getTrangThai(), nv.getNgayTao(), nv.getNgaySua()));
+                    nv.getHinhThucThanhToan(), nv.getNgayThanhToan(), nv.getTrangThai(), nv.getNgayTao(), nv.getNgaySua(),nv.getGhiChu()));
         return new HoaDonModel(x.getId(), x.getKh(), x.getNv(), x.getCp(), x.getMa(), x.getThanhTien(), 
-                    x.getHinhThucThanhToan(), x.getNgayThanhToan(), x.getTrangThai(), x.getNgayTao(), x.getNgaySua());
+                    x.getHinhThucThanhToan(), x.getNgayThanhToan(), x.getTrangThai(), x.getNgayTao(), x.getNgaySua(),x.getGhiChu());
     }
     
 }

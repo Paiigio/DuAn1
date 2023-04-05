@@ -316,10 +316,20 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         buttonGroup1.add(rdoHoatDong);
         rdoHoatDong.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         rdoHoatDong.setText("Hoạt Động");
+        rdoHoatDong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdoHoatDongMouseClicked(evt);
+            }
+        });
 
         buttonGroup1.add(rdoHetHan);
         rdoHetHan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         rdoHetHan.setText("Hết Hạn");
+        rdoHetHan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdoHetHanMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -594,7 +604,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
             .addGroup(JKhuyenMaiLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(770, Short.MAX_VALUE))
         );
@@ -602,10 +612,11 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
             JKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JKhuyenMaiLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(JKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(100, Short.MAX_VALUE))
+            .addGroup(JKhuyenMaiLayout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -614,7 +625,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(JKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 74, Short.MAX_VALUE))
+                .addGap(0, 68, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -656,6 +667,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         if (JOptionPane.showConfirmDialog(null, "Bạn có muốn sửa không?","Thông báo",JOptionPane.YES_NO_OPTION)!=JOptionPane.YES_OPTION){
             return;
         }
+    
         if (ctkm.updateCTKM(nv) != null) {
             JOptionPane.showMessageDialog(null, "Sửa thành công");
         } else {
@@ -679,15 +691,17 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
             String trangThai = tblBang.getValueAt(row, 7).toString();
             if(trangThai.equalsIgnoreCase("Hoạt Động")) {
                 rdoHoatDong.setSelected(true);
+                  
             } else {
                 rdoHetHan.setSelected(true);
+               
             }
 
             Date date = new SimpleDateFormat("yyyy-MM-dd").parse(ngayBD);
             Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse(ngayKT);
             txtBD.setDate(date);
             txtKetThuc.setDate(date2);
-
+             btnThem.setSelected(false);
         } catch (ParseException ex) {
 
         }
@@ -737,24 +751,24 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTKSanPhamCaretUpdate
 
     private void cbbHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbHangActionPerformed
-//        NSX n = (NSX) cbb.getSelectedItem();
-//        ArrayList<CTSanPhamModel> list = ctsp.getAllCTSanPham();
-//        ArrayList<CTSanPhamModel> listNEW = new ArrayList<>();
-//        for (CTSanPhamModel x : list) {
-//            if (x.getSp().getNsx() != null && x.getSp().getNsx().getTen().equals(n.getTen())) {
-//                listNEW.add(x);
-//            }
-//        }
-//        dtmSP.setRowCount(0);
-//        for (int i = 0; i < listNEW.size(); ++i) {
-//            dtmSP.addRow(new Object[]{
-//                i + 1,
-//                listNEW.get(i).getMa(),
-//                listNEW.get(i).getSp().getTen() + " " + listNEW.get(i).getDl().getSoDungLuong() + " " + listNEW.get(i).getMs().getTen(),
-//                //                listNEW.get(i).getSoLuongTon(),
-//                listNEW.get(i).getCtkm()
-//            });
-//        }
+        NSX n = (NSX) cbb.getSelectedItem();
+        ArrayList<CTSanPhamModel> list = ctsp.getAllCTSanPham();
+        ArrayList<CTSanPhamModel> listNEW = new ArrayList<>();
+        for (CTSanPhamModel x : list) {
+            if (x.getSp().getNsx() != null && x.getSp().getNsx().getTen().equals(n.getTen())) {
+                listNEW.add(x);
+            }
+        }
+        dtmSP.setRowCount(0);
+        for (int i = 0; i < listNEW.size(); ++i) {
+            dtmSP.addRow(new Object[]{
+                i + 1,
+                listNEW.get(i).getMa(),
+                listNEW.get(i).getSp().getTen() + " " + listNEW.get(i).getDl().getSoDungLuong() + " " + listNEW.get(i).getMs().getTen(),
+                //                listNEW.get(i).getSoLuongTon(),
+                listNEW.get(i).getCtkm()
+            });
+        }
     }//GEN-LAST:event_cbbHangActionPerformed
 
     private void btnSuaCTKMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaCTKMActionPerformed
@@ -840,6 +854,14 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
     private void btnXoaCTKMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaCTKMActionPerformed
         deleteSinhVien(tblSanPham);
     }//GEN-LAST:event_btnXoaCTKMActionPerformed
+
+    private void rdoHetHanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdoHetHanMouseClicked
+        btnThem.setEnabled(false);
+    }//GEN-LAST:event_rdoHetHanMouseClicked
+
+    private void rdoHoatDongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdoHoatDongMouseClicked
+        btnThem.setEnabled(true);
+    }//GEN-LAST:event_rdoHoatDongMouseClicked
     private CTSanPhamModel getCTSPByMa(String ma) {
         ArrayList<CTSanPhamModel> listSP = ctsp.getAllCTSanPham();
         for (CTSanPhamModel z : listSP) {

@@ -119,8 +119,8 @@ public class HoaDonResponsitory {
         return nv;
     }
     public HoaDon updateHuyHD(HoaDon nv) {
-        String sql = "UPDATE HOADON SET Trangthai =2 WHERE MAHD=?";
-        JDBC_Helper.excuteUpdate(sql, nv.getMa());
+        String sql = "UPDATE dbo.HoaDon SET TrangThai = 2 ,NGAYSUA=GETDATE(), GhiChu=? WHERE MaHD=?";
+        JDBC_Helper.excuteUpdate(sql,nv.getGhiChu(), nv.getMa());
         return nv;
     }
 

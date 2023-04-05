@@ -83,4 +83,9 @@ public class IMEIService implements IIMEIService {
     public int updateIMEI_ThanhToan(String ma) {
         return im.updateIMEI_ThanhToan(ma);
     }
+
+    @Override
+    public Integer updateIMEI_HuyHang(String ma) {
+        return  im.updateIMEI_HuyHang(ma);
+        }
 }
