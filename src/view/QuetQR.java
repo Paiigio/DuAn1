@@ -287,6 +287,7 @@ public class QuetQR extends javax.swing.JFrame implements Runnable, ThreadFactor
                     hdct.setGhiChu(maIMEI);
                     hdct.setDongia(ctsp.getGiaBan());
                     hdct.setThanhTien(ctsp.getGiaBan() * 1);
+                    
                     if (hdct == null) {
                         return;
                     }
