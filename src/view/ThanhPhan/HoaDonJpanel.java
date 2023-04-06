@@ -109,31 +109,32 @@ public class HoaDonJpanel extends javax.swing.JPanel {
 
     public ArrayList<HoaDonModel> getAllHoaDon() {
         int x = cbbTT.getSelectedIndex();
-        int a = 1;
+        int a = 0;
         int b = 0;
         int c = 0;
         if (x == 3) {
-            a = 1;
+            a = ;
             b = 2;
             c = 0;
         } else if (x == 1) {
-            a = 0;
+            a = 1 ;
             b = 2;
             c = 0;
             Trang = 2;
         } else if (x == 2) {
-            a = 0;
+            a = 2;
             b = 1;
-            c = 1;
+            c = 0;
             Trang = 2;
         } else {
-            a = 1;
+            a = 0;
             b = 2;
             c = 1;
             Trang = 2;
         }
         ArrayList<HoaDonModel> list = new ArrayList<>();
-        String sql = "SELECT TOP 5 * FROM HOADON WHERE MAHD not in (SELECT TOP " + (Trang * 5 - 5) + " MAHD FROM HOADON WHERE TRANGTHAI=" + a + " OR TRANGTHAI=" + b + " OR TRANGTHAI=" + c + " ORDER BY MAHD)ORDER BY MAHD";
+        String sql = "SELECT TOP 5 * FROM HOADON WHERE MAHD not in (SELECT TOP " + (Trang * 5 - 5) + " MAHD FROM HOADON WHERE TRANGTHAI!=" + b + " OR TRANGTHAI!=" + c  +"ORDER BY MAHD)"
+                + "AND TRANGTHAI="+a+"ORDER BY MAHD";
         ResultSet rs = JDBC_Helper.excuteQuery(sql);
         try {
             while (rs.next()) {
