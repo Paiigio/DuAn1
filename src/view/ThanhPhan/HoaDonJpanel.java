@@ -55,18 +55,18 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         lblTrang.setText("1/" + soTrang);
     }
 
-    public void countHD() {
-        try {
-            String sql = "SELECT count(*) From HOADON";
-            ResultSet rs = JDBC_Helper.excuteQuery(sql);
-            while (rs.next()) {
-                count = rs.getLong(1);
-            }
-            rs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void countHD() {
+//        try {
+//            String sql = "SELECT count(*) From HOADON";
+//            ResultSet rs = JDBC_Helper.excuteQuery(sql);
+//            while (rs.next()) {
+//                count = rs.getLong(1);
+//            }
+//            rs.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public void countHDTT() {
         try {
@@ -112,29 +112,25 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         int a = 0;
         int b = 0;
         int c = 0;
-        if (x == 3) {
-            a = ;
-            b = 2;
-            c = 0;
-        } else if (x == 1) {
+     
+         if (x == 1) {
             a = 1 ;
             b = 2;
             c = 0;
-            Trang = 2;
+     
         } else if (x == 2) {
             a = 2;
             b = 1;
             c = 0;
-            Trang = 2;
+          
         } else {
             a = 0;
             b = 2;
             c = 1;
-            Trang = 2;
+      
         }
         ArrayList<HoaDonModel> list = new ArrayList<>();
-        String sql = "SELECT TOP 5 * FROM HOADON WHERE MAHD not in (SELECT TOP " + (Trang * 5 - 5) + " MAHD FROM HOADON WHERE TRANGTHAI!=" + b + " OR TRANGTHAI!=" + c  +"ORDER BY MAHD)"
-                + "AND TRANGTHAI="+a+"ORDER BY MAHD";
+        String sql = "SELECT TOP 5 * FROM HOADON WHERE MAHD NOT IN (SELECT TOP "+(Trang*5-5)+"  MAHD FROM HOADON WHERE TRANGTHAI!="+b+" AND TRANGTHAI!="+c+" ORDER BY MAHD) AND TRANGTHAI="+a+" ORDER BY MAHD";
         ResultSet rs = JDBC_Helper.excuteQuery(sql);
         try {
             while (rs.next()) {
@@ -152,10 +148,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
     }
 
     private void loadTable(long Trang) {
-        int x = cbbTT.getSelectedIndex();
-        if (x == 0) {
-            loadTableFull(Trang);
-        } else {
+
             ArrayList<HoaDonModel> listSP = getAllHoaDon();
             dtm.setRowCount(0);
             for (HoaDonModel s : listSP) {
@@ -172,25 +165,9 @@ public class HoaDonJpanel extends javax.swing.JPanel {
 
             }
         }
-    }
+   
 
-    private void loadTableFull(long Trang) {
-        ArrayList<HoaDonModel> listSP = getAllHoaDon();
-        dtm.setRowCount(0);
-        for (HoaDonModel s : listSP) {
-            dtm.addRow(new Object[]{
-                s.getKh(),
-                s.getNv(),
-                s.getCp(),
-                s.getMa(), Double.valueOf(s.getThanhTien()).longValue(), s.getHinhThucThanhToan() == 1 ? "Tiền mặt" : "Chuyển khoản", s.getNgayThanhToan(),
-                s.getTrangThai() == 0 ? "Chưa thanh toán" : s.getTrangThai() == 1 ? "Đã thanh toán" : s.getTrangThai() == 2 ? "Đơn đã hủy" : "NULL",
-                s.getNgayTao(),
-                s.getNgaySua()
-            });
-
-        }
-    }
-
+  
     public String getIDHoaDon(String ma) {
         ArrayList<HoaDonModel> hd = hds.getAllHoaDon();
         for (HoaDonModel h : hd) {
@@ -229,7 +206,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
 
         JHoaDon.setBackground(new java.awt.Color(238, 232, 170));
 
-        cbbTT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chưa thanh toán", "Đã thanh toán", "Đã hủy", "ALL" }));
+        cbbTT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chưa thanh toán", "Đã thanh toán", "Đã hủy" }));
         cbbTT.setToolTipText("");
         cbbTT.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -432,16 +409,12 @@ public class HoaDonJpanel extends javax.swing.JPanel {
             loadTable(1);
             Trang = 1;
             lblTrang.setText("1/" + soTrang);
-        } else if (tt.equalsIgnoreCase("ALL")) {
-            countHD();
-            if (count % 5 == 0) {
-                soTrang = count / 5;
-            } else {
+        }  else {
                 soTrang = count / 5 + 1;
             }
             loadTable(1);
             lblTrang.setText("1/" + soTrang);
-        }
+        
         System.out.println(cbbTT.getSelectedIndex());
     }//GEN-LAST:event_cbbTTItemStateChanged
 
@@ -474,15 +447,16 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         if (Trang > 1) {
             Trang--;
             String tt = cbbTT.getSelectedItem().toString();
-            if (tt.equalsIgnoreCase("Đãthanh toán")) {
+            if (tt.equalsIgnoreCase("Đã thanh toán")) {
                 loadTable(Trang);
             } else if (tt.equalsIgnoreCase("Chưa thanh toán")) {
                 loadTable(Trang);
-            } else if (tt.equalsIgnoreCase("ALL")) {
+            } else if (tt.equalsIgnoreCase("Đã hủy")) {
                 loadTable(Trang);
             }
             lblTrang.setText(Trang + "/" + soTrang);
         }
+        System.out.println(Trang);
     }//GEN-LAST:event_btnTrangTruocActionPerformed
 
     private void btnTiepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTiepActionPerformed
@@ -497,12 +471,13 @@ public class HoaDonJpanel extends javax.swing.JPanel {
                 loadTable(Trang);
             } else if (tt.equalsIgnoreCase("Chưa thanh toán")) {
                 loadTable(Trang);
-            } else if (tt.equalsIgnoreCase("ALL")) {
+            } else if (tt.equalsIgnoreCase("Đã hủy")) {
                 loadTable(Trang);
             }
-            lblTrang.setText("" + Trang);
+
             lblTrang.setText(Trang + "/" + soTrang);
         }
+        System.out.println(Trang);
     }//GEN-LAST:event_btnTiepActionPerformed
 
     private void btnTrangDauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrangDauActionPerformed

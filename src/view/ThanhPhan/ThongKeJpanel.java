@@ -61,19 +61,8 @@ public class ThongKeJpanel extends javax.swing.JPanel {
             String thangStr = cbbLocThang.getSelectedItem().toString();
 
             for (HoaDonChiTietModel x : list) {
-                if (thangStr.equalsIgnoreCase("ALL")) {
-                    total += x.getThanhTien();
-                    Object[] rowData = {
-                        x.getIdhd().getNv().getHoTen(),
-                        x.getIdhd().getMa(),
-                        x.getNgayTao(),
-                        x.getThanhTien() + " VND"
-                    };
-                    dtm.addRow(rowData);
-                } else {
-                    LocalDate lcd = LocalDate.parse(x.getNgayTao().toString());
-                    String month = subString(lcd.getMonth().toString().toLowerCase());
-                    if (month.equalsIgnoreCase(thangStr)) {
+                if (x.getIdhd().getTrangThai() == 1) {
+                    if (thangStr.equalsIgnoreCase("ALL")) {
                         total += x.getThanhTien();
                         Object[] rowData = {
                             x.getIdhd().getNv().getHoTen(),
@@ -82,6 +71,19 @@ public class ThongKeJpanel extends javax.swing.JPanel {
                             x.getThanhTien() + " VND"
                         };
                         dtm.addRow(rowData);
+                    } else {
+                        LocalDate lcd = LocalDate.parse(x.getNgayTao().toString());
+                        String month = subString(lcd.getMonth().toString().toLowerCase());
+                        if (month.equalsIgnoreCase(thangStr)) {
+                            total += x.getThanhTien();
+                            Object[] rowData = {
+                                x.getIdhd().getNv().getHoTen(),
+                                x.getIdhd().getMa(),
+                                x.getNgayTao(),
+                                x.getThanhTien() + " VND"
+                            };
+                            dtm.addRow(rowData);
+                        }
                     }
                 }
             }
@@ -105,33 +107,35 @@ public class ThongKeJpanel extends javax.swing.JPanel {
         int sum = 1, dem = 0;
         dtm2.setRowCount(0);
         for (int i = 0; i < list.size(); i++) {
-            sum = 0;
-            boolean check = true;
-            if (i == list.size()) {
-                break;
-            }
-            if (i > 0) {
-                for (int j = i; j > 0; j--) {
-                    if (list.get(i).getIdctsp().getId().equals(list.get(j - 1).getIdctsp().getId())) {
-                        check = false;
-                    }
-                }
-            }
-            if (check) {
-                for (int j = i; j < list.size(); j++) {
-                    if (list.get(i).getIdctsp().getId().equals(list.get(j).getIdctsp().getId())) {
-                        ++sum;
-                    }
+            if (list.get(i).getIdhd().getTrangThai() == 1) {
+                sum = 0;
+                boolean check = true;
+                if (i == list.size()) {
+                    break;
                 }
 
-                dem += sum;
-                Object[] rowData = {
-                    list.get(i).getIdctsp().getSp().getTen() + " " + list.get(i).getIdctsp().getMs() + " " + list.get(i).getIdctsp().getDl(),
-                    sum
-                };
-                dtm2.addRow(rowData);
-            }
+                if (i > 0) {
+                    for (int j = i; j > 0; j--) {
+                        if (list.get(i).getIdctsp().getId().equals(list.get(j - 1).getIdctsp().getId())) {
+                            check = false;
+                        }
+                    }
+                }
+                if (check) {
+                    for (int j = i; j < list.size(); j++) {
+                        if (list.get(i).getIdctsp().getId().equals(list.get(j).getIdctsp().getId())) {
+                            ++sum;
+                        }
+                    }
 
+                    dem += sum;
+                    Object[] rowData = {
+                        list.get(i).getIdctsp().getSp().getTen() + " " + list.get(i).getIdctsp().getMs() + " " + list.get(i).getIdctsp().getDl(),
+                        sum
+                    };
+                    dtm2.addRow(rowData);
+                }
+            }
         }
         Object[] count = {
             "Tổng",
@@ -590,9 +594,7 @@ public class ThongKeJpanel extends javax.swing.JPanel {
         JBieuDoThongKe.setLayout(JBieuDoThongKeLayout);
         JBieuDoThongKeLayout.setHorizontalGroup(
             JBieuDoThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JBieuDoThongKeLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 390, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         JBieuDoThongKeLayout.setVerticalGroup(
             JBieuDoThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -606,8 +608,8 @@ public class ThongKeJpanel extends javax.swing.JPanel {
         jpnBieuDoLayout.setHorizontalGroup(
             jpnBieuDoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnBieuDoLayout.createSequentialGroup()
-                .addComponent(JBieuDoThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(JBieuDoThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 354, Short.MAX_VALUE))
         );
         jpnBieuDoLayout.setVerticalGroup(
             jpnBieuDoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -640,37 +642,14 @@ public class ThongKeJpanel extends javax.swing.JPanel {
         int sum, dem = 0;
         dtm2.setRowCount(0);
         for (int i = 0; i < list.size(); i++) {
-            sum = 0;
-            boolean check = true;
-            if (i == list.size()) {
-                break;
-            }
-
-            if (nsx.equalsIgnoreCase("ALL")) {
-                if (i > 0) {
-                    for (int j = i; j > 0; j--) {
-                        if (list.get(i).getIdctsp().getId().equals(list.get(j - 1).getIdctsp().getId())) {
-                            check = false;
-                        }
-                    }
-                }
-                if (check) {
-                    for (int j = i; j < list.size(); j++) {
-                        if (list.get(i).getIdctsp().getId().equals(list.get(j).getIdctsp().getId())) {
-                            ++sum;
-                        }
-                    }
-
-                    dem += sum;
-                    Object[] rowData = {
-                        list.get(i).getIdctsp().getSp().getTen() + " " + list.get(i).getIdctsp().getMs() + " " + list.get(i).getIdctsp().getDl(),
-                        sum
-                    };
-                    dtm2.addRow(rowData);
+            if (list.get(i).getIdhd().getTrangThai() == 1) {
+                sum = 0;
+                boolean check = true;
+                if (i == list.size()) {
+                    break;
                 }
 
-            } else {
-                if (list.get(i).getIdctsp().getSp().getNsx().getTen().equalsIgnoreCase(nsx)) {
+                if (nsx.equalsIgnoreCase("ALL")) {
                     if (i > 0) {
                         for (int j = i; j > 0; j--) {
                             if (list.get(i).getIdctsp().getId().equals(list.get(j - 1).getIdctsp().getId())) {
@@ -693,6 +672,31 @@ public class ThongKeJpanel extends javax.swing.JPanel {
                         dtm2.addRow(rowData);
                     }
 
+                } else {
+                    if (list.get(i).getIdctsp().getSp().getNsx().getTen().equalsIgnoreCase(nsx)) {
+                        if (i > 0) {
+                            for (int j = i; j > 0; j--) {
+                                if (list.get(i).getIdctsp().getId().equals(list.get(j - 1).getIdctsp().getId())) {
+                                    check = false;
+                                }
+                            }
+                        }
+                        if (check) {
+                            for (int j = i; j < list.size(); j++) {
+                                if (list.get(i).getIdctsp().getId().equals(list.get(j).getIdctsp().getId())) {
+                                    ++sum;
+                                }
+                            }
+
+                            dem += sum;
+                            Object[] rowData = {
+                                list.get(i).getIdctsp().getSp().getTen() + " " + list.get(i).getIdctsp().getMs() + " " + list.get(i).getIdctsp().getDl(),
+                                sum
+                            };
+                            dtm2.addRow(rowData);
+                        }
+
+                    }
                 }
             }
         }
