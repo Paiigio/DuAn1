@@ -21,6 +21,7 @@ import CurveLineChart.ModelChart;
 import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import responsitory.IMEIResponsitory;
 
 public class ThongKeJpanel extends javax.swing.JPanel {
 
@@ -28,6 +29,7 @@ public class ThongKeJpanel extends javax.swing.JPanel {
     private INSXService insx = new NSXService();
     private ICTSanPhamService ictsp = new CTSanPhamService();
     private IIMEIService iimei = new IMEIService();
+    private IMEIResponsitory imeirp = new IMEIResponsitory();
     private DefaultTableModel dtm;
     private DefaultTableModel dtm2;
     DefaultComboBoxModel dcm = new DefaultComboBoxModel();
@@ -100,42 +102,53 @@ public class ThongKeJpanel extends javax.swing.JPanel {
     }
 
     public void loadTableSanPham() {
-        ArrayList<HoaDonChiTietModel> list = ihdct.getAllHoaDonCT();
-        for (HoaDonChiTietModel x : list) {
-            System.out.println(x.getIdctsp().getSp().getTen());
-        }
-        int sum = 1, dem = 0;
+//        ArrayList<HoaDonChiTietModel> list = ihdct.getAllHoaDonCT();
+//        for (HoaDonChiTietModel x : list) {
+//            System.out.println(x.getIdctsp().getSp().getTen());
+//        }
+//        int sum = 1, dem = 0;
+//        dtm2.setRowCount(0);
+//        for (int i = 0; i < list.size(); i++) {
+//            if (list.get(i).getIdhd().getTrangThai() == 1) {
+//                sum = 0;
+//                boolean check = true;
+//                if (i == list.size()) {
+//                    break;
+//                }
+//
+//                if (i > 0) {
+//                    for (int j = i; j > 0; j--) {
+//                        if (list.get(i).getIdctsp().getId().equals(list.get(j - 1).getIdctsp().getId())) {
+//                            check = false;
+//                        }
+//                    }
+//                }
+//                if (check) {
+//                    for (int j = i; j < list.size(); j++) {
+//                        if (list.get(i).getIdctsp().getId().equals(list.get(j).getIdctsp().getId())) {
+//                            ++sum;
+//                        }
+//                    }
+//
+//                    dem += sum;
+//                    Object[] rowData = {
+//                        list.get(i).getIdctsp().getSp().getTen() + " " + list.get(i).getIdctsp().getMs() + " " + list.get(i).getIdctsp().getDl(),
+//                        sum
+//                    };
+//                    dtm2.addRow(rowData);
+//                }
+//            }
+//        }
+
+        int dem = 0;
         dtm2.setRowCount(0);
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getIdhd().getTrangThai() == 1) {
-                sum = 0;
-                boolean check = true;
-                if (i == list.size()) {
-                    break;
-                }
-
-                if (i > 0) {
-                    for (int j = i; j > 0; j--) {
-                        if (list.get(i).getIdctsp().getId().equals(list.get(j - 1).getIdctsp().getId())) {
-                            check = false;
-                        }
-                    }
-                }
-                if (check) {
-                    for (int j = i; j < list.size(); j++) {
-                        if (list.get(i).getIdctsp().getId().equals(list.get(j).getIdctsp().getId())) {
-                            ++sum;
-                        }
-                    }
-
-                    dem += sum;
-                    Object[] rowData = {
-                        list.get(i).getIdctsp().getSp().getTen() + " " + list.get(i).getIdctsp().getMs() + " " + list.get(i).getIdctsp().getDl(),
-                        sum
-                    };
-                    dtm2.addRow(rowData);
-                }
-            }
+        for(Map.Entry<String, Integer> entry : imeirp.amountsImeiSell().entrySet()) {
+            dem += entry.getValue();
+            Object[] rowData = {
+                entry.getKey(),
+                entry.getValue()
+            };
+            dtm2.addRow(rowData);
         }
         Object[] count = {
             "Tổng",
@@ -417,11 +430,11 @@ public class ThongKeJpanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2)
                         .addContainerGap())
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbbNSX, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
