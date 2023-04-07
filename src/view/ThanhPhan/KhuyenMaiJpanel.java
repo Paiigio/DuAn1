@@ -156,7 +156,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         Collections.sort(list, Comparator.comparing(CTKhuyenMai -> CTKhuyenMai.getMa()));
         for (CTKhuyenMaiModel x : list) {
             Object[] rowData = {
-//                x.getMa(), x.getTen(), x.getThoiGianBatDau(), x.getThoiGianKetThuc(), x.getHinhThuc(), x.getNgayTao(), x.getNgaySua(), x.getTrangThai()
+             x.getMa(), x.getTen(), x.getThoiGianBatDau(), x.getThoiGianKetThuc(), x.getHinhThuc(), x.getNgayTao(), x.getNgaySua(), x.getTrangThai()== 0 ? "Hoạt Động" : "Hết Hạn"
             };
             dtm.addRow(rowData);
 
@@ -715,7 +715,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
         String tim = txtTimKM.getText().trim();
         if (tim.length() == 0) {
-            JOptionPane.showMessageDialog(null, "không đc để trống tìm");
+            JOptionPane.showMessageDialog(this, "không đc để trống tìm");
             txtTimKM.requestFocus();
         }
         if (ctkm.getTimTen(tim).size() > 0) {

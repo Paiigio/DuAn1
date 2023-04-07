@@ -102,43 +102,7 @@ public class ThongKeJpanel extends javax.swing.JPanel {
     }
 
     public void loadTableSanPham() {
-//        ArrayList<HoaDonChiTietModel> list = ihdct.getAllHoaDonCT();
-//        for (HoaDonChiTietModel x : list) {
-//            System.out.println(x.getIdctsp().getSp().getTen());
-//        }
-//        int sum = 1, dem = 0;
-//        dtm2.setRowCount(0);
-//        for (int i = 0; i < list.size(); i++) {
-//            if (list.get(i).getIdhd().getTrangThai() == 1) {
-//                sum = 0;
-//                boolean check = true;
-//                if (i == list.size()) {
-//                    break;
-//                }
-//
-//                if (i > 0) {
-//                    for (int j = i; j > 0; j--) {
-//                        if (list.get(i).getIdctsp().getId().equals(list.get(j - 1).getIdctsp().getId())) {
-//                            check = false;
-//                        }
-//                    }
-//                }
-//                if (check) {
-//                    for (int j = i; j < list.size(); j++) {
-//                        if (list.get(i).getIdctsp().getId().equals(list.get(j).getIdctsp().getId())) {
-//                            ++sum;
-//                        }
-//                    }
-//
-//                    dem += sum;
-//                    Object[] rowData = {
-//                        list.get(i).getIdctsp().getSp().getTen() + " " + list.get(i).getIdctsp().getMs() + " " + list.get(i).getIdctsp().getDl(),
-//                        sum
-//                    };
-//                    dtm2.addRow(rowData);
-//                }
-//            }
-//        }
+
 
         int dem = 0;
         dtm2.setRowCount(0);
