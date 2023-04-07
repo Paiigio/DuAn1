@@ -46,6 +46,7 @@ public class QL_DT extends javax.swing.JFrame {
            lblAnhDangNhap.setIcon(imgicon);
            if(Login.nv.getCv().getTenCV().equalsIgnoreCase("Nhân Viên")){
                btnNhanVien.setEnabled(false);
+               btnKhuyenMai.setEnabled(false);
                btnNhanVien.addMouseListener(new MouseListener() {
                    
                    @Override
@@ -276,9 +277,6 @@ public class QL_DT extends javax.swing.JFrame {
             .addGroup(TraiLayout.createSequentialGroup()
                 .addGroup(TraiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(TraiLayout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(lblAnhDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(TraiLayout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addGroup(TraiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -288,8 +286,14 @@ public class QL_DT extends javax.swing.JFrame {
                             .addComponent(btnSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnTrangChu, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblChucVU, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnTrangChu, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(TraiLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(TraiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(TraiLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(lblChucVU, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblAnhDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         TraiLayout.setVerticalGroup(
@@ -604,11 +608,11 @@ public class QL_DT extends javax.swing.JFrame {
     }//GEN-LAST:event_btnKhachHangActionPerformed
 
     private void btnKhachHangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhachHangMouseExited
-        // TODO add your handling code here:
+          btnBanHang.setBackground(new Color(255,215,0));
     }//GEN-LAST:event_btnKhachHangMouseExited
 
     private void btnKhachHangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhachHangMouseEntered
-        // TODO add your handling code here:
+        btnThongke.setBackground(Color.pink);
     }//GEN-LAST:event_btnKhachHangMouseEntered
 
     private void btnThongkeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThongkeMouseExited

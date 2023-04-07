@@ -30,6 +30,17 @@ public class IMEIService implements IIMEIService {
     }
     
     @Override
+    public ArrayList<IMEIModel> getIMEIByTT() {
+        ArrayList<IMEIModel> list = new ArrayList<>();
+        ArrayList<IMEI> i = im.getIMEIByTT();
+        for (IMEI x : i) {
+            list.add(new IMEIModel(x.getId(), x.getCtsp(), x.getMa(), x.getNgayTao(), x.getGhiChu(), x.getTrangThai()));
+            
+        }
+        return list;
+    }
+    
+    @Override
     public IMEIModel insertIMEI(IMEIModel i) {
         ArrayList<IMEI> list = im.getAllIMEI();
         for (IMEI x : list) {

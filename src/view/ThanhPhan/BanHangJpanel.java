@@ -499,11 +499,6 @@ public class BanHangJpanel extends javax.swing.JPanel {
 
         txtTongTien.setEditable(false);
         txtTongTien.setEnabled(false);
-        txtTongTien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTongTienActionPerformed(evt);
-            }
-        });
 
         jLabel33.setText("Tổng tiền");
 
@@ -549,11 +544,6 @@ public class BanHangJpanel extends javax.swing.JPanel {
         jLabel44.setText("VND");
 
         cbbPhuongThucThanhToan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tiền mặt", "Chuyển Khoản", "Thẻ" }));
-        cbbPhuongThucThanhToan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbbPhuongThucThanhToanActionPerformed(evt);
-            }
-        });
 
         btnInHD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/print.png"))); // NOI18N
         btnInHD.addActionListener(new java.awt.event.ActionListener() {
@@ -712,7 +702,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
             }
         });
 
-        cbbTrangThaiHoaDon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chưa TT", "Đã thanh toán", "Hóa Đơn Hủy" }));
+        cbbTrangThaiHoaDon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chưa TT", "Đã thanh toán" }));
         cbbTrangThaiHoaDon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbbTrangThaiHoaDonActionPerformed(evt);
@@ -1054,17 +1044,13 @@ public class BanHangJpanel extends javax.swing.JPanel {
         hd.setMa(maHD);
         if (iHoaDonService.upadteHD(hd) != null) {
             JOptionPane.showMessageDialog(null, "Cập nhật thành công");
-            loadHD();
+            loadHDCho();
         }
 
     }//GEN-LAST:event_btnThayActionPerformed
 
-    private void txtTongTienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTongTienActionPerformed
-
-    }//GEN-LAST:event_txtTongTienActionPerformed
-
     private void txtTienKHCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTienKHCaretUpdate
-        // Tiền thừa
+    
         String tienKH = "";
         int tienThanhToan = 0;
         if (!txtTienKH.getText().trim().isEmpty()) {
@@ -1079,10 +1065,6 @@ public class BanHangJpanel extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_txtTienKHCaretUpdate
-
-    private void cbbPhuongThucThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbPhuongThucThanhToanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbbPhuongThucThanhToanActionPerformed
 
     private void btnInHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInHDActionPerformed
 

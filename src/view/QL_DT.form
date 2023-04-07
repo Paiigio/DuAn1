@@ -88,10 +88,6 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                              <Component id="lblAnhDangNhap" min="-2" pref="129" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="btnNhanVien" alignment="0" min="-2" pref="191" max="-2" attributes="0"/>
@@ -102,7 +98,16 @@
                                   <Component id="btnHoaDon" alignment="0" min="-2" pref="191" max="-2" attributes="0"/>
                                   <Component id="btnBanHang" alignment="0" min="-2" pref="191" max="-2" attributes="0"/>
                                   <Component id="btnTrangChu" alignment="0" min="-2" pref="191" max="-2" attributes="0"/>
-                                  <Component id="lblChucVU" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                      <Component id="lblChucVU" min="-2" pref="153" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="lblAnhDangNhap" min="-2" pref="129" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>

@@ -38,6 +38,23 @@ public class IMEIResponsitory {
         }
         return list;
     }
+    
+    public ArrayList<IMEI> getIMEIByTT() {
+        ArrayList<IMEI> list = new ArrayList<>();
+        String sql = "SELECT * FROM dbo.IMEI WHERE TRANGTHAI = 1";
+        ResultSet rs = JDBC_Helper.excuteQuery(sql);
+        try {
+            while (rs.next()) {
+                CTSanPham ctsp = c.getCTSanPhamByID(rs.getString(6));
+                list.add(new IMEI(rs.getString(1), ctsp, rs.getString(2), rs.getDate(3), rs.getString(4), rs.getInt(5)));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(IMEIResponsitory.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        return list;
+    }
 
     public IMEI getIMEIByID(String id) {
 

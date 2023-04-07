@@ -110,11 +110,11 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="237" max="-2" attributes="0"/>
-                              <Component id="btnThem" min="-2" pref="91" max="-2" attributes="0"/>
+                              <Component id="btnThem" linkSize="1" min="-2" pref="91" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
-                              <Component id="btnSUa" min="-2" pref="89" max="-2" attributes="0"/>
+                              <Component id="btnSUa" linkSize="1" min="-2" pref="89" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
-                              <Component id="jButton22" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButton22" linkSize="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
@@ -212,9 +212,9 @@
                       </Group>
                       <EmptySpace pref="74" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnThem" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnSUa" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton22" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnThem" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnSUa" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton22" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>

@@ -298,6 +298,9 @@ public class KhachHangJpanel extends javax.swing.JPanel {
                                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(544, Short.MAX_VALUE))
         );
+
+        TTNhanVien1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnSUa, btnThem, jButton22});
+
         TTNhanVien1Layout.setVerticalGroup(
             TTNhanVien1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TTNhanVien1Layout.createSequentialGroup()
@@ -339,6 +342,8 @@ public class KhachHangJpanel extends javax.swing.JPanel {
                     .addComponent(jButton22))
                 .addGap(18, 18, 18))
         );
+
+        TTNhanVien1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnSUa, btnThem, jButton22});
 
         tblBang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

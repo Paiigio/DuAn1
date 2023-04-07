@@ -55,18 +55,6 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         lblTrang.setText("1/" + soTrang);
     }
 
-//    public void countHD() {
-//        try {
-//            String sql = "SELECT count(*) From HOADON";
-//            ResultSet rs = JDBC_Helper.excuteQuery(sql);
-//            while (rs.next()) {
-//                count = rs.getLong(1);
-//            }
-//            rs.close();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     public void countHDTT() {
         try {

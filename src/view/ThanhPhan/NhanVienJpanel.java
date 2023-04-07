@@ -445,6 +445,9 @@ public class NhanVienJpanel extends javax.swing.JPanel {
                         .addComponent(btnClear)))
                 .addContainerGap(390, Short.MAX_VALUE))
         );
+
+        TTNhanVienLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnClear, btnSua, btnThem});
+
         TTNhanVienLayout.setVerticalGroup(
             TTNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TTNhanVienLayout.createSequentialGroup()
@@ -510,6 +513,8 @@ public class NhanVienJpanel extends javax.swing.JPanel {
                             .addComponent(btnClear))
                         .addGap(18, 18, 18))))
         );
+
+        TTNhanVienLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnClear, btnSua, btnThem});
 
         tblBangTTNV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

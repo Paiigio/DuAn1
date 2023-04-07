@@ -15,6 +15,8 @@ public interface IIMEIService {
 
     public ArrayList<IMEIModel> getAllIMEI();
 
+    public ArrayList<IMEIModel> getIMEIByTT();
+
     public IMEIModel insertIMEI(IMEIModel i);
 
     public IMEIModel updateIMEI(IMEIModel i);
@@ -28,5 +30,6 @@ public interface IIMEIService {
     public IMEIModel getTrangThaiByIMEI(String imei);
 
     public int updateIMEI_ThanhToan(String ma);
+
     public Integer updateIMEI_HuyHang(String ma);
 }
