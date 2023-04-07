@@ -346,15 +346,13 @@ public class Login extends javax.swing.JFrame {
             buffer.append((char) randomLimitedInt);
         }
         String generatedString = buffer.toString();
-        System.out.println("Random String: " + generatedString);
+   
         return generatedString;
     }
             
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         String user = txtUser.getText();
-//        Random r =new Random();
-//        String [] arr= {"hehe123","123456","doanxem","ngacnhienchua","dobietday"};
-//        int random=r.nextInt(arr.length);
+
         ArrayList<NhanVienModel> list = nvs.getAllNV();
         for (NhanVienModel x : list) {
             if (!(x.getMa().equals(user))) {

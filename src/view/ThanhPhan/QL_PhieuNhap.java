@@ -109,7 +109,7 @@ private void clearForm(){
             } catch (NumberFormatException e) {
             }
         }
-        System.out.println(nv);
+       
         return new PhieuNhapModel(null, pn, nv, ma, gia, null);
     }
 

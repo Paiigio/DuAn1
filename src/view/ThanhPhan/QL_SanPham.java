@@ -72,7 +72,7 @@ public class QL_SanPham extends javax.swing.JFrame {
         String ten = txtTen.getText();
         String moTa = txtMoTa.getText();
         NSX nsx = (NSX) cbbNSX.getSelectedItem();
-        System.out.println(nsx.getId());
+    
         if (ma.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Mã không được để trống");
             return null;
@@ -366,7 +366,7 @@ public class QL_SanPham extends javax.swing.JFrame {
         try {
             int f = jfile.showOpenDialog(this);
             File file = jfile.getSelectedFile();
-            System.out.println(file);
+           
             con = DB_Context.getConnection();
             con.setAutoCommit(false);
             String sql = "INSERT INTO SANPHAM VALUES(NEWID(),?,?,?,?,GETDATE(),null)";

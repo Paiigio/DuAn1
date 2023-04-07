@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package view.ThanhPhan;
 
 import DomainModels.DungLuong;
@@ -22,7 +19,6 @@ import ViewModel.DungLuongModel;
 import ViewModel.IMEIModel;
 import ViewModel.MauSacModel;
 import ViewModel.SanPhamModel;
-import com.google.zxing.qrcode.encoder.QRCode;
 import java.awt.Image;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -140,9 +136,9 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         Locale localeVN = new Locale("vi", "VN");
         NumberFormat vn = NumberFormat.getInstance(localeVN);
         for (int i = 0; i < list.size(); ++i) {
-            System.out.println(list.get(i).getId());
+         
             ArrayList<IMEIModel> listIMEI = iIMEIService.selectSL(list.get(i).getId());
-            System.out.println(listIMEI.size());
+          
             dtm.addRow(new Object[]{
                 i + 1,
                 list.get(i).getMa(),
@@ -173,11 +169,6 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         cbbSP.setSelectedIndex(0);
         lblAnhSP.setIcon(null);
     }
-//    private String deleteDot(String chuoi){
-//        for (int i = 0 ; i < chuoi.length() ; ++i){
-//            c
-//        }
-//    }
 
     private String checkSP() {
         CTSanPhamModel ctspM = getCTSPFormInput();
@@ -334,19 +325,8 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         cbbMS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         cbbSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbbSP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbbSPActionPerformed(evt);
-            }
-        });
 
         txtMaQR.setEnabled(false);
-
-        txtNamBH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNamBHActionPerformed(evt);
-            }
-        });
 
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
@@ -499,13 +479,15 @@ public class SanPhamJpanel extends javax.swing.JPanel {
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtGiaNhap))
-                    .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(rdBan)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rdKhongBan)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(rdBan)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(rdKhongBan)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(115, 115, 115))
         );
@@ -721,10 +703,6 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnUpAnhThemSPActionPerformed
 
-    private void txtNamBHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamBHActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNamBHActionPerformed
-
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         clear();
     }//GEN-LAST:event_btnClearActionPerformed
@@ -919,10 +897,6 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cbbTKDLActionPerformed
 
-    private void cbbSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbSPActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbbSPActionPerformed
-
     private void btnSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSPActionPerformed
         new QL_SanPham().setVisible(true);
     }//GEN-LAST:event_btnSPActionPerformed
@@ -956,7 +930,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
             fout.flush();
 
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
 
     }//GEN-LAST:event_btnInMaActionPerformed

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package view.ThanhPhan;
 
 import DomainModels.ChucVu;
@@ -554,23 +551,6 @@ public class NhanVienJpanel extends javax.swing.JPanel {
         jLabel17.setText("Vai trò");
 
         cbbVaiTroNV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân viên", "Giám đốc", "Quản lý" }));
-        cbbVaiTroNV.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbbVaiTroNVItemStateChanged(evt);
-            }
-        });
-        cbbVaiTroNV.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbbVaiTroNVMouseClicked(evt);
-            }
-        });
-        cbbVaiTroNV.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-                cbbVaiTroNVCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
-        });
         cbbVaiTroNV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbbVaiTroNVActionPerformed(evt);
@@ -791,17 +771,11 @@ public class NhanVienJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTImActionPerformed
 
     private void cbbVaiTroNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbVaiTroNVActionPerformed
-//    String vaitro=cbbVaiTroNV.getSelectedItem().toString();
-//        if(nvs.getVaiTro(vaitro).size()>0){
-//       JOptionPane.showMessageDialog(this, "Tìm thành công");
-//        }else{
-//            JOptionPane.showMessageDialog(this, "Tìm thành thất bại");
-//        }
-//        loadTableVaiTro(vaitro);
+
         ArrayList<NhanVienModel> list = nvs.getAllNV();
         ArrayList<NhanVienModel> listNew = new ArrayList<>();
         ChucVu cv = (ChucVu) cbbVaiTroNV.getSelectedItem();
-        System.out.println(cv.getMa());
+     
         for (NhanVienModel x : list) {
             if (x.getCv() != null && x.getCv().getMa().equals(cv.getMa())) {
                 listNew.add(x);
@@ -873,67 +847,6 @@ public class NhanVienJpanel extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_cbbTTActionPerformed
-
-    private void cbbVaiTroNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbbVaiTroNVMouseClicked
-
-    }//GEN-LAST:event_cbbVaiTroNVMouseClicked
-
-    private void cbbVaiTroNVCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_cbbVaiTroNVCaretPositionChanged
-//           ArrayList<NhanVienModel> list = nvs.getAllNV();
-//    ArrayList<NhanVienModel> listNew = new ArrayList<>();
-//        ChucVu cv = (ChucVu) cbbCV.getSelectedItem();
-//    for (NhanVienModel x : list){
-//        if (x.getCv()!=null && x.getCv().getMa().equals(cv.getMa())){
-//            listNew.add(x);
-//        }
-//    }
-//    dtmNV.setRowCount(0);
-//            for (NhanVienModel z : listNew) {
-//                dtmNV.addRow(new Object[]{
-//                    z.getCv(),
-//                    z.getMa(),
-//                    z.getHoTen(),
-//                    z.getGioiTinh(),
-//                    z.getSdt(),
-//                    z.getNgaySinh(),
-//                    z.getDiaChi(),
-//                    z.getEmail(),
-//                    z.getMatKhau(),
-//                    z.getTrangThai() == 1 ? "Đi làm": "Nghỉ làm",
-//                    z.getHinhAnh()
-//                });
-//
-//            }
-    }//GEN-LAST:event_cbbVaiTroNVCaretPositionChanged
-
-    private void cbbVaiTroNVItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbVaiTroNVItemStateChanged
-//           ArrayList<NhanVienModel> list = nvs.getAllNV();
-//    ArrayList<NhanVienModel> listNew = new ArrayList<>();
-//        ChucVu cv = (ChucVu) cbbCV.getSelectedItem();
-//        System.out.println(cv.getTenCV());
-//    for (NhanVienModel x : list){
-//        if (x.getCv()!=null && x.getCv().getMa().equals(cv.getMa())){
-//            listNew.add(x);
-//        }
-//    }
-//    dtmNV.setRowCount(0);
-//            for (NhanVienModel z : listNew) {
-//                dtmNV.addRow(new Object[]{
-//                    z.getCv(),
-//                    z.getMa(),
-//                    z.getHoTen(),
-//                    z.getGioiTinh(),
-//                    z.getSdt(),
-//                    z.getNgaySinh(),
-//                    z.getDiaChi(),
-//                    z.getEmail(),
-//                    z.getMatKhau(),
-//                    z.getTrangThai() == 1 ? "Đi làm": "Nghỉ làm",
-//                    z.getHinhAnh()
-//                });
-//
-//            }
-    }//GEN-LAST:event_cbbVaiTroNVItemStateChanged
 
     private void XuatExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XuatExcelActionPerformed
         ArrayList<NhanVienModel> list = nvs.getAllNV();

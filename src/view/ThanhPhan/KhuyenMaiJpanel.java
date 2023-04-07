@@ -1,11 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package view.ThanhPhan;
 
 import DomainModels.CTKhuyenMai;
-import DomainModels.CTSanPham;
 import DomainModels.NSX;
 import Service.CTKhuyenMaiService;
 import Service.CTSanPhamService;
@@ -13,10 +9,8 @@ import Service.Interface.ICTKhuyenMaiService;
 import Service.Interface.ICTSanPhamService;
 import Service.Interface.INSXService;
 import Service.NSXService;
-import Utilites.DB_Context;
 import ViewModel.CTKhuyenMaiModel;
 import ViewModel.CTSanPhamModel;
-import ViewModel.CheckModel;
 import ViewModel.NSXModel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,7 +24,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import view.QL_DT;
 
 public class KhuyenMaiJpanel extends javax.swing.JPanel {
 
@@ -110,7 +103,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         dtm.setRowCount(0);
         Collections.sort(list, Comparator.comparing(CTKhuyenMai -> CTKhuyenMai.getMa()));
         for (CTKhuyenMaiModel x : list) {
-                    System.out.println(x.getTrangThai());
+                
             Object[] rowData = {
                 x.getMa(),
                 x.getTen(),
@@ -807,7 +800,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
             {
                 CTSanPhamModel c = getCTSPByMa(tblSanPham.getValueAt(i, 1).toString());
                 c.setCtkm(ctkm);
-                System.out.println(c.getCtkm());
+              
                 if (ctsp.updateCTKMSanPham(c) != null) {
                     dem++;
                 }   

@@ -6,6 +6,8 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Locale;
@@ -33,6 +35,13 @@ public class QL_DT extends javax.swing.JFrame {
         cardLayout.show(panelCardGoc, "trangchu");
           JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
         loaddulieuDangNhap();
+       Toolkit tk = Toolkit.getDefaultToolkit();
+        int xsize = (int) tk.getScreenSize().getWidth();
+        int ysize = (int) tk.getScreenSize().getHeight();
+        Insets scrmax = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration());
+        int taskBar = scrmax.bottom;
+        this.setSize(xsize, ysize - taskBar);
+     
     
       
     }
@@ -120,6 +129,7 @@ public class QL_DT extends javax.swing.JFrame {
 
         btnTrangChu.setBackground(new java.awt.Color(255, 215, 0));
         btnTrangChu.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnTrangChu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trangchu.png"))); // NOI18N
         btnTrangChu.setText("Trang chủ");
         btnTrangChu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnTrangChu.setOpaque(true);
@@ -137,6 +147,7 @@ public class QL_DT extends javax.swing.JFrame {
 
         btnBanHang.setBackground(new java.awt.Color(255, 215, 0));
         btnBanHang.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnBanHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/banhang.png"))); // NOI18N
         btnBanHang.setText("Bán Hàng");
         btnBanHang.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnBanHang.setOpaque(true);
@@ -156,6 +167,7 @@ public class QL_DT extends javax.swing.JFrame {
 
         btnHoaDon.setBackground(new java.awt.Color(255, 215, 0));
         btnHoaDon.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/hoadon.png"))); // NOI18N
         btnHoaDon.setText("Hóa đơn");
         btnHoaDon.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnHoaDon.setOpaque(true);
@@ -175,6 +187,7 @@ public class QL_DT extends javax.swing.JFrame {
 
         btnSanPham.setBackground(new java.awt.Color(255, 215, 0));
         btnSanPham.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sanpham.png"))); // NOI18N
         btnSanPham.setText("Sản phẩm");
         btnSanPham.setOpaque(true);
         btnSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -193,6 +206,7 @@ public class QL_DT extends javax.swing.JFrame {
 
         btnKhuyenMai.setBackground(new java.awt.Color(255, 215, 0));
         btnKhuyenMai.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnKhuyenMai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sale.png"))); // NOI18N
         btnKhuyenMai.setText("Khuyến mãi");
         btnKhuyenMai.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnKhuyenMai.setOpaque(true);
@@ -212,6 +226,7 @@ public class QL_DT extends javax.swing.JFrame {
 
         btnKhachHang.setBackground(new java.awt.Color(255, 215, 0));
         btnKhachHang.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/khachhang.png"))); // NOI18N
         btnKhachHang.setText("Khách hàng");
         btnKhachHang.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnKhachHang.setOpaque(true);
@@ -231,6 +246,7 @@ public class QL_DT extends javax.swing.JFrame {
 
         btnNhanVien.setBackground(new java.awt.Color(255, 215, 0));
         btnNhanVien.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/nhanvien.png"))); // NOI18N
         btnNhanVien.setText("Nhân viên");
         btnNhanVien.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnNhanVien.setOpaque(true);
@@ -250,6 +266,7 @@ public class QL_DT extends javax.swing.JFrame {
 
         btnThongke.setBackground(new java.awt.Color(255, 215, 0));
         btnThongke.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnThongke.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/thongke.png"))); // NOI18N
         btnThongke.setText("Thống kê");
         btnThongke.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnThongke.setOpaque(true);

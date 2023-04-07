@@ -19,7 +19,6 @@ import PieChart.ModelPieChart;
 import PieChart.Pie_Chart;
 import CurveLineChart.ModelChart;
 import ViewModel.IMEIModel;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -169,7 +168,7 @@ public class ThongKeJpanel extends javax.swing.JPanel {
             if (x.getIdhd().getTrangThai() == 1) {
                 LocalDate lcd = LocalDate.parse(x.getNgayTao().toString());
                 String month = UpperCaseFirst(subString(lcd.getMonth().toString().toLowerCase()));
-                System.out.println(month);
+               
                 valueOfKey = map.get(month);
                 valueOfKey += x.getThanhTien();
                 map.put(month, valueOfKey);

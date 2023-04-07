@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package responsitory;
 
 import DomainModels.CTSanPham;
@@ -78,7 +75,7 @@ public class IMEIResponsitory {
         try {
             while (rs.next()) {
                 CTSanPham ctsp = c.getCTSanPhamByID(rs.getString(6));
-                System.out.println(ctsp);
+                
                 list.add(new IMEI(rs.getString(1), ctsp, rs.getString(2), rs.getDate(3), rs.getString(4), rs.getInt(5)));
             }
         } catch (SQLException ex) {
@@ -118,7 +115,7 @@ public class IMEIResponsitory {
         try {
             while (rs.next()) {
                 CTSanPham ctsp = c.getCTSanPhamByID(rs.getString(6));
-                System.out.println(ctsp);
+              
                 list.add(new IMEI(rs.getString(1), ctsp, rs.getString(2), rs.getDate(3), rs.getString(4), rs.getInt(5)));
             }
         } catch (SQLException ex) {
