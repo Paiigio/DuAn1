@@ -396,6 +396,11 @@ public class BanHangJpanel extends javax.swing.JPanel {
                 txtTimKiemSPCaretUpdate(evt);
             }
         });
+        txtTimKiemSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimKiemSPActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -1147,6 +1152,10 @@ public class BanHangJpanel extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_btnHuyHDActionPerformed
+
+    private void txtTimKiemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemSPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimKiemSPActionPerformed
     private void TongTien() {
         int indexHD = tblHoaDon.getSelectedRow();
         String maHD = tblHoaDon.getValueAt(indexHD, 0).toString();
