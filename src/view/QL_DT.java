@@ -625,11 +625,11 @@ public class QL_DT extends javax.swing.JFrame {
     }//GEN-LAST:event_btnKhachHangActionPerformed
 
     private void btnKhachHangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhachHangMouseExited
-          btnBanHang.setBackground(new Color(255,215,0));
+          btnKhachHang.setBackground(new Color(255,215,0));
     }//GEN-LAST:event_btnKhachHangMouseExited
 
     private void btnKhachHangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhachHangMouseEntered
-        btnThongke.setBackground(Color.pink);
+        btnKhachHang.setBackground(Color.pink);
     }//GEN-LAST:event_btnKhachHangMouseEntered
 
     private void btnThongkeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThongkeMouseExited

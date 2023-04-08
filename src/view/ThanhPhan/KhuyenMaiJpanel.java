@@ -12,6 +12,7 @@ import Service.NSXService;
 import ViewModel.CTKhuyenMaiModel;
 import ViewModel.CTSanPhamModel;
 import ViewModel.NSXModel;
+import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 public class KhuyenMaiJpanel extends javax.swing.JPanel {
 
@@ -43,9 +45,11 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         dtmSP = (DefaultTableModel) tblSanPham.getModel();
         cbbHang.setModel(cbb);
         this.loadTable();
-        tblBang.getColumnModel().getColumn(0).setPreferredWidth(30);
+        tblBang.getColumnModel().getColumn(0).setPreferredWidth(50);
         tblBang.getColumnModel().getColumn(1).setPreferredWidth(120);
         tblBang.getColumnModel().getColumn(4).setPreferredWidth(60);
+        JTableHeader ttHeader=tblBang.getTableHeader();
+        ttHeader.setBackground(Color.red);
         load();
         loadTKHang();
     }
@@ -262,7 +266,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         jPanel2.setOpaque(false);
 
         jLabel47.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sale.png"))); // NOI18N
+        jLabel47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sale22.png"))); // NOI18N
 
         jLabel48.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel48.setText("Mã khuyến mãi     :");
@@ -370,7 +374,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(202, 202, 202)
                         .addComponent(jLabel47)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnSua, btnThem});
@@ -410,7 +414,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
                     .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSua1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addContainerGap(192, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnSua, btnThem});
@@ -453,7 +457,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(tblBang);
         if (tblBang.getColumnModel().getColumnCount() > 0) {
-            tblBang.getColumnModel().getColumn(0).setMaxWidth(80);
+            tblBang.getColumnModel().getColumn(0).setMaxWidth(100);
         }
 
         jLabel58.setText("Tìm sản phẩm");
@@ -548,7 +552,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
                                 .addComponent(btnSuaCTKM)
                                 .addGap(110, 110, 110)
                                 .addComponent(btnXoaCTKM)))
-                        .addGap(0, 59, Short.MAX_VALUE))
+                        .addGap(0, 86, Short.MAX_VALUE))
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -597,19 +601,17 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
             .addGroup(JKhuyenMaiLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(770, Short.MAX_VALUE))
         );
         JKhuyenMaiLayout.setVerticalGroup(
             JKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JKhuyenMaiLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(100, Short.MAX_VALUE))
-            .addGroup(JKhuyenMaiLayout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(JKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 106, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

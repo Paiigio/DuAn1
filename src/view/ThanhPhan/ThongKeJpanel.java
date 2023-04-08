@@ -19,12 +19,15 @@ import PieChart.ModelPieChart;
 import PieChart.Pie_Chart;
 import CurveLineChart.ModelChart;
 import ViewModel.IMEIModel;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import responsitory.IMEIResponsitory;
+import view.QL_DT;
 
 public class ThongKeJpanel extends javax.swing.JPanel {
 
@@ -62,7 +65,8 @@ public class ThongKeJpanel extends javax.swing.JPanel {
             dcm.addElement(new NSX(x.getId(), x.getMa(), x.getTen(), null, null));
         }
     }
-
+ Locale localeVN = new Locale("vi", "VN");
+        NumberFormat vn = NumberFormat.getInstance(localeVN);
     public void loadTableDoanhThu() {
         ArrayList<HoaDonChiTietModel> list = ihdct.getAllHoaDonCT();
         dtm.setRowCount(0);
@@ -74,8 +78,10 @@ public class ThongKeJpanel extends javax.swing.JPanel {
                     x.getIdhd().getNv().getHoTen(),
                     x.getIdhd().getMa(),
                     x.getNgayTao(),
-                    x.getThanhTien() + " VND"
+                vn.format( x.getThanhTien() ) + " VND"
+                       
                 };
+               
                 dtm.addRow(rowData);
             }
         }
@@ -84,7 +90,7 @@ public class ThongKeJpanel extends javax.swing.JPanel {
             "",
             "",
             "Tổng Tiền",
-            total + " VND"
+            vn.format(total) + " VND"
         };
         dtm.addRow(sum);
     }
@@ -135,7 +141,7 @@ public class ThongKeJpanel extends javax.swing.JPanel {
                 count++;
             }
         }
- 
+
         Object[] sum = {
             "",
             "",
@@ -168,7 +174,7 @@ public class ThongKeJpanel extends javax.swing.JPanel {
             if (x.getIdhd().getTrangThai() == 1) {
                 LocalDate lcd = LocalDate.parse(x.getNgayTao().toString());
                 String month = UpperCaseFirst(subString(lcd.getMonth().toString().toLowerCase()));
-               
+
                 valueOfKey = map.get(month);
                 valueOfKey += x.getThanhTien();
                 map.put(month, valueOfKey);
@@ -296,11 +302,6 @@ public class ThongKeJpanel extends javax.swing.JPanel {
         jLabel6.setText("Lọc theo tháng");
 
         jdcNgayBD.setDateFormatString("yyyy-MM-dd");
-        jdcNgayBD.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jdcNgayBDMouseClicked(evt);
-            }
-        });
 
         jdcNgayKT.setDateFormatString("yyyy-MM-dd");
 
@@ -433,6 +434,8 @@ public class ThongKeJpanel extends javax.swing.JPanel {
                 .addGap(14, 14, 14))
         );
 
+        jPanel7.setOpaque(false);
+
         tblHoaDonHuy.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -460,14 +463,10 @@ public class ThongKeJpanel extends javax.swing.JPanel {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel7))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addContainerGap(1139, Short.MAX_VALUE))
+            .addComponent(jScrollPane3)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -576,6 +575,11 @@ public class ThongKeJpanel extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(153, 0, 0));
         jLabel10.setText("Biểu đồ đường cong thể hiện doanh thu qua từng tháng");
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
+        });
 
         jPanel3.setBackground(new java.awt.Color(238, 232, 170));
 
@@ -718,7 +722,7 @@ public class ThongKeJpanel extends javax.swing.JPanel {
                             x.getIdhd().getNv().getHoTen(),
                             x.getIdhd().getMa(),
                             x.getNgayTao(),
-                            x.getThanhTien() + " VND"
+                          vn.format(x.getThanhTien())   + " VND"
                         };
                         dtm.addRow(rowData);
                     }
@@ -729,7 +733,7 @@ public class ThongKeJpanel extends javax.swing.JPanel {
             "",
             "",
             "Tổng Tiền",
-            total + " VND"
+            vn.format(total) + " VND"
         };
         dtm.addRow(sum);
     }//GEN-LAST:event_cbbLocThangActionPerformed
@@ -807,14 +811,10 @@ public class ThongKeJpanel extends javax.swing.JPanel {
         dtm2.addRow(count);
     }//GEN-LAST:event_cbbNSXActionPerformed
 
-    private void jdcNgayBDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jdcNgayBDMouseClicked
-
-    }//GEN-LAST:event_jdcNgayBDMouseClicked
-
     private void btnLocNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocNgayActionPerformed
         Date ngayBD = jdcNgayBD.getDate();
         Date ngayKT = jdcNgayKT.getDate();
-        if(ngayBD.after(ngayKT)) {
+        if (ngayBD.after(ngayKT)) {
             JOptionPane.showMessageDialog(this, "Ngay bat dau phai truoc ngay ket thuc");
             return;
         }
@@ -829,7 +829,7 @@ public class ThongKeJpanel extends javax.swing.JPanel {
                         x.getIdhd().getNv().getHoTen(),
                         x.getIdhd().getMa(),
                         x.getNgayTao(),
-                        x.getThanhTien() + " VND"
+                      vn.format( x.getThanhTien() ) + " VND"
                     };
                     dtm.addRow(rowData);
                 }
@@ -840,7 +840,7 @@ public class ThongKeJpanel extends javax.swing.JPanel {
             "",
             "",
             "Tổng Tiền",
-            total + " VND"
+           vn.format(total)  + " VND"
         };
         dtm.addRow(sum);
     }//GEN-LAST:event_btnLocNgayActionPerformed
@@ -852,10 +852,16 @@ public class ThongKeJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLoadDataBangActionPerformed
 
     private void btnLoadDataBieuDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadDataBieuDoActionPerformed
-        curveLine_Chart.clear();
+//        curveLine_Chart.clear();
+//        loadBieuDoTron();
+//        setDataChart();
+    }//GEN-LAST:event_btnLoadDataBieuDoActionPerformed
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+            curveLine_Chart.clear();
         loadBieuDoTron();
         setDataChart();
-    }//GEN-LAST:event_btnLoadDataBieuDoActionPerformed
+    }//GEN-LAST:event_jLabel10MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -904,17 +910,18 @@ public class ThongKeJpanel extends javax.swing.JPanel {
             public void run() {
                 try {
                     Thread.sleep(100);
-//                    pie_Chart.clearData();
-//                    curveLine_Chart.start();
+                    pie_Chart.clearData();
+                    curveLine_Chart.start();
                     loadTableDoanhThu();
                     loadTableSanPham();
                     loadTableHDHuy();
                     loadBieuDoTron();
                     setDataChart();
-                           curveLine_Chart.clear();
-                            loadBieuDoTron();
-     
-    
+                    curveLine_Chart.clear();
+                    loadBieuDoTron();
+
+                    setDataChart();
+
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();
                 }

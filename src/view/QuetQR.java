@@ -294,7 +294,7 @@ public class QuetQR extends javax.swing.JFrame implements Runnable, ThreadFactor
 
                     iHoaDonChiTietService.insertHDCT(hdct);
 
-                    banHangjp.loadGioHang1(hd.getId());
+                    banHangjp.loadGioHang();
                 }
 
             }

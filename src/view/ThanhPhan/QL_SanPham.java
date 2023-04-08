@@ -359,7 +359,7 @@ public class QL_SanPham extends javax.swing.JFrame {
     }//GEN-LAST:event_tbnSuaActionPerformed
 
     private void btnImportEXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportEXActionPerformed
-        JFileChooser jfile = new JFileChooser();
+        JFileChooser jfile = new JFileChooser("D:\\duan1_nhom8\\excel");
         int batchSize = 20;
         Connection con = null;
         int x1 = tblHienThi.getRowCount();

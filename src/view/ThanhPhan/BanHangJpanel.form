@@ -26,7 +26,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <Component id="JBanHang" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -318,7 +318,6 @@
             <Component class="javax.swing.JTextField" name="txtTimKiemSP">
               <Events>
                 <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txtTimKiemSPCaretUpdate"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTimKiemSPActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -349,35 +348,35 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel35" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel32" alignment="0" min="-2" pref="43" max="-2" attributes="0"/>
                                   <Component id="jLabel36" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel32" alignment="0" min="-2" pref="43" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="txtTienThua" min="-2" pref="132" max="-2" attributes="0"/>
+                                      <Component id="txtTienThua" linkSize="2" min="-2" pref="132" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jLabel43" min="-2" pref="43" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="txtMaCoupon" max="32767" attributes="0"/>
-                                          <Component id="txtGiamGia" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="cbbPhuongThucThanhToan" alignment="0" pref="132" max="32767" attributes="0"/>
+                                          <Component id="txtMaCoupon" linkSize="2" max="32767" attributes="0"/>
+                                          <Component id="txtGiamGia" linkSize="2" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="cbbPhuongThucThanhToan" linkSize="2" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jLabel44" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="txtTienKH" min="-2" pref="132" max="-2" attributes="0"/>
+                                      <Component id="txtTienKH" linkSize="2" min="-2" pref="132" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jLabel42" min="-2" pref="43" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="txtTongTien" min="-2" pref="132" max="-2" attributes="0"/>
+                                      <Component id="txtTongTien" linkSize="2" min="-2" pref="132" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jLabel38" min="-2" pref="43" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="txtMaHD" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
+                                  <Component id="txtMaHD" linkSize="2" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -387,7 +386,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtTenNV" min="-2" pref="132" max="-2" attributes="0"/>
+                                  <Component id="txtTenNV" linkSize="2" min="-2" pref="132" max="-2" attributes="0"/>
                                   <Component id="txtGhiChu" min="-2" pref="217" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -413,19 +412,19 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel32" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtMaHD" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtMaHD" linkSize="3" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="jLabel32" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel33" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtTongTien" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtTongTien" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel38" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtTienKH" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtTienKH" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel36" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel42" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -433,38 +432,38 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel43" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel37" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtTienThua" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtTienThua" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel35" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbbPhuongThucThanhToan" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbbPhuongThucThanhToan" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel40" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtMaCoupon" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtMaCoupon" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel34" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtGiamGia" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtGiamGia" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel44" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtTenNV" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtTenNV" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel41" min="-2" max="-2" attributes="0"/>
                           <Component id="txtGhiChu" min="-2" pref="80" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnInHD" min="-2" pref="55" max="-2" attributes="0"/>
-                          <Component id="btnThanhToan" min="-2" pref="55" max="-2" attributes="0"/>
+                          <Component id="btnThanhToan" alignment="0" min="-2" pref="55" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="21" max="32767" attributes="0"/>
                   </Group>
@@ -794,8 +793,11 @@
                         </Column>
                       </TableColumnModel>
                     </Property>
+                    <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="66" green="66" red="ff" type="rgb"/>
+                    </Property>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                      <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                     </Property>
                   </Properties>
                   <Events>

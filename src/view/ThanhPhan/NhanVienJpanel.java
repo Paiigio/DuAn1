@@ -2,6 +2,7 @@
 package view.ThanhPhan;
 
 import DomainModels.ChucVu;
+import DomainModels.NhanVien;
 import Service.ChucVuService;
 import Service.Interface.IChucVuService;
 import Service.Interface.INhanVienService;
@@ -16,6 +17,8 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -189,6 +192,7 @@ public class NhanVienJpanel extends javax.swing.JPanel {
 
     public void loadTableNV() {
         ArrayList<NhanVienModel> list = nvs.getAllNV();
+               Collections.sort(list, Comparator.comparing(NhanVien -> NhanVien.getMa()));
         dtmNV.setRowCount(0);
         for (NhanVienModel x : list) {
             dtmNV.addRow(new Object[]{
