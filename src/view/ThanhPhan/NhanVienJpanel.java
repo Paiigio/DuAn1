@@ -1,4 +1,3 @@
-
 package view.ThanhPhan;
 
 import DomainModels.ChucVu;
@@ -103,17 +102,17 @@ public class NhanVienJpanel extends javax.swing.JPanel {
         }
 
         if (ma.length() == 0) {
-            JOptionPane.showMessageDialog(this, "Không được để trống mã");
+            JOptionPane.showMessageDialog(null, "Không được để trống mã");
             txtMaNV.requestFocus();
             return null;
         }
         if (ten.length() == 0) {
-            JOptionPane.showMessageDialog(this, "Không được để trống tên");
+            JOptionPane.showMessageDialog(null, "Không được để trống tên");
             txtHoTen.requestFocus();
             return null;
         }
         if (ngay == null) {
-            JOptionPane.showMessageDialog(this, "Không được để trống ngày sinh");
+            JOptionPane.showMessageDialog(null, "Không được để trống ngày sinh");
             txtNgaySinhNV.requestFocus();
             return null;
         } else {
@@ -122,7 +121,7 @@ public class NhanVienJpanel extends javax.swing.JPanel {
         }
 
         if (sdt.length() == 0) {
-            JOptionPane.showMessageDialog(this, "Không được để trống số điện thoại");
+            JOptionPane.showMessageDialog(null, "Không được để trống số điện thoại");
             txtSDT.requestFocus();
             return null;
         } else {
@@ -130,38 +129,38 @@ public class NhanVienJpanel extends javax.swing.JPanel {
                 int dienthoai = Integer.parseInt(txtSDT.getText());
 
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Sai định dạng số điện thoại");
+                JOptionPane.showMessageDialog(null, "Sai định dạng số điện thoại");
                 txtSDT.requestFocus();
                 e.printStackTrace();
                 return null;
             }
             String ktsdt = "0\\d{9}";
             if (txtSDT.getText().matches(ktsdt) == false) {
-                JOptionPane.showMessageDialog(this, "Bạn nhập sai số điện thoại");
+                JOptionPane.showMessageDialog(null, "Bạn nhập sai số điện thoại");
                 txtSDT.requestFocus();
                 return null;
             }
         }
         if (email.length() == 0) {
-            JOptionPane.showMessageDialog(this, "Không được để trống email");
+            JOptionPane.showMessageDialog(null, "Không được để trống email");
             txtMK.requestFocus();
             return null;
         } else {
             String mail = "\\w+@(\\w+\\.\\w+){1,2}";
             Matcher matcher = Pattern.compile(mail).matcher(txtEmail.getText());
             if (!matcher.matches()) {
-                JOptionPane.showMessageDialog(this, "Sai định dạng email");
+                JOptionPane.showMessageDialog(null, "Sai định dạng email");
                 return null;
             }
         }
         if (mk.length() == 0) {
-            JOptionPane.showMessageDialog(this, "Không được để trống mật khẩu");
+            JOptionPane.showMessageDialog(null, "Không được để trống mật khẩu");
             txtMK.requestFocus();
             return null;
         }
 
         if (diachi.length() == 0) {
-            JOptionPane.showMessageDialog(this, "Không được để trống địa chỉ");
+            JOptionPane.showMessageDialog(null, "Không được để trống địa chỉ");
             txtDCNV.requestFocus();
             return null;
         }
@@ -192,7 +191,7 @@ public class NhanVienJpanel extends javax.swing.JPanel {
 
     public void loadTableNV() {
         ArrayList<NhanVienModel> list = nvs.getAllNV();
-               Collections.sort(list, Comparator.comparing(NhanVien -> NhanVien.getMa()));
+        Collections.sort(list, Comparator.comparing(NhanVien -> NhanVien.getMa()));
         dtmNV.setRowCount(0);
         for (NhanVienModel x : list) {
             dtmNV.addRow(new Object[]{
@@ -303,7 +302,6 @@ public class NhanVienJpanel extends javax.swing.JPanel {
         cbbVaiTroNV = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
         cbbTT = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
         XuatExcel = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(238, 232, 170));
@@ -570,13 +568,6 @@ public class NhanVienJpanel extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("Import Excel");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         XuatExcel.setText("Export Excel");
         XuatExcel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -609,9 +600,7 @@ public class NhanVienJpanel extends javax.swing.JPanel {
                                 .addComponent(jLabel18)
                                 .addGroup(JNhanVienLayout.createSequentialGroup()
                                     .addComponent(cbbTT, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(54, 54, 54)
-                                    .addComponent(jButton1)
-                                    .addGap(18, 18, 18)
+                                    .addGap(48, 48, 48)
                                     .addComponent(XuatExcel))))
                         .addGroup(JNhanVienLayout.createSequentialGroup()
                             .addGap(17, 17, 17)
@@ -634,7 +623,6 @@ public class NhanVienJpanel extends javax.swing.JPanel {
                     .addComponent(btnTIm)
                     .addComponent(cbbVaiTroNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbbTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
                     .addComponent(XuatExcel))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -680,9 +668,9 @@ public class NhanVienJpanel extends javax.swing.JPanel {
             return;
         }
         if (nvs.insertNV(nv) != null) {
-            JOptionPane.showMessageDialog(this, "Thêm thành công");
+            JOptionPane.showMessageDialog(null, "Thêm thành công");
         } else {
-            JOptionPane.showMessageDialog(this, "Thêm thất bại do trùng mã");
+            JOptionPane.showMessageDialog(null, "Thêm thất bại do trùng mã");
         }
         loadTableNV();
         clearFormTTNV();
@@ -692,11 +680,14 @@ public class NhanVienJpanel extends javax.swing.JPanel {
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         int row = tblBangTTNV.getSelectedRow();
         if (row < 0) {
-            JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa");
+            JOptionPane.showMessageDialog(null, "Chọn dòng cần sửa");
             return;
         }
         NhanVienModel nv = getFormData();
         if (nv == null) {
+            return;
+        }
+        if (JOptionPane.showConfirmDialog(null, "Bạn có muốn tiếp tục sửa không?", "Thông báo", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
             return;
         }
         String id = tblBangTTNV.getValueAt(row, 1).toString();
@@ -706,9 +697,9 @@ public class NhanVienJpanel extends javax.swing.JPanel {
         }
         nv.setId(id);
         if (nvs.updateNV(nv) != null) {
-            JOptionPane.showMessageDialog(this, "Sửa thành công");
+            JOptionPane.showMessageDialog(null, "Sửa thành công");
         } else {
-            JOptionPane.showMessageDialog(this, "Sửa thất bại");
+            JOptionPane.showMessageDialog(null, "Sửa thất bại");
         }
         loadTableNV();
         clearFormTTNV();
@@ -767,9 +758,9 @@ public class NhanVienJpanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "không đc để trống tìm");
         }
         if (nvs.getTimTen(tim).size() > 0) {
-            JOptionPane.showMessageDialog(this, "Tìm thành công");
+            JOptionPane.showMessageDialog(null, "Tìm thành công");
         } else {
-            JOptionPane.showMessageDialog(this, "Tìm thành thất bại");
+            JOptionPane.showMessageDialog(null, "Tìm thành thất bại");
         }
         loadTableNV1(tim);
     }//GEN-LAST:event_btnTImActionPerformed
@@ -779,7 +770,7 @@ public class NhanVienJpanel extends javax.swing.JPanel {
         ArrayList<NhanVienModel> list = nvs.getAllNV();
         ArrayList<NhanVienModel> listNew = new ArrayList<>();
         ChucVu cv = (ChucVu) cbbVaiTroNV.getSelectedItem();
-     
+
         for (NhanVienModel x : list) {
             if (x.getCv() != null && x.getCv().getMa().equals(cv.getMa())) {
                 listNew.add(x);
@@ -853,6 +844,9 @@ public class NhanVienJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cbbTTActionPerformed
 
     private void XuatExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XuatExcelActionPerformed
+        if (JOptionPane.showConfirmDialog(null, "Bạn có muốn tiếp tục xuất file  không?", "Thông báo", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+            return;
+        }
         ArrayList<NhanVienModel> list = nvs.getAllNV();
         try {
             XSSFWorkbook wb = new XSSFWorkbook();
@@ -926,16 +920,12 @@ public class NhanVienJpanel extends javax.swing.JPanel {
                 ex.printStackTrace();
             }
 
-            JOptionPane.showMessageDialog(this, "Done !!!");
+            JOptionPane.showMessageDialog(null, "Done !!!");
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error !!!");
+            JOptionPane.showMessageDialog(null, "Error !!!");
         }
     }//GEN-LAST:event_XuatExcelActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -952,7 +942,6 @@ public class NhanVienJpanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbbCV;
     private javax.swing.JComboBox<String> cbbTT;
     private javax.swing.JComboBox<String> cbbVaiTroNV;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

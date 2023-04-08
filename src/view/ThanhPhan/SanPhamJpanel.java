@@ -203,23 +203,23 @@ public class SanPhamJpanel extends javax.swing.JPanel {
             anh = strHinhanh;
         }
         if (ma.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Mã không được để trống");
+            JOptionPane.showMessageDialog(null, "Mã không được để trống");
             return null;
         }
         if (maQR.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Mã QR không được để trống");
+            JOptionPane.showMessageDialog(null, "Mã QR không được để trống");
             return null;
         }
         if (namBH.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Năm bảo hành không được để trống");
+            JOptionPane.showMessageDialog(null, "Năm bảo hành không được để trống");
             return null;
         }
         if (giaNhap.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Giá nhập không được để trống");
+            JOptionPane.showMessageDialog(null, "Giá nhập không được để trống");
             return null;
         }
         if (giaBan.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Giá bán không được để trống");
+            JOptionPane.showMessageDialog(null, "Giá bán không được để trống");
             return null;
         }
         return new CTSanPhamModel(null, ms, null, sp, dl, ma, maQR, anh, Integer.valueOf(namBH), null, null, Float.valueOf(giaNhap.replace(".", "")), Float.valueOf(giaBan.replace(".", "")), 0);
@@ -710,13 +710,13 @@ public class SanPhamJpanel extends javax.swing.JPanel {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         CTSanPhamModel ctsp = getCTSPFormInput();
         if (ctsp == null) {
-            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+            JOptionPane.showMessageDialog(null, "Thêm thất bại");
             return;
         }
 
 //   
         if (checkSP().equals("Có")) {
-            JOptionPane.showMessageDialog(this, "Đã có sản phẩm này");
+            JOptionPane.showMessageDialog(null, "Đã có sản phẩm này");
 
             btnSuaActionPerformed(evt);
 
@@ -724,10 +724,10 @@ public class SanPhamJpanel extends javax.swing.JPanel {
 
         } else if (checkSP().equals("Thêm")) {
             if (iCTSanPhamService.insertCTSanPham(ctsp) != null) {
-                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                JOptionPane.showMessageDialog(null, "Thêm thành công");
                 loadData();
             } else {
-                JOptionPane.showMessageDialog(this, "Thêm thất bại");
+                JOptionPane.showMessageDialog(null, "Thêm thất bại");
             }
         }
 
@@ -736,7 +736,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         int index = tblHienThi.getSelectedRow();
         if (index < 0) {
-            JOptionPane.showMessageDialog(this, "Mời bạn chọn dòng cần sửa");
+            JOptionPane.showMessageDialog(null, "Mời bạn chọn dòng cần sửa");
             return;
         }
         CTSanPhamModel ctsp = getCTSPFormInput();
@@ -755,22 +755,22 @@ public class SanPhamJpanel extends javax.swing.JPanel {
                 continue;
             }
             if (x.getMa() != null && x.getMa().equals(ctsp.getMa())) {
-                JOptionPane.showMessageDialog(this, "Mã đã tồn tại");
+                JOptionPane.showMessageDialog(null, "Mã đã tồn tại");
                 return;
             }
             if (x.getMaQR() != null && x.getMaQR().equals(ctsp.getMaQR())) {
-                JOptionPane.showMessageDialog(this, "Mã QR đã tồn tại");
+                JOptionPane.showMessageDialog(null, "Mã QR đã tồn tại");
                 return;
             }
         }
-        if (JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không?", "Thông báo", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+        if (JOptionPane.showConfirmDialog(null, "Bạn có muốn sửa không?", "Thông báo", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
             return;
         }
         if (iCTSanPhamService.updateCTSanPham(ctsp) != null) {
-            JOptionPane.showMessageDialog(this, "Update thành công");
+            JOptionPane.showMessageDialog(null, "Update thành công");
             loadData();
         } else {
-            JOptionPane.showMessageDialog(this, "Update thất bại");
+            JOptionPane.showMessageDialog(null, "Update thất bại");
         }
     }//GEN-LAST:event_btnSuaActionPerformed
 
@@ -810,7 +810,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
             }
         }
         if (listNEW.size() < 0) {
-            JOptionPane.showMessageDialog(this, "Không tìm thấy dữ liệu");
+            JOptionPane.showMessageDialog(null, "Không tìm thấy dữ liệu");
             return;
         }
         dtm.setRowCount(0);
@@ -912,7 +912,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
     private void btnInMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInMaActionPerformed
         int row = tblHienThi.getSelectedRow();
         if (row < 0) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn sp bạn muốn in mã");
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn sp bạn muốn in mã");
             return;
         }
         String maQR = tblHienThi.getValueAt(row, 5).toString();

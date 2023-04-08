@@ -1,4 +1,3 @@
-
 package responsitory;
 
 import DomainModels.CTSanPham;
@@ -35,7 +34,7 @@ public class IMEIResponsitory {
         }
         return list;
     }
-    
+
     public ArrayList<IMEI> getIMEIByTT() {
         ArrayList<IMEI> list = new ArrayList<>();
         String sql = "SELECT * FROM dbo.IMEI WHERE TRANGTHAI = 1";
@@ -75,7 +74,7 @@ public class IMEIResponsitory {
         try {
             while (rs.next()) {
                 CTSanPham ctsp = c.getCTSanPhamByID(rs.getString(6));
-                
+
                 list.add(new IMEI(rs.getString(1), ctsp, rs.getString(2), rs.getDate(3), rs.getString(4), rs.getInt(5)));
             }
         } catch (SQLException ex) {
@@ -115,7 +114,7 @@ public class IMEIResponsitory {
         try {
             while (rs.next()) {
                 CTSanPham ctsp = c.getCTSanPhamByID(rs.getString(6));
-              
+
                 list.add(new IMEI(rs.getString(1), ctsp, rs.getString(2), rs.getDate(3), rs.getString(4), rs.getInt(5)));
             }
         } catch (SQLException ex) {
@@ -145,7 +144,7 @@ public class IMEIResponsitory {
         int row = JDBC_Helper.excuteUpdate(sql, ma);
         return row;
     }
-    
+
     public LinkedHashMap<String, Integer> amountsImeiSell() {
         String sql = "SELECT COUNT(IMEI.IDCTSP),  CONCAT(TENSP,TENMau,SOLUONG) FROM dbo.IMEI JOIN dbo.CTSANPHAM ON CTSANPHAM.IDCTSP = IMEI.IDCTSP JOIN dbo.SANPHAM ON SANPHAM.IDSP = CTSANPHAM.IDSP JOIN dbo.NSX ON NSX.IDNSX = SANPHAM.IDNSX JOIN dbo.DUNGLUONG ON DUNGLUONG.IDDL = CTSANPHAM.IDDL JOIN dbo.MAUSAC ON MAUSAC.IDMS = CTSANPHAM.IDMS\n"
                 + "WHERE IMEI.TRANGTHAI=1\n"
@@ -153,12 +152,29 @@ public class IMEIResponsitory {
         ResultSet rs = JDBC_Helper.excuteQuery(sql);
         LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
         try {
-            while(rs.next()) {
+            while (rs.next()) {
                 map.put(rs.getString(2), rs.getInt(1));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return map;
+    }
+
+    public ArrayList<IMEI> getTimImei(String IMEI) {
+   ArrayList<IMEI> list = new ArrayList<>();
+        String sql = "SELECT * FROM dbo.IMEI WHERE  MaIMEI LIKE ? ";
+        ResultSet rs = JDBC_Helper.excuteQuery(sql, "%" + IMEI + "%");
+        try {
+            while (rs.next()) {
+                 CTSanPham ctsp = c.getCTSanPhamByID(rs.getString(6));
+                list.add(new IMEI(rs.getString(1), ctsp, rs.getString(2), rs.getDate(3), rs.getString(4), rs.getInt(5)));
+
+
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return list;
     }
 }

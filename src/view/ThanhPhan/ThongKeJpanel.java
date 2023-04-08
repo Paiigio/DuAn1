@@ -815,7 +815,7 @@ public class ThongKeJpanel extends javax.swing.JPanel {
         Date ngayBD = jdcNgayBD.getDate();
         Date ngayKT = jdcNgayKT.getDate();
         if (ngayBD.after(ngayKT)) {
-            JOptionPane.showMessageDialog(this, "Ngay bat dau phai truoc ngay ket thuc");
+            JOptionPane.showMessageDialog(null, "Ngay bat dau phai truoc ngay ket thuc");
             return;
         }
         ArrayList<HoaDonChiTietModel> list = ihdct.getAllHoaDonCT();

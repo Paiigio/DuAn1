@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author duong
  */
 public interface IIMEIService {
-
+ public ArrayList<IMEIModel>  getTimImei(String IMEI);
     public ArrayList<IMEIModel> getAllIMEI();
 
     public ArrayList<IMEIModel> getIMEIByTT();

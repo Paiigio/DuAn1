@@ -18,18 +18,21 @@ import view.Login;
  * @author duong
  */
 public class DoiMatKhauJpanel extends javax.swing.JFrame {
-     Login log = new Login();
-     INhanVienService nvs= new NhanVienService();
+
+    Login log = new Login();
+    INhanVienService nvs = new NhanVienService();
+
     public DoiMatKhauJpanel() {
         initComponents();
         setLocationRelativeTo(this);
     }
-       private boolean getData() {
-        if(txtPasss.getText() == null || txtXacNhan.getText() == null) {
+
+    private boolean getData() {
+        if (txtPasss.getText() == null || txtXacNhan.getText() == null) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ dữ liệu");
             return false;
         }
-        if(!txtPasss.getText().equalsIgnoreCase(txtXacNhan.getText())) {
+        if (!txtPasss.getText().equalsIgnoreCase(txtXacNhan.getText())) {
             JOptionPane.showMessageDialog(this, "Mật khẩu mới và xác nhận mật khẩu mới phải trùng nhau");
             return false;
         }
@@ -105,22 +108,25 @@ public class DoiMatKhauJpanel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-   ArrayList<NhanVienModel> list = nvs.getAllNV();
+        ArrayList<NhanVienModel> list = nvs.getAllNV();
         String user = log.getUser();
-        System.out.println(user);
-        if(getData()) {
-        for(NhanVienModel x : list) {
-            if(x.getMa().equalsIgnoreCase(user)) {
-                nvs.updateNV(new NhanVienModel(x.getId(), x.getCv(), x.getMa(), x.getHoTen(), x.getGioiTinh(),
-                                                x.getSdt(), x.getNgaySinh(), x.getDiaChi(), x.getEmail(), String.valueOf(this.txtPasss.getPassword()),
-                                                x.getTrangThai(), x.getHinhAnh()));
-                                JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công!");
-                                this.dispose();
+        if (JOptionPane.showConfirmDialog(null, "Bạn có muốn tiếp tục đổi mật khẩu không?", "Thông báo", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        if (getData()) {
+            for (NhanVienModel x : list) {
+                if (x.getMa().equalsIgnoreCase(user)) {
+                    nvs.updateNV(new NhanVienModel(x.getId(), x.getCv(), x.getMa(), x.getHoTen(), x.getGioiTinh(),
+                            x.getSdt(), x.getNgaySinh(), x.getDiaChi(), x.getEmail(), String.valueOf(this.txtPasss.getPassword()),
+                            x.getTrangThai(), x.getHinhAnh()));
+                    JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công!");
+                    this.dispose();
                 }
             }
         }
 
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -267,13 +267,13 @@ public class QuetQR extends javax.swing.JFrame implements Runnable, ThreadFactor
                         }
                     }
                     if (dem == 0) {
-                        JOptionPane.showMessageDialog(this, "Sai mã IMEI hoặc mã imei không tồn tại");
+                        JOptionPane.showMessageDialog(null, "Sai mã IMEI hoặc mã imei không tồn tại");
                         return;
                     }
                     // kiểm tra imei uvằ nhập vào
                     for (HoaDonChiTietModel i : listHDCTNEW) {
                         if (i.getGhiChu() != null && i.getGhiChu().equals(maIMEI)) {
-                            JOptionPane.showMessageDialog(this, "IMEI đã tồn tại trong đơn hàng");
+                            JOptionPane.showMessageDialog(null, "IMEI đã tồn tại trong đơn hàng");
                             return;
 
                         }

@@ -710,7 +710,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
         String tim = txtTimKM.getText().trim();
         if (tim.length() == 0) {
-            JOptionPane.showMessageDialog(this, "không đc để trống tìm");
+            JOptionPane.showMessageDialog(null, "không đc để trống tìm");
             txtTimKM.requestFocus();
         }
         if (ctkm.getTimTen(tim).size() > 0) {
@@ -812,7 +812,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
             loadSP();
             JOptionPane.showMessageDialog(null, "Thêm dữ liệu thành công!");
         } else
-            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+            JOptionPane.showMessageDialog(null, "Thêm thất bại");
     }//GEN-LAST:event_btnSuaCTKMActionPerformed
     public void deleteSinhVien(JTable table) {
         ArrayList<CTSanPhamModel> listSP = ctsp.getAllCTSanPham();

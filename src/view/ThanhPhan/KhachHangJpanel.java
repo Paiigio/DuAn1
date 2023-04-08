@@ -104,18 +104,18 @@ public class KhachHangJpanel extends javax.swing.JPanel {
         String email = txtEmail.getText().trim();
 
         if (ma.length() == 0) {
-            JOptionPane.showMessageDialog(this, "Không được để trống mã");
+            JOptionPane.showMessageDialog(null, "Không được để trống mã");
             txtMaKh.requestFocus();
             return null;
         }
         if (ten.length() == 0) {
-            JOptionPane.showMessageDialog(this, "Không được để trống tên");
+            JOptionPane.showMessageDialog(null, "Không được để trống tên");
             txtHoTen.requestFocus();
             return null;
         }
 
         if (sdt.length() == 0) {
-            JOptionPane.showMessageDialog(this, "Không được để trống số điện thoại");
+            JOptionPane.showMessageDialog(null, "Không được để trống số điện thoại");
             txtSDT.requestFocus();
             return null;
         } else {
@@ -123,20 +123,20 @@ public class KhachHangJpanel extends javax.swing.JPanel {
                 int dienthoai = Integer.parseInt(txtSDT.getText());
 
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Sai định dạng số điện thoại");
+                JOptionPane.showMessageDialog(null, "Sai định dạng số điện thoại");
                 txtSDT.requestFocus();
                 e.printStackTrace();
                 return null;
             }
             String ktsdt = "0\\d{9}";
             if (txtSDT.getText().matches(ktsdt) == false) {
-                JOptionPane.showMessageDialog(this, "Bạn nhập sai số điện thoại");
+                JOptionPane.showMessageDialog(null, "Bạn nhập sai số điện thoại");
                 txtSDT.requestFocus();
                 return null;
             }
         }
         if (ngay == null) {
-            JOptionPane.showMessageDialog(this, "Không được để trống ngày sinh");
+            JOptionPane.showMessageDialog(null, "Không được để trống ngày sinh");
             txtNgaySinh.requestFocus();
             return null;
         } else {
@@ -144,20 +144,20 @@ public class KhachHangJpanel extends javax.swing.JPanel {
             String date = sdf.format(txtNgaySinh.getDate());
         }
         if (diachi.length() == 0) {
-            JOptionPane.showMessageDialog(this, "Không được để trống địa chỉ");
+            JOptionPane.showMessageDialog(null, "Không được để trống địa chỉ");
             txtDiaChi.requestFocus();
             return null;
         }
 
         if (email.length() == 0) {
-            JOptionPane.showMessageDialog(this, "Không được để trống email");
+            JOptionPane.showMessageDialog(null, "Không được để trống email");
             txtEmail.requestFocus();
             return null;
         } else {
             String mail = "\\w+@(\\w+\\.\\w+){1,2}";
             Matcher matcher = Pattern.compile(mail).matcher(txtEmail.getText());
             if (!matcher.matches()) {
-                JOptionPane.showMessageDialog(this, "Sai định dạng email");
+                JOptionPane.showMessageDialog(null, "Sai định dạng email");
                 return null;
             }
         }
@@ -457,9 +457,9 @@ public class KhachHangJpanel extends javax.swing.JPanel {
             return;
         }
         if (khs.insertKH(kh) != null) {
-            JOptionPane.showMessageDialog(this, "Thêm thành công");
+            JOptionPane.showMessageDialog(null, "Thêm thành công");
         } else {
-            JOptionPane.showMessageDialog(this, "Thêm thất bại do trùng mã");
+            JOptionPane.showMessageDialog(null, "Thêm thất bại do trùng mã");
         }
         loadTable();
         clearForm();
@@ -482,7 +482,10 @@ public class KhachHangJpanel extends javax.swing.JPanel {
     private void btnSUaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSUaActionPerformed
         int row = tblBang.getSelectedRow();
         if (row < 0) {
-            JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa");
+            JOptionPane.showMessageDialog(null, "Chọn dòng cần sửa");
+            return;
+        }
+        if (JOptionPane.showConfirmDialog(null, "Bạn có muốn tiếp tục sửa không?", "Thông báo", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
             return;
         }
         KhachHangModel nv = getFormData();
@@ -492,9 +495,9 @@ public class KhachHangJpanel extends javax.swing.JPanel {
         String id = tblBang.getValueAt(row, 0).toString();
         nv.setId(id);
         if (khs.updateKH(nv) != null) {
-            JOptionPane.showMessageDialog(this, "Sửa thành công");
+            JOptionPane.showMessageDialog(null, "Sửa thành công");
         } else {
-            JOptionPane.showMessageDialog(this, "Sửa thất bại");
+            JOptionPane.showMessageDialog(null, "Sửa thất bại");
         }
         loadTable();
         clearForm();
@@ -503,12 +506,12 @@ public class KhachHangJpanel extends javax.swing.JPanel {
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
         String sdt = txtTim.getText().trim();
         if (sdt.length() == 0) {
-            JOptionPane.showMessageDialog(this, "nhập ô tìm theo sdt");
+            JOptionPane.showMessageDialog(null, "nhập ô tìm theo sdt");
         }
         if (khs.getTimSDT(sdt).size()>0) {
-            JOptionPane.showMessageDialog(this, "tìm thành công");
+            JOptionPane.showMessageDialog(null, "tìm thành công");
         } else {
-            JOptionPane.showMessageDialog(this, "tìm thất bại");
+            JOptionPane.showMessageDialog(null, "tìm thất bại");
         }
         loadTableTim(sdt);
         txtTim.setText("");
