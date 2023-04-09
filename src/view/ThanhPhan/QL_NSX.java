@@ -269,11 +269,9 @@ public class QL_NSX extends javax.swing.JFrame {
         }
         ArrayList<NSXModel> list = iNSXService.getAllNSX();
         NSXModel nsx = getNSXFromInput();
-        System.out.println(nsx.getMa());
+       
         for (NSXModel x : list) {
-//            if (x.getMa() != null && x.getMa().equals(tblHienThi.getValueAt(index, 1).toString())) {
-//                nsx.setId(x.getId());
-//            }
+
             if (x.getMa() != null && x.getMa().equals(tblHienThi.getValueAt(index, 1).toString())) {
                 nsx.setId(x.getId());                
                 continue;
@@ -283,7 +281,7 @@ public class QL_NSX extends javax.swing.JFrame {
                 return;
             }
         }  
-        System.out.println(nsx.getId());
+   
         if (iNSXService.updateNSX(nsx) != null) {
             JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
             loadData();

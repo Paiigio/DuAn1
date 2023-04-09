@@ -55,18 +55,6 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         lblTrang.setText("1/" + soTrang);
     }
 
-//    public void countHD() {
-//        try {
-//            String sql = "SELECT count(*) From HOADON";
-//            ResultSet rs = JDBC_Helper.excuteQuery(sql);
-//            while (rs.next()) {
-//                count = rs.getLong(1);
-//            }
-//            rs.close();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     public void countHDTT() {
         try {
@@ -441,7 +429,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
 
     private void btnTrangTruocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrangTruocActionPerformed
         if (Trang == 1) {
-            JOptionPane.showMessageDialog(this, "Bạn đã ở trang đầu");
+            JOptionPane.showMessageDialog(null, "Bạn đã ở trang đầu");
             return;
         }
         if (Trang > 1) {
@@ -461,7 +449,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
 
     private void btnTiepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTiepActionPerformed
         if (Trang == soTrang) {
-            JOptionPane.showMessageDialog(this, "Bạn đã ở trang cuối");
+            JOptionPane.showMessageDialog(null, "Bạn đã ở trang cuối");
             return;
         }
         if (Trang < soTrang) {
@@ -482,7 +470,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
 
     private void btnTrangDauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrangDauActionPerformed
         if (Trang == 1) {
-            JOptionPane.showMessageDialog(this, "Bạn đã ở trang đầu");
+            JOptionPane.showMessageDialog(null, "Bạn đã ở trang đầu");
             return;
         }
         Trang = 1;
@@ -493,7 +481,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
 
     private void btnTrangCuoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrangCuoiActionPerformed
         if (Trang == soTrang) {
-            JOptionPane.showMessageDialog(this, "Bạn đã ở trang cuối");
+            JOptionPane.showMessageDialog(null, "Bạn đã ở trang cuối");
             return;
         }
         Trang = soTrang;
@@ -504,17 +492,17 @@ public class HoaDonJpanel extends javax.swing.JPanel {
 
     private void btnDenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDenActionPerformed
         if (txtDenTrang.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Bạn chưa nhập trang muốn đến");
+            JOptionPane.showMessageDialog(null, "Bạn chưa nhập trang muốn đến");
             return;
         }
         try {
             int check = Integer.parseInt(txtDenTrang.getText());
             if (check < 1 || check > soTrang) {
-                JOptionPane.showMessageDialog(this, "Trang muốn đến không tồn tại");
+                JOptionPane.showMessageDialog(null, "Trang muốn đến không tồn tại");
                 return;
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Trang muốn đến phải là số");
+            JOptionPane.showMessageDialog(null, "Trang muốn đến phải là số");
             return;
         }
         Trang = Integer.parseInt(txtDenTrang.getText());

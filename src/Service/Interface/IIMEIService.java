@@ -12,8 +12,10 @@ import java.util.ArrayList;
  * @author duong
  */
 public interface IIMEIService {
-
+ public ArrayList<IMEIModel>  getTimImei(String IMEI);
     public ArrayList<IMEIModel> getAllIMEI();
+
+    public ArrayList<IMEIModel> getIMEIByTT();
 
     public IMEIModel insertIMEI(IMEIModel i);
 
@@ -28,5 +30,6 @@ public interface IIMEIService {
     public IMEIModel getTrangThaiByIMEI(String imei);
 
     public int updateIMEI_ThanhToan(String ma);
+
     public Integer updateIMEI_HuyHang(String ma);
 }

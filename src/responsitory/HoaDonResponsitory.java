@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package responsitory;
 
 import DomainModels.Coupon;
@@ -34,7 +31,7 @@ public class HoaDonResponsitory {
                 NhanVien nv = nvr.getNVByID(rs.getString(3));
                 Coupon cp = cr.getCPByID(rs.getString(4));
                 list.add(new HoaDon(rs.getString(1), kh, nv, cp, rs.getString(5), rs.getFloat(6), rs.getInt(7), rs.getDate(8), rs.getInt(9),
-                        rs.getDate(10), rs.getDate(11)));
+                        rs.getDate(10), rs.getDate(11), rs.getString(12)));
             }
         } catch (Exception ex) {
 
@@ -53,7 +50,7 @@ public class HoaDonResponsitory {
                 NhanVien nv = nvr.getNVByID(rs.getString(3));
                 Coupon cp = cr.getCPByID(rs.getString(4));
                 list.add(new HoaDon(rs.getString(1), kh, nv, cp, rs.getString(5), rs.getFloat(6), rs.getInt(7), rs.getDate(8), rs.getInt(9),
-                        rs.getDate(10), rs.getDate(11)));
+                        rs.getDate(10), rs.getDate(11), rs.getString(12)));
             }
         } catch (Exception ex) {
 
@@ -72,7 +69,7 @@ public class HoaDonResponsitory {
                 NhanVien nv = nvr.getNVByID(rs.getString(3));
                 Coupon cp = cr.getCPByID(rs.getString(4));
                 list.add(new HoaDon(rs.getString(1), kh, nv, cp, rs.getString(5), rs.getFloat(6), rs.getInt(7), rs.getDate(8), rs.getInt(9),
-                        rs.getDate(10), rs.getDate(11)));
+                        rs.getDate(10), rs.getDate(11), rs.getString(12)));
             }
         } catch (Exception ex) {
 
@@ -91,7 +88,7 @@ public class HoaDonResponsitory {
                 NhanVien nv = nvr.getNVByID(rs.getString(3));
                 Coupon cp = cr.getCPByID(rs.getString(4));
                 return new HoaDon(rs.getString(1), kh, nv, cp, rs.getString(5), rs.getFloat(6), rs.getInt(7), rs.getDate(8), rs.getInt(9),
-                        rs.getDate(10), rs.getDate(11));
+                        rs.getDate(10), rs.getDate(11), rs.getString(12));
             }
         } catch (SQLException ex) {
             Logger.getLogger(NhanVienResponsitory.class.getName()).log(Level.SEVERE, null, ex);

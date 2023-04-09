@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package view.ThanhPhan;
 
 import DomainModels.DungLuong;
@@ -22,7 +19,6 @@ import ViewModel.DungLuongModel;
 import ViewModel.IMEIModel;
 import ViewModel.MauSacModel;
 import ViewModel.SanPhamModel;
-import com.google.zxing.qrcode.encoder.QRCode;
 import java.awt.Image;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -140,9 +136,9 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         Locale localeVN = new Locale("vi", "VN");
         NumberFormat vn = NumberFormat.getInstance(localeVN);
         for (int i = 0; i < list.size(); ++i) {
-            System.out.println(list.get(i).getId());
+         
             ArrayList<IMEIModel> listIMEI = iIMEIService.selectSL(list.get(i).getId());
-            System.out.println(listIMEI.size());
+          
             dtm.addRow(new Object[]{
                 i + 1,
                 list.get(i).getMa(),
@@ -173,11 +169,6 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         cbbSP.setSelectedIndex(0);
         lblAnhSP.setIcon(null);
     }
-//    private String deleteDot(String chuoi){
-//        for (int i = 0 ; i < chuoi.length() ; ++i){
-//            c
-//        }
-//    }
 
     private String checkSP() {
         CTSanPhamModel ctspM = getCTSPFormInput();
@@ -212,23 +203,23 @@ public class SanPhamJpanel extends javax.swing.JPanel {
             anh = strHinhanh;
         }
         if (ma.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Mã không được để trống");
+            JOptionPane.showMessageDialog(null, "Mã không được để trống");
             return null;
         }
         if (maQR.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Mã QR không được để trống");
+            JOptionPane.showMessageDialog(null, "Mã QR không được để trống");
             return null;
         }
         if (namBH.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Năm bảo hành không được để trống");
+            JOptionPane.showMessageDialog(null, "Năm bảo hành không được để trống");
             return null;
         }
         if (giaNhap.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Giá nhập không được để trống");
+            JOptionPane.showMessageDialog(null, "Giá nhập không được để trống");
             return null;
         }
         if (giaBan.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Giá bán không được để trống");
+            JOptionPane.showMessageDialog(null, "Giá bán không được để trống");
             return null;
         }
         return new CTSanPhamModel(null, ms, null, sp, dl, ma, maQR, anh, Integer.valueOf(namBH), null, null, Float.valueOf(giaNhap.replace(".", "")), Float.valueOf(giaBan.replace(".", "")), 0);
@@ -334,19 +325,8 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         cbbMS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         cbbSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbbSP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbbSPActionPerformed(evt);
-            }
-        });
 
         txtMaQR.setEnabled(false);
-
-        txtNamBH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNamBHActionPerformed(evt);
-            }
-        });
 
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
@@ -499,13 +479,15 @@ public class SanPhamJpanel extends javax.swing.JPanel {
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtGiaNhap))
-                    .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(rdBan)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rdKhongBan)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(rdBan)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(rdKhongBan)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(115, 115, 115))
         );
@@ -721,10 +703,6 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnUpAnhThemSPActionPerformed
 
-    private void txtNamBHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamBHActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNamBHActionPerformed
-
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         clear();
     }//GEN-LAST:event_btnClearActionPerformed
@@ -732,13 +710,13 @@ public class SanPhamJpanel extends javax.swing.JPanel {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         CTSanPhamModel ctsp = getCTSPFormInput();
         if (ctsp == null) {
-            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+            JOptionPane.showMessageDialog(null, "Thêm thất bại");
             return;
         }
 
 //   
         if (checkSP().equals("Có")) {
-            JOptionPane.showMessageDialog(this, "Đã có sản phẩm này");
+            JOptionPane.showMessageDialog(null, "Đã có sản phẩm này");
 
             btnSuaActionPerformed(evt);
 
@@ -746,10 +724,10 @@ public class SanPhamJpanel extends javax.swing.JPanel {
 
         } else if (checkSP().equals("Thêm")) {
             if (iCTSanPhamService.insertCTSanPham(ctsp) != null) {
-                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                JOptionPane.showMessageDialog(null, "Thêm thành công");
                 loadData();
             } else {
-                JOptionPane.showMessageDialog(this, "Thêm thất bại");
+                JOptionPane.showMessageDialog(null, "Thêm thất bại");
             }
         }
 
@@ -758,7 +736,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         int index = tblHienThi.getSelectedRow();
         if (index < 0) {
-            JOptionPane.showMessageDialog(this, "Mời bạn chọn dòng cần sửa");
+            JOptionPane.showMessageDialog(null, "Mời bạn chọn dòng cần sửa");
             return;
         }
         CTSanPhamModel ctsp = getCTSPFormInput();
@@ -777,22 +755,22 @@ public class SanPhamJpanel extends javax.swing.JPanel {
                 continue;
             }
             if (x.getMa() != null && x.getMa().equals(ctsp.getMa())) {
-                JOptionPane.showMessageDialog(this, "Mã đã tồn tại");
+                JOptionPane.showMessageDialog(null, "Mã đã tồn tại");
                 return;
             }
             if (x.getMaQR() != null && x.getMaQR().equals(ctsp.getMaQR())) {
-                JOptionPane.showMessageDialog(this, "Mã QR đã tồn tại");
+                JOptionPane.showMessageDialog(null, "Mã QR đã tồn tại");
                 return;
             }
         }
-        if (JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không?", "Thông báo", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+        if (JOptionPane.showConfirmDialog(null, "Bạn có muốn sửa không?", "Thông báo", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
             return;
         }
         if (iCTSanPhamService.updateCTSanPham(ctsp) != null) {
-            JOptionPane.showMessageDialog(this, "Update thành công");
+            JOptionPane.showMessageDialog(null, "Update thành công");
             loadData();
         } else {
-            JOptionPane.showMessageDialog(this, "Update thất bại");
+            JOptionPane.showMessageDialog(null, "Update thất bại");
         }
     }//GEN-LAST:event_btnSuaActionPerformed
 
@@ -832,7 +810,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
             }
         }
         if (listNEW.size() < 0) {
-            JOptionPane.showMessageDialog(this, "Không tìm thấy dữ liệu");
+            JOptionPane.showMessageDialog(null, "Không tìm thấy dữ liệu");
             return;
         }
         dtm.setRowCount(0);
@@ -919,10 +897,6 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cbbTKDLActionPerformed
 
-    private void cbbSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbSPActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbbSPActionPerformed
-
     private void btnSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSPActionPerformed
         new QL_SanPham().setVisible(true);
     }//GEN-LAST:event_btnSPActionPerformed
@@ -938,7 +912,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
     private void btnInMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInMaActionPerformed
         int row = tblHienThi.getSelectedRow();
         if (row < 0) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn sp bạn muốn in mã");
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn sp bạn muốn in mã");
             return;
         }
         String maQR = tblHienThi.getValueAt(row, 5).toString();
@@ -956,7 +930,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
             fout.flush();
 
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
 
     }//GEN-LAST:event_btnInMaActionPerformed

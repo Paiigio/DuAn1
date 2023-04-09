@@ -72,7 +72,7 @@ public class QL_SanPham extends javax.swing.JFrame {
         String ten = txtTen.getText();
         String moTa = txtMoTa.getText();
         NSX nsx = (NSX) cbbNSX.getSelectedItem();
-        System.out.println(nsx.getId());
+    
         if (ma.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Mã không được để trống");
             return null;
@@ -359,14 +359,14 @@ public class QL_SanPham extends javax.swing.JFrame {
     }//GEN-LAST:event_tbnSuaActionPerformed
 
     private void btnImportEXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportEXActionPerformed
-        JFileChooser jfile = new JFileChooser();
+        JFileChooser jfile = new JFileChooser("D:\\duan1_nhom8\\excel");
         int batchSize = 20;
         Connection con = null;
         int x1 = tblHienThi.getRowCount();
         try {
             int f = jfile.showOpenDialog(this);
             File file = jfile.getSelectedFile();
-            System.out.println(file);
+           
             con = DB_Context.getConnection();
             con.setAutoCommit(false);
             String sql = "INSERT INTO SANPHAM VALUES(NEWID(),?,?,?,?,GETDATE(),null)";

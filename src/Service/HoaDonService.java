@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Service;
 
 import DomainModels.HoaDon;
@@ -23,7 +20,7 @@ public class HoaDonService implements  IHoaDonService{
         ArrayList<HoaDon> nv = hdr.getAllHoaDon();
         for (HoaDon x : nv) {
             list.add(new HoaDonModel(x.getId(), x.getKh(), x.getNv(), x.getCp(), x.getMa(), x.getThanhTien(), 
-                    x.getHinhThucThanhToan(), x.getNgayThanhToan(), x.getTrangThai(), x.getNgayTao(), x.getNgaySua()));
+                    x.getHinhThucThanhToan(), x.getNgayThanhToan(), x.getTrangThai(), x.getNgayTao(), x.getNgaySua(), x.getGhiChu()));
 
         }
         return list;
@@ -51,7 +48,7 @@ public class HoaDonService implements  IHoaDonService{
         ArrayList<HoaDon> nv = hdr.getAllHoaDonTT();
         for (HoaDon x : nv) {
             list.add(new HoaDonModel(x.getId(), x.getKh(), x.getNv(), x.getCp(), x.getMa(), x.getThanhTien(), 
-                    x.getHinhThucThanhToan(), x.getNgayThanhToan(), x.getTrangThai(), x.getNgayTao(), x.getNgaySua()));
+                    x.getHinhThucThanhToan(), x.getNgayThanhToan(), x.getTrangThai(), x.getNgayTao(), x.getNgaySua(), x.getGhiChu()));
 
         }
         return list;
@@ -63,7 +60,7 @@ public class HoaDonService implements  IHoaDonService{
         ArrayList<HoaDon> nv = hdr.getAllHoaDonCTT();
         for (HoaDon x : nv) {
             list.add(new HoaDonModel(x.getId(), x.getKh(), x.getNv(), x.getCp(), x.getMa(), x.getThanhTien(), 
-                    x.getHinhThucThanhToan(), x.getNgayThanhToan(), x.getTrangThai(), x.getNgayTao(), x.getNgaySua()));
+                    x.getHinhThucThanhToan(), x.getNgayThanhToan(), x.getTrangThai(), x.getNgayTao(), x.getNgaySua(), x.getGhiChu()));
 
         }
         return list;

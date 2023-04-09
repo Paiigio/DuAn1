@@ -26,6 +26,7 @@ public class QL_IMEI extends javax.swing.JFrame {
     private DefaultTableModel dtm = new DefaultTableModel();
     private ICTSanPhamService iCTSanPhamService = new CTSanPhamService();
     private DefaultComboBoxModel cbb = new DefaultComboBoxModel();
+    int dem = 0;
 
     /**
      * Creates new form QL_IMEI
@@ -45,20 +46,26 @@ public class QL_IMEI extends javax.swing.JFrame {
     private void loadCBB() {
         ArrayList<CTSanPhamModel> list = iCTSanPhamService.getAllCTSanPham();
         for (CTSanPhamModel x : list) {
-            cbb.addElement(new CTSanPham(x.getId(), x.getMs(), x.getCtkm(), x.getSp(), x.getDl(), x.getMa(), x.getMaQR(), x.getHinhAnh(), x.getNamBH(), x.getNgayTao(), x.getNgaySua(), x.getGiaNhap(), x.getGiaBan(),x.getTrangThai()));
+            cbb.addElement(new CTSanPham(x.getId(), x.getMs(), x.getCtkm(), x.getSp(), x.getDl(), x.getMa(), x.getMaQR(), x.getHinhAnh(), x.getNamBH(), x.getNgayTao(), x.getNgaySua(), x.getGiaNhap(), x.getGiaBan(), x.getTrangThai()));
         }
     }
 
     private void loadData() {
         ArrayList<IMEIModel> list = iIMEIService.getAllIMEI();
         dtm.setRowCount(0);
-        for (int i = 0; i < list.size(); ++i) {;
+        for (IMEIModel x : list) {
             dtm.addRow(new Object[]{
-                i + 1,
-                list.get(i).getMa(),
-                list.get(i).getCtsp(),
-                list.get(i).getTrangThai() == 0 ? "Còn hàng" : "Đã bán",
-                list.get(i).getGhiChu()
+                 x.getMa(), x.getCtsp(), x.getTrangThai()==1?"Đã bán":"Chưa bán", x.getGhiChu()
+            });
+        }
+    }
+
+    private void loadData(String imei) {
+        ArrayList<IMEIModel> list = iIMEIService.getTimImei(imei);
+        dtm.setRowCount(0);
+        for (IMEIModel x : list) {
+            dtm.addRow(new Object[]{
+                x.getMa(), x.getCtsp(), x.getTrangThai()==1?"Đã bán":"Chưa bán", x.getGhiChu()
             });
         }
     }
@@ -67,7 +74,7 @@ public class QL_IMEI extends javax.swing.JFrame {
         ArrayList<IMEIModel> list = iIMEIService.getAllIMEI();
         IMEIModel i = new IMEIModel();
         String ma = txtMa.getText();
-        String ghiChu ="";
+        String ghiChu = "";
         CTSanPham ctsp = (CTSanPham) cbbSP.getSelectedItem();
         int trangThai = 0;
         if (rdConHang.isSelected()) {
@@ -117,7 +124,7 @@ public class QL_IMEI extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblHienThi = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -246,13 +253,13 @@ public class QL_IMEI extends javax.swing.JFrame {
 
         tblHienThi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "STT", "Mã IMEI", "Sản phẩm", "Trạng thái", "Ghi chú"
+                "Mã IMEI", "Sản phẩm", "Trạng thái", "Ghi chú"
             }
         ));
         tblHienThi.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -334,7 +341,7 @@ public class QL_IMEI extends javax.swing.JFrame {
                 im.setId(x.getId());
                 continue;
             }
-            if (x.getMa()!=null && x.getMa().equals(im.getMa())){
+            if (x.getMa() != null && x.getMa().equals(im.getMa())) {
                 JOptionPane.showMessageDialog(this, "Mã đã tồn tại");
                 return;
             }
@@ -347,10 +354,10 @@ public class QL_IMEI extends javax.swing.JFrame {
 
     private void tblHienThiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHienThiMouseClicked
         int index = tblHienThi.getSelectedRow();
-        String ma = tblHienThi.getValueAt(index, 1).toString();
-        String ghiChu = tblHienThi.getValueAt(index, 4).toString();
-        String trangThai = tblHienThi.getValueAt(index, 3).toString();
-        cbb.setSelectedItem(tblHienThi.getValueAt(index, 2));
+        String ma = tblHienThi.getValueAt(index, 0).toString();
+        String ghiChu = tblHienThi.getValueAt(index, 3).toString();
+        String trangThai = tblHienThi.getValueAt(index, 2).toString();
+        cbb.setSelectedItem(tblHienThi.getValueAt(index, 1));
         txtMa.setText(ma);
         txtGhiChu.setText(ghiChu);
         if (trangThai.trim().equals("Còn hàng")) {
@@ -360,24 +367,13 @@ public class QL_IMEI extends javax.swing.JFrame {
     }//GEN-LAST:event_tblHienThiMouseClicked
 
     private void txtTimKiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimKiemCaretUpdate
-        String timKiem = txtTimKiem.getText();
-        ArrayList<IMEIModel> list = iIMEIService.getAllIMEI();
-        ArrayList<IMEIModel> listNew = new ArrayList<>();
-        for (IMEIModel x : list) {
-            if (x.getMa() != null && x.getMa().equals(timKiem)) {
-                listNew.add(x);
+        String timKiem = txtTimKiem.getText().trim();
+        if (iIMEIService.getTimImei(timKiem).size() > 0) {
+            loadData(timKiem);
+        } else {
+            JOptionPane.showMessageDialog(this, "tìm thất bại");
+        }
 
-            }
-        }
-        dtm.setRowCount(0);
-        for (int i = 0; i < listNew.size(); ++i) {
-            dtm.addRow(new Object[]{
-                i + 1,
-                listNew.get(i).getMa(),
-                listNew.get(i).getTrangThai() == 0 ? "Còn hàng" : "Đã bán",
-                listNew.get(i).getGhiChu()
-            });
-        }
     }//GEN-LAST:event_txtTimKiemCaretUpdate
 
     /**
