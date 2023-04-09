@@ -2,16 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
-            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/KhachHang_BanHang.java</file>
-            <file>file:/D:/duan1_nhom8/src/view/Login.java</file>
+            <file>file:/D:/duan1_nhom8/src/Service/Interface/IHoaDonService.java</file>
+            <file>file:/D:/duan1_nhom8/src/DomainModels/HoaDon.java</file>
+            <file>file:/D:/duan1_nhom8/src/responsitory/HoaDonResponsitory.java</file>
             <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/BanHangJpanel.java</file>
-            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/QL_IMEI.java</file>
-            <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/ThongKeJpanel.java</file>
+            <file>file:/D:/duan1_nhom8/src/view/QuetCoupon.java</file>
+            <file>file:/D:/duan1_nhom8/src/Service/HoaDonService.java</file>
         </group>
->>>>>>> origin/master
     </open-files>
 </project-private>

@@ -8,6 +8,7 @@ import DomainModels.Coupon;
 import Service.CouponService;
 import Service.Interface.ICouponService;
 import ViewModel.CouponModel;
+import com.barcodelib.barcode.Linear;
 import java.lang.ref.Cleaner;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,7 +44,7 @@ public class QL_Coupon extends javax.swing.JFrame {
     public void loadData() {
         ArrayList<CouponModel> list = iCouponService.getAllCoupon();
         dtm.setRowCount(0);
-        Collections.sort(list, Comparator.comparing(Coupon -> Coupon.getMa()));
+        Collections.sort(list, Comparator.comparing(Coupon -> Coupon.getId()));
         for (CouponModel x : list) {
             dtm.addRow(new Object[]{
                 x.getMa(),
@@ -55,7 +56,17 @@ public class QL_Coupon extends javax.swing.JFrame {
     }
 
     public CouponModel getFromData() throws ParseException {
-        String ma = txtMa.getText();
+        double random = Math.random();
+        random = random * 99999999 + 10000000;
+        int ma = (int) random;
+        String maCoupon = "";
+        for (CouponModel c : iCouponService.getAllCoupon()) {
+            if (c.getMa()!=null && c.getMa().equals(String.valueOf(ma))) {
+                ma += 1;
+            }
+        }
+        maCoupon = String.valueOf(ma);
+
         Date hanSuDung = txtHanSuDung.getDate();
         System.out.println(hanSuDung);
 //        Date hsd = new SimpleDateFormat("dd/MM/yyyy").parse(hanSuDung.toString());
@@ -65,12 +76,8 @@ public class QL_Coupon extends javax.swing.JFrame {
         String ht = "";
         if (hinhThuc == 0) {
             ht = "Giảm tiền";
-        } else if (hinhThuc == 1){
+        } else if (hinhThuc == 1) {
             ht = "Giảm phần trăm";
-        }
-        if (ma.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Mã không được để trống");
-            return null;
         }
         if (giamGia.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Giảm giá không được để trống");
@@ -80,7 +87,7 @@ public class QL_Coupon extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Hạn sử dụng không được để trống");
             return null;
         }
-        return new CouponModel(null, ma, hanSuDung, ht, Float.valueOf(giamGia), null, null);
+        return new CouponModel(null, maCoupon, hanSuDung, ht, Float.valueOf(giamGia), null, null);
     }
 
     /**
@@ -104,8 +111,9 @@ public class QL_Coupon extends javax.swing.JFrame {
         txtHanSuDung = new com.toedter.calendar.JDateChooser();
         Nút = new javax.swing.JPanel();
         btnSua = new javax.swing.JButton();
-        btnThem = new javax.swing.JButton();
+        btnThemSP = new javax.swing.JButton();
         txtTimKiem = new javax.swing.JTextField();
+        btnInMa = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHienThi = new javax.swing.JTable();
 
@@ -124,6 +132,8 @@ public class QL_Coupon extends javax.swing.JFrame {
         jLabel4.setText("Hình thức:");
 
         jLabel5.setText("Giảm giá:");
+
+        txtMa.setEnabled(false);
 
         cbbHinhThuc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Giảm tiền", "Giảm phần trăm" }));
 
@@ -175,10 +185,17 @@ public class QL_Coupon extends javax.swing.JFrame {
             }
         });
 
-        btnThem.setText("Thêm");
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
+        btnThemSP.setText("Thêm");
+        btnThemSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
+                btnThemSPActionPerformed(evt);
+            }
+        });
+
+        btnInMa.setText("In Mã");
+        btnInMa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInMaActionPerformed(evt);
             }
         });
 
@@ -190,23 +207,30 @@ public class QL_Coupon extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addComponent(btnInMa, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnThemSP, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
                 .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
         );
+
+        NútLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnInMa, btnSua, btnThemSP});
+
         NútLayout.setVerticalGroup(
             NútLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NútLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(NútLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                    .addGroup(NútLayout.createSequentialGroup()
-                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(NútLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSua)
+                        .addComponent(btnThemSP, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnInMa, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
+
+        NútLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnInMa, btnSua, btnThemSP});
 
         tblHienThi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -258,7 +282,7 @@ public class QL_Coupon extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+    private void btnThemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSPActionPerformed
         try {
             CouponModel cp = getFromData();
             if (cp == null) {
@@ -273,28 +297,28 @@ public class QL_Coupon extends javax.swing.JFrame {
         } catch (ParseException ex) {
             ex.printStackTrace();
         }
-    }//GEN-LAST:event_btnThemActionPerformed
+    }//GEN-LAST:event_btnThemSPActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         try {
-            int index =tblHienThi.getSelectedRow();
-            if (index < 0){
+            int index = tblHienThi.getSelectedRow();
+            if (index < 0) {
                 JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa");
             }
             CouponModel cp = getFromData();
-            if (cp == null){
+            if (cp == null) {
                 return;
             }
             String ma = tblHienThi.getValueAt(index, 0).toString();
             ArrayList<CouponModel> list = iCouponService.getAllCoupon();
             String id = "";
-            for (CouponModel x : list){
-                if(x.getMa()!=null && x.getMa().equals(ma)){
+            for (CouponModel x : list) {
+                if (x.getMa() != null && x.getMa().equals(ma)) {
                     id = x.getId();
                 }
             }
             cp.setId(id);
-            if (iCouponService.updateCP(cp)!=null){
+            if (iCouponService.updateCP(cp) != null) {
                 JOptionPane.showMessageDialog(this, "Sửa thành công");
                 loadData();
             } else {
@@ -317,10 +341,9 @@ public class QL_Coupon extends javax.swing.JFrame {
             System.out.println(hanSuDung);
             System.out.println(hsd);
             int tl = 0;
-            if (theLoai.trim().equals("Giảm tiền")){
+            if (theLoai.trim().equals("Giảm tiền")) {
                 tl = 0;
-            } 
-            else if (theLoai.trim().equals("Giảm phần trăm")){
+            } else if (theLoai.trim().equals("Giảm phần trăm")) {
                 tl = 1;
             }
             txtHanSuDung.setDate(hsd);
@@ -330,6 +353,25 @@ public class QL_Coupon extends javax.swing.JFrame {
             Logger.getLogger(QL_Coupon.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_tblHienThiMouseClicked
+
+    private void btnInMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInMaActionPerformed
+        int row = tblHienThi.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn sp bạn muốn in mã");
+            return;
+        }
+        String ma = tblHienThi.getValueAt(row, 0).toString();
+        try {
+            Linear barcode = new Linear();
+            barcode.setType(Linear.CODE128B);
+            barcode.setData(ma);
+            barcode.setI(11.0f);
+            String maqr = ma;
+            barcode.renderBarcode("D:\\duan1_nhom8\\src\\BarcoreSP\\" + maqr + ".png");
+            JOptionPane.showMessageDialog(this, "Tạo mã thành công");
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnInMaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -369,8 +411,9 @@ public class QL_Coupon extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Nút;
     private javax.swing.JPanel TextFieldCoupon;
+    private javax.swing.JButton btnInMa;
     private javax.swing.JButton btnSua;
-    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnThemSP;
     private javax.swing.JComboBox<String> cbbHinhThuc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

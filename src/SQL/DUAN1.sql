@@ -294,3 +294,5 @@ BEGIN
 	UPDATE dbo.HOADONCHITIET SET ghiChu=NULL FROM dbo.HOADONCHITIET JOIN inserted ON dbo.HOADONCHITIET.idhd=inserted.idhd
 	END
 end
+
+ALTER TABLE HOADON ADD ghiChu nvarchar(200)

@@ -88,5 +88,17 @@ public class HoaDonService implements  IHoaDonService{
         return new HoaDonModel(x.getId(), x.getKh(), x.getNv(), x.getCp(), x.getMa(), x.getThanhTien(), 
                     x.getHinhThucThanhToan(), x.getNgayThanhToan(), x.getTrangThai(), x.getNgayTao(), x.getNgaySua(),x.getGhiChu());
     }
-    
+    @Override
+    public HoaDonModel updateCopounHD(HoaDonModel nv) {
+           var x = hdr.updateCopounHD(new HoaDon(nv.getId(), nv.getKh(), nv.getNv(), nv.getCp(), nv.getMa(), nv.getThanhTien(), 
+                    nv.getHinhThucThanhToan(), nv.getNgayThanhToan(), nv.getTrangThai(), nv.getNgayTao(), nv.getNgaySua(),nv.getGhiChu()));
+        return new HoaDonModel(x.getId(), x.getKh(), x.getNv(), x.getCp(), x.getMa(), x.getThanhTien(), 
+                    x.getHinhThucThanhToan(), x.getNgayThanhToan(), x.getTrangThai(), x.getNgayTao(), x.getNgaySua(),x.getGhiChu());
+    }    
+        @Override
+    public HoaDonModel getHDByMaHD(String ma) {
+        var x = hdr.getHDByMaHD(ma);
+        return new HoaDonModel(x.getId(), x.getKh(), x.getNv(), x.getCp(), x.getMa(), x.getThanhTien(), 
+                    x.getHinhThucThanhToan(), x.getNgayThanhToan(), x.getTrangThai(), x.getNgayTao(), x.getNgaySua());
+    }
 }

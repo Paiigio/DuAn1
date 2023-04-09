@@ -26,6 +26,10 @@ public interface IHoaDonService {
 
     public HoaDonModel updateHuyHD(HoaDonModel nv);
 
+    public HoaDonModel updateCopounHD(HoaDonModel nv);
+
+    public HoaDonModel getHDByMaHD(String ma);
+
     public ArrayList<HoaDonModel> getAllHoaDonTT();
 
     public ArrayList<HoaDonModel> getAllHoaDonCTT();

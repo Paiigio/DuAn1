@@ -49,8 +49,8 @@ public class QuetCoupon extends javax.swing.JFrame implements Runnable, ThreadFa
     private Webcam webcam = null;
     private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
-
-
+    public String idCoupon = "";
+    BanHangJpanel banHangjp;
     /**
      * Creates new form NewJFrame
      */
@@ -61,6 +61,12 @@ public class QuetCoupon extends javax.swing.JFrame implements Runnable, ThreadFa
 
     }
 
+    public QuetCoupon(BanHangJpanel banhangjp) {
+        initComponents();
+        initWebcam();
+        setLocationRelativeTo(this); 
+        this.banHangjp = banhangjp;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -193,8 +199,7 @@ public class QuetCoupon extends javax.swing.JFrame implements Runnable, ThreadFa
 
             if (result != null) {
                 txt.setText(result.getText());
-
-
+                banHangjp.setTextCoupon(txt.getText());
             }
 
         } while (true);

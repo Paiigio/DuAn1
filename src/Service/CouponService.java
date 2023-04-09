@@ -47,4 +47,10 @@ private CouponReponsitory cpr = new CouponReponsitory();
     public Integer deleteCP(String id) {
              return cpr.deleteCP(id);
     }  
+    
+        @Override
+    public CouponModel getCouponByMa(String ma) {
+          var x= cpr.getCPByMa(ma);
+        return  new CouponModel(x.getId(), x.getMa(),x.getHanSuDung(),x.getHinhThuc(),x.getGiamGia(),x.getNgayTao(),x.getNgaySua());
+    }
 }

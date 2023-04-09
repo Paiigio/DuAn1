@@ -20,4 +20,6 @@ public interface ICouponService {
     public CouponModel updateCP(CouponModel cp);
 
     public Integer deleteCP(String id);
+
+    public CouponModel getCouponByMa(String ma);
 }

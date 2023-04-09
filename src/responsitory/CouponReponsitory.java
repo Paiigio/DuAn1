@@ -37,6 +37,19 @@ public class CouponReponsitory {
         }
        return null;
     }
+       public Coupon getCPByMa(String ma){
+        
+        String sql="SELECT * FROM COUPON WHERE MACOUPON=?";
+        ResultSet rs=JDBC_Helper.excuteQuery(sql,ma);
+        try {
+            while(rs.next()){
+                return new Coupon(rs.getString(1),rs.getString(2),rs.getDate(3),rs.getString(4),rs.getFloat(5),rs.getDate(6),rs.getDate(7));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+       return null;
+    }
     public Coupon insertCP(Coupon cp){
         String sql= "INSERT INTO COUPON VALUES(NEWID(),?,?,?,?,GETDATE(),null)";
        JDBC_Helper.excuteUpdate(sql, cp.getMa(),cp.getHanSuDung(),cp.getHinhThuc(),cp.getGiamGia());

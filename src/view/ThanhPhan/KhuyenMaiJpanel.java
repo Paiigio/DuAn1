@@ -322,9 +322,9 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         buttonGroup1.add(rdoHetHan);
         rdoHetHan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         rdoHetHan.setText("Hết Hạn");
-        rdoHetHan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                rdoHetHanMouseClicked(evt);
+        rdoHetHan.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                rdoHetHanStateChanged(evt);
             }
         });
 
@@ -850,13 +850,18 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         deleteSinhVien(tblSanPham);
     }//GEN-LAST:event_btnXoaCTKMActionPerformed
 
-    private void rdoHetHanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdoHetHanMouseClicked
-        btnThem.setEnabled(false);
-    }//GEN-LAST:event_rdoHetHanMouseClicked
-
     private void rdoHoatDongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdoHoatDongMouseClicked
         btnThem.setEnabled(true);
     }//GEN-LAST:event_rdoHoatDongMouseClicked
+
+    private void rdoHetHanStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rdoHetHanStateChanged
+       Date ngayBD = txtBD.getDate();
+       Date ngayHT = new Date();
+       if (ngayBD.after(ngayHT)){
+           rdoHetHan.setSelected(true);
+       } else rdoHoatDong.setSelected(true);
+      
+    }//GEN-LAST:event_rdoHetHanStateChanged
     private CTSanPhamModel getCTSPByMa(String ma) {
         ArrayList<CTSanPhamModel> listSP = ctsp.getAllCTSanPham();
         for (CTSanPhamModel z : listSP) {

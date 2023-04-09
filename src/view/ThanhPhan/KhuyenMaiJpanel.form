@@ -315,7 +315,7 @@
                 <Property name="text" type="java.lang.String" value="H&#x1ebf;t H&#x1ea1;n"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rdoHetHanMouseClicked"/>
+                <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdoHetHanStateChanged"/>
               </Events>
             </Component>
           </SubComponents>
