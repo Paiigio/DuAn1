@@ -905,6 +905,7 @@ public class NhanVienJpanel extends javax.swing.JPanel {
                 cell.setCellValue(list.get(i).getTrangThai());
                 cell = row.createCell(10, CellType.STRING);
                 cell.setCellValue(list.get(i).getHinhAnh());
+                
             }
 
             File f = new File("D:\\duan1_nhom8\\excel\\NhanVienExcel.xlsx");
