@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public interface ICTSanPhamService {
 
     public ArrayList<CTSanPhamModel> getAllCTSanPham();
-       public ArrayList<CTSanPhamModel> getAllCTSanPhamlocTT(); 
+    
    public Object getCTSPById(String ma);
     public CTSanPhamModel getCTSPByMa(String ma);
 

@@ -44,26 +44,7 @@ public class CTSanPhamResponsitory {
         }
         return list;
     }
-   public ArrayList<CTSanPham> getAllCTSanPhamlocTT() {
-        ArrayList<CTSanPham> list = new ArrayList<>();
-        String sql = "SELECT * FROM dbo.CTSANPHAM WHERE TRANGTHAI =0 ";
-        ResultSet rs = JDBC_Helper.excuteQuery(sql);
-        try {
-            while (rs.next()) {
-                MauSac mauSac = ms.getMSByID(rs.getString(2));
-                CTKhuyenMai ctKhuyenMai = ctkm.getCVCTKMID(rs.getString(3));
-                SanPham sanPham = sp.getSPByID(rs.getString(4));
-                DungLuong dungLuong = dl.getDLByID(rs.getString(5));
-                list.add(new CTSanPham(rs.getString(1), mauSac, ctKhuyenMai, sanPham, dungLuong, rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getDate(11), rs.getFloat(12), rs.getFloat(13),rs.getInt(14)));
-//                list.add(new CTSanPham(sql, ms, ctkm, sp, dl, sql, sql, 0, sql, 0, 0, 0, ngayTao, ngayNhap));
 
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(CTSanPhamResponsitory.class.getName()).log(Level.SEVERE, null, ex);
-            ex.printStackTrace();
-        }
-        return list;
-    }
     public CTSanPham getCTSanPhamByID(String id) {
 
         String sql = "SELECT * FROM dbo.CTSANPHAM WHERE IDCTSP=?";
