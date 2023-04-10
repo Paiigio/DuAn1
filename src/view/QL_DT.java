@@ -36,13 +36,11 @@ public class QL_DT extends javax.swing.JFrame {
           JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
         loaddulieuDangNhap();
        Toolkit tk = Toolkit.getDefaultToolkit();
-//        int xsize = (int) tk.getScreenSize().getWidth();
-//        int ysize = (int) tk.getScreenSize().getHeight();
-//        Insets scrmax = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration());
-//        int taskBar = scrmax.bottom;
-//        this.setSize(xsize, ysize - taskBar);
-         this.setTitle("QLDT");
-        this.setSize(1515,800);
+        int xsize = (int) tk.getScreenSize().getWidth();
+        int ysize = (int) tk.getScreenSize().getHeight();
+        Insets scrmax = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration());
+        int taskBar = scrmax.bottom;
+        this.setSize(xsize, ysize - taskBar);
         
       
     }
