@@ -1,4 +1,3 @@
-
 package responsitory;
 
 import DomainModels.CTKhuyenMai;
@@ -34,7 +33,49 @@ public class CTSanPhamResponsitory {
                 CTKhuyenMai ctKhuyenMai = ctkm.getCVCTKMID(rs.getString(3));
                 SanPham sanPham = sp.getSPByID(rs.getString(4));
                 DungLuong dungLuong = dl.getDLByID(rs.getString(5));
-                list.add(new CTSanPham(rs.getString(1), mauSac, ctKhuyenMai, sanPham, dungLuong, rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getDate(11), rs.getFloat(12), rs.getFloat(13),rs.getInt(14)));
+                list.add(new CTSanPham(rs.getString(1), mauSac, ctKhuyenMai, sanPham, dungLuong, rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getDate(11), rs.getFloat(12), rs.getFloat(13), rs.getInt(14)));
+//                list.add(new CTSanPham(sql, ms, ctkm, sp, dl, sql, sql, 0, sql, 0, 0, 0, ngayTao, ngayNhap));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CTSanPhamResponsitory.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
+    public ArrayList<CTSanPham> getAllCTSanPham_DangBan() {
+        ArrayList<CTSanPham> list = new ArrayList<>();
+        String sql = "SELECT * FROM dbo.CTSANPHAM WHERE TRANGTHAI = 0";
+        ResultSet rs = JDBC_Helper.excuteQuery(sql);
+        try {
+            while (rs.next()) {
+                MauSac mauSac = ms.getMSByID(rs.getString(2));
+                CTKhuyenMai ctKhuyenMai = ctkm.getCVCTKMID(rs.getString(3));
+                SanPham sanPham = sp.getSPByID(rs.getString(4));
+                DungLuong dungLuong = dl.getDLByID(rs.getString(5));
+                list.add(new CTSanPham(rs.getString(1), mauSac, ctKhuyenMai, sanPham, dungLuong, rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getDate(11), rs.getFloat(12), rs.getFloat(13), rs.getInt(14)));
+//                list.add(new CTSanPham(sql, ms, ctkm, sp, dl, sql, sql, 0, sql, 0, 0, 0, ngayTao, ngayNhap));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CTSanPhamResponsitory.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
+    public ArrayList<CTSanPham> getAllCTSanPham_KhongBan() {
+        ArrayList<CTSanPham> list = new ArrayList<>();
+        String sql = "SELECT * FROM dbo.CTSANPHAM WHERE TRANGTHAI = 1";
+        ResultSet rs = JDBC_Helper.excuteQuery(sql);
+        try {
+            while (rs.next()) {
+                MauSac mauSac = ms.getMSByID(rs.getString(2));
+                CTKhuyenMai ctKhuyenMai = ctkm.getCVCTKMID(rs.getString(3));
+                SanPham sanPham = sp.getSPByID(rs.getString(4));
+                DungLuong dungLuong = dl.getDLByID(rs.getString(5));
+                list.add(new CTSanPham(rs.getString(1), mauSac, ctKhuyenMai, sanPham, dungLuong, rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getDate(11), rs.getFloat(12), rs.getFloat(13), rs.getInt(14)));
 //                list.add(new CTSanPham(sql, ms, ctkm, sp, dl, sql, sql, 0, sql, 0, 0, 0, ngayTao, ngayNhap));
 
             }
@@ -55,7 +96,7 @@ public class CTSanPhamResponsitory {
                 CTKhuyenMai ctKhuyenMai = ctkm.getCVCTKMID(rs.getString(3));
                 SanPham sanPham = sp.getSPByID(rs.getString(4));
                 DungLuong dungLuong = dl.getDLByID(rs.getString(5));
-                return new CTSanPham(rs.getString(1), mauSac, ctKhuyenMai, sanPham, dungLuong, rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getDate(11), rs.getFloat(12), rs.getFloat(13),rs.getInt(14));
+                return new CTSanPham(rs.getString(1), mauSac, ctKhuyenMai, sanPham, dungLuong, rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getDate(11), rs.getFloat(12), rs.getFloat(13), rs.getInt(14));
 //                return new ChucVu(rs.getString(1),rs.getString(2),rs.getString(3),rs.getDate(4),rs.getDate(5));
             }
         } catch (SQLException ex) {
@@ -66,13 +107,13 @@ public class CTSanPhamResponsitory {
 
     public CTSanPham insertCTSanPham(CTSanPham ctsp) {
         String sql = "INSERT INTO CTSANPHAM(IDCTSP,IDMS,IDCTKM,IDSP,IDDL,MACTSP,MAQR,HINHANH,NAMBH,NGAYTAO,NGAYSUA,GIANHAP,GIABAN,TRANGTHAI) VALUES(NEWID(),?,null,?,?,?,?,?,?,GETDATE(),null,?,?,?)";
-        JDBC_Helper.excuteUpdate(sql, ctsp.getMs().getId(), ctsp.getSp().getId(), ctsp.getDl().getId(), ctsp.getMa(), ctsp.getMaQR(), ctsp.getHinhAnh(), ctsp.getNamBH(), ctsp.getGiaNhap(), ctsp.getGiaBan(),ctsp.getTrangThai());
+        JDBC_Helper.excuteUpdate(sql, ctsp.getMs().getId(), ctsp.getSp().getId(), ctsp.getDl().getId(), ctsp.getMa(), ctsp.getMaQR(), ctsp.getHinhAnh(), ctsp.getNamBH(), ctsp.getGiaNhap(), ctsp.getGiaBan(), ctsp.getTrangThai());
         return ctsp;
     }
 
     public CTSanPham updateCTSanPham(CTSanPham ctsp) {
         String sql = "UPDATE dbo.CTSANPHAM SET IDMS=?,IDSP=?,IDDL=?,MACTSP=?,MAQR=?,HINHANH=?,NAMBH=?,NGAYSUA=GETDATE(),GIANHAP=?,GIABAN=?,TRANGTHAI = ? WHERE IDCTSP=?";
-        JDBC_Helper.excuteUpdate(sql, ctsp.getMs().getId(), ctsp.getSp().getId(), ctsp.getDl().getId(), ctsp.getMa(), ctsp.getMaQR(), ctsp.getHinhAnh(), ctsp.getNamBH(), ctsp.getGiaNhap(), ctsp.getGiaBan(),ctsp.getTrangThai(), ctsp.getId());
+        JDBC_Helper.excuteUpdate(sql, ctsp.getMs().getId(), ctsp.getSp().getId(), ctsp.getDl().getId(), ctsp.getMa(), ctsp.getMaQR(), ctsp.getHinhAnh(), ctsp.getNamBH(), ctsp.getGiaNhap(), ctsp.getGiaBan(), ctsp.getTrangThai(), ctsp.getId());
         return ctsp;
     }
 
@@ -81,20 +122,21 @@ public class CTSanPhamResponsitory {
         int row = JDBC_Helper.excuteUpdate(sql, ma);
         return row;
     }
-    
-        public CTSanPham updateCTKMSanPham(CTSanPham ctsp) {
+
+    public CTSanPham updateCTKMSanPham(CTSanPham ctsp) {
         String sql = "UPDATE dbo.CTSANPHAM SET IDCTKM=? WHERE IDCTSP=?";
         JDBC_Helper.excuteUpdate(sql, ctsp.getCtkm().getId(), ctsp.getId());
         return ctsp;
-     }   
-      public CTSanPham deleteCTKM (CTSanPham ctsp) {
+    }
+
+    public CTSanPham deleteCTKM(CTSanPham ctsp) {
         String sql = "UPDATE dbo.CTSANPHAM SET IDCTKM = null WHERE IDCTSP = ?";
-        JDBC_Helper.excuteUpdate(sql,ctsp.getId());
+        JDBC_Helper.excuteUpdate(sql, ctsp.getId());
         return ctsp;
     }
 
-      public CTSanPham quetQR(String maqr){
-          
+    public CTSanPham quetQR(String maqr) {
+
         String sql = "SELECT * FROM dbo.CTSANPHAM WHERE mactsp=?";
         ResultSet rs = JDBC_Helper.excuteQuery(sql, maqr);
         try {
@@ -103,12 +145,12 @@ public class CTSanPhamResponsitory {
                 CTKhuyenMai ctKhuyenMai = ctkm.getCVCTKMID(rs.getString(3));
                 SanPham sanPham = sp.getSPByID(rs.getString(4));
                 DungLuong dungLuong = dl.getDLByID(rs.getString(5));
-                return new CTSanPham(rs.getString(1), mauSac, ctKhuyenMai, sanPham, dungLuong, rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getDate(11), rs.getFloat(12), rs.getFloat(13),rs.getInt(14));
+                return new CTSanPham(rs.getString(1), mauSac, ctKhuyenMai, sanPham, dungLuong, rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getDate(10), rs.getDate(11), rs.getFloat(12), rs.getFloat(13), rs.getInt(14));
 //                return new ChucVu(rs.getString(1),rs.getString(2),rs.getString(3),rs.getDate(4),rs.getDate(5));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return null;
-      }
+    }
 }

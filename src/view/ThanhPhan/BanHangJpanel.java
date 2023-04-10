@@ -92,7 +92,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
     }
 
     private void loadSP() {
-        ArrayList<CTSanPhamModel> listSP = iCTSanPhamService.getAllCTSanPham();
+        ArrayList<CTSanPhamModel> listSP = iCTSanPhamService.getAllCTSanPham_DangBan();
         dtmSP.setRowCount(0);
         Locale localeVN = new Locale("vi", "VN");
         NumberFormat vn = NumberFormat.getInstance(localeVN);
