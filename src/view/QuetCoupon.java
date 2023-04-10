@@ -200,6 +200,7 @@ public class QuetCoupon extends javax.swing.JFrame implements Runnable, ThreadFa
             if (result != null) {
                 txt.setText(result.getText());
                 banHangjp.setTextCoupon(txt.getText());
+                this.dispose();
             }
 
         } while (true);
