@@ -75,4 +75,15 @@ public class CTSanPhamService implements ICTSanPhamService {
         return new CTSanPhamModel(x.getId(), x.getMs(), x.getCtkm(), x.getSp(), x.getDl(), x.getMa(), x.getMaQR(), x.getHinhAnh(), x.getNamBH(), x.getNgayTao(), x.getNgaySua(), x.getGiaNhap(), x.getGiaBan(),x.getTrangThai());
     }
 
+    @Override
+    public ArrayList<CTSanPhamModel> getAllCTSanPhamlocTT() {
+             ArrayList<CTSanPhamModel> list = new ArrayList<>();
+        ArrayList<CTSanPham> sp = ctsp.getAllCTSanPham();
+        for (CTSanPham x : sp) {
+            list.add(new CTSanPhamModel(x.getId(), x.getMs(), x.getCtkm(), x.getSp(), x.getDl(), x.getMa(), x.getMaQR(), x.getHinhAnh(), x.getNamBH(), x.getNgayTao(), x.getNgaySua(), x.getGiaNhap(), x.getGiaBan(),x.getTrangThai()));
+
+        }
+        return list;
+    }
+
 }

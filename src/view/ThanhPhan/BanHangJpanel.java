@@ -92,7 +92,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
     }
 
     private void loadSP() {
-        ArrayList<CTSanPhamModel> listSP = iCTSanPhamService.getAllCTSanPham();
+        ArrayList<CTSanPhamModel> listSP = iCTSanPhamService.getAllCTSanPhamlocTT();
         dtmSP.setRowCount(0);
         Locale localeVN = new Locale("vi", "VN");
         NumberFormat vn = NumberFormat.getInstance(localeVN);
@@ -860,6 +860,10 @@ public class BanHangJpanel extends javax.swing.JPanel {
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         String tienThua = txtTienThua.getText();
         String tongTien = txtTongTien.getText();
+        if(txtMaHD.getText().trim().length()==0){
+            JOptionPane.showMessageDialog(null, "Chọn hd cần thanh toán");
+            return;
+        }
         float thanhTien = Float.valueOf(tongTien);
         float tienKH = 0;
         if (txtTienKH.getText().trim().isEmpty()) {
@@ -1155,7 +1159,11 @@ public class BanHangJpanel extends javax.swing.JPanel {
 
     private void btnInHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInHDActionPerformed
 //      int indexgiohang=tblGioHang.getSelectedRow();
-        String h1 = txtMaHD.getText();
+        String h1 = txtMaHD.getText().trim();
+        if(h1.length()==0){
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn hóa đơn cần in");
+            return;
+        }
 
         try {
             Hashtable map = new Hashtable();
