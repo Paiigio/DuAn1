@@ -11,6 +11,7 @@ import java.util.Date;
  * @author duong
  */
 public class HoaDonChiTiet {
+
     private String id;
     private HoaDon idhd;
     private CTSanPham idctsp;
@@ -20,11 +21,25 @@ public class HoaDonChiTiet {
     private Date ngayTao;
     private Date ngaySua;
     private String ghiChu;
+    private int baoHanh;
 
     public HoaDonChiTiet() {
     }
 
-    public HoaDonChiTiet(String id,HoaDon idhd, CTSanPham idctsp, float dongia, int sl, float thanhTien, Date ngayTao, Date ngaySua,String ghiChu) {
+    public HoaDonChiTiet(String id, HoaDon idhd, CTSanPham idctsp, float dongia, int sl, float thanhTien, Date ngayTao, Date ngaySua, String ghiChu, int baoHanh) {
+        this.id = id;
+        this.idhd = idhd;
+        this.idctsp = idctsp;
+        this.dongia = dongia;
+        this.sl = sl;
+        this.thanhTien = thanhTien;
+        this.ngayTao = ngayTao;
+        this.ngaySua = ngaySua;
+        this.ghiChu = ghiChu;
+        this.baoHanh = baoHanh;
+    }
+
+    public HoaDonChiTiet(String id, HoaDon idhd, CTSanPham idctsp, float dongia, int sl, float thanhTien, Date ngayTao, Date ngaySua, String ghiChu) {
         this.id = id;
         this.idhd = idhd;
         this.idctsp = idctsp;
@@ -52,7 +67,15 @@ public class HoaDonChiTiet {
         this.id = id;
     }
 
+    public int getBaoHanh() {
+        return baoHanh;
+    }
 
+    public void setBaoHanh(int baoHanh) {
+        this.baoHanh = baoHanh;
+    }
+
+ 
 
     public HoaDon getIdhd() {
         return idhd;
@@ -109,6 +132,5 @@ public class HoaDonChiTiet {
     public void setNgaySua(Date ngaySua) {
         this.ngaySua = ngaySua;
     }
-    
-    
+
 }

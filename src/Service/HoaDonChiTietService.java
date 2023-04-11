@@ -1,4 +1,3 @@
-
 package Service;
 
 import DomainModels.HoaDon;
@@ -24,7 +23,7 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
         ArrayList<HoaDonChiTietModel> list = new ArrayList<>();
         ArrayList<HoaDonChiTiet> hd = hdct.getAllHoaDonCT();
         for (HoaDonChiTiet x : hd) {
-            list.add(new HoaDonChiTietModel(x.getId(), x.getIdhd(), x.getIdctsp(), x.getDongia(), x.getSl(), x.getThanhTien(), x.getNgayTao(), x.getNgaySua(), x.getGhiChu()));
+            list.add(new HoaDonChiTietModel(x.getId(), x.getIdhd(), x.getIdctsp(), x.getDongia(), x.getSl(), x.getThanhTien(), x.getNgayTao(), x.getNgaySua(), x.getGhiChu(), x.getBaoHanh()));
 
         }
         return list;
@@ -33,8 +32,8 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
     @Override
     public HoaDonChiTietModel insertHDCT(HoaDonChiTietModel h) {
         ArrayList<HoaDonChiTiet> ds = hdct.getAllHoaDonCT();
-        var x = hdct.insertHDCT(new HoaDonChiTiet(h.getId(), h.getIdhd(), h.getIdctsp(), h.getDongia(), h.getSl(), h.getThanhTien(), h.getNgayTao(), h.getNgaySua(), h.getGhiChu()));
-        return new HoaDonChiTietModel(x.getId(), x.getIdhd(), x.getIdctsp(), x.getDongia(), x.getSl(), x.getThanhTien(), x.getNgayTao(), x.getNgaySua(), x.getGhiChu());
+        var x = hdct.insertHDCT(new HoaDonChiTiet(h.getId(), h.getIdhd(), h.getIdctsp(), h.getDongia(), h.getSl(), h.getThanhTien(), h.getNgayTao(), h.getNgaySua(), h.getGhiChu(), h.getBaoHanh()));
+        return new HoaDonChiTietModel(x.getId(), x.getIdhd(), x.getIdctsp(), x.getDongia(), x.getSl(), x.getThanhTien(), x.getNgayTao(), x.getNgaySua(), x.getGhiChu(), x.getBaoHanh());
     }
 
     @Override
@@ -47,7 +46,7 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
         ArrayList<HoaDonChiTietModel> list = new ArrayList<>();
         ArrayList<HoaDonChiTiet> hd = hdct.getAllHoaDonCTByIDHD(id);
         for (HoaDonChiTiet x : hd) {
-            list.add(new HoaDonChiTietModel(x.getId(), x.getIdhd(), x.getIdctsp(), x.getDongia(), x.getSl(), x.getThanhTien(), x.getNgayTao(), x.getNgaySua(), x.getGhiChu()));
+            list.add(new HoaDonChiTietModel(x.getId(), x.getIdhd(), x.getIdctsp(), x.getDongia(), x.getSl(), x.getThanhTien(), x.getNgayTao(), x.getNgaySua(), x.getGhiChu(),x.getBaoHanh()));
 
         }
         return list;
@@ -56,5 +55,26 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
     @Override
     public Integer delete(String ghiChu, String idHD) {
         return hdct.delete(ghiChu, idHD);
+    }
+
+    @Override
+    public HoaDonChiTietModel updateBaoHanh_Yes(HoaDonChiTietModel h) {
+        var x = hdct.updateBaoHanh_Yes(new HoaDonChiTiet(h.getId(), h.getIdhd(), h.getIdctsp(), h.getDongia(), h.getSl(), h.getThanhTien(), h.getNgayTao(), h.getNgaySua(), h.getGhiChu(), h.getBaoHanh()));
+        return new HoaDonChiTietModel(x.getId(), x.getIdhd(), x.getIdctsp(), x.getDongia(), x.getSl(), x.getThanhTien(), x.getNgayTao(), x.getNgaySua(), x.getGhiChu(), x.getBaoHanh());
+
+    }
+
+    @Override
+    public HoaDonChiTietModel updateBaoHanh_No(HoaDonChiTietModel h) {
+        var x = hdct.updateBaoHanh_No(new HoaDonChiTiet(h.getId(), h.getIdhd(), h.getIdctsp(), h.getDongia(), h.getSl(), h.getThanhTien(), h.getNgayTao(), h.getNgaySua(), h.getGhiChu(), h.getBaoHanh()));
+        return new HoaDonChiTietModel(x.getId(), x.getIdhd(), x.getIdctsp(), x.getDongia(), x.getSl(), x.getThanhTien(), x.getNgayTao(), x.getNgaySua(), x.getGhiChu(), x.getBaoHanh());
+
+    }
+
+    @Override
+    public HoaDonChiTietModel selectIDHDCT(String idHD, String ghiChu) {
+        var x = hdct.selectIDHDCT(idHD, ghiChu);
+        return new HoaDonChiTietModel(x.getId(), x.getIdhd(), x.getIdctsp(), x.getDongia(), x.getSl(), x.getThanhTien(), x.getNgayTao(), x.getNgaySua(), x.getGhiChu(), x.getBaoHanh());
+
     }
 }

@@ -86,6 +86,10 @@ public class QL_IMEI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Mã không được để trống!");
             return null;
         }
+        if (!ma.matches("^[0-9]{15}$")){
+            JOptionPane.showMessageDialog(this, "Mã phải là một dãy số 15 chữ số");
+            return null;
+        }
 
         i.setCtsp(ctsp);
         i.setMa(ma);

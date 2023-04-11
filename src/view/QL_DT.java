@@ -26,65 +26,65 @@ public class QL_DT extends javax.swing.JFrame {
 
     CardLayout cardLayout;
 
-       
     public QL_DT() {
         initComponents();
         this.setLocationRelativeTo(this);
         cardLayout = (CardLayout) panelCardGoc.getLayout();
         //show card 1 
         cardLayout.show(panelCardGoc, "trangchu");
-          JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
+        JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
         loaddulieuDangNhap();
-       Toolkit tk = Toolkit.getDefaultToolkit();
+        Toolkit tk = Toolkit.getDefaultToolkit();
         int xsize = (int) tk.getScreenSize().getWidth();
         int ysize = (int) tk.getScreenSize().getHeight();
         Insets scrmax = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration());
         int taskBar = scrmax.bottom;
         this.setSize(xsize, ysize - taskBar);
-        
-      
+
     }
-    public void loaddulieuDangNhap(){
-             NhanVien nv = new NhanVien();
-           lblTen.setText(Login.nv.getHoTen());
-           lblChucVU.setText(Login.nv.getCv().getTenCV());
-           ImageIcon imgicon = new ImageIcon(getClass().getResource("/AnhNV/" + Login.nv.getHinhAnh()));
-           Image img = imgicon.getImage();
-           img.getScaledInstance(lblAnhDangNhap.getWidth(), lblAnhDangNhap.getY(), 0);
-           lblAnhDangNhap.setIcon(imgicon);
-           if(Login.nv.getCv().getTenCV().equalsIgnoreCase("Nhân Viên")){
-               btnNhanVien.setEnabled(false);
-               btnKhuyenMai.setEnabled(false);
-               btnNhanVien.addMouseListener(new MouseListener() {
-                   
-                   @Override
-                   public void mouseClicked(MouseEvent e) {
-                       e.consume();
-                   }
 
-                   @Override
-                   public void mousePressed(MouseEvent e) {
-                       throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-                   }
+    public void loaddulieuDangNhap() {
+        NhanVien nv = new NhanVien();
+        lblTen.setText(Login.nv.getHoTen());
+        lblChucVU.setText(Login.nv.getCv().getTenCV());
+        ImageIcon imgicon = new ImageIcon(getClass().getResource("/AnhNV/" + Login.nv.getHinhAnh()));
+        Image img = imgicon.getImage();
+        img.getScaledInstance(lblAnhDangNhap.getWidth(), lblAnhDangNhap.getY(), 0);
+        lblAnhDangNhap.setIcon(imgicon);
+        if (Login.nv.getCv().getTenCV().equalsIgnoreCase("Nhân Viên")) {
+            btnNhanVien.setEnabled(false);
+            btnKhuyenMai.setEnabled(false);
+            btnNhanVien.addMouseListener(new MouseListener() {
 
-                   @Override
-                   public void mouseReleased(MouseEvent e) {
-                       throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-                   }
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    e.consume();
+                }
 
-                   @Override
-                   public void mouseEntered(MouseEvent e) {
-                       throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-                   }
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                }
 
-                   @Override
-                   public void mouseExited(MouseEvent e) {
-                       throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-                   }
-               });
-               
-           }
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                }
+            });
+
+        }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -578,7 +578,7 @@ public class QL_DT extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTrangChuMouseEntered
 
     private void btnTrangChuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangChuMouseExited
-        btnTrangChu.setBackground(new Color(255,215,0));
+        btnTrangChu.setBackground(new Color(255, 215, 0));
     }//GEN-LAST:event_btnTrangChuMouseExited
 
     private void btnHoaDonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHoaDonMouseEntered
@@ -586,7 +586,7 @@ public class QL_DT extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHoaDonMouseEntered
 
     private void btnHoaDonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHoaDonMouseExited
-        btnHoaDon.setBackground(new Color(255,215,0));
+        btnHoaDon.setBackground(new Color(255, 215, 0));
     }//GEN-LAST:event_btnHoaDonMouseExited
 
     private void btnSanPhamMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSanPhamMouseEntered
@@ -594,7 +594,7 @@ public class QL_DT extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSanPhamMouseEntered
 
     private void btnSanPhamMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSanPhamMouseExited
-        btnSanPham.setBackground(new Color(255,215,0));
+        btnSanPham.setBackground(new Color(255, 215, 0));
     }//GEN-LAST:event_btnSanPhamMouseExited
 
     private void btnKhuyenMaiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhuyenMaiMouseEntered
@@ -602,7 +602,7 @@ public class QL_DT extends javax.swing.JFrame {
     }//GEN-LAST:event_btnKhuyenMaiMouseEntered
 
     private void btnKhuyenMaiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhuyenMaiMouseExited
-        btnKhuyenMai.setBackground(new Color(255,215,0));
+        btnKhuyenMai.setBackground(new Color(255, 215, 0));
     }//GEN-LAST:event_btnKhuyenMaiMouseExited
 
     private void btnNhanVienMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhanVienMouseEntered
@@ -610,7 +610,7 @@ public class QL_DT extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNhanVienMouseEntered
 
     private void btnNhanVienMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhanVienMouseExited
-        btnNhanVien.setBackground(new Color(255,215,0));
+        btnNhanVien.setBackground(new Color(255, 215, 0));
     }//GEN-LAST:event_btnNhanVienMouseExited
 
     private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
@@ -632,7 +632,7 @@ public class QL_DT extends javax.swing.JFrame {
     }//GEN-LAST:event_btnKhachHangActionPerformed
 
     private void btnKhachHangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhachHangMouseExited
-          btnKhachHang.setBackground(new Color(255,215,0));
+        btnKhachHang.setBackground(new Color(255, 215, 0));
     }//GEN-LAST:event_btnKhachHangMouseExited
 
     private void btnKhachHangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhachHangMouseEntered
@@ -640,7 +640,7 @@ public class QL_DT extends javax.swing.JFrame {
     }//GEN-LAST:event_btnKhachHangMouseEntered
 
     private void btnThongkeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThongkeMouseExited
-        btnThongke.setBackground(new Color(255,215,0));
+        btnThongke.setBackground(new Color(255, 215, 0));
     }//GEN-LAST:event_btnThongkeMouseExited
 
     private void btnThongkeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThongkeMouseEntered
@@ -655,7 +655,7 @@ public class QL_DT extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBanHangActionPerformed
 
     private void btnBanHangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBanHangMouseExited
-        btnBanHang.setBackground(new Color(255,215,0));
+        btnBanHang.setBackground(new Color(255, 215, 0));
     }//GEN-LAST:event_btnBanHangMouseExited
 
     private void btnBanHangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBanHangMouseEntered
@@ -696,7 +696,7 @@ public class QL_DT extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       new DoiMatKhauJpanel().setVisible(true);
+        new DoiMatKhauJpanel().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

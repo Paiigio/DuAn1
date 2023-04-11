@@ -215,7 +215,8 @@ public class BanHangJpanel extends javax.swing.JPanel {
                 hdct.getSl(),
                 hdct.getIdctsp().getCtkm(),
                 hdct.getIdctsp().getCtkm() == null ? vn.format(hdct.getDongia()) : vn.format(giamGia(hdct.getIdctsp().getCtkm().getHinhThuc(), hdct.getDongia())),
-                hdct.getGhiChu()
+                hdct.getGhiChu(),
+                hdct.getBaoHanh() == 0 ? false : true
             });
 
         }
@@ -303,15 +304,28 @@ public class BanHangJpanel extends javax.swing.JPanel {
 
         tblGioHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Tên SP", "Đơn giá", "Số lượng", "CTKM", "Thành tiền", "IMEI"
+                "STT", "Tên SP", "Đơn giá", "Số lượng", "CTKM", "Thành tiền", "IMEI", "Bảo hành"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tblGioHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblGioHangMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tblGioHang);
 
         btnXoaCTSP.setText("Xóa ");
@@ -886,12 +900,12 @@ public class BanHangJpanel extends javax.swing.JPanel {
         if (txtMaCoupon.getText().trim().isEmpty()) {
             newHD.setCp(cp);
         } else {
-        CouponModel cpm = iCouponService.getCouponByMa(txtMaCoupon.getText());
-        if (cpm != null){
-        cp.setMa(cpm.getMa());
-        cp.setId(cpm.getId());
-        newHD.setCp(cp);
-        }
+            CouponModel cpm = iCouponService.getCouponByMa(txtMaCoupon.getText());
+            if (cpm != null) {
+                cp.setMa(cpm.getMa());
+                cp.setId(cpm.getId());
+                newHD.setCp(cp);
+            }
         }
         String idHD = "";
         ArrayList<HoaDonModel> listHDM = iHoaDonService.getAllHoaDon();
@@ -1268,6 +1282,45 @@ public class BanHangJpanel extends javax.swing.JPanel {
     private void btnHuyCouponActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyCouponActionPerformed
         txtMaCoupon.setText("");
     }//GEN-LAST:event_btnHuyCouponActionPerformed
+
+    private void tblGioHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGioHangMouseClicked
+        int indexGH = tblGioHang.getSelectedRow();
+        boolean check = (boolean) tblGioHang.getValueAt(indexGH, 7);
+        System.out.println("Check hiện tại: " + check);
+        String ghiChu = tblGioHang.getValueAt(indexGH, 6).toString();
+        HoaDonModel hd = iHoaDonService.getHDByMaHD(txtMaHD.getText());
+        HoaDonChiTietModel hdct = iHoaDonChiTietService.selectIDHDCT(hd.getId(), ghiChu);
+
+        if (check == false) {
+            if (JOptionPane.showConfirmDialog(null, "Bạn có muốn thêm bảo hành cho sản phẩm không?", "Thông báo", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+                return;
+            }
+            HoaDonChiTietModel h = new HoaDonChiTietModel();
+            h.setId(hdct.getId());
+            h.setBaoHanh(1);
+            if (iHoaDonChiTietService.updateBaoHanh_Yes(h) != null) {
+                JOptionPane.showMessageDialog(null, "Thêm thành công");
+                loadGioHang();
+                TongTien();
+            }
+
+        }
+
+        if (check == true) {
+            if (JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa bảo hành cho sản phẩm không?", "Thông báo", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+                return;
+            }
+            HoaDonChiTietModel h = new HoaDonChiTietModel();
+            h.setId(hdct.getId());
+            h.setBaoHanh(0);
+            if (iHoaDonChiTietService.updateBaoHanh_No(h) != null) {
+                JOptionPane.showMessageDialog(null, "Xóa thành công");
+                loadGioHang();
+                TongTien();
+            }
+
+        }
+    }//GEN-LAST:event_tblGioHangMouseClicked
     private void TongTien() {
         int indexHD = tblHoaDon.getSelectedRow();
         String maHD = txtMaHD.getText();
@@ -1278,10 +1331,18 @@ public class BanHangJpanel extends javax.swing.JPanel {
                 idHD = x.getId();
             }
         }
+
         ArrayList<HoaDonChiTietModel> listHDCTM = iHoaDonChiTietService.getAllHoaDonCTBYIDHD(idHD);
         int tong = 0;
+        int tienBH = 0;
         for (HoaDonChiTietModel y : listHDCTM) {
             tong += y.getThanhTien();
+            System.out.println("Bảo hành "+y.getBaoHanh());
+            if (y.getBaoHanh() == 1) {
+                tienBH = tienBH + 500000;
+            } else {
+                tienBH = tienBH + 0;
+            }
         }
         int giamGia = 0;
         if (txtGiamGia.getText().isEmpty()) {
@@ -1290,7 +1351,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
             giamGia = Integer.valueOf(txtGiamGia.getText());
         }
         txtGiamGia.setText(String.valueOf(giamGia));
-        txtTongTien.setText(String.valueOf(tong - giamGia));
+        txtTongTien.setText(String.valueOf(tong - giamGia + tienBH));
 
     }
 

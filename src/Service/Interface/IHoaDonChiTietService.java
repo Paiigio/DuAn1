@@ -19,9 +19,15 @@ public interface IHoaDonChiTietService {
 
     public HoaDonChiTietModel insertHDCT(HoaDonChiTietModel hdct);
 
+    public HoaDonChiTietModel updateBaoHanh_Yes(HoaDonChiTietModel hdct);
+
+    public HoaDonChiTietModel updateBaoHanh_No(HoaDonChiTietModel hdct);
+
     public Integer deleteHDCT(String id);
 
     public ArrayList<HoaDonChiTietModel> getAllHoaDonCTBYIDHD(String id);
 
     public Integer delete(String ghiChu, String idHD);
+    
+    public HoaDonChiTietModel selectIDHDCT (String idHD, String ghiChu);
 }
