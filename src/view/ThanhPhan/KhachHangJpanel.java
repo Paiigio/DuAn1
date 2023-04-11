@@ -93,8 +93,8 @@ public class KhachHangJpanel extends javax.swing.JPanel {
     }
 
     private KhachHangModel getFormData() {
-
-        String ma = txtMaKh.getText().trim();
+        ArrayList<KhachHangModel> listKH = khs.getAllKH();
+        String ma = "KH"+listKH.size();
         String ten = txtHoTen.getText().trim();
         String sdt = txtSDT.getText().trim();
         Date ngay = txtNgaySinh.getDate();
@@ -161,6 +161,12 @@ public class KhachHangJpanel extends javax.swing.JPanel {
                 return null;
             }
         }
+        for (KhachHangModel x : listKH){
+            if (x.getSdt()!=null && x.getSdt().equals(txtSDT.getText())){
+                JOptionPane.showMessageDialog(null, "Số điện thoại đã được sử dụng");
+                return null;
+            }
+        }
 
         return new KhachHangModel(null, ma, sdt, ten, diachi, gt, email, ngay, null, null);
 
@@ -208,6 +214,8 @@ public class KhachHangJpanel extends javax.swing.JPanel {
 
         jLabel60.setText("Mã KH");
 
+        txtMaKh.setEnabled(false);
+
         jLabel62.setText("Họ tên");
 
         jLabel63.setText("Giới tính");
@@ -215,6 +223,12 @@ public class KhachHangJpanel extends javax.swing.JPanel {
         rdoNam.setText("Nam");
 
         rdoNu.setText("Nữ");
+
+        txtSDT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSDTActionPerformed(evt);
+            }
+        });
 
         jLabel64.setText("SDT");
 
@@ -517,6 +531,10 @@ public class KhachHangJpanel extends javax.swing.JPanel {
         txtTim.setText("");
 
     }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void txtSDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSDTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSDTActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -83,7 +83,8 @@ public class NhanVienJpanel extends javax.swing.JPanel {
 
     private NhanVienModel getFormData() {
         ChucVu cv = (ChucVu) cbbCV.getSelectedItem();
-        String ma = txtMaNV.getText().trim();
+        ArrayList<NhanVienModel> listNV = nvs.getAllNV();
+        String ma = "NV"+(listNV.size()+1);
         String ten = txtHoTen.getText().trim();
         String sdt = txtSDT.getText().trim();
         Date ngay = txtNgaySinhNV.getDate();
@@ -169,6 +170,12 @@ public class NhanVienJpanel extends javax.swing.JPanel {
             anh = "NoAvatar.jpg";
         } else {
             anh = strHinhanh;
+        }
+        for (NhanVienModel x : listNV){
+            if (x.getSdt()!=null &&  x.getSdt().equals(txtSDT.getText())){
+                JOptionPane.showMessageDialog(null, "Số điện thoại này đã được sử dụng");
+                return null;
+            }
         }
 
         return new NhanVienModel(null, cv, ma, ten, gt, sdt, ngay, diachi, email, mk, tt, anh);
@@ -323,6 +330,8 @@ public class NhanVienJpanel extends javax.swing.JPanel {
         });
 
         jLabel4.setText("Mã NV");
+
+        txtMaNV.setEnabled(false);
 
         jLabel5.setText("Chức vụ");
 

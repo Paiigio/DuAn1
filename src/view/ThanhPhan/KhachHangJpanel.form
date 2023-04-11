@@ -228,6 +228,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtMaKh">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel62">
               <Properties>
@@ -252,6 +255,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtSDT">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSDTActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel64">
               <Properties>
