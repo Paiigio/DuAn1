@@ -41,8 +41,7 @@ public class QL_DT extends javax.swing.JFrame {
         Insets scrmax = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration());
         int taskBar = scrmax.bottom;
         this.setSize(xsize, ysize - taskBar);
-     
-    
+        
       
     }
     public void loaddulieuDangNhap(){
@@ -389,47 +388,50 @@ public class QL_DT extends javax.swing.JFrame {
         panelCardGoc.setLayout(new java.awt.CardLayout());
 
         JKhachHang.setBackground(new java.awt.Color(238, 232, 170));
+        JKhachHang.setPreferredSize(new java.awt.Dimension(1265, 710));
 
         javax.swing.GroupLayout JKhachHangLayout = new javax.swing.GroupLayout(JKhachHang);
         JKhachHang.setLayout(JKhachHangLayout);
         JKhachHangLayout.setHorizontalGroup(
             JKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1808, Short.MAX_VALUE)
+            .addGap(0, 1265, Short.MAX_VALUE)
         );
         JKhachHangLayout.setVerticalGroup(
             JKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 783, Short.MAX_VALUE)
+            .addGap(0, 710, Short.MAX_VALUE)
         );
 
         panelCardGoc.add(JKhachHang, "cardkh");
 
         JNhanVien.setBackground(new java.awt.Color(238, 232, 170));
+        JNhanVien.setPreferredSize(new java.awt.Dimension(1265, 710));
 
         javax.swing.GroupLayout JNhanVienLayout = new javax.swing.GroupLayout(JNhanVien);
         JNhanVien.setLayout(JNhanVienLayout);
         JNhanVienLayout.setHorizontalGroup(
             JNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1914, Short.MAX_VALUE)
+            .addGap(0, 1265, Short.MAX_VALUE)
         );
         JNhanVienLayout.setVerticalGroup(
             JNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 783, Short.MAX_VALUE)
+            .addGap(0, 710, Short.MAX_VALUE)
         );
 
         panelCardGoc.add(JNhanVien, "cardnhanvien");
         JNhanVien.getAccessibleContext().setAccessibleName("nhanvien");
 
         JThongKe.setBackground(new java.awt.Color(238, 232, 170));
+        JThongKe.setPreferredSize(new java.awt.Dimension(1265, 710));
 
         javax.swing.GroupLayout JThongKeLayout = new javax.swing.GroupLayout(JThongKe);
         JThongKe.setLayout(JThongKeLayout);
         JThongKeLayout.setHorizontalGroup(
             JThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1914, Short.MAX_VALUE)
+            .addGap(0, 1265, Short.MAX_VALUE)
         );
         JThongKeLayout.setVerticalGroup(
             JThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 783, Short.MAX_VALUE)
+            .addGap(0, 710, Short.MAX_VALUE)
         );
 
         panelCardGoc.add(JThongKe, "cardthongke");
@@ -437,64 +439,68 @@ public class QL_DT extends javax.swing.JFrame {
         JThongKe.getAccessibleContext().setAccessibleDescription("");
 
         JBanHang.setBackground(new java.awt.Color(238, 232, 170));
+        JBanHang.setPreferredSize(new java.awt.Dimension(1265, 710));
 
         javax.swing.GroupLayout JBanHangLayout = new javax.swing.GroupLayout(JBanHang);
         JBanHang.setLayout(JBanHangLayout);
         JBanHangLayout.setHorizontalGroup(
             JBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1914, Short.MAX_VALUE)
+            .addGap(0, 1265, Short.MAX_VALUE)
         );
         JBanHangLayout.setVerticalGroup(
             JBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 694, Short.MAX_VALUE)
+            .addGap(0, 710, Short.MAX_VALUE)
         );
 
         panelCardGoc.add(JBanHang, "cardBH");
         JBanHang.getAccessibleContext().setAccessibleName("banhang");
 
         JKhuyenMai.setBackground(new java.awt.Color(238, 232, 170));
+        JKhuyenMai.setPreferredSize(new java.awt.Dimension(1265, 710));
 
         javax.swing.GroupLayout JKhuyenMaiLayout = new javax.swing.GroupLayout(JKhuyenMai);
         JKhuyenMai.setLayout(JKhuyenMaiLayout);
         JKhuyenMaiLayout.setHorizontalGroup(
             JKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1914, Short.MAX_VALUE)
+            .addGap(0, 1265, Short.MAX_VALUE)
         );
         JKhuyenMaiLayout.setVerticalGroup(
             JKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 783, Short.MAX_VALUE)
+            .addGap(0, 710, Short.MAX_VALUE)
         );
 
         panelCardGoc.add(JKhuyenMai, "cardkhuyenmai");
         JKhuyenMai.getAccessibleContext().setAccessibleName("khuyenmai");
 
         JHoaDon.setBackground(new java.awt.Color(238, 232, 170));
+        JHoaDon.setPreferredSize(new java.awt.Dimension(1265, 710));
 
         javax.swing.GroupLayout JHoaDonLayout = new javax.swing.GroupLayout(JHoaDon);
         JHoaDon.setLayout(JHoaDonLayout);
         JHoaDonLayout.setHorizontalGroup(
             JHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1914, Short.MAX_VALUE)
+            .addGap(0, 1265, Short.MAX_VALUE)
         );
         JHoaDonLayout.setVerticalGroup(
             JHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 783, Short.MAX_VALUE)
+            .addGap(0, 710, Short.MAX_VALUE)
         );
 
         panelCardGoc.add(JHoaDon, "cardhoadon");
         JHoaDon.getAccessibleContext().setAccessibleName("hoadon");
 
         JSanPham.setBackground(new java.awt.Color(238, 232, 170));
+        JSanPham.setPreferredSize(new java.awt.Dimension(1265, 710));
 
         javax.swing.GroupLayout JSanPhamLayout = new javax.swing.GroupLayout(JSanPham);
         JSanPham.setLayout(JSanPhamLayout);
         JSanPhamLayout.setHorizontalGroup(
             JSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1914, Short.MAX_VALUE)
+            .addGap(0, 1265, Short.MAX_VALUE)
         );
         JSanPhamLayout.setVerticalGroup(
             JSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 783, Short.MAX_VALUE)
+            .addGap(0, 710, Short.MAX_VALUE)
         );
 
         panelCardGoc.add(JSanPham, "cardsanpham");
@@ -512,14 +518,14 @@ public class QL_DT extends javax.swing.JFrame {
             .addGroup(TrangChuLayout.createSequentialGroup()
                 .addGap(274, 274, 274)
                 .addComponent(anhTrangchu)
-                .addContainerGap(840, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
         TrangChuLayout.setVerticalGroup(
             TrangChuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TrangChuLayout.createSequentialGroup()
                 .addGap(106, 106, 106)
                 .addComponent(anhTrangchu, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addContainerGap(124, Short.MAX_VALUE))
         );
 
         panelCardGoc.add(TrangChu, "trangchu");
@@ -560,6 +566,7 @@ public class QL_DT extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTrangChuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangChuMouseClicked

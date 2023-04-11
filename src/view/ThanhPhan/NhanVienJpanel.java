@@ -853,11 +853,11 @@ public class NhanVienJpanel extends javax.swing.JPanel {
             XSSFSheet sheet = wb.createSheet("Nhân Viên");
             XSSFRow row = null;
             Cell cell = null;
-            row = sheet.createRow(2);
+            row = sheet.createRow(0);
             cell = row.createCell(0, CellType.STRING);
             cell.setCellValue("Danh Sách Nhân Viên");
 
-            row = sheet.createRow(2);
+            row = sheet.createRow(1);
             cell = row.createCell(0, CellType.STRING);
             cell.setCellValue("Chức Vụ");
             cell = row.createCell(1, CellType.STRING);
@@ -882,7 +882,7 @@ public class NhanVienJpanel extends javax.swing.JPanel {
             cell.setCellValue("Hình Ảnh");
 
             for (int i = 0; i < list.size(); i++) {
-                row = sheet.createRow(3 + i);
+                row = sheet.createRow(2 + i);
                 cell = row.createCell(0, CellType.STRING);
                 cell.setCellValue(list.get(i).getCv().getTenCV());
                 cell = row.createCell(1, CellType.STRING);
@@ -905,6 +905,7 @@ public class NhanVienJpanel extends javax.swing.JPanel {
                 cell.setCellValue(list.get(i).getTrangThai());
                 cell = row.createCell(10, CellType.STRING);
                 cell.setCellValue(list.get(i).getHinhAnh());
+                
             }
 
             File f = new File("D:\\duan1_nhom8\\excel\\NhanVienExcel.xlsx");
