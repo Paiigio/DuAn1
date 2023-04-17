@@ -367,7 +367,7 @@ public class QL_Coupon extends javax.swing.JFrame {
             barcode.setData(ma);
             barcode.setI(11.0f);
             String maqr = ma;
-            barcode.renderBarcode("D:\\duan1_nhom8\\src\\BarcoreSP\\" + maqr + ".png");
+            barcode.renderBarcode("D:\\DuAn1_FInal\\src\\BarcoreSP\\" + maqr + ".png");
             JOptionPane.showMessageDialog(this, "Tạo mã thành công");
         } catch (Exception e) {
         }

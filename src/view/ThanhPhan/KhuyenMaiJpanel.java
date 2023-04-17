@@ -871,8 +871,12 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_rdoHoatDongMouseClicked
 
     private void rdoHetHanStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rdoHetHanStateChanged
-        Date ngayBD = txtBD.getDate();
-        Date ngayHT = new Date();
+         int row=tblBang.getSelectedRow();
+         if(row==-1){
+             return;
+         }
+        Date ngayBD = (Date) tblBang.getValueAt(row,2);
+        Date ngayHT = (Date) tblBang.getValueAt(row, 3);
         if (ngayBD.after(ngayHT)) {
             rdoHetHan.setSelected(true);
         } else {

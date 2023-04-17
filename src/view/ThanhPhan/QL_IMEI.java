@@ -143,7 +143,7 @@ public class QL_IMEI extends javax.swing.JFrame {
         jLabel4.setText("Ghi chú:");
 
         TrangThai.add(rdConHang);
-        rdConHang.setText("Còn hàng");
+        rdConHang.setText("Chưa bán");
 
         TrangThai.add(rdDaBan);
         rdDaBan.setText("Đã bán");
@@ -364,7 +364,7 @@ public class QL_IMEI extends javax.swing.JFrame {
         cbb.setSelectedItem(tblHienThi.getValueAt(index, 1));
         txtMa.setText(ma);
         txtGhiChu.setText(ghiChu);
-        if (trangThai.trim().equals("Còn hàng")) {
+        if (trangThai.trim().equals("Chưa bán")) {
             rdConHang.setSelected(true);
         } else
             rdDaBan.setSelected(true);

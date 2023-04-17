@@ -946,7 +946,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
                     .to(ImageType.PNG).stream();
 
             String f_name = maQR;
-            String Path_name = "D:\\duan1_nhom8\\src\\QRSANPHAM\\";
+            String Path_name = "D:\\DuAn1_FInal\\src\\QRSANPHAM\\";
 
             FileOutputStream fout = new FileOutputStream(new File(Path_name + (f_name + ".PNG")));
             fout.write(out.toByteArray());
