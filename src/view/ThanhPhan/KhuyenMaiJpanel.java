@@ -280,10 +280,10 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         jLabel47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sale22.png"))); // NOI18N
 
         jLabel48.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel48.setText("Mã khuyến mãi     :");
+        jLabel48.setText("Mã khuyến mại     :");
 
         jLabel49.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel49.setText("Tên khuyến mãi    :");
+        jLabel49.setText("Tên khuyến mại    :");
 
         jLabel51.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel51.setText("Hình thức");

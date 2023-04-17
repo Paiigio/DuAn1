@@ -1041,7 +1041,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
                 cell.setCellValue(list.get(i).getTrangThai());
 
             }
-            File f = new File("D:\\duan1_nhom8\\excel\\SanPhamExcel.xlsx");
+            File f = new File("D:\\DuAn1_FInal\\excel\\SanPhamExcel.xlsx");
 
             try {
                 FileOutputStream fis = new FileOutputStream(f);

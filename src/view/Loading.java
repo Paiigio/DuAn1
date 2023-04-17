@@ -32,7 +32,7 @@ public class Loading extends javax.swing.JFrame {
                     pgrload.setValue(i);
 //                    lblLoad.setText("Loading "+i +"%");
                     try {
-                        Thread.sleep(20);
+                        Thread.sleep(10);
                     } catch (InterruptedException ex) {
 //                        Logger.getLogger(Loading.class.getName()).log(Level.SEVERE, null, ex);
                     }

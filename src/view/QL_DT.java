@@ -54,6 +54,7 @@ public class QL_DT extends javax.swing.JFrame {
         if (Login.nv.getCv().getTenCV().equalsIgnoreCase("Nhân Viên")) {
             btnNhanVien.setEnabled(false);
             btnKhuyenMai.setEnabled(false);
+            btnSanPham.setEnabled(false);
             btnNhanVien.addMouseListener(new MouseListener() {
 
                 @Override
@@ -120,6 +121,7 @@ public class QL_DT extends javax.swing.JFrame {
         anhTrangchu = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Quản lý bán điện thoại");
 
         Tong.setBackground(new java.awt.Color(238, 232, 170));
 
@@ -206,7 +208,7 @@ public class QL_DT extends javax.swing.JFrame {
         btnKhuyenMai.setBackground(new java.awt.Color(255, 215, 0));
         btnKhuyenMai.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnKhuyenMai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sale.png"))); // NOI18N
-        btnKhuyenMai.setText("Khuyến mãi");
+        btnKhuyenMai.setText("Khuyến mại");
         btnKhuyenMai.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnKhuyenMai.setOpaque(true);
         btnKhuyenMai.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -394,11 +396,11 @@ public class QL_DT extends javax.swing.JFrame {
         JKhachHang.setLayout(JKhachHangLayout);
         JKhachHangLayout.setHorizontalGroup(
             JKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1265, Short.MAX_VALUE)
+            .addGap(0, 1290, Short.MAX_VALUE)
         );
         JKhachHangLayout.setVerticalGroup(
             JKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 710, Short.MAX_VALUE)
+            .addGap(0, 749, Short.MAX_VALUE)
         );
 
         panelCardGoc.add(JKhachHang, "cardkh");
@@ -410,11 +412,11 @@ public class QL_DT extends javax.swing.JFrame {
         JNhanVien.setLayout(JNhanVienLayout);
         JNhanVienLayout.setHorizontalGroup(
             JNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1265, Short.MAX_VALUE)
+            .addGap(0, 1290, Short.MAX_VALUE)
         );
         JNhanVienLayout.setVerticalGroup(
             JNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 710, Short.MAX_VALUE)
+            .addGap(0, 749, Short.MAX_VALUE)
         );
 
         panelCardGoc.add(JNhanVien, "cardnhanvien");
@@ -427,11 +429,11 @@ public class QL_DT extends javax.swing.JFrame {
         JThongKe.setLayout(JThongKeLayout);
         JThongKeLayout.setHorizontalGroup(
             JThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1265, Short.MAX_VALUE)
+            .addGap(0, 1290, Short.MAX_VALUE)
         );
         JThongKeLayout.setVerticalGroup(
             JThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 710, Short.MAX_VALUE)
+            .addGap(0, 749, Short.MAX_VALUE)
         );
 
         panelCardGoc.add(JThongKe, "cardthongke");
@@ -445,11 +447,11 @@ public class QL_DT extends javax.swing.JFrame {
         JBanHang.setLayout(JBanHangLayout);
         JBanHangLayout.setHorizontalGroup(
             JBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1265, Short.MAX_VALUE)
+            .addGap(0, 1290, Short.MAX_VALUE)
         );
         JBanHangLayout.setVerticalGroup(
             JBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 710, Short.MAX_VALUE)
+            .addGap(0, 749, Short.MAX_VALUE)
         );
 
         panelCardGoc.add(JBanHang, "cardBH");
@@ -462,11 +464,11 @@ public class QL_DT extends javax.swing.JFrame {
         JKhuyenMai.setLayout(JKhuyenMaiLayout);
         JKhuyenMaiLayout.setHorizontalGroup(
             JKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1265, Short.MAX_VALUE)
+            .addGap(0, 1290, Short.MAX_VALUE)
         );
         JKhuyenMaiLayout.setVerticalGroup(
             JKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 710, Short.MAX_VALUE)
+            .addGap(0, 749, Short.MAX_VALUE)
         );
 
         panelCardGoc.add(JKhuyenMai, "cardkhuyenmai");
@@ -479,11 +481,11 @@ public class QL_DT extends javax.swing.JFrame {
         JHoaDon.setLayout(JHoaDonLayout);
         JHoaDonLayout.setHorizontalGroup(
             JHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1265, Short.MAX_VALUE)
+            .addGap(0, 1290, Short.MAX_VALUE)
         );
         JHoaDonLayout.setVerticalGroup(
             JHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 710, Short.MAX_VALUE)
+            .addGap(0, 749, Short.MAX_VALUE)
         );
 
         panelCardGoc.add(JHoaDon, "cardhoadon");
@@ -496,11 +498,11 @@ public class QL_DT extends javax.swing.JFrame {
         JSanPham.setLayout(JSanPhamLayout);
         JSanPhamLayout.setHorizontalGroup(
             JSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1265, Short.MAX_VALUE)
+            .addGap(0, 1290, Short.MAX_VALUE)
         );
         JSanPhamLayout.setVerticalGroup(
             JSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 710, Short.MAX_VALUE)
+            .addGap(0, 749, Short.MAX_VALUE)
         );
 
         panelCardGoc.add(JSanPham, "cardsanpham");
@@ -518,14 +520,14 @@ public class QL_DT extends javax.swing.JFrame {
             .addGroup(TrangChuLayout.createSequentialGroup()
                 .addGap(274, 274, 274)
                 .addComponent(anhTrangchu)
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addContainerGap(216, Short.MAX_VALUE))
         );
         TrangChuLayout.setVerticalGroup(
             TrangChuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TrangChuLayout.createSequentialGroup()
                 .addGap(106, 106, 106)
                 .addComponent(anhTrangchu, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         panelCardGoc.add(TrangChu, "trangchu");
@@ -539,16 +541,16 @@ public class QL_DT extends javax.swing.JFrame {
                 .addComponent(Trai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(TongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelCardGoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelCardGoc, javax.swing.GroupLayout.DEFAULT_SIZE, 1294, Short.MAX_VALUE)
                     .addComponent(Tren, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(15, 15, 15))
         );
         TongLayout.setVerticalGroup(
             TongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TongLayout.createSequentialGroup()
                 .addComponent(Tren, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelCardGoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelCardGoc, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE))
             .addComponent(Trai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -558,11 +560,16 @@ public class QL_DT extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Tong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Tong, javax.swing.GroupLayout.PREFERRED_SIZE, 1522, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Tong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(Tong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
