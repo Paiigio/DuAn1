@@ -17,6 +17,7 @@ import ViewModel.HoaDonModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -30,7 +31,6 @@ import responsitory.NhanVienResponsitory;
  */
 public class HoaDonJpanel extends javax.swing.JPanel {
 
-   
     private DefaultTableModel dtm = new DefaultTableModel();
     private DefaultTableModel dt = new DefaultTableModel();
     private HoaDonService hds = new HoaDonService();
@@ -54,7 +54,6 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         loadTable(1);
         lblTrang.setText("1/" + soTrang);
     }
-
 
     public void countHDTT() {
         try {
@@ -100,25 +99,25 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         int a = 0;
         int b = 0;
         int c = 0;
-     
-         if (x == 1) {
-            a = 1 ;
+
+        if (x == 1) {
+            a = 1;
             b = 2;
             c = 0;
-     
+
         } else if (x == 2) {
             a = 2;
             b = 1;
             c = 0;
-          
+
         } else {
             a = 0;
             b = 2;
             c = 1;
-      
+
         }
         ArrayList<HoaDonModel> list = new ArrayList<>();
-        String sql = "SELECT TOP 5 * FROM HOADON WHERE MAHD NOT IN (SELECT TOP "+(Trang*5-5)+"  MAHD FROM HOADON WHERE TRANGTHAI!="+b+" AND TRANGTHAI!="+c+" ORDER BY MAHD) AND TRANGTHAI="+a+" ORDER BY MAHD";
+        String sql = "SELECT TOP 5 * FROM HOADON WHERE MAHD NOT IN (SELECT TOP " + (Trang * 5 - 5) + "  MAHD FROM HOADON WHERE TRANGTHAI!=" + b + " AND TRANGTHAI!=" + c + " ORDER BY MAHD) AND TRANGTHAI=" + a + " ORDER BY MAHD";
         ResultSet rs = JDBC_Helper.excuteQuery(sql);
         try {
             while (rs.next()) {
@@ -135,27 +134,31 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         return list;
     }
 
+    private int catMa(String ma) {
+        String chuSo = ma.substring(2);
+        int so = Integer.valueOf(chuSo);
+        return so;
+    }
+
     private void loadTable(long Trang) {
+        ArrayList<HoaDonModel> listSP = getAllHoaDon();
+        Collections.sort(listSP, (HoaDonModel o1, HoaDonModel o2) -> catMa(o1.getMa()) > catMa(o2.getMa()) ? 1 : -1);
+        dtm.setRowCount(0);
+        for (HoaDonModel s : listSP) {
+            dtm.addRow(new Object[]{
+                s.getKh(),
+                s.getNv(),
+                s.getCp(),
+                s.getMa(),
+                Double.valueOf(s.getThanhTien()).longValue(),
+                s.getHinhThucThanhToan() == 1 ? "Tiền mặt" : "Chuyển khoản", s.getNgayThanhToan(),
+                s.getTrangThai() == 0 ? "Chưa thanh toán" : s.getTrangThai() == 1 ? "Đã thanh toán" : "Đơn đã hủy",
+                s.getNgayTao(), s.getNgaySua()
+            });
 
-            ArrayList<HoaDonModel> listSP = getAllHoaDon();
-            dtm.setRowCount(0);
-            for (HoaDonModel s : listSP) {
-                dtm.addRow(new Object[]{
-                    s.getKh(),
-                    s.getNv(),
-                    s.getCp(),
-                    s.getMa(),
-                    Double.valueOf(s.getThanhTien()).longValue(),
-                    s.getHinhThucThanhToan() == 1 ? "Tiền mặt" : "Chuyển khoản", s.getNgayThanhToan(),
-                    s.getTrangThai() == 0 ? "Chưa thanh toán" : s.getTrangThai() == 1 ? "Đã thanh toán" : "Đơn đã hủy",
-                    s.getNgayTao(), s.getNgaySua()
-                });
-
-            }
         }
-   
+    }
 
-  
     public String getIDHoaDon(String ma) {
         ArrayList<HoaDonModel> hd = hds.getAllHoaDon();
         for (HoaDonModel h : hd) {
@@ -365,7 +368,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbbTTItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbTTItemStateChanged
-         String tt = cbbTT.getSelectedItem().toString();
+        String tt = cbbTT.getSelectedItem().toString();
         int x = cbbTT.getSelectedIndex();
         if (tt.equalsIgnoreCase("Đã thanh toán")) {
             countHDTT();
@@ -397,12 +400,12 @@ public class HoaDonJpanel extends javax.swing.JPanel {
             loadTable(1);
             Trang = 1;
             lblTrang.setText("1/" + soTrang);
-        }  else {
-                soTrang = count / 5 + 1;
-            }
-            loadTable(1);
-            lblTrang.setText("1/" + soTrang);
-        
+        } else {
+            soTrang = count / 5 + 1;
+        }
+        loadTable(1);
+        lblTrang.setText("1/" + soTrang);
+
         System.out.println(cbbTT.getSelectedIndex());
     }//GEN-LAST:event_cbbTTItemStateChanged
 
@@ -419,8 +422,8 @@ public class HoaDonJpanel extends javax.swing.JPanel {
                     h.getIdhd().getMa(),
                     h.getIdctsp().getSp().getTen(),
                     h.getSl(),
-                    Double.valueOf(h.getIdctsp().getGiaBan()).longValue(),
-                    Double.valueOf(h.getIdctsp().getGiaBan() * h.getSl()).longValue()
+                    Double.valueOf(h.getThanhTien()).longValue(),
+                    Double.valueOf(h.getThanhTien() * h.getSl()).longValue()
                 });
             }
 

@@ -51,11 +51,15 @@ public class KhachHangJpanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-
+    private int catMa(String ma){
+        String chuSo = ma.substring(2);
+        int so = Integer.valueOf(chuSo);
+        return so;
+    }
     public void loadTable() {
         ArrayList<KhachHangModel> list = khs.getAllKH();
         dtm.setRowCount(0);
-        Collections.sort(list, Comparator.comparing(KhachHang -> KhachHang.getMaKH()));
+        Collections.sort(list, (KhachHangModel o1, KhachHangModel o2) -> catMa(o1.getMaKH()) > catMa(o2.getMaKH()) ? 1 : -1);
         for (KhachHangModel x : list) {
             dtm.addRow(new Object[]{
                 x.getMaKH(),
@@ -75,7 +79,7 @@ public class KhachHangJpanel extends javax.swing.JPanel {
     public void loadTableTim(String sdt) {
         ArrayList<KhachHangModel> list = khs.getTimSDT(sdt);
         dtm.setRowCount(0);
-        Collections.sort(list, Comparator.comparing(KhachHang -> KhachHang.getMaKH()));
+        Collections.sort(list, (KhachHangModel o1, KhachHangModel o2) -> catMa(o1.getMaKH()) > catMa(o2.getMaKH()) ? 1 : -1);
         for (KhachHangModel x : list) {
             dtm.addRow(new Object[]{
                 x.getMaKH(),

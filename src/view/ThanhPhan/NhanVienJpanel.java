@@ -84,7 +84,7 @@ public class NhanVienJpanel extends javax.swing.JPanel {
     private NhanVienModel getFormData() {
         ChucVu cv = (ChucVu) cbbCV.getSelectedItem();
         ArrayList<NhanVienModel> listNV = nvs.getAllNV();
-        String ma = "NV"+(listNV.size()+1);
+        String ma = "NV" + (listNV.size() + 1);
         String ten = txtHoTen.getText().trim();
         String sdt = txtSDT.getText().trim();
         Date ngay = txtNgaySinhNV.getDate();
@@ -171,8 +171,8 @@ public class NhanVienJpanel extends javax.swing.JPanel {
         } else {
             anh = strHinhanh;
         }
-        for (NhanVienModel x : listNV){
-            if (x.getSdt()!=null &&  x.getSdt().equals(txtSDT.getText())){
+        for (NhanVienModel x : listNV) {
+            if (x.getSdt() != null && x.getSdt().equals(txtSDT.getText())) {
                 JOptionPane.showMessageDialog(null, "Số điện thoại này đã được sử dụng");
                 return null;
             }
@@ -196,9 +196,15 @@ public class NhanVienJpanel extends javax.swing.JPanel {
         txtNgaySinhNV.setDate(null);
     }
 
+    private int catMa(String ma) {
+        String chuSo = ma.substring(2);
+        int so = Integer.valueOf(chuSo);
+        return so;
+    }
+
     public void loadTableNV() {
         ArrayList<NhanVienModel> list = nvs.getAllNV();
-        Collections.sort(list, Comparator.comparing(NhanVien -> NhanVien.getMa()));
+        Collections.sort(list, (NhanVienModel o1, NhanVienModel o2) -> catMa(o1.getMa()) > catMa(o2.getMa()) ? 1 : -1);
         dtmNV.setRowCount(0);
         for (NhanVienModel x : list) {
             dtmNV.addRow(new Object[]{
@@ -220,6 +226,7 @@ public class NhanVienJpanel extends javax.swing.JPanel {
 
     public void loadTableNV1(String ten) {
         ArrayList<NhanVienModel> list = nvs.getTimTen(ten);
+        Collections.sort(list, (NhanVienModel o1, NhanVienModel o2) -> catMa(o1.getMa()) > catMa(o2.getMa()) ? 1 : -1);
         dtmNV.setRowCount(0);
         for (NhanVienModel x : list) {
             dtmNV.addRow(new Object[]{
@@ -241,6 +248,7 @@ public class NhanVienJpanel extends javax.swing.JPanel {
 
     public void loadTableVaiTro(String ten) {
         ArrayList<NhanVienModel> list = nvs.getVaiTro(ten);
+        Collections.sort(list, (NhanVienModel o1, NhanVienModel o2) -> catMa(o1.getMa()) > catMa(o2.getMa()) ? 1 : -1);
         dtmNV.setRowCount(0);
         for (NhanVienModel x : list) {
             dtmNV.addRow(new Object[]{
@@ -914,7 +922,7 @@ public class NhanVienJpanel extends javax.swing.JPanel {
                 cell.setCellValue(list.get(i).getTrangThai());
                 cell = row.createCell(10, CellType.STRING);
                 cell.setCellValue(list.get(i).getHinhAnh());
-                
+
             }
 
             File f = new File("D:\\duan1_nhom8\\excel\\NhanVienExcel.xlsx");
