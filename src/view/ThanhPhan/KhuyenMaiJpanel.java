@@ -174,6 +174,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         String hinhthuc = txtHinhThuc.getText().trim();
         Date ngayBD = txtBD.getDate();
         Date ngayKT = txtKetThuc.getDate();
+        Date ngayHT = new Date();
         int trangThai = rdoHetHan.isSelected() ? 1 : 0;
         if (ma.length() == 0) {
             JOptionPane.showMessageDialog(null, "Không được để trống mã");
@@ -211,7 +212,10 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null,"Ngày bắt đầu phải trước ngày kết thúc" );
             return null;
         }
-     
+         if (ngayBD.after(ngayHT)){
+            trangThai = 1;
+        }    
+         System.out.println(trangThai);
         return new CTKhuyenMaiModel(null, ma, ten, ngayBD, ngayKT, hinhthuc, null, null, trangThai);
     }
 

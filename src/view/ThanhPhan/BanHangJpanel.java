@@ -78,6 +78,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
         tblHoaDon.getTableHeader().setBackground(Color.red);
         tblHoaDon.getTableHeader().setOpaque(false);
         tblGioHang.getTableHeader().setBackground(Color.red);
+
     }
 
     private float giamGia(String hinhThuc, float giaTien) {
@@ -128,12 +129,15 @@ public class BanHangJpanel extends javax.swing.JPanel {
     public void setTextCoupon(String txt) {
         txtMaCoupon.setText(txt);
     }
-
+    private int catMa(String ma){
+        String chuSo = ma.substring(2);
+        int so = Integer.valueOf(chuSo);
+        return so;
+    }
     private void loadHD() {
         ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDon();
         dtmHD.setRowCount(0);
-        Collections.sort(listHD, Comparator.comparing(HoaDon -> HoaDon.getMa()));
-
+        Collections.sort(listHD, (HoaDonModel o1, HoaDonModel o2) -> catMa(o1.getMa()) > catMa(o2.getMa()) ? 1 : -1);
         for (HoaDonModel x : listHD) {
             dtmHD.addRow(new Object[]{
                 x.getMa(),
@@ -158,7 +162,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
     private void loadHDCho() {
         ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDonCTT();
         dtmHD.setRowCount(0);
-        Collections.sort(listHD, Comparator.comparing(HoaDon -> HoaDon.getMa()));
+        Collections.sort(listHD, (HoaDonModel o1, HoaDonModel o2) -> catMa(o1.getMa()) > catMa(o2.getMa()) ? 1 : -1);
 
         for (HoaDonModel x : listHD) {
             dtmHD.addRow(new Object[]{
