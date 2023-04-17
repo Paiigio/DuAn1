@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/duan1_nhom8/src/Service/Interface/ICTKhuyenMaiService.java</file>
             <file>file:/D:/duan1_nhom8/src/Service/Interface/IHoaDonChiTietService.java</file>
             <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/NhanVienJpanel.java</file>
@@ -18,6 +19,16 @@
             <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/BanHangJpanel.java</file>
             <file>file:/D:/duan1_nhom8/src/Service/HoaDonChiTietService.java</file>
             <file>file:/D:/duan1_nhom8/src/view/ThanhPhan/ThongKeJpanel.java</file>
+=======
+            <file>file:/D:/DuAn1_FInal/src/view/ThanhPhan/HoaDonJpanel.java</file>
+            <file>file:/D:/DuAn1_FInal/src/view/QuetQR.java</file>
+            <file>file:/D:/DuAn1_FInal/src/view/ThanhPhan/NhanVienJpanel.java</file>
+            <file>file:/D:/DuAn1_FInal/src/view/ThanhPhan/KhachHangJpanel.java</file>
+            <file>file:/D:/DuAn1_FInal/src/view/ThanhPhan/BanHangJpanel.java</file>
+            <file>file:/D:/DuAn1_FInal/src/view/ThanhPhan/KhuyenMaiJpanel.java</file>
+            <file>file:/D:/DuAn1_FInal/src/view/ThanhPhan/QL_Coupon.java</file>
+            <file>file:/D:/DuAn1_FInal/src/view/ThanhPhan/ThongKeJpanel.java</file>
+>>>>>>> origin/master
         </group>
     </open-files>
 </project-private>

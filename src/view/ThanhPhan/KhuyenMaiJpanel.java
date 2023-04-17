@@ -871,6 +871,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_rdoHoatDongMouseClicked
 
     private void rdoHetHanStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rdoHetHanStateChanged
+
 //        int index = tblBang.getSelectedRow();
 //        Date ngayBD = (Date) tblBang.getValueAt(index, 2);
 //        Date ngayKT = (Date) tblBang.getValueAt(index, 3);
@@ -888,6 +889,18 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
 //                System.out.println("Hoạt động 1");
 //            }
 //        }
+//         int row=tblBang.getSelectedRow();
+//         if(row==-1){
+//             return;
+//         }
+//        Date ngayBD = (Date) tblBang.getValueAt(row,2);
+//        Date ngayHT = (Date) tblBang.getValueAt(row, 3);
+//        if (ngayBD.after(ngayHT)) {
+//            rdoHetHan.setSelected(true);
+//        } else {
+//            rdoHoatDong.setSelected(true);
+//        }
+
     }//GEN-LAST:event_rdoHetHanStateChanged
 
     private void cbHoatDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbHoatDongActionPerformed

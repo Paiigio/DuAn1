@@ -180,7 +180,11 @@ public class ThongKeJpanel extends javax.swing.JPanel {
                 Object[] rowData = {
                     x.getIdhd().getMa(),
                     x.getIdctsp().getSp().getTen() + " " + x.getIdctsp().getMs() + " " + x.getIdctsp().getDl(),
-                    vn.format(x.getThanhTien()),
+
+                    vn.format(x.getThanhTien()),                
+
+
+
                     x.getNgayTao(),
                     x.getIdhd().getNgaySua(),
                     x.getIdhd().getGhiChu()

@@ -209,7 +209,10 @@ public class QuetQR extends javax.swing.JFrame implements Runnable, ThreadFactor
                 txt.setText(result.getText());
                 ctsp = ctspr.quetQR(result.getText());
                 if (ctsp != null & ctsp.getMaQR() != null) {
-                    JOptionPane.showConfirmDialog(this, "Đã tìm thấy sản phẩm " + ctsp.getSp().getTen() + ", size " + ctsp.getDl().getSoDungLuong() + ", màu " + ctsp.getMs().getTen() + ", cao " + "\n Bạn có muốn thêm sản phẩm này vào giỏ hàng không?");
+               int sp=     JOptionPane.showConfirmDialog(this, "Đã tìm thấy sản phẩm " + ctsp.getSp().getTen() + ", size " + ctsp.getDl().getSoDungLuong() + ", màu " + ctsp.getMs().getTen() + ", cao " + "\n Bạn có muốn thêm sản phẩm này vào giỏ hàng không?");
+               if(sp!=JOptionPane.YES_OPTION){
+                   return;
+               }
                     idctsp = result.getText();
 
 //          int indexSP = tblSanPham.getSelectedRow();
@@ -257,6 +260,9 @@ public class QuetQR extends javax.swing.JFrame implements Runnable, ThreadFactor
                     ArrayList<HoaDonChiTietModel> listHDCTNEW = iHoaDonChiTietService.getAllHoaDonCTBYIDHD(hd.getId());
                     // nhập vào imei
                     String maIMEI = (String) JOptionPane.showInputDialog(this, "Mời bạn chọn mã IMEI", "Lựa chọn", JOptionPane.INFORMATION_MESSAGE, null, null, "Mã IMEI");
+                    if (maIMEI.isEmpty()) {
+                        return;
+                    }
                     for (IMEIModel ss : listIMEINEW) {
                         System.out.println("IMEI " + ss.getMa());
                         if (ss.getMa() != null) {
@@ -287,7 +293,7 @@ public class QuetQR extends javax.swing.JFrame implements Runnable, ThreadFactor
                     hdct.setGhiChu(maIMEI);
                     hdct.setDongia(ctsp.getGiaBan());
                     hdct.setThanhTien(ctsp.getGiaBan() * 1);
-                    
+
                     if (hdct == null) {
                         return;
                     }

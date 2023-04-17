@@ -712,7 +712,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
 
     private void btnUpAnhThemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpAnhThemSPActionPerformed
         try {
-            JFileChooser f = new JFileChooser("D:\\duan1_nhom8\\src\\icon\\anhSP");
+            JFileChooser f = new JFileChooser("D:\\DuAn1_FInal\\src\\icon\\anhSP");
             f.showOpenDialog(null);
             File file = f.getSelectedFile();
             Image img = ImageIO.read(file);
@@ -946,7 +946,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
                     .to(ImageType.PNG).stream();
 
             String f_name = maQR;
-            String Path_name = "D:\\duan1_nhom8\\src\\QRSANPHAM\\";
+            String Path_name = "D:\\DuAn1_FInal\\src\\QRSANPHAM\\";
 
             FileOutputStream fout = new FileOutputStream(new File(Path_name + (f_name + ".PNG")));
             fout.write(out.toByteArray());
@@ -960,7 +960,11 @@ public class SanPhamJpanel extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dcbmSP.removeAllElements();
+        dcbmDL.removeAllElements();
+        dcbmMS.removeAllElements();
         loadCBBSP();
+        loadCBBMS();
+        loadCBBDL();
         loadData();
     }//GEN-LAST:event_jButton2ActionPerformed
 

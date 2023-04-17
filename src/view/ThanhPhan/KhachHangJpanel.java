@@ -185,6 +185,7 @@ public class KhachHangJpanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         KhachHang = new javax.swing.JPanel();
         TTNhanVien1 = new javax.swing.JPanel();
         jLabel60 = new javax.swing.JLabel();
@@ -224,8 +225,10 @@ public class KhachHangJpanel extends javax.swing.JPanel {
 
         jLabel63.setText("Giới tính");
 
+        buttonGroup1.add(rdoNam);
         rdoNam.setText("Nam");
 
+        buttonGroup1.add(rdoNu);
         rdoNu.setText("Nữ");
 
         txtSDT.addActionListener(new java.awt.event.ActionListener() {
@@ -546,6 +549,7 @@ public class KhachHangJpanel extends javax.swing.JPanel {
     private javax.swing.JPanel TTNhanVien1;
     private javax.swing.JButton btnSUa;
     private javax.swing.JButton btnThem;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton23;
     private javax.swing.JLabel jLabel60;

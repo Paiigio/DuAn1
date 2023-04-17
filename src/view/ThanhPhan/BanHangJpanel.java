@@ -407,6 +407,10 @@ public class BanHangJpanel extends javax.swing.JPanel {
             }
         });
         jScrollPane5.setViewportView(tblSanPham);
+        if (tblSanPham.getColumnModel().getColumnCount() > 0) {
+            tblSanPham.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tblSanPham.getColumnModel().getColumn(1).setPreferredWidth(200);
+        }
 
         jLabel1.setText("Tìm kiếm");
 
