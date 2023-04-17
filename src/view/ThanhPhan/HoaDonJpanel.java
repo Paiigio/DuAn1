@@ -155,25 +155,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
                 s.getTrangThai() == 0 ? "Chưa thanh toán" : s.getTrangThai() == 1 ? "Đã thanh toán" : "Đơn đã hủy",
                 s.getNgayTao(), s.getNgaySua()
             });
-
-<<<<<<< HEAD
-=======
-        ArrayList<HoaDonModel> listSP = getAllHoaDon();
-        dtm.setRowCount(0);
-        for (HoaDonModel s : listSP) {
-            dtm.addRow(new Object[]{
-                s.getKh(),
-                s.getNv(),
-                s.getCp(),
-                s.getMa(),
-                Double.valueOf(s.getThanhTien()).longValue(),
-                s.getHinhThucThanhToan() == 1 ? "Tiền mặt" : "Chuyển khoản", s.getNgayThanhToan(),
-                s.getTrangThai() == 0 ? "Chưa thanh toán" : s.getTrangThai() == 1 ? "Đã thanh toán" : "Đơn đã hủy",
-                s.getNgayTao(), s.getNgaySua()
-            });
-
->>>>>>> origin/master
-        }
+            }
     }
 
     public String getIDHoaDon(String ma) {
