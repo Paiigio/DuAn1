@@ -61,7 +61,9 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         for (CTKhuyenMaiModel x : list) {
             if (date2.after(x.getThoiGianKetThuc())) {
                 list2.add(ctkm.updateTrangThai(x));
-            } else {
+            } else if(date2.before(x.getThoiGianBatDau())) {
+                list2.add(ctkm.updateTrangThai(x));
+            }else {
                 list2.add(ctkm.updateTrangThaiHoatDong(x));
 
             }
@@ -74,7 +76,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(1000);
                     loadSP();
                     loadTable();
 
@@ -106,7 +108,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         ArrayList<CTKhuyenMaiModel> list = checkExpiryDate();
 
         dtm.setRowCount(0);
-        Collections.sort(list, Comparator.comparing(CTKhuyenMai -> CTKhuyenMai.getMa()));
+        Collections.sort(list, (CTKhuyenMaiModel o1, CTKhuyenMaiModel o2) -> catMa(o1.getMa()) > catMa(o2.getMa()) ? 1 : -1);
         for (CTKhuyenMaiModel x : list) {
 
             Object[] rowData = {
@@ -176,18 +178,13 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
     }
 
     private CTKhuyenMaiModel getFormData() {
-        String ma = txtMa.getText().trim();
+        ArrayList<CTKhuyenMaiModel> list = ctkm.getAllCTKM();
         String ten = txtTen.getText().trim();
         String hinhthuc = txtHinhThuc.getText().trim();
         Date ngayBD = txtBD.getDate();
         Date ngayKT = txtKetThuc.getDate();
         Date ngayHT = new Date();
         int trangThai = rdoHetHan.isSelected() ? 1 : 0;
-        if (ma.length() == 0) {
-            JOptionPane.showMessageDialog(null, "Không được để trống mã");
-            txtMa.requestFocus();
-            return null;
-        }
         if (ten.length() == 0) {
             JOptionPane.showMessageDialog(null, "Không được để trống tên");
             txtTen.requestFocus();
@@ -222,8 +219,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         if (ngayBD.after(ngayHT)) {
             trangThai = 1;
         }
-        System.out.println(trangThai);
-        return new CTKhuyenMaiModel(null, ma, ten, ngayBD, ngayKT, hinhthuc, null, null, trangThai);
+        return new CTKhuyenMaiModel(null, null, ten, ngayBD, ngayKT, hinhthuc, null, null, trangThai);
     }
 
     /**
@@ -648,10 +644,13 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         CTKhuyenMaiModel nv = getFormData();
-        ArrayList<CTKhuyenMaiModel> listKM = ctkm.getAllCTKM();
         if (nv == null) {
             return;
         }
+        ArrayList<CTKhuyenMaiModel> listKM = ctkm.getAllCTKM();
+        String ma = "KM" + (listKM.size() + 1);
+        nv.setMa(ma);
+
         if (ctkm.insertCTKM(nv) != null) {
             JOptionPane.showMessageDialog(null, "Thêm thành công");
         } else {
@@ -668,6 +667,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
             return;
         }
         CTKhuyenMaiModel nv = getFormData();
+        System.out.println(nv.getTrangThai());
         if (nv == null) {
             return;
         }
@@ -871,14 +871,23 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_rdoHoatDongMouseClicked
 
     private void rdoHetHanStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rdoHetHanStateChanged
-        Date ngayBD = txtBD.getDate();
-        Date ngayHT = new Date();
-        if (ngayBD.after(ngayHT)) {
-            rdoHetHan.setSelected(true);
-        } else {
-            rdoHoatDong.setSelected(true);
-        }
-
+//        int index = tblBang.getSelectedRow();
+//        Date ngayBD = (Date) tblBang.getValueAt(index, 2);
+//        Date ngayKT = (Date) tblBang.getValueAt(index, 3);
+//        System.out.println("Ngày bắt đầu: " + ngayBD + " Ngày kết thúc: " + ngayKT);
+//        Date ngayHT = new Date();
+//        if (ngayKT.before(ngayHT)) {
+//            System.out.println("Hết hạn");
+//            rdoHetHan.setSelected(true);
+//        } else {
+//            if (ngayBD.after(ngayHT)) {
+//                System.out.println("Hết hạn 1");
+//                rdoHetHan.setSelected(true);
+//            } else {
+//                rdoHoatDong.setSelected(true);
+//                System.out.println("Hoạt động 1");
+//            }
+//        }
     }//GEN-LAST:event_rdoHetHanStateChanged
 
     private void cbHoatDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbHoatDongActionPerformed

@@ -23,7 +23,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -77,8 +79,9 @@ public class ThongKeJpanel extends javax.swing.JPanel {
     }
     Locale localeVN = new Locale("vi", "VN");
     NumberFormat vn = NumberFormat.getInstance(localeVN);
-    public void loadBH(){
-        
+
+    public void loadBH() {
+
         ArrayList<HoaDonChiTietModel> listHDCT = ihdct.getAllHoaDonCT_BH();
         dtmBH.setRowCount(0);
         int total = 0;
@@ -104,10 +107,11 @@ public class ThongKeJpanel extends javax.swing.JPanel {
             "",
             total,
             ""
-            
+
         };
         dtmBH.addRow(sum);
     }
+
     public void loadTableDoanhThu() {
 
         ArrayList<HoaDonChiTietModel> list = ihdct.getAllHoaDonCT();
@@ -119,7 +123,7 @@ public class ThongKeJpanel extends javax.swing.JPanel {
                 Object[] rowData = {
                     x.getIdhd().getNv().getHoTen(),
                     x.getIdhd().getMa(),
-                    x.getNgayTao(),
+                    x.getIdhd().getNgayThanhToan(),
                     vn.format(x.getThanhTien()) + " VND"
 
                 };
@@ -328,7 +332,7 @@ public class ThongKeJpanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Tên Nhân Viên", "Mã Hóa Đơn", "Ngày Tạo", "Thành Tiền"
+                "Tên Nhân Viên", "Mã Hóa Đơn", "Ngày Thanh Toán", "Thành Tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -896,12 +900,14 @@ public class ThongKeJpanel extends javax.swing.JPanel {
         double total = 0;
         for (HoaDonChiTietModel x : list) { // 2 cái ch? khác m?agif làmijagilaf2 cái ngày bd v?i ngày kt ko khá
             if (x.getIdhd().getTrangThai() == 1) {
-                if ((x.getNgayTao().compareTo(ngayBD) == 0 || x.getNgayTao().after(ngayBD)) && (x.getNgayTao().compareTo(ngayKT) == 0 || x.getNgayTao().before(ngayKT))) {
+                if ((x.getIdhd().getNgayThanhToan().after(ngayBD) && x.getIdhd().getNgayThanhToan().before(ngayKT)) || (x.getIdhd().getNgayThanhToan()== ngayBD)) {
+//            if (x.getIdhd().getNgayThanhToan().compareTo(ngayBD) == 0){
+                System.out.println(x);
                     total += x.getThanhTien();
                     Object[] rowData = {
                         x.getIdhd().getNv().getHoTen(),
                         x.getIdhd().getMa(),
-                        x.getNgayTao(),
+                        x.getIdhd().getNgayThanhToan(),
                         vn.format(x.getThanhTien()) + " VND"
                     };
                     dtm.addRow(rowData);

@@ -83,8 +83,8 @@ public class CTKhuyenMaiResponsitory {
     }
 
     public CTKhuyenMai updateCTKM(CTKhuyenMai cv) {
-        String sql = "UPDATE dbo.CTKHUYENMAI SET TENKM =?,TGBATDAU=?,TGKETTHUC=?,HINHTHUC=?,NGAYSUA=GETDATE() WHERE MAKM=?";
-        JDBC_Helper.excuteUpdate(sql, cv.getTen(), cv.getThoiGianBatDau(), cv.getThoiGianKetThuc(), cv.getHinhThuc(), cv.getMa());
+        String sql = "UPDATE dbo.CTKHUYENMAI SET TENKM =?,TGBATDAU=?,TGKETTHUC=?,HINHTHUC=?,NGAYSUA=GETDATE(),TrangThai = ? WHERE MAKM=?";
+        JDBC_Helper.excuteUpdate(sql, cv.getTen(), cv.getThoiGianBatDau(), cv.getThoiGianKetThuc(), cv.getHinhThuc(),cv.getTrangThai(), cv.getMa());
         return cv;
     }
     
