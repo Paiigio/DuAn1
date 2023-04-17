@@ -30,7 +30,6 @@ import responsitory.NhanVienResponsitory;
  */
 public class HoaDonJpanel extends javax.swing.JPanel {
 
-   
     private DefaultTableModel dtm = new DefaultTableModel();
     private DefaultTableModel dt = new DefaultTableModel();
     private HoaDonService hds = new HoaDonService();
@@ -54,7 +53,6 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         loadTable(1);
         lblTrang.setText("1/" + soTrang);
     }
-
 
     public void countHDTT() {
         try {
@@ -100,25 +98,25 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         int a = 0;
         int b = 0;
         int c = 0;
-     
-         if (x == 1) {
-            a = 1 ;
+
+        if (x == 1) {
+            a = 1;
             b = 2;
             c = 0;
-     
+
         } else if (x == 2) {
             a = 2;
             b = 1;
             c = 0;
-          
+
         } else {
             a = 0;
             b = 2;
             c = 1;
-      
+
         }
         ArrayList<HoaDonModel> list = new ArrayList<>();
-        String sql = "SELECT TOP 5 * FROM HOADON WHERE MAHD NOT IN (SELECT TOP "+(Trang*5-5)+"  MAHD FROM HOADON WHERE TRANGTHAI!="+b+" AND TRANGTHAI!="+c+" ORDER BY MAHD) AND TRANGTHAI="+a+" ORDER BY MAHD";
+        String sql = "SELECT TOP 5 * FROM HOADON WHERE MAHD NOT IN (SELECT TOP " + (Trang * 5 - 5) + "  MAHD FROM HOADON WHERE TRANGTHAI!=" + b + " AND TRANGTHAI!=" + c + " ORDER BY MAHD) AND TRANGTHAI=" + a + " ORDER BY MAHD";
         ResultSet rs = JDBC_Helper.excuteQuery(sql);
         try {
             while (rs.next()) {
@@ -137,25 +135,23 @@ public class HoaDonJpanel extends javax.swing.JPanel {
 
     private void loadTable(long Trang) {
 
-            ArrayList<HoaDonModel> listSP = getAllHoaDon();
-            dtm.setRowCount(0);
-            for (HoaDonModel s : listSP) {
-                dtm.addRow(new Object[]{
-                    s.getKh(),
-                    s.getNv(),
-                    s.getCp(),
-                    s.getMa(),
-                    Double.valueOf(s.getThanhTien()).longValue(),
-                    s.getHinhThucThanhToan() == 1 ? "Tiền mặt" : "Chuyển khoản", s.getNgayThanhToan(),
-                    s.getTrangThai() == 0 ? "Chưa thanh toán" : s.getTrangThai() == 1 ? "Đã thanh toán" : "Đơn đã hủy",
-                    s.getNgayTao(), s.getNgaySua()
-                });
+        ArrayList<HoaDonModel> listSP = getAllHoaDon();
+        dtm.setRowCount(0);
+        for (HoaDonModel s : listSP) {
+            dtm.addRow(new Object[]{
+                s.getKh(),
+                s.getNv(),
+                s.getCp(),
+                s.getMa(),
+                Double.valueOf(s.getThanhTien()).longValue(),
+                s.getHinhThucThanhToan() == 1 ? "Tiền mặt" : "Chuyển khoản", s.getNgayThanhToan(),
+                s.getTrangThai() == 0 ? "Chưa thanh toán" : s.getTrangThai() == 1 ? "Đã thanh toán" : "Đơn đã hủy",
+                s.getNgayTao(), s.getNgaySua()
+            });
 
-            }
         }
-   
+    }
 
-  
     public String getIDHoaDon(String ma) {
         ArrayList<HoaDonModel> hd = hds.getAllHoaDon();
         for (HoaDonModel h : hd) {
@@ -189,6 +185,8 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         btnDen = new javax.swing.JButton();
         btnTrangCuoi = new javax.swing.JButton();
         btnTrangDau = new javax.swing.JButton();
+        txtTim = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setName(""); // NOI18N
 
@@ -286,6 +284,14 @@ public class HoaDonJpanel extends javax.swing.JPanel {
             }
         });
 
+        txtTim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Tìm hóa đơn");
+
         javax.swing.GroupLayout JHoaDonLayout = new javax.swing.GroupLayout(JHoaDon);
         JHoaDon.setLayout(JHoaDonLayout);
         JHoaDonLayout.setHorizontalGroup(
@@ -297,7 +303,11 @@ public class HoaDonJpanel extends javax.swing.JPanel {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JHoaDonLayout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(306, 306, 306)
+                            .addGap(88, 88, 88)
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(40, 40, 40)
                             .addComponent(cbbTT, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(JHoaDonLayout.createSequentialGroup()
                             .addGap(33, 33, 33)
@@ -326,7 +336,10 @@ public class HoaDonJpanel extends javax.swing.JPanel {
                 .addGroup(JHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(JHoaDonLayout.createSequentialGroup()
                         .addGap(41, 41, 41)
-                        .addComponent(cbbTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(JHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbbTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
                         .addGap(18, 18, 18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JHoaDonLayout.createSequentialGroup()
                         .addContainerGap()
@@ -365,7 +378,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbbTTItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbTTItemStateChanged
-         String tt = cbbTT.getSelectedItem().toString();
+        String tt = cbbTT.getSelectedItem().toString();
         int x = cbbTT.getSelectedIndex();
         if (tt.equalsIgnoreCase("Đã thanh toán")) {
             countHDTT();
@@ -397,12 +410,12 @@ public class HoaDonJpanel extends javax.swing.JPanel {
             loadTable(1);
             Trang = 1;
             lblTrang.setText("1/" + soTrang);
-        }  else {
-                soTrang = count / 5 + 1;
-            }
-            loadTable(1);
-            lblTrang.setText("1/" + soTrang);
-        
+        } else {
+            soTrang = count / 5 + 1;
+        }
+        loadTable(1);
+        lblTrang.setText("1/" + soTrang);
+
         System.out.println(cbbTT.getSelectedIndex());
     }//GEN-LAST:event_cbbTTItemStateChanged
 
@@ -514,6 +527,58 @@ public class HoaDonJpanel extends javax.swing.JPanel {
     private void cbbTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTTActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbbTTActionPerformed
+    public ArrayList<HoaDonModel> getHDTim() {
+        ArrayList<HoaDonModel> list = new ArrayList<>();
+        String txt = txtTim.getText();
+        int x = cbbTT.getSelectedIndex();
+        String sql = "SELECT* FROM HOADON WHERE MAHD LIKE '%" + txt + "%' AND TRANGTHAI= " + x;
+        ResultSet rs = JDBC_Helper.excuteQuery(sql);
+        try {
+            while (rs.next()) {
+                KhachHang kh = khr.getKHByID(rs.getString(2));
+                NhanVien nv = nvr.getNVByID(rs.getString(3));
+                Coupon cp = cr.getCPByID(rs.getString(4));
+                list.add(new HoaDonModel(rs.getString(1), kh, nv, cp, rs.getString(5), rs.getFloat(6), rs.getInt(7), rs.getDate(8), rs.getInt(9),
+                        rs.getDate(10), rs.getDate(11)));
+            }
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
+    private void loadTableTim(String ma) {
+        ArrayList<HoaDonModel> listSP = getHDTim();
+        dtm.setRowCount(0);
+        for (HoaDonModel s : listSP) {
+            dtm.addRow(new Object[]{
+                s.getKh(),
+                s.getNv(),
+                s.getCp(),
+                s.getMa(),
+                Double.valueOf(s.getThanhTien()).longValue(),
+                s.getHinhThucThanhToan() == 1 ? "Tiền mặt" : "Chuyển khoản", s.getNgayThanhToan(),
+                s.getTrangThai() == 0 ? "Chưa thanh toán" : s.getTrangThai() == 1 ? "Đã thanh toán" : "Đơn đã hủy",
+                s.getNgayTao(), s.getNgaySua()
+            });
+
+        }
+    }
+    private void txtTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimActionPerformed
+        String tim = txtTim.getText().trim();
+        if (tim.length() == 0) {
+            JOptionPane.showMessageDialog(this, "không đc để trống tìm");
+        }
+        if (getHDTim().size() > 0) {
+            JOptionPane.showMessageDialog(null, "Tìm thành công");
+        } else {
+            JOptionPane.showMessageDialog(null, "Tìm thất bại");
+            return;
+        }
+        loadTableTim(tim);
+
+    }//GEN-LAST:event_txtTimActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -525,11 +590,13 @@ public class HoaDonJpanel extends javax.swing.JPanel {
     private javax.swing.JButton btnTrangTruoc;
     private javax.swing.JComboBox<String> cbbTT;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblTrang;
     private javax.swing.JTable tblHDCT;
     private javax.swing.JTable tblHoaDon;
     private javax.swing.JTextField txtDenTrang;
+    private javax.swing.JTextField txtTim;
     // End of variables declaration//GEN-END:variables
 }

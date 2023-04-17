@@ -917,7 +917,7 @@ public class NhanVienJpanel extends javax.swing.JPanel {
                 
             }
 
-            File f = new File("D:\\duan1_nhom8\\excel\\NhanVienExcel.xlsx");
+            File f = new File("D:\\DuAn1_FInal\\excel\\NhanVienExcel.xlsx");
 
             try {
                 FileOutputStream fis = new FileOutputStream(f);
