@@ -216,9 +216,17 @@ public class HoaDonJpanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã HD", "Tên SP", "Số lượng", "Đơn giá", "Thành Tiền"
+                "Mã HD", "Tên SP", "Số lượng", "Đơn giá", "Bảo hành", "Thành Tiền"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblHDCT);
 
         tblHoaDon.setModel(new javax.swing.table.DefaultTableModel(
@@ -439,7 +447,8 @@ public class HoaDonJpanel extends javax.swing.JPanel {
                     h.getIdctsp().getSp().getTen(),
                     h.getSl(),
                     Double.valueOf(h.getThanhTien()).longValue(),
-                    Double.valueOf(h.getThanhTien() * h.getSl()).longValue()
+                    h.getBaoHanh() == 1 ? true : false,
+                    h.getBaoHanh() == 1 ? Double.valueOf(h.getThanhTien() * h.getSl() +500000).longValue() : Double.valueOf(h.getThanhTien() * h.getSl()).longValue()
                 });
             }
 

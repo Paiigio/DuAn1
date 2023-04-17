@@ -17,6 +17,8 @@ public interface IHoaDonChiTietService {
 
     public ArrayList<HoaDonChiTietModel> getAllHoaDonCT();
 
+    public ArrayList<HoaDonChiTietModel> getAllHoaDonCT_BH();
+
     public HoaDonChiTietModel insertHDCT(HoaDonChiTietModel hdct);
 
     public HoaDonChiTietModel updateBaoHanh_Yes(HoaDonChiTietModel hdct);
@@ -28,6 +30,6 @@ public interface IHoaDonChiTietService {
     public ArrayList<HoaDonChiTietModel> getAllHoaDonCTBYIDHD(String id);
 
     public Integer delete(String ghiChu, String idHD);
-    
-    public HoaDonChiTietModel selectIDHDCT (String idHD, String ghiChu);
+
+    public HoaDonChiTietModel selectIDHDCT(String idHD, String ghiChu);
 }

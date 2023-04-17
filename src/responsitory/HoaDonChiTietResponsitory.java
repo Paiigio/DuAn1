@@ -34,7 +34,22 @@ public class HoaDonChiTietResponsitory {
         }
         return list;
     }
+    public ArrayList<HoaDonChiTiet> getAllHoaDonCT_BH() {
+        ArrayList<HoaDonChiTiet> list = new ArrayList<>();
+        String sql = "SELECT* FROM dbo.HOADONCHITIET WHERE BAOHANH = 1";
+        ResultSet rs = JDBC_Helper.excuteQuery(sql);
+        try {
+            while (rs.next()) {
+                HoaDon hd = hds.getHDByID(rs.getString(1));
+                CTSanPham ctsp = ctspr.getCTSanPhamByID(rs.getString(2));
+                list.add(new HoaDonChiTiet(rs.getString(9), hd, ctsp, rs.getFloat(3), rs.getInt(4), rs.getFloat(5), rs.getDate(6), rs.getDate(7), rs.getString(8), rs.getInt(10)));
+            }
+        } catch (Exception ex) {
 
+            ex.printStackTrace();
+        }
+        return list;
+    }
     public HoaDonChiTiet insertHDCT(HoaDonChiTiet hdct) {
         String sql = "INSERT dbo.HOADONCHITIET(IDHD,IDCTSP,DONGIA,SOLUONG,NGAYTAO,NGAYSUA,GHICHU,THANHTIEN,BAOHANH) VALUES(?,?,?,?,GETDATE(),null,?,?,0)";
         JDBC_Helper.excuteUpdate(sql, hdct.getIdhd().getId(), hdct.getIdctsp().getId(), hdct.getDongia(), hdct.getSl(), hdct.getGhiChu(), hdct.getThanhTien());
