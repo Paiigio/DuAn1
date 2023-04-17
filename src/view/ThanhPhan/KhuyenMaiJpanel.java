@@ -1,4 +1,3 @@
-
 package view.ThanhPhan;
 
 import DomainModels.CTKhuyenMai;
@@ -48,29 +47,29 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         tblBang.getColumnModel().getColumn(0).setPreferredWidth(50);
         tblBang.getColumnModel().getColumn(1).setPreferredWidth(120);
         tblBang.getColumnModel().getColumn(4).setPreferredWidth(60);
-        JTableHeader ttHeader=tblBang.getTableHeader();
+        JTableHeader ttHeader = tblBang.getTableHeader();
         ttHeader.setBackground(Color.red);
         load();
         loadTKHang();
     }
-    
-        
+
     public ArrayList<CTKhuyenMaiModel> checkExpiryDate() {
         long millis = System.currentTimeMillis();
-            java.sql.Date date2 = new java.sql.Date(millis);
-            ArrayList<CTKhuyenMaiModel> list = ctkm.getAllCTKM();
-            ArrayList<CTKhuyenMaiModel> list2 = new ArrayList<>();
-            for (CTKhuyenMaiModel x : list) {
-                if (date2.after(x.getThoiGianKetThuc())) {
-                    list2.add(ctkm.updateTrangThai(x));
-                } else {
-                    list2.add(ctkm.updateTrangThaiHoatDong(x));
-                    
-                }
+        java.sql.Date date2 = new java.sql.Date(millis);
+        ArrayList<CTKhuyenMaiModel> list = ctkm.getAllCTKM();
+        ArrayList<CTKhuyenMaiModel> list2 = new ArrayList<>();
+        for (CTKhuyenMaiModel x : list) {
+            if (date2.after(x.getThoiGianKetThuc())) {
+                list2.add(ctkm.updateTrangThai(x));
+            } else {
+                list2.add(ctkm.updateTrangThaiHoatDong(x));
+
             }
-            return list2;
+        }
+        return list2;
     }
-        private void load() {
+
+    private void load() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -86,33 +85,35 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
             }
         }).start();
     }
+
     public ArrayList<CTSanPhamModel> checkExpiryDate1() {
         long millis = System.currentTimeMillis();
-            java.sql.Date date2 = new java.sql.Date(millis);
-            ArrayList<CTSanPhamModel> list = ctsp.getAllCTSanPham();
-            ArrayList<CTSanPhamModel> list2 = new ArrayList<>();
-            for (CTSanPhamModel x : list) {
-                if (x.getCtkm()!=null && date2.after(x.getCtkm().getThoiGianKetThuc())) {
-                    list2.add(ctsp.deleteCTKM(x));
-                } else {
-                    list2.add(x);
+        java.sql.Date date2 = new java.sql.Date(millis);
+        ArrayList<CTSanPhamModel> list = ctsp.getAllCTSanPham();
+        ArrayList<CTSanPhamModel> list2 = new ArrayList<>();
+        for (CTSanPhamModel x : list) {
+            if (x.getCtkm() != null && date2.after(x.getCtkm().getThoiGianKetThuc())) {
+                list2.add(ctsp.deleteCTKM(x));
+            } else {
+                list2.add(x);
 
-                }
             }
-            return list2;
+        }
+        return list2;
     }
+
     public void loadTable() {
         ArrayList<CTKhuyenMaiModel> list = checkExpiryDate();
 
         dtm.setRowCount(0);
         Collections.sort(list, Comparator.comparing(CTKhuyenMai -> CTKhuyenMai.getMa()));
         for (CTKhuyenMaiModel x : list) {
-                
+
             Object[] rowData = {
                 x.getMa(),
                 x.getTen(),
-                x.getThoiGianBatDau(), 
-                x.getThoiGianKetThuc(), 
+                x.getThoiGianBatDau(),
+                x.getThoiGianKetThuc(),
                 x.getHinhThuc(),
                 x.getNgayTao(),
                 x.getNgaySua(),
@@ -123,17 +124,23 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         }
     }
 
+    private int catMa(String ma) {
+        String chuSo = ma.substring(2);
+        int so = Integer.valueOf(chuSo);
+        return so;
+    }
+
     private void loadSP() {
         ArrayList<CTSanPhamModel> listSP = checkExpiryDate1();
         dtmSP.setRowCount(0);
-                Collections.sort(listSP, Comparator.comparing(CTSanPham -> CTSanPham.getMa()));
+        Collections.sort(listSP, (CTSanPhamModel o1, CTSanPhamModel o2) -> catMa(o1.getMa()) > catMa(o2.getMa()) ? 1 : -1);
 
         for (int i = 0; i < listSP.size(); i++) {
             dtmSP.addRow(new Object[]{
                 i + 1,
                 listSP.get(i).getMa(),
                 listSP.get(i).getSp().getTen() + " " + listSP.get(i).getDl().getSoDungLuong() + " " + listSP.get(i).getMs().getTen(),
-                listSP.get(i).getCtkm(), 
+                listSP.get(i).getCtkm(),
                 false
             });
         }
@@ -146,14 +153,14 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
             cbb.addElement(new NSX(x.getId(), x.getMa(), x.getTen(), x.getNgayTao(), x.getNgaySua()));
         }
     }
-    
+
     public void loadTable1(String tim) {
         ArrayList<CTKhuyenMaiModel> list = ctkm.getTimTen(tim);
         dtm.setRowCount(0);
         Collections.sort(list, Comparator.comparing(CTKhuyenMai -> CTKhuyenMai.getMa()));
         for (CTKhuyenMaiModel x : list) {
             Object[] rowData = {
-             x.getMa(), x.getTen(), x.getThoiGianBatDau(), x.getThoiGianKetThuc(), x.getHinhThuc(), x.getNgayTao(), x.getNgaySua(), x.getTrangThai()== 0 ? "Hoạt Động" : "Hết Hạn"
+                x.getMa(), x.getTen(), x.getThoiGianBatDau(), x.getThoiGianKetThuc(), x.getHinhThuc(), x.getNgayTao(), x.getNgaySua(), x.getTrangThai() == 0 ? "Hoạt Động" : "Hết Hạn"
             };
             dtm.addRow(rowData);
 
@@ -208,14 +215,14 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
             txtHinhThuc.requestFocus();
             return null;
         }
-        if (!ngayBD.before(ngayKT)){
-            JOptionPane.showMessageDialog(null,"Ngày bắt đầu phải trước ngày kết thúc" );
+        if (!ngayBD.before(ngayKT)) {
+            JOptionPane.showMessageDialog(null, "Ngày bắt đầu phải trước ngày kết thúc");
             return null;
         }
-         if (ngayBD.after(ngayHT)){
+        if (ngayBD.after(ngayHT)) {
             trangThai = 1;
-        }    
-         System.out.println(trangThai);
+        }
+        System.out.println(trangThai);
         return new CTKhuyenMaiModel(null, ma, ten, ngayBD, ngayKT, hinhthuc, null, null, trangThai);
     }
 
@@ -481,6 +488,11 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         });
 
         cbHoatDong.setText("Hoạt động");
+        cbHoatDong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbHoatDongActionPerformed(evt);
+            }
+        });
 
         tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -641,7 +653,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
             return;
         }
         if (ctkm.insertCTKM(nv) != null) {
-            JOptionPane.showMessageDialog(null, "Thêm thành công");        
+            JOptionPane.showMessageDialog(null, "Thêm thành công");
         } else {
             JOptionPane.showMessageDialog(null, "Thêm thất bại do trùng mã");
         }
@@ -659,14 +671,14 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         if (nv == null) {
             return;
         }
-             
+
         String ma = tblBang.getValueAt(row, 0).toString();
 
         nv.setId(ma);
-        if (JOptionPane.showConfirmDialog(null, "Bạn có muốn sửa không?","Thông báo",JOptionPane.YES_NO_OPTION)!=JOptionPane.YES_OPTION){
+        if (JOptionPane.showConfirmDialog(null, "Bạn có muốn sửa không?", "Thông báo", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
             return;
         }
-    
+
         if (ctkm.updateCTKM(nv) != null) {
             JOptionPane.showMessageDialog(null, "Sửa thành công");
         } else {
@@ -688,19 +700,19 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
             String ngayBD = tblBang.getValueAt(row, 2).toString();
             String ngayKT = tblBang.getValueAt(row, 3).toString();
             String trangThai = tblBang.getValueAt(row, 7).toString();
-            if(trangThai.equalsIgnoreCase("Hoạt Động")) {
+            if (trangThai.equalsIgnoreCase("Hoạt Động")) {
                 rdoHoatDong.setSelected(true);
-                  
+
             } else {
                 rdoHetHan.setSelected(true);
-               
+
             }
 
             Date date = new SimpleDateFormat("yyyy-MM-dd").parse(ngayBD);
             Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse(ngayKT);
             txtBD.setDate(date);
             txtKetThuc.setDate(date2);
-             btnThem.setSelected(false);
+            btnThem.setSelected(false);
         } catch (ParseException ex) {
 
         }
@@ -796,7 +808,7 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
         if (JOptionPane.showConfirmDialog(null, "Bạn có muốn thêm / sửa chương trình khuyến mãi không?", "Thông báo", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
             return;
         }
-        if (tblBang.getValueAt(indexCTKM, 7).toString().equalsIgnoreCase("Hết hạn")){
+        if (tblBang.getValueAt(indexCTKM, 7).toString().equalsIgnoreCase("Hết hạn")) {
             JOptionPane.showMessageDialog(null, "Chương trình đã hết hạn , mời bạn chọn chương trình khác");
             return;
         }
@@ -806,10 +818,10 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
             {
                 CTSanPhamModel c = getCTSPByMa(tblSanPham.getValueAt(i, 1).toString());
                 c.setCtkm(ctkm);
-              
+
                 if (ctsp.updateCTKMSanPham(c) != null) {
                     dem++;
-                }   
+                }
             }
         }
         if (dem > 0) {
@@ -859,13 +871,48 @@ public class KhuyenMaiJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_rdoHoatDongMouseClicked
 
     private void rdoHetHanStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rdoHetHanStateChanged
-       Date ngayBD = txtBD.getDate();
-       Date ngayHT = new Date();
-       if (ngayBD.after(ngayHT)){
-           rdoHetHan.setSelected(true);
-       } else rdoHoatDong.setSelected(true);
-      
+        Date ngayBD = txtBD.getDate();
+        Date ngayHT = new Date();
+        if (ngayBD.after(ngayHT)) {
+            rdoHetHan.setSelected(true);
+        } else {
+            rdoHoatDong.setSelected(true);
+        }
+
     }//GEN-LAST:event_rdoHetHanStateChanged
+
+    private void cbHoatDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbHoatDongActionPerformed
+        ArrayList<CTSanPhamModel> listSP = checkExpiryDate1();
+        if (cbHoatDong.isSelected() == true) {
+            dtmSP.setRowCount(0);
+            Collections.sort(listSP, Comparator.comparing(CTSanPham -> CTSanPham.getMa()));
+            for (int i = 0; i < listSP.size(); i++) {
+                if (listSP.get(i).getCtkm() != null) {
+                    dtmSP.addRow(new Object[]{
+                        i + 1,
+                        listSP.get(i).getMa(),
+                        listSP.get(i).getSp().getTen() + " " + listSP.get(i).getDl().getSoDungLuong() + " " + listSP.get(i).getMs().getTen(),
+                        listSP.get(i).getCtkm(),
+                        true
+                    });
+                }
+            }
+        } else {
+            dtmSP.setRowCount(0);
+            Collections.sort(listSP, Comparator.comparing(CTSanPham -> CTSanPham.getMa()));
+            for (int i = 0; i < listSP.size(); i++) {
+                if (listSP.get(i).getCtkm() == null) {
+                    dtmSP.addRow(new Object[]{
+                        i + 1,
+                        listSP.get(i).getMa(),
+                        listSP.get(i).getSp().getTen() + " " + listSP.get(i).getDl().getSoDungLuong() + " " + listSP.get(i).getMs().getTen(),
+                        listSP.get(i).getCtkm(),
+                        false
+                    });
+                }
+            }
+        }
+    }//GEN-LAST:event_cbHoatDongActionPerformed
     private CTSanPhamModel getCTSPByMa(String ma) {
         ArrayList<CTSanPhamModel> listSP = ctsp.getAllCTSanPham();
         for (CTSanPhamModel z : listSP) {

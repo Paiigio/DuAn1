@@ -17,6 +17,7 @@ import ViewModel.HoaDonModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -133,9 +134,15 @@ public class HoaDonJpanel extends javax.swing.JPanel {
         return list;
     }
 
-    private void loadTable(long Trang) {
+    private int catMa(String ma) {
+        String chuSo = ma.substring(2);
+        int so = Integer.valueOf(chuSo);
+        return so;
+    }
 
+    private void loadTable(long Trang) {
         ArrayList<HoaDonModel> listSP = getAllHoaDon();
+        Collections.sort(listSP, (HoaDonModel o1, HoaDonModel o2) -> catMa(o1.getMa()) > catMa(o2.getMa()) ? 1 : -1);
         dtm.setRowCount(0);
         for (HoaDonModel s : listSP) {
             dtm.addRow(new Object[]{
@@ -148,8 +155,7 @@ public class HoaDonJpanel extends javax.swing.JPanel {
                 s.getTrangThai() == 0 ? "Chưa thanh toán" : s.getTrangThai() == 1 ? "Đã thanh toán" : "Đơn đã hủy",
                 s.getNgayTao(), s.getNgaySua()
             });
-
-        }
+            }
     }
 
     public String getIDHoaDon(String ma) {
@@ -210,9 +216,17 @@ public class HoaDonJpanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã HD", "Tên SP", "Số lượng", "Đơn giá", "Thành Tiền"
+                "Mã HD", "Tên SP", "Số lượng", "Đơn giá", "Bảo hành", "Thành Tiền"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblHDCT);
 
         tblHoaDon.setModel(new javax.swing.table.DefaultTableModel(
@@ -432,8 +446,9 @@ public class HoaDonJpanel extends javax.swing.JPanel {
                     h.getIdhd().getMa(),
                     h.getIdctsp().getSp().getTen(),
                     h.getSl(),
-                    Double.valueOf(h.getIdctsp().getGiaBan()).longValue(),
-                    Double.valueOf(h.getIdctsp().getGiaBan() * h.getSl()).longValue()
+                    Double.valueOf(h.getThanhTien()).longValue(),
+                    h.getBaoHanh() == 1 ? true : false,
+                    h.getBaoHanh() == 1 ? Double.valueOf(h.getThanhTien() * h.getSl() +500000).longValue() : Double.valueOf(h.getThanhTien() * h.getSl()).longValue()
                 });
             }
 

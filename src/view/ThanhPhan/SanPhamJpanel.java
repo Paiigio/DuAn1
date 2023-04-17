@@ -27,6 +27,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -136,16 +137,19 @@ public class SanPhamJpanel extends javax.swing.JPanel {
             dcbmTKDL.addElement(new DungLuong(x.getId(), x.getMa(), x.getSoDungLuong()));
         }
     }
-
+    private int catMa(String ma){
+        String chuSo = ma.substring(2);
+        int so = Integer.valueOf(chuSo);
+        return so;
+    }
     private void loadData() {
         ArrayList<CTSanPhamModel> list = iCTSanPhamService.getAllCTSanPham();
+        Collections.sort(list, (CTSanPhamModel o1, CTSanPhamModel o2) -> catMa(o1.getMa()) > catMa(o2.getMa()) ? 1 : -1);
         dtm.setRowCount(0);
         Locale localeVN = new Locale("vi", "VN");
         NumberFormat vn = NumberFormat.getInstance(localeVN);
         for (int i = 0; i < list.size(); ++i) {
-
             ArrayList<IMEIModel> listIMEI = iIMEIService.selectSL(list.get(i).getId());
-
             dtm.addRow(new Object[]{
                 i + 1,
                 list.get(i).getMa(),

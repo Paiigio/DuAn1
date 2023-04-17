@@ -28,7 +28,38 @@ public class CTKhuyenMaiResponsitory {
         }
         return list;
     }
+    public ArrayList<CTKhuyenMai> getAllCTKM_HoatDong() {
+        ArrayList<CTKhuyenMai> list = new ArrayList<>();
+        String sql = "SELECT* FROM dbo.CTKHUYENMAI WHERE TRANGTHAI = 1";
+        ResultSet rs = JDBC_Helper.excuteQuery(sql);
+        try {
+            while (rs.next()) {
+                list.add(new CTKhuyenMai(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getDate(5),
+                        rs.getString(6), rs.getDate(7), rs.getDate(8), rs.getInt(9)));
 
+            }
+        } catch (SQLException ex) {
+
+            ex.printStackTrace();
+        }
+        return list;
+    }
+    public ArrayList<CTKhuyenMai> getAllCTKM_KhongHoatDong() {
+        ArrayList<CTKhuyenMai> list = new ArrayList<>();
+        String sql = "SELECT* FROM dbo.CTKHUYENMAI WHERE TRANGTHAI = 0";
+        ResultSet rs = JDBC_Helper.excuteQuery(sql);
+        try {
+            while (rs.next()) {
+                list.add(new CTKhuyenMai(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getDate(5),
+                        rs.getString(6), rs.getDate(7), rs.getDate(8), rs.getInt(9)));
+
+            }
+        } catch (SQLException ex) {
+
+            ex.printStackTrace();
+        }
+        return list;
+    }    
     public CTKhuyenMai getCVCTKMID(String id) {
 
         String sql = "SELECT * FROM CTKHUYENMAI WHERE IDCTKM=?";

@@ -25,7 +25,26 @@ public class CTKhuyenMaiService implements ICTKhuyenMaiService {
         }
         return list;
     }
+    @Override
+    public ArrayList<CTKhuyenMaiModel> getAllCTKM_HoatDong() {
+        ArrayList<CTKhuyenMaiModel> list = new ArrayList<>();
+        ArrayList<CTKhuyenMai> cv = ct.getAllCTKM_HoatDong();
+        for (CTKhuyenMai x : cv) {
+            list.add(new CTKhuyenMaiModel(x.getId(), x.getMa(), x.getTen(), x.getThoiGianBatDau(), x.getThoiGianKetThuc(), x.getHinhThuc(), x.getNgayTao(), x.getNgaySua(), x.getTrangThai()));
 
+        }
+        return list;
+    }
+    @Override
+    public ArrayList<CTKhuyenMaiModel> getAllCTKM_KhongHoatDong() {
+        ArrayList<CTKhuyenMaiModel> list = new ArrayList<>();
+        ArrayList<CTKhuyenMai> cv = ct.getAllCTKM_KhongHoatDong();
+        for (CTKhuyenMai x : cv) {
+            list.add(new CTKhuyenMaiModel(x.getId(), x.getMa(), x.getTen(), x.getThoiGianBatDau(), x.getThoiGianKetThuc(), x.getHinhThuc(), x.getNgayTao(), x.getNgaySua(), x.getTrangThai()));
+
+        }
+        return list;
+    }
     @Override
     public CTKhuyenMaiModel insertCTKM(CTKhuyenMaiModel cv) {
         ArrayList<CTKhuyenMai> list = ct.getAllCTKM();

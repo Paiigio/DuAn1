@@ -47,6 +47,7 @@ public class ThongKeJpanel extends javax.swing.JPanel {
     private DefaultTableModel dtm;
     private DefaultTableModel dtm3;
     private DefaultTableModel dtm2;
+    private DefaultTableModel dtmBH;
     DefaultComboBoxModel dcm = new DefaultComboBoxModel();
 
     public ThongKeJpanel() {
@@ -56,6 +57,7 @@ public class ThongKeJpanel extends javax.swing.JPanel {
         dtm = (DefaultTableModel) this.tblDoanhThu.getModel();
         dtm2 = (DefaultTableModel) this.tblMayBanDuoc.getModel();
         dtm3 = (DefaultTableModel) this.tblHoaDonHuy.getModel();
+        dtmBH = (DefaultTableModel) this.tblBaoHanh.getModel();
         pie_Chart.setChartType(Pie_Chart.PeiChartType.DEFAULT);
         cbbNSX.setModel(dcm);
         curveLine_Chart.addLegend("Doanh Thu", Color.decode("#e65c00"), Color.decode("#F9D423"));
@@ -73,9 +75,41 @@ public class ThongKeJpanel extends javax.swing.JPanel {
             dcm.addElement(new NSX(x.getId(), x.getMa(), x.getTen(), null, null));
         }
     }
- Locale localeVN = new Locale("vi", "VN");
-        NumberFormat vn = NumberFormat.getInstance(localeVN);
+    Locale localeVN = new Locale("vi", "VN");
+    NumberFormat vn = NumberFormat.getInstance(localeVN);
+    public void loadBH(){
+        
+        ArrayList<HoaDonChiTietModel> listHDCT = ihdct.getAllHoaDonCT_BH();
+        dtmBH.setRowCount(0);
+        int total = 0;
+        for (HoaDonChiTietModel x : listHDCT) {
+            if (x.getIdhd().getTrangThai() == 1) {
+                total += 1;
+                Object[] rowData = {
+                    x.getIdhd().getMa(),
+                    x.getIdctsp().getSp().getMa(),
+                    vn.format(x.getThanhTien()) + " VND",
+                    1,
+                    x.getIdhd().getNgayThanhToan()
+
+                };
+
+                dtmBH.addRow(rowData);
+            }
+        }
+
+        Object[] sum = {
+            "Tổng số lượng",
+            "",
+            "",
+            total,
+            ""
+            
+        };
+        dtmBH.addRow(sum);
+    }
     public void loadTableDoanhThu() {
+
         ArrayList<HoaDonChiTietModel> list = ihdct.getAllHoaDonCT();
         dtm.setRowCount(0);
         double total = 0;
@@ -86,18 +120,18 @@ public class ThongKeJpanel extends javax.swing.JPanel {
                     x.getIdhd().getNv().getHoTen(),
                     x.getIdhd().getMa(),
                     x.getNgayTao(),
-                vn.format( x.getThanhTien() ) + " VND"
-                       
+                    vn.format(x.getThanhTien()) + " VND"
+
                 };
-               
+
                 dtm.addRow(rowData);
             }
         }
 
         Object[] sum = {
-            "",
-            "",
             "Tổng Tiền",
+            "",
+            "",
             vn.format(total) + " VND"
         };
         dtm.addRow(sum);
@@ -134,13 +168,19 @@ public class ThongKeJpanel extends javax.swing.JPanel {
     public void loadTableHDHuy() {
         dtm3.setRowCount(0);
         int count = 0;
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat vn = NumberFormat.getInstance(localeVN);
         ArrayList<HoaDonChiTietModel> list = ihdct.getAllHoaDonCT();
         for (HoaDonChiTietModel x : list) {
             if (x.getIdhd().getTrangThai() == 2) {
                 Object[] rowData = {
                     x.getIdhd().getMa(),
                     x.getIdctsp().getSp().getTen() + " " + x.getIdctsp().getMs() + " " + x.getIdctsp().getDl(),
+<<<<<<< HEAD
                     vn.format(x.getThanhTien()),                
+=======
+                    vn.format(x.getThanhTien()),
+>>>>>>> origin/master
                     x.getNgayTao(),
                     x.getIdhd().getNgaySua(),
                     x.getIdhd().getGhiChu()
@@ -151,11 +191,11 @@ public class ThongKeJpanel extends javax.swing.JPanel {
         }
 
         Object[] sum = {
-            "",
-            "",
-            "",
-            "",
             "Tổng",
+            "",
+            "",
+            "",
+            "",
             count
         };
         dtm3.addRow(sum);
@@ -255,6 +295,9 @@ public class ThongKeJpanel extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblHoaDonHuy = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblBaoHanh = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jpnBieuDo = new javax.swing.JPanel();
         JBieuDoThongKe = new javax.swing.JPanel();
@@ -465,10 +508,35 @@ public class ThongKeJpanel extends javax.swing.JPanel {
             }
         });
         jScrollPane3.setViewportView(tblHoaDonHuy);
+        if (tblHoaDonHuy.getColumnModel().getColumnCount() > 0) {
+            tblHoaDonHuy.getColumnModel().getColumn(5).setHeaderValue("Lý do hủy");
+        }
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 51, 0));
         jLabel7.setText("Hóa đơn hủy ");
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 51, 0));
+        jLabel8.setText("Bảo hành");
+
+        tblBaoHanh.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã HD", "Sản Phẩm", "Thành Tiền", "Số lượng ", "Ngày thanh toán"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(tblBaoHanh);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -477,16 +545,26 @@ public class ThongKeJpanel extends javax.swing.JPanel {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7)
-                .addContainerGap(1139, Short.MAX_VALUE))
-            .addComponent(jScrollPane3)
+                .addGap(480, 480, 480)
+                .addComponent(jLabel8)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 95, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -721,7 +799,7 @@ public class ThongKeJpanel extends javax.swing.JPanel {
                             x.getIdhd().getNv().getHoTen(),
                             x.getIdhd().getMa(),
                             x.getNgayTao(),
-                          vn.format(x.getThanhTien())   + " VND"
+                            vn.format(x.getThanhTien()) + " VND"
                         };
                         dtm.addRow(rowData);
                     }
@@ -828,7 +906,7 @@ public class ThongKeJpanel extends javax.swing.JPanel {
                         x.getIdhd().getNv().getHoTen(),
                         x.getIdhd().getMa(),
                         x.getNgayTao(),
-                      vn.format( x.getThanhTien() ) + " VND"
+                        vn.format(x.getThanhTien()) + " VND"
                     };
                     dtm.addRow(rowData);
                 }
@@ -839,19 +917,19 @@ public class ThongKeJpanel extends javax.swing.JPanel {
             "",
             "",
             "Tổng Tiền",
-           vn.format(total)  + " VND"
+            vn.format(total) + " VND"
         };
         dtm.addRow(sum);
     }//GEN-LAST:event_btnLocNgayActionPerformed
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-            curveLine_Chart.clear();
+        curveLine_Chart.clear();
         loadBieuDoTron();
         setDataChart();
     }//GEN-LAST:event_jLabel10MouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-          loadTableDoanhThu();
+        loadTableDoanhThu();
         loadTableSanPham();
         loadTableHDHuy();
     }//GEN-LAST:event_jLabel1MouseClicked
@@ -930,6 +1008,7 @@ public class ThongKeJpanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -942,12 +1021,14 @@ public class ThongKeJpanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private com.toedter.calendar.JDateChooser jdcNgayBD;
     private com.toedter.calendar.JDateChooser jdcNgayKT;
     private javax.swing.JPanel jpnBang;
     private javax.swing.JPanel jpnBieuDo;
     private PieChart.Pie_Chart pie_Chart;
+    private javax.swing.JTable tblBaoHanh;
     private javax.swing.JTable tblDoanhThu;
     private javax.swing.JTable tblHoaDonHuy;
     private javax.swing.JTable tblMayBanDuoc;
@@ -968,7 +1049,7 @@ public class ThongKeJpanel extends javax.swing.JPanel {
                     setDataChart();
                     curveLine_Chart.clear();
                     loadBieuDoTron();
-
+                    loadBH();
                     setDataChart();
 
                 } catch (InterruptedException ex) {

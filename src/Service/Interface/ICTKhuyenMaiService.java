@@ -16,6 +16,10 @@ public interface ICTKhuyenMaiService {
 
     public ArrayList<CTKhuyenMaiModel> getAllCTKM();
 
+    public ArrayList<CTKhuyenMaiModel> getAllCTKM_HoatDong();
+
+    public ArrayList<CTKhuyenMaiModel> getAllCTKM_KhongHoatDong();
+
     public CTKhuyenMaiModel insertCTKM(CTKhuyenMaiModel cv);
 
     public CTKhuyenMaiModel updateCTKM(CTKhuyenMaiModel cv);

@@ -28,7 +28,16 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
         }
         return list;
     }
+    @Override
+    public ArrayList<HoaDonChiTietModel> getAllHoaDonCT_BH() {
+        ArrayList<HoaDonChiTietModel> list = new ArrayList<>();
+        ArrayList<HoaDonChiTiet> hd = hdct.getAllHoaDonCT_BH();
+        for (HoaDonChiTiet x : hd) {
+            list.add(new HoaDonChiTietModel(x.getId(), x.getIdhd(), x.getIdctsp(), x.getDongia(), x.getSl(), x.getThanhTien(), x.getNgayTao(), x.getNgaySua(), x.getGhiChu(), x.getBaoHanh()));
 
+        }
+        return list;
+    }
     @Override
     public HoaDonChiTietModel insertHDCT(HoaDonChiTietModel h) {
         ArrayList<HoaDonChiTiet> ds = hdct.getAllHoaDonCT();

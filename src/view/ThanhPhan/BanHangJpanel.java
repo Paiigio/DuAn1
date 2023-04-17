@@ -94,6 +94,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
 
     private void loadSP() {
         ArrayList<CTSanPhamModel> listSP = iCTSanPhamService.getAllCTSanPham_DangBan();
+        Collections.sort(listSP, (CTSanPhamModel o1, CTSanPhamModel o2) -> catMa(o1.getMa()) > catMa(o2.getMa()) ? 1 : -1);
         dtmSP.setRowCount(0);
         Locale localeVN = new Locale("vi", "VN");
         NumberFormat vn = NumberFormat.getInstance(localeVN);
@@ -129,11 +130,13 @@ public class BanHangJpanel extends javax.swing.JPanel {
     public void setTextCoupon(String txt) {
         txtMaCoupon.setText(txt);
     }
-    private int catMa(String ma){
+
+    private int catMa(String ma) {
         String chuSo = ma.substring(2);
         int so = Integer.valueOf(chuSo);
         return so;
     }
+
     private void loadHD() {
         ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDon();
         dtmHD.setRowCount(0);
@@ -178,7 +181,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
     private void loadHDTT() {
         ArrayList<HoaDonModel> listHD = iHoaDonService.getAllHoaDonTT();
         dtmHD.setRowCount(0);
-        Collections.sort(listHD, Comparator.comparing(HoaDon -> HoaDon.getMa()));
+        Collections.sort(listHD, (HoaDonModel o1, HoaDonModel o2) -> catMa(o1.getMa()) > catMa(o2.getMa()) ? 1 : -1);
         for (HoaDonModel x : listHD) {
             dtmHD.addRow(new Object[]{
                 x.getMa(),
@@ -209,7 +212,6 @@ public class BanHangJpanel extends javax.swing.JPanel {
         // lấy ra hóa đơn chi tiết có trong hóa đơn và mã imei
         dtmGH.setRowCount(0);
         for (HoaDonChiTietModel hdct : listNEW) {
-
             // lấy ra những mã imei có mã sản phẩm đang có trong hóa đơn chi tiết
             dem++;
             dtmGH.addRow(new Object[]{
@@ -1196,7 +1198,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
 
     private void txtTimKiemSPCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimKiemSPCaretUpdate
         String timKiem = txtTimKiemSP.getText();
-        ArrayList<CTSanPhamModel> list = iCTSanPhamService.getAllCTSanPham();
+        ArrayList<CTSanPhamModel> list = iCTSanPhamService.getAllCTSanPham_DangBan();
         ArrayList<CTSanPhamModel> listNEW = new ArrayList<>();
         String tenSP = "";
         for (CTSanPhamModel x : list) {
@@ -1209,6 +1211,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Không tìm thấy dữ liệu");
             return;
         }
+        Collections.sort(listNEW, (CTSanPhamModel o1, CTSanPhamModel o2) -> catMa(o1.getMa()) > catMa(o2.getMa()) ? 1 : -1);
         dtmSP.setRowCount(0);
         Locale localeVN = new Locale("vi", "VN");
         NumberFormat vn = NumberFormat.getInstance(localeVN);
@@ -1344,7 +1347,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
         int tienBH = 0;
         for (HoaDonChiTietModel y : listHDCTM) {
             tong += y.getThanhTien();
-            System.out.println("Bảo hành "+y.getBaoHanh());
+            System.out.println("Bảo hành " + y.getBaoHanh());
             if (y.getBaoHanh() == 1) {
                 tienBH = tienBH + 500000;
             } else {
