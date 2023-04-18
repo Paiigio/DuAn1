@@ -228,7 +228,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Giá bán không được để trống");
             return null;
         }
-        return new CTSanPhamModel(null, ms, null, sp, dl, ma, maQR, anh, Integer.valueOf(namBH), null, null, Float.valueOf(giaNhap.replace(".", "")), Float.valueOf(giaBan.replace(".", "")), 0);
+        return new CTSanPhamModel(null, ms, null, sp, dl, null, maQR, anh, Integer.valueOf(namBH), null, null, Float.valueOf(giaNhap.replace(".", "")), Float.valueOf(giaBan.replace(".", "")), 0);
     }
 
     /**
@@ -307,6 +307,8 @@ public class SanPhamJpanel extends javax.swing.JPanel {
         });
 
         jLabel19.setText("Mã CTSP");
+
+        txtMa.setEnabled(false);
 
         jLabel20.setText("Mã QR");
 
