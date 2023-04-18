@@ -1111,6 +1111,7 @@ public class BanHangJpanel extends javax.swing.JPanel {
         if (cbbTrangThaiHoaDon.getSelectedIndex() == 2) {
 
         }
+        dtmGH.setRowCount(0);
     }//GEN-LAST:event_cbbTrangThaiHoaDonActionPerformed
 
     private void btnXoaCTSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaCTSPActionPerformed
