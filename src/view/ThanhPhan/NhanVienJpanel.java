@@ -83,8 +83,7 @@ public class NhanVienJpanel extends javax.swing.JPanel {
 
     private NhanVienModel getFormData() {
         ChucVu cv = (ChucVu) cbbCV.getSelectedItem();
-        ArrayList<NhanVienModel> listNV = nvs.getAllNV();
-        String ma = "NV" + (listNV.size() + 1);
+
         String ten = txtHoTen.getText().trim();
         String sdt = txtSDT.getText().trim();
         Date ngay = txtNgaySinhNV.getDate();
@@ -102,11 +101,6 @@ public class NhanVienJpanel extends javax.swing.JPanel {
             }
         }
 
-        if (ma.length() == 0) {
-            JOptionPane.showMessageDialog(null, "Không được để trống mã");
-            txtMaNV.requestFocus();
-            return null;
-        }
         if (ten.length() == 0) {
             JOptionPane.showMessageDialog(null, "Không được để trống tên");
             txtHoTen.requestFocus();
@@ -171,14 +165,8 @@ public class NhanVienJpanel extends javax.swing.JPanel {
         } else {
             anh = strHinhanh;
         }
-        for (NhanVienModel x : listNV) {
-            if (x.getSdt() != null && x.getSdt().equals(txtSDT.getText())) {
-                JOptionPane.showMessageDialog(null, "Số điện thoại này đã được sử dụng");
-                return null;
-            }
-        }
 
-        return new NhanVienModel(null, cv, ma, ten, gt, sdt, ngay, diachi, email, mk, tt, anh);
+        return new NhanVienModel(null, cv, null, ten, gt, sdt, ngay, diachi, email, mk, tt, anh);
 
     }
 
@@ -680,10 +668,21 @@ public class NhanVienJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnUpAnhNVActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        ArrayList<NhanVienModel> listNV = nvs.getAllNV();
+
+        String ma = "NV" + (listNV.size() + 1);
         NhanVienModel nv = getFormData();
+        for (NhanVienModel x : listNV) {
+            if (x.getSdt() != null && x.getSdt().equals(nv.getSdt())) {
+                JOptionPane.showMessageDialog(null, "Số điện thoại này đã được sử dụng");
+                return;
+            }
+        }
         if (nv == null) {
             return;
         }
+        nv.setMa(ma);
+
         if (nvs.insertNV(nv) != null) {
             JOptionPane.showMessageDialog(null, "Thêm thành công");
         } else {
@@ -695,12 +694,23 @@ public class NhanVienJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        ArrayList<NhanVienModel> listNV = nvs.getAllNV();
         int row = tblBangTTNV.getSelectedRow();
+        String sdt = tblBangTTNV.getValueAt(row, 4).toString();
         if (row < 0) {
             JOptionPane.showMessageDialog(null, "Chọn dòng cần sửa");
             return;
         }
         NhanVienModel nv = getFormData();
+        nv.setMa(txtMaNV.getText());
+        for (NhanVienModel x : listNV) {
+            if (x.getSdt() != null && x.getSdt().equals(sdt)) {
+                continue;
+                } else if (x.getSdt() != null && x.getSdt().equals(txtSDT.getText())){
+                JOptionPane.showMessageDialog(null, "Số điện thoại này đã được sử dụng");
+                return;
+            }
+        }
         if (nv == null) {
             return;
         }

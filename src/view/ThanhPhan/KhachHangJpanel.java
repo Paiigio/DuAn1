@@ -1,4 +1,3 @@
-
 package view.ThanhPhan;
 
 import Service.Interface.IKhachHangService;
@@ -27,19 +26,19 @@ public class KhachHangJpanel extends javax.swing.JPanel {
 
     private IKhachHangService khs = new KhachHangService();
     DefaultTableModel dtm = new DefaultTableModel();
-       long count, soTrang, Trang = 1;
+    long count, soTrang, Trang = 1;
 
     public KhachHangJpanel() {
         initComponents();
-        
+
         dtm = (DefaultTableModel) tblBang.getModel();
         loadTable();
-              tblBang.getColumnModel().getColumn(1).setPreferredWidth(150);
-              tblBang.getColumnModel().getColumn(0).setPreferredWidth(30);
-    
+        tblBang.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tblBang.getColumnModel().getColumn(0).setPreferredWidth(30);
+
     }
 
-        public void countKH() {
+    public void countKH() {
         try {
             String sql = "SELECT count(*) From KHACHHANG";
             ResultSet rs = JDBC_Helper.excuteQuery(sql);
@@ -51,11 +50,13 @@ public class KhachHangJpanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-    private int catMa(String ma){
+
+    private int catMa(String ma) {
         String chuSo = ma.substring(2);
         int so = Integer.valueOf(chuSo);
         return so;
     }
+
     public void loadTable() {
         ArrayList<KhachHangModel> list = khs.getAllKH();
         dtm.setRowCount(0);
@@ -97,21 +98,13 @@ public class KhachHangJpanel extends javax.swing.JPanel {
     }
 
     private KhachHangModel getFormData() {
-        ArrayList<KhachHangModel> listKH = khs.getAllKH();
-        String ma = "KH"+listKH.size();
+
         String ten = txtHoTen.getText().trim();
         String sdt = txtSDT.getText().trim();
         Date ngay = txtNgaySinh.getDate();
-
         String gt = rdoNam.isSelected() == true ? "Nam" : "Nữ";
         String diachi = txtDiaChi.getText().trim();
         String email = txtEmail.getText().trim();
-
-        if (ma.length() == 0) {
-            JOptionPane.showMessageDialog(null, "Không được để trống mã");
-            txtMaKh.requestFocus();
-            return null;
-        }
         if (ten.length() == 0) {
             JOptionPane.showMessageDialog(null, "Không được để trống tên");
             txtHoTen.requestFocus();
@@ -165,14 +158,8 @@ public class KhachHangJpanel extends javax.swing.JPanel {
                 return null;
             }
         }
-        for (KhachHangModel x : listKH){
-            if (x.getSdt()!=null && x.getSdt().equals(txtSDT.getText())){
-                JOptionPane.showMessageDialog(null, "Số điện thoại đã được sử dụng");
-                return null;
-            }
-        }
 
-        return new KhachHangModel(null, ma, sdt, ten, diachi, gt, email, ngay, null, null);
+        return new KhachHangModel(null, null, sdt, ten, diachi, gt, email, ngay, null, null);
 
     }
 
@@ -473,10 +460,20 @@ public class KhachHangJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tblBangMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        ArrayList<KhachHangModel> listKH = khs.getAllKH();
+        String ma = "KH" + listKH.size();
         KhachHangModel kh = getFormData();
+        for (KhachHangModel x : listKH) {
+            if (x.getSdt() != null && x.getSdt().equals(kh.getSdt())) {
+                JOptionPane.showMessageDialog(null, "Số điện thoại đã được sử dụng");
+                return;
+            }
+        }
         if (kh == null) {
             return;
         }
+        kh.setMaKH(ma);
+
         if (khs.insertKH(kh) != null) {
             JOptionPane.showMessageDialog(null, "Thêm thành công");
         } else {
@@ -501,7 +498,9 @@ public class KhachHangJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton22ActionPerformed
 
     private void btnSUaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSUaActionPerformed
+        ArrayList<KhachHangModel> listKH = khs.getAllKH();
         int row = tblBang.getSelectedRow();
+        String sdt = tblBang.getValueAt(row, 3).toString();
         if (row < 0) {
             JOptionPane.showMessageDialog(null, "Chọn dòng cần sửa");
             return;
@@ -513,6 +512,17 @@ public class KhachHangJpanel extends javax.swing.JPanel {
         if (nv == null) {
             return;
         }
+        nv.setMaKH(txtMaKh.getText());
+        for (KhachHangModel x : listKH) {
+            if (x.getSdt() != null && x.getSdt().equals(sdt)) {
+                continue;
+            } else if (x.getSdt() != null && x.getSdt().equals(nv.getSdt())) {
+
+                JOptionPane.showMessageDialog(null, "Số điện thoại đã được sử dụng");
+                return;
+            }
+        }
+
         String id = tblBang.getValueAt(row, 0).toString();
         nv.setId(id);
         if (khs.updateKH(nv) != null) {
@@ -529,7 +539,7 @@ public class KhachHangJpanel extends javax.swing.JPanel {
         if (sdt.length() == 0) {
             JOptionPane.showMessageDialog(null, "nhập ô tìm theo sdt");
         }
-        if (khs.getTimSDT(sdt).size()>0) {
+        if (khs.getTimSDT(sdt).size() > 0) {
             JOptionPane.showMessageDialog(null, "tìm thành công");
         } else {
             JOptionPane.showMessageDialog(null, "tìm thất bại");

@@ -228,7 +228,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Giá bán không được để trống");
             return null;
         }
-        return new CTSanPhamModel(null, ms, null, sp, dl, ma, maQR, anh, Integer.valueOf(namBH), null, null, Float.valueOf(giaNhap.replace(".", "")), Float.valueOf(giaBan.replace(".", "")), 0);
+        return new CTSanPhamModel(null, ms, null, sp, dl, null, maQR, anh, Integer.valueOf(namBH), null, null, Float.valueOf(giaNhap.replace(".", "")), Float.valueOf(giaBan.replace(".", "")), 0);
     }
 
     /**
@@ -738,10 +738,11 @@ public class SanPhamJpanel extends javax.swing.JPanel {
 //   
         if (checkSP().equals("Có")) {
             JOptionPane.showMessageDialog(null, "Đã có sản phẩm này");
-
-            btnSuaActionPerformed(evt);
-
-            loadData();
+//
+//            btnSuaActionPerformed(evt);
+//
+//            loadData();
+        return;
 
         } else if (checkSP().equals("Thêm")) {
             if (iCTSanPhamService.insertCTSanPham(ctsp) != null) {
@@ -761,6 +762,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
             return;
         }
         CTSanPhamModel ctsp = getCTSPFormInput();
+        ctsp.setMa(txtMa.getText());
         int tt = 0;
         if (rdKhongBan.isSelected()) {
             tt = 1;
