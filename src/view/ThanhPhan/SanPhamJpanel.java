@@ -198,7 +198,6 @@ public class SanPhamJpanel extends javax.swing.JPanel {
     }
 
     private CTSanPhamModel getCTSPFormInput() {
-        String ma = txtMa.getText();
         String giaNhap = txtGiaNhap.getText();
         String giaBan = txtGiaBan.getText();
         String namBH = txtNamBH.getText();
@@ -212,10 +211,6 @@ public class SanPhamJpanel extends javax.swing.JPanel {
             anh = "NoAvatar.jpg";
         } else {
             anh = strHinhanh;
-        }
-        if (ma.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Mã không được để trống");
-            return null;
         }
         if (maQR.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Mã QR không được để trống");
@@ -731,7 +726,10 @@ public class SanPhamJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        ArrayList<CTSanPhamModel> list = iCTSanPhamService.getAllCTSanPham();
+        String ma = "SP"+(list.size()+1);
         CTSanPhamModel ctsp = getCTSPFormInput();
+        ctsp.setMa(ma);
         if (ctsp == null) {
             JOptionPane.showMessageDialog(null, "Thêm thất bại");
             return;
