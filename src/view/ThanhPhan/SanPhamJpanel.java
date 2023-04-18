@@ -740,10 +740,11 @@ public class SanPhamJpanel extends javax.swing.JPanel {
 //   
         if (checkSP().equals("Có")) {
             JOptionPane.showMessageDialog(null, "Đã có sản phẩm này");
-
-            btnSuaActionPerformed(evt);
-
-            loadData();
+//
+//            btnSuaActionPerformed(evt);
+//
+//            loadData();
+        return;
 
         } else if (checkSP().equals("Thêm")) {
             if (iCTSanPhamService.insertCTSanPham(ctsp) != null) {
@@ -763,6 +764,7 @@ public class SanPhamJpanel extends javax.swing.JPanel {
             return;
         }
         CTSanPhamModel ctsp = getCTSPFormInput();
+        ctsp.setMa(txtMa.getText());
         int tt = 0;
         if (rdKhongBan.isSelected()) {
             tt = 1;
